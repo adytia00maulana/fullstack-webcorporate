@@ -10,7 +10,7 @@
 	<!-- style css -->
 	<link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>" />
 
-    <title>CI PARK</title>
+    <title><?= $title; ?></title>
   </head>
   <body>
 
@@ -26,12 +26,15 @@
 						<a class="nav-link" href="<?= base_url('about') ?>">Tentang Kami</a>
 					</li>
                     <li class="nav-item mr-5 text-uppercase">
-						<a class="nav-link" href="<?= base_url('') ?>">Produk</a>
+						<a class="nav-link" href="<?= base_url('product') ?>">Produk</a>
 					</li>
 				    <li class="nav-item mr-5 text-uppercase">
-						<a class="nav-link" href="<?= base_url('') ?>">Galer-i</a>
+						<a class="nav-link" href="<?= base_url('gallery') ?>">Galer-i</a>
 					</li>
-                    <li class="nav-item mr-5 text-uppercase">
+					<li class="nav-item mr-5 text-uppercase">
+						<a class="nav-link" href="<?= base_url('info') ?>">Info</a>
+					</li>
+					<li class="nav-item mr-5 text-uppercase">
 						<a class="nav-link" href="<?= base_url('contact') ?>">Kontak Kami</a>
 					</li>
 					<li class="nav-item mr-5 text-uppercase">
@@ -41,9 +44,8 @@
 			</div>
 		</div>
 	</nav>
-
-
-	<header class="jumbotron jumbotron-fluid mt-5">
+	
+	<!-- <header class="jumbotron jumbotron-fluid mt-5">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -52,12 +54,12 @@
 				<div class="col-md-6">
 					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat alias dolorem aspernatur commodi explicabo voluptatum veniam iusto provident enim ipsa consequatur nihil atque, maiores repudiandae voluptatem dolores, quasi numquam id placeat praesentium earum, architecto harum temporibus? Similique recusandae voluptatem voluptate, fuga id ratione hic impedit? Repellat facere, perferendis velit reiciendis dolores esse tempora pariatur, obcaecati magni ducimus laborum quia reprehenderit impedit ad iusto atque laudantium quaerat. Sequi quam excepturi illum temporibus consequuntur? Expedita nemo iusto et modi aut, dolores, eius distinctio doloremque quas aliquam voluptatum sit! Nisi asperiores magni in voluptate corrupti, commodi vero odio neque suscipit inventore maiores unde.
 				</div>
-								<div class="col-md-6">
+				<div class="col-md-6">
 					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat alias dolorem aspernatur commodi explicabo voluptatum veniam iusto provident enim ipsa consequatur nihil atque, maiores repudiandae voluptatem dolores, quasi numquam id placeat praesentium earum, architecto harum temporibus? Similique recusandae voluptatem voluptate, fuga id ratione hic impedit? Repellat facere, perferendis velit reiciendis dolores esse tempora pariatur, obcaecati magni ducimus laborum quia reprehenderit impedit ad iusto atque laudantium quaerat. Sequi quam excepturi illum temporibus consequuntur? Expedita nemo iusto et modi aut, dolores, eius distinctio doloremque quas aliquam voluptatum sit! Nisi asperiores magni in voluptate corrupti, commodi vero odio neque suscipit inventore maiores unde.
 				</div>
 			</div>
 		</div>
-    </header>
+    </header> -->
     
     <?= $this->renderSection('content') ?>
 
