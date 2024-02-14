@@ -14,7 +14,7 @@
   </head>
   <body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-success fw-bold">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-success fw-bold sticky-top">
 		<div class="container">
 			<a class="navbar-brand text-uppercase" href="<?= base_url('home') ?>">Home</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,28 +44,21 @@
 			</div>
 		</div>
 	</nav>
-	
-	<!-- <header class="jumbotron jumbotron-fluid mt-5">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1 class="text-center">Hirup Gampang Kalo Ada Codeigniter</h1>
-				</div>
-				<div class="col-md-6">
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat alias dolorem aspernatur commodi explicabo voluptatum veniam iusto provident enim ipsa consequatur nihil atque, maiores repudiandae voluptatem dolores, quasi numquam id placeat praesentium earum, architecto harum temporibus? Similique recusandae voluptatem voluptate, fuga id ratione hic impedit? Repellat facere, perferendis velit reiciendis dolores esse tempora pariatur, obcaecati magni ducimus laborum quia reprehenderit impedit ad iusto atque laudantium quaerat. Sequi quam excepturi illum temporibus consequuntur? Expedita nemo iusto et modi aut, dolores, eius distinctio doloremque quas aliquam voluptatum sit! Nisi asperiores magni in voluptate corrupti, commodi vero odio neque suscipit inventore maiores unde.
-				</div>
-				<div class="col-md-6">
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat alias dolorem aspernatur commodi explicabo voluptatum veniam iusto provident enim ipsa consequatur nihil atque, maiores repudiandae voluptatem dolores, quasi numquam id placeat praesentium earum, architecto harum temporibus? Similique recusandae voluptatem voluptate, fuga id ratione hic impedit? Repellat facere, perferendis velit reiciendis dolores esse tempora pariatur, obcaecati magni ducimus laborum quia reprehenderit impedit ad iusto atque laudantium quaerat. Sequi quam excepturi illum temporibus consequuntur? Expedita nemo iusto et modi aut, dolores, eius distinctio doloremque quas aliquam voluptatum sit! Nisi asperiores magni in voluptate corrupti, commodi vero odio neque suscipit inventore maiores unde.
+	<div class="wrapper">
+		<div class="header">
+			<div class="jumbotron jumbotron-fluid wall-home">
+				<div class="container">
+					<h1 class="display-4 text-white text-center fw-bold">PT Makmur Bersama Indonesia</h1>
 				</div>
 			</div>
+		</div>x
+		<div class="content">
+			    <?= $this->renderSection('content') ?>			
 		</div>
-    </header> -->
-    
-    <?= $this->renderSection('content') ?>
-
-	<footer class="jumbotron jumbotron-fluid mt-5 mb-0">
-		<div class="container text-center">Copyright &copy <?= Date('Y') ?> Sruntulan</div>
-	</footer>
+		<footer class="jumbotron jumbotron-fluid mt-5 mb-0">
+			<div class="container text-center">Copyright &copy <?= Date('Y') ?> Sruntulan</div>
+		</footer>
+	</div>
 
 	<!-- Optional JavaScript; choose one of the two! -->
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
