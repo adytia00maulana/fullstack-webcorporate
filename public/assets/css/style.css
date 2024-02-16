@@ -1,14 +1,21 @@
-.wall-home {
+/* .wall-home {
     background-image: url("../img/wall_two.png");
     background-position: center;
     height: 500px;
-}
+} */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+/* body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: thick solid red;
+} */
 
 header {
     position: relative;
@@ -28,6 +35,16 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.section-explore-content {
+    line-height: 1.5;
+    font-size: 26px;
+}
+
+.section-product-service {
+    line-height: 1.8;
+    font-size: 26px;
 }
 
 footer {
