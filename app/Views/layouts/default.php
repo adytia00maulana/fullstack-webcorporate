@@ -13,7 +13,6 @@
     <title><?= $title; ?></title>
   </head>
   <body>
-
 	<nav class="navbar navbar-expand-lg navbar-dark bg-success fw-bold sticky-top">
 		<div class="container">
 			<a class="navbar-brand text-uppercase" href="<?= base_url('home') ?>">Home</a>
@@ -25,10 +24,10 @@
 					<li class="nav-item mr-5 text-uppercase">
 						<a class="nav-link" href="<?= base_url('about') ?>">Tentang Kami</a>
 					</li>
-                    <li class="nav-item mr-5 text-uppercase">
+					<li class="nav-item mr-5 text-uppercase">
 						<a class="nav-link" href="<?= base_url('product') ?>">Produk</a>
 					</li>
-				    <li class="nav-item mr-5 text-uppercase">
+					<li class="nav-item mr-5 text-uppercase">
 						<a class="nav-link" href="<?= base_url('gallery') ?>">Galer-i</a>
 					</li>
 					<li class="nav-item mr-5 text-uppercase">
@@ -44,21 +43,14 @@
 			</div>
 		</div>
 	</nav>
-	<div class="wrapper">
-		<div class="header">
-			<div class="jumbotron jumbotron-fluid wall-home">
-				<div class="container">
-					<h1 class="display-4 text-white text-center fw-bold">PT Makmur Bersama Indonesia</h1>
-				</div>
-			</div>
-		</div>x
-		<div class="content">
-			    <?= $this->renderSection('content') ?>			
-		</div>
-		<footer class="jumbotron jumbotron-fluid mt-5 mb-0">
-			<div class="container text-center">Copyright &copy <?= Date('Y') ?> Sruntulan</div>
-		</footer>
+	
+	<div class="content">
+		<?= $this->renderSection('content') ?>			
 	</div>
+
+	<footer class="footer p-3">
+		<div class="container text-center">Copyright &copy <?= Date('Y') ?> Sruntulan</div>
+	</footer>
 
 	<!-- Optional JavaScript; choose one of the two! -->
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
