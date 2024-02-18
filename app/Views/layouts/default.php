@@ -9,34 +9,43 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 	<!-- style css -->
 	<link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>" />
+	<!-- font google outfit and heebo -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
     <title><?= $title; ?></title>
   </head>
   <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-success fw-bold sticky-top">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-secondary fw-bold sticky-top font-outfit">
 		<div class="container">
-			<a class="navbar-brand text-uppercase" href="<?= base_url('home') ?>">Home</a>
+			<a class="navbar-brand text-uppercase" href="<?= base_url('home') ?>">
+			<img src="<?= base_url('assets/img/logo_mbi.png') ?>" width="90px" class="img-fluid" alt="">
+			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item mr-5 text-uppercase">
+					<li class="nav-item mr-5 text-capitalize">
 						<a class="nav-link" href="<?= base_url('about') ?>">Tentang Kami</a>
 					</li>
-					<li class="nav-item mr-5 text-uppercase">
+					<li class="nav-item mr-5 text-capitalize">
 						<a class="nav-link" href="<?= base_url('product') ?>">Produk</a>
 					</li>
-					<li class="nav-item mr-5 text-uppercase">
-						<a class="nav-link" href="<?= base_url('gallery') ?>">Galer-i</a>
+					<li class="nav-item mr-5 text-capitalize">
+						<a class="nav-link" href="<?= base_url('gallery') ?>">Galeri</a>
 					</li>
-					<li class="nav-item mr-5 text-uppercase">
+					<li class="nav-item mr-5 text-capitalize">
 						<a class="nav-link" href="<?= base_url('info') ?>">Info</a>
 					</li>
-					<li class="nav-item mr-5 text-uppercase">
+					<li class="nav-item mr-5 text-capitalize">
 						<a class="nav-link" href="<?= base_url('contact') ?>">Kontak Kami</a>
 					</li>
-					<li class="nav-item mr-5 text-uppercase">
+					<li class="nav-item mr-5 text-capitalize">
 						<a class="nav-link" href="<?= base_url('faq') ?>">Faq</a>
 					</li>
 				</ul>
@@ -48,8 +57,8 @@
 		<?= $this->renderSection('content') ?>			
 	</div>
 
-	<footer class="footer p-3">
-		<div class="container text-center">Copyright &copy <?= Date('Y') ?> Sruntulan</div>
+	<footer class="footer p-3 bg-secondary">
+		<div class="container text-center">Copyright &copy <?= Date('Y') ?> Makmur Bersama Indonesia</div>
 	</footer>
 
 	<!-- Optional JavaScript; choose one of the two! -->
