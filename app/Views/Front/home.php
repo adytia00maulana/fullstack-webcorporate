@@ -5,17 +5,33 @@
 <div class="section-video-slider">
     <div class="container-fluid">
         <div class="row">
-            <div class="jumbotron-fluid">
+            <!-- <div class="jumbotron-fluid">
                 <div class="content-video">
                     <video class="img-fluid" autoplay loop muted>
-                        <source src="https://mdbcdn.b-cdn.net/img/video/Tropical.mp4" type="video/mp4" />
+                        <source src="<?= base_url('assets/master/home/video_banner.mp4') ?>" type="video/mp4" />
                     </video>
                     <div class="carousel-caption d-none d-md-block">
                         <h4 class="font-weight-bold">PT Makmur Bersama Indonesia</h4>
+                        <div class="content">
                         <p>Deskripsi Slider</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
+            <div class="video-background-holder">
+                <div class="video-background-overlay"></div>
+                <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+                    <source src="<?= base_url('assets/master/home/video_banner.mp4') ?>" type="video/mp4">
+                </video>
+                <div class="video-background-content container h-100">
+                    <div class="d-flex h-100 text-center align-items-center">
+                        <div class="w-100 text-white">
+                        <h4 class="font-weight-bold">PT Makmur Bersama Indonesia</h4>
+                        <div class="content">
+                            <p>Deskripsi Slider</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- End -->
         </div>
     </div>
 </div>
