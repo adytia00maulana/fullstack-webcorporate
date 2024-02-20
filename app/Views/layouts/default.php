@@ -53,13 +53,13 @@
 		</div>
 	</nav>
 	
-	<div class="content">
-		<?= $this->renderSection('content') ?>			
-	</div>
-
-	<footer class="footer p-3 bg-secondary">
-		<div class="container text-center">Copyright &copy <?= Date('Y') ?> Makmur Bersama Indonesia</div>
-	</footer>
+		<div class="content-wrapper">
+			<?= $this->renderSection('content') ?>			
+		</div>
+	
+		<footer class="footer p-3 bg-secondary">
+			<div class="container text-center">Copyright &copy <?= Date('Y') ?> Multi Bestri Indonesia</div>
+		</footer>
 
 	<!-- Optional JavaScript; choose one of the two! -->
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
