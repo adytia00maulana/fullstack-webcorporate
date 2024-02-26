@@ -18,15 +18,30 @@ body {
 
 footer {
     margin-top: auto;
-    color: greenyellow !important;
-    font-weight: 700;
+    font-size: 24px;
+    text-shadow: 0 0 1px #eaeaea;
+    color: bisque;
+    font-weight: 500;
 }
 
 
 /* styling for content */
-
 .navbar-nav>li>a:hover {
-    color: greenyellow !important;
+    color: seagreen !important;
+}
+
+.nav-link {
+    font-size: 24px;
+    color: rgb(107, 117, 218) !important;
+}
+
+.font-pathway-extreme {
+  font-family: "Pathway Extreme", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings:
+  "wdth" 100;
 }
 
 .font-outfit {
@@ -98,4 +113,261 @@ footer {
     background-color: black;
     opacity: 0.5;
     z-index: 1;
+}
+
+/* visi misi */
+.section-visi-misi {
+    line-height: 2.4;
+}
+
+/* ceo */
+.section-ceo-speech {
+    line-height: 1.8;
+}
+
+.text-ceo {
+    font-size: clamp(1rem, 1vw, 3rem);
+    letter-spacing: 1.3px;
+    text-wrap:wrap;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+/* page contact us */
+.section-contact-us {
+    /* background: lightgreen; */
+    background-image: linear-gradient(to top, #d7d731 , rgb(154, 204, 176));
+}
+
+.container-contact {
+  background: #FFFFFF;
+  width: 900px;
+  height: 650px;
+  margin: 5% auto;
+  position: relative;
+}
+.container-contact .map {
+  width: 45%;
+  float: left;
+}
+.container-contact .contact-form {
+  width: 53%;
+  margin-left: 2%;
+  float: left;
+}
+.container-contact .contact-form .title {
+  font-size: 2.5em;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  color: #242424;
+  margin: 5% 8%;
+}
+.container-contact .contact-form .subtitle {
+  font-size: 1.2em;
+  font-weight: 400;
+  margin: 0 4% 5% 8%;
+}
+.container-contact .contact-form input,
+.container-contact .contact-form textarea {
+  width: 330px;
+  padding: 3%;
+  margin: 2% 8%;
+  color: #242424;
+  border: 1px solid #B7B7B7;
+}
+.container-contact .contact-form input::placeholder,
+.container-contact .contact-form textarea::placeholder {
+  color: #242424;
+}
+.container-contact .contact-form .btn-send {
+  background: #A383C9;
+  width: 180px;
+  height: 60px;
+  color: #FFFFFF;
+  font-weight: 700;
+  margin: 2% 8%;
+  border: none;
+}
+
+/* page FAQ */
+.body-wrapper {
+    background-color: greenyellow;
+    background-image: linear-gradient(to top, #d7d731 , rgb(154, 204, 176));
+}
+    .section-faq {
+        font-weight: 500;
+        padding: 0 1.6em;
+    }
+
+   .desc-korean-ginseng {
+    font-size: 20px;
+    text-align: left;
+    text-wrap:wrap;
+    letter-spacing: 1px;
+    font-weight: 500;
+   }
+
+.text-head {
+    font-size: clamp(2rem, 4vw, 4rem);
+    text-shadow: 0 4px 0px darkgreen;
+    color: #fffa6d;
+}
+
+.aturan-konsumsi, .text-sub-head {
+    font-size: 26px;
+    color: black;
+}
+
+.desc-rules {
+    margin-top: 3rem;
+    line-height: 1.5;
+}
+
+.aturan-konsumsi, h2 {
+    text-align: left;
+    font-size: clamp(1rem, 2vw, 1rem);
+    letter-spacing: 0.2px;
+}
+
+.aturan-konsumsi, p {
+    margin-bottom: 2em !important;
+    font-size: 20px;
+}
+
+.cara-memilih-produk {
+    line-height: 1.6;
+    padding-top: 2em;
+    margin-left: 4em;
+    font-size: 20px;
+}
+
+
+h5, .text-saran .text-cara-memilih-produk {
+     font-size: 30px;
+     font-family: Arial, Helvetica, sans-serif;
+     text-shadow: 0 2px 2px #65fa15;
+     position: relative;
+     left: 2em;
+}
+
+.text-sub-head-kosmetik {
+    font-size: 24px;
+}
+
+.rules
+.kosmetik {
+    line-height: 1.2;
+}
+
+.list-kosmetik li {
+    font-size: 22px;
+    font-weight: 600;
+    margin-left: 0.5em;
+}
+
+
+/* mobile 360 */
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+
+   .content-wrapper {
+    line-height: 1.8;
+    padding: 0.8em;
+   }
+
+   .desc-korean-ginseng {
+    font-size: 14px;
+    text-align: left;
+   }
+
+   .desc-rules {
+        margin-top: 3rem;
+        line-height: 1.5;
+        font-size: 18px;
+    }
+
+    .aturan-konsumsi, p {
+        margin-bottom: 2em !important;
+        font-size: 14px;
+    }
+
+    /* styling text for section saran dan pemakaian in device mobile */
+    .text-produk-show, text-sub-menu-saran, hr {
+        display: none;
+    }
+
+    .text-sub-menu-saran::after {
+        content: 'saran dan pemakaian serta cara memilih produk ginseng';
+        text-transform: capitalize;
+        text-shadow: 2px 1px #eaeaea;
+        color: seagreen;
+        font-size: 15px;
+        margin: 1em;
+    }
+
+    .aturan-konsumsi {
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .text-sub-head {
+        text-transform: uppercase;
+        text-shadow: 1px 0.1px rgba(0,0,0,0.7);
+        font-size: 14px;
+        letter-spacing: 0;
+    }
+
+    .cara-memilih-produk {
+        position: relative;
+        left: -3em;
+    }
+
+    .aturan-konsumsi, .text-aturan-konsumsi,
+    .cara-memilih-produk, .text-cara-memilih {    
+        font-size: 12px;
+        text-transform: capitalize;
+    }
+    
+    .h5, .text-saran {
+     font-size: 18px;
+     text-shadow: 2px 1px #eaeaea;
+     color: seagreen;
+    }
+
+    h5, .text-cara-memilih-produk {
+     font-size: 18px;
+     position: relative;
+     left: 3em;
+     text-shadow: 2px 1px #eaeaea;
+     color: seagreen;
+    }
+    /* end styling text for section saran dan pemakaian in device mobile */
+
+    .kosmetik {
+        text-align: left;
+        line-height: 1.4;
+    }
+
+    .kosmetik .text-head {
+        font-size: clamp(2.4rem, 4vw, 4rem);
+        padding: 0.2em 0;
+    }
+
+    .text-sub-head-kosmetik {
+        font-size: 16px;
+        margin-left: 0.4em;
+    }
+
+    .list-kosmetik li {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .text-list-kosmetik {
+        padding-left: 0.3em;
+        text-transform: capitalize;
+        text-align: left;
+    }
 }
