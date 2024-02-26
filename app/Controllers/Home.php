@@ -37,6 +37,6 @@ class Home extends BaseController
 
     public function faq(): string {
         $data = ['title' => 'Home'];
-        return view('front/gallery', $data);
+        return view('front/faq', $data);
     }
 }

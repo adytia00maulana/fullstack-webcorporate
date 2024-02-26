@@ -12,9 +12,9 @@
             <div class="video-background-content container h-100">
                 <div class="d-flex h-100 text-center align-items-center">
                     <div class="w-100 text-white">
-                    <h1 class="font-weight-bold">PT Multri Bestri Indonesia</h1>
+                    <h1 class="font-weight-bold font-italic">PT Makmur Bersama Indonesia</h1>
                     <div class="content">
-                        <p>Deskripsi Slider</p>
+                        <h4>Deskripsi Slider</h4>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
     </div>
 </div>
 
-<div class="section-visi-misi mt-3 mb-3 pt-3 pb-3">
+<div class="section-visi-misi mt-3 mb-3 pt-3 pb-3 font-heebo">
     <div class="container">
         <h1 class="font-weight-bold font-italic text-center mb-3">Visi & Misi</h1>
         <div class="row">
@@ -77,14 +77,18 @@
         <h1 class="font-weight-bold font-italic text-center mb-3">Sambutan CEO</h1>
         <div class="row">
             <div class="col-md-6">
-                <p class="text-sm-left text-wrap">
+                <p class="text-sm-left text-wrap text-ceo">
                     Welcome to KBShop ! <br>
                     First of all, I would like to express my sincere gratitude for your visit to our homepage. As you navigate our website, I sincerely hope you learn about the information of Korea Best shop based in Indonesia as an outstanding distributor of the best quality consumer products mostly from the exciting morning calm land of R.O. Korea. <br>
                     As a leading distributor of the best quality consumer goods, we are trying our best to grow with our customers based on the first priority of customer satisfaction in all terms of competitive price, quality, and convenience. <br>
-                    Our aspiration is defined by a simple set of core business values that describe how we operate every single day – Trust, Passion, and Contribution. They reflect how we interact with our customers, our business partners, and our communities. I hope this provides you with a few good reasons to know KB(Korea Best) Shop better. Whether you are a potential customer, a business partner, we look forward to finding out how we can serve you for your perfect satisfaction. We wish the best to all visitors of our homepage. <br>
-                    With best regards
-                    C. S. Park , President & CEO
+                    Our aspiration is defined by a simple set of core business values that describe how we operate every single day – Trust, Passion, and Contribution. They reflect how we interact with our customers, our business partners, and our communities. I hope this provides you with a few good reasons to know KB(Korea Best) Shop better. Whether you are a potential customer, a business partner, we look forward to finding out how we can serve you for your perfect satisfaction. We wish the best to all visitors of our homepage.
                 </p>
+                <p class="font-weight-bold">
+                    With best regards <br>
+                C. S. Park
+                <br>
+                President & CEO
+            </p>
             </div>
             <div class="col-md-6">
                 <img src="<?= base_url('assets/master/home/park.png') ?>" alt="" class="img-fluid mt-5">

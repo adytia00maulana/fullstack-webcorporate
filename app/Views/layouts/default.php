@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 	<!-- style css -->
 	<link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>" />
+	<link rel="stylesheet" href="<?= base_url('assets/css/product.css') ?>" />
 	<!-- font google outfit and heebo -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Pathway+Extreme:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
@@ -20,9 +24,9 @@
     <title><?= $title; ?></title>
   </head>
   <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-secondary fw-bold sticky-top font-outfit">
+	<nav class="navbar navbar-expand-lg navbar-dark fw-bold sticky-top font-pathway-extreme" style="background-color: silver">
 		<div class="container">
-			<a class="navbar-brand text-uppercase" href="<?= base_url('home') ?>">
+			<a class="navbar-brand text-uppercase" href="<?= base_url('#') ?>">
 			<img src="<?= base_url('assets/img/logo_mbi.png') ?>" width="90px" class="img-fluid" alt="">
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +62,7 @@
 		</div>
 	
 		<footer class="footer p-3 bg-secondary">
-			<div class="container text-center">Copyright &copy <?= Date('Y') ?> Multi Bestri Indonesia</div>
+			<div class="container text-center">Copyright &copy <?= Date('Y') ?> Makmur Bersama Indonesia</div>
 		</footer>
 
 	<!-- Optional JavaScript; choose one of the two! -->
