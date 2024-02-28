@@ -174,4 +174,16 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
+
+	/*
+	|--------------------------------------------------------------------------
+	| Global Config
+	|--------------------------------------------------------------------------
+	| 
+	*/
+    
+    // Table Database Name
+    public $product         = 'product';
+    public $source_product  = 'source_product';
+    public $detail_product  = 'detail_product';
 }
