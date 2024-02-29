@@ -4,9 +4,57 @@ use CodeIgniter\Model;
 class ProductModel extends Model
 {
     // Create
-    public function MDL_Insert()
+    public function MdlInsert()
     {
-        $tblmenu = config('app')->tmstMenu;
+        $tableProduct = config('app')->product;
+
+        $data = $this->request->getPost();
+        unset($data['submit']);
+        unset($data['csrf_test_name']);
+
+        $data['id'] = $this->request->getPost('id');
+        $data['id_product_detail'] = $this->request->getPost('id_product_detail');
+        $data['code'] = $this->request->getPost('code');
+        $data['name'] = $this->request->getPost('name');
+        $data['active'] = strlen($this->request->getPost('active')) ? "1" : "0";
+        $data['created_by'] = $this->session->get('userdata')['USER_ID'];
+        $data['created_date'] = date("Y-m-d H:i:s");
+        $data['updated_by'] = $this->session->get('userdata')['USER_ID'];
+        $data['updated_date'] = date("Y-m-d H:i:s");
+
+        $res = $this->db->table($tableProduct)->insert($data);
+        dd($res);
+        if ($res) {
+            //Update Order Number
+            $parent_id = $data['parent_id'];
+            $tid = $data['tid'];
+            $appid = $data['app_id'];
+            $sSQL = "
+				SELECT id
+				FROM $tableProduct
+			";
+
+            $ambil = $this->db->query($sSQL);
+            dd($ambil);
+            if ($ambil->getNumRows() > 0) {
+                foreach ($ambil->getResult() as $rows) {
+                    $tid++;
+                    $data = array(
+                        'tid' => $tid
+                    );
+
+                    $this->db->table($tableProduct)->update($data, ['id' => $rows->id]);
+                }
+            }
+        }
+
+        return $res;
+    }
+
+    // Updated
+    public function MdlUpdate($id)
+    {
+        $tableProduct = config('app')->product;
 
         helper('uniqueid');
         $id = uniqueid();
@@ -16,30 +64,28 @@ class ProductModel extends Model
         unset($data['csrf_test_name']);
 
         $data['id'] = $id;
+        $data['id_product_detail'] = $id;
+        $data['code'] = $id;
+        $data['name'] = $id;
         $data['active'] = strlen($this->request->getPost('active')) ? "1" : "0";
-        $data['userid'] = $this->session->get('userdata')['USER_ID'];
-        $data['recdate'] = date("Y-m-d H:i:s");
-        $data['moduser'] = $this->session->get('userdata')['USER_ID'];
-        $data['moddate'] = date("Y-m-d H:i:s");
+        $data['created_by'] = $this->session->get('userdata')['USER_ID'];
+        $data['created_date'] = date("Y-m-d H:i:s");
+        $data['updated_by'] = $this->session->get('userdata')['USER_ID'];
+        $data['updated_date'] = date("Y-m-d H:i:s");
 
-        $res = $this->db->table($tblmenu)->insert($data);
+        $res = $this->db->table($tableProduct)->insert($data);
         if ($res) {
             //Update Order Number
             $parent_id = $data['parent_id'];
             $tid = $data['tid'];
             $appid = $data['app_id'];
             $sSQL = "
-				SELECT id, tid
-				FROM $tblmenu
-				WHERE 1=1
-					AND id <> '$id'
-					AND parent_id = '$parent_id'
-					AND tid >= $tid
-                    AND app_id = '$appid'
-				ORDER BY tid
+				SELECT id
+				FROM $tableProduct
 			";
 
             $ambil = $this->db->query($sSQL);
+            dd($ambil);
             if ($ambil->getNumRows() > 0) {
                 foreach ($ambil->getResult() as $rows) {
                     $tid++;
@@ -47,53 +93,7 @@ class ProductModel extends Model
                         'tid' => $tid
                     );
 
-                    $this->db->table($tblmenu)->update($data, ['id' => $rows->id]);
-                }
-            }
-        }
-
-        return $res;
-    }
-
-    // Updated
-    public function MDL_Update($id)
-    {
-        $tblmenu = config('app')->tmstMenu;
-
-        $data = $this->request->getPost();
-        unset($data['submit']);
-        unset($data['csrf_test_name']);
-
-        $data['active'] = strlen($this->request->getPost('active')) ? "1" : "0";
-        $data['moduser'] = $this->session->get('userdata')['USER_ID'];
-        $data['moddate'] = date("Y-m-d H:i:s");
-
-        $res = $this->db->table($tblmenu)->update($data, ['id' => $id]);
-        if ($res) {
-            //Update Order Number
-            $parent_id = $data['parent_id'];
-            $tid = $data['tid'];
-            $appid = $data['app_id'];
-            $sSQL = "
-				SELECT id, tid
-				FROM $tblmenu
-				WHERE 1=1
-					AND id <> '$id'
-					AND parent_id = '$parent_id'
-					AND tid >= $tid
-					AND app_id = '$appid'
-				ORDER BY tid
-			";
-
-            $ambil = $this->db->query($sSQL);
-            if ($ambil->getNumRows() > 0) {
-                foreach ($ambil->getResult() as $rows) {
-                    $tid++;
-                    $data = array(
-                        'tid' => $tid
-                    );
-
-                    $this->db->table($tblmenu)->update($data, ['id' => $rows->id]);
+                    $this->db->table($tableProduct)->update($data, ['id' => $rows->id]);
                 }
             }
         }
@@ -102,44 +102,39 @@ class ProductModel extends Model
     }
 
     // Retrive by Id
-    public function MDL_Select($appid = '')
+    public function MdlSelectId($id = NULL)
     {
-        $tblmenu = config('app')->tmstMenu;
-
         $hasil = array();
-
-        $sSQL = "
-			SELECT m.id, det.custom_title as parentt, m.custom_title, m.tid, m.url_menu 
-				,IIF(m.active=1,'Active','Not Active') as active
-			FROM $tblmenu m LEFT JOIN $tblmenu det ON det.id = m.parent_id
-			WHERE 1=1
-                AND m.app_id = '$appid'
-			ORDER BY m.parent_id,m.tid
-		";
-
-        $ambil = $this->db->query($sSQL);
-        if ($ambil->getNumRows() > 0) {
-            foreach ($ambil->getResult() as $data) {
-                $hasil[] = $data;
+        if($id != null){
+            $sSQL = "
+                select * from product where id=1 and active =1
+            ";
+            $ambil = $this->db->query($sSQL);
+            dd($ambil);
+            if ($ambil->getNumRows() > 0) {
+                foreach ($ambil->getResult() as $data) {
+                    $hasil[] = $data;
+                }
             }
         }
+
         return $hasil;
     }
 
     // Retrive all
-    public function MDL_SelectID($id)
+    public function MdlSelect()
     {
-        $tblmenu = config('app')->tmstMenu;
+        $tableProduct = config('app')->product;
 
-        return $this->db->table($tblmenu)->getWhere(array('id' => $id))->getRow();
+        return $this->db->table($tableProduct)->findAll();
     }
 
     // Delete
-    public function MDL_Delete($id)
+    public function MdlDelete($id)
     {
-        $tblmenu = config('app')->tmstMenu;
+        $tableProduct = config('app')->product;
 
-        $res = $this->db->table($tblmenu)->delete(array('id' => $id));
+        $res = $this->db->table($tableProduct)->delete(array('id' => $id));
         return $res;
     }
 
