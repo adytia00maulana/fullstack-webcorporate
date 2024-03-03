@@ -10,6 +10,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('private/auth/login', 'Auth::login');
 $routes->get('private/auth/check', 'Auth::check');
 $routes->get('private/auth/logout', 'Auth::logout');
+$routes->get('/admin', 'Admin::layout');
 
 // routing front / company profile
 $routes->get('/', 'Home::index');
