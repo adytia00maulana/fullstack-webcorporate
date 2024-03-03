@@ -7,8 +7,24 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class Admin extends BaseController
 {
-    public function layout(): string
+    public function index(): string
     {
-        return view('adm_layout\layout');
+        $data['url_users_list'] = base_url() . 'admin/applicationListUsers';
+        $data['url_role_list'] = base_url() . 'admin/applicationListRole';
+        return view('adm_layout\dashboard', $data);
+    }
+
+    public function applicationListUsers(): string
+    {
+        $data['url_users_list'] = base_url() . 'admin/applicationListUsers';
+        $data['url_role_list'] = base_url() . 'admin/applicationListRole';
+        return view('Back\Admin\Users\users-list', $data);
+    }
+
+    public function applicationListRole(): string
+    {
+        $data['url_users_list'] = base_url() . 'admin/applicationListUsers';
+        $data['url_role_list'] = base_url() . 'admin/applicationListRole';
+        return view('Back\Admin\Users\role-list', $data);
     }
 }
