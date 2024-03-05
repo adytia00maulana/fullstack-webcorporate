@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
     <section class="section">
         <div class="section-header">
-            <h1>Daftar Aplikasi</h1>
+            <h1>Application List</h1>
         </div>
 
         <div class="section-body">

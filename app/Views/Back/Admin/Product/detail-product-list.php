@@ -3,21 +3,24 @@
 <?= $this->section('content') ?>
     <section class="section">
         <div class="section-header">
-            <h1>Daftar Aplikasi</h1>
+            <h1>Application List</h1>
         </div>
 
         <div class="section-body">
             <div class="card">
                 <div class="card-header">
-                    <h4>Detail Product</h4>
+                    <h4><?= $title ?? 'Detail Product' ?></h4>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-striped table-md">
+                        <table class="table table-striped table-md" id="table-detail-product">
                             <thead class="table-primary">
                             <tr>
                                 <th>#</th>
-                                <th>Role Name</th>
+                                <th>Source Product</th>
+                                <th>Code Product</th>
+                                <th>Detail Product Name</th>
+                                <th>Description</th>
                                 <th>Created By</th>
                                 <th>Created At</th>
                                 <th>Updated By</th>
@@ -30,7 +33,15 @@
                             <?php $no = 0; foreach($getList as $row): $no++;?>
                             <?php
                                 $id = $row['id'];
-                                $role_name = $row['role_name'];
+                                $id_product = $row['id_product'];
+                                $name_product = $row['name_product'];
+                                $id_source_product = $row['id_source_product'];
+                                $name_source_product = $row['name_source_product'];
+                                $code = $row['code'];
+                                $name = $row['name'];
+                                $filename = $row['filename'];
+                                $filepath = $row['filepath'];
+                                $description = $row['description'];
                                 $active = $row['active'];
                                 $created_by = $row['created_by'];
                                 $created_date = $row['created_date'];
@@ -39,9 +50,12 @@
                             ?>
                                 <tr>
                                     <td><?= $no ?></td>
-                                    <td><?= $role_name ?></td>
-                                    <td><?= $created_date? date('D, d M Y H:i:s', strtotime($created_date)): '' ?></td>
+                                    <td><?= $name_source_product ?></td>
+                                    <td><?= $code ?></td>
+                                    <td><?= $name ?></td>
+                                    <td><?= $description ?></td>
                                     <td><?= $created_by ?></td>
+                                    <td><?= $created_date? date('D, d M Y H:i:s', strtotime($created_date)): '' ?></td>
                                     <td><?= $updated_by? $updated_by : 'No Updated' ?></td>
                                     <td><?= $updated_date? date('D, d M Y H:i:s', strtotime($updated_date)): 'No Updated' ?></td>
                                     <td>

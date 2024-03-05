@@ -18,22 +18,27 @@ class Admin extends BaseController
         $this->ProductModel = model(ProductModel::class);
     }
 
-    public function index(): string
+    public function defaultLoadSideBar(): array
     {
         $data['url_users_list'] = base_url() . 'admin/listUsers';
         $data['url_role_list'] = base_url() . 'admin/listRole';
-        $data['url_product_list'] = base_url() . 'admin/listProduct';
+        $data['url_detail_product_list'] = base_url() . 'admin/listDetailProduct/';
         $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct';
+        $data['getListProduct'] = $this->ProductModel->MdlProductSelect();
+
+        return $data;
+    }
+
+    public function index(): string
+    {
+        $data = $this->defaultLoadSideBar();
 
         return view('adm_layout\dashboard', $data);
     }
 
     public function applicationListUsers(): string
     {
-        $data['url_users_list'] = base_url() . 'admin/listUsers';
-        $data['url_role_list'] = base_url() . 'admin/listRole';
-        $data['url_product_list'] = base_url() . 'admin/listProduct';
-        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct';
+        $data = $this->defaultLoadSideBar();
 
         $data['getListUser'] = $this->MstUserModel->MdlSelect();
         return view('Back\Admin\Users\users-list', $data);
@@ -41,10 +46,7 @@ class Admin extends BaseController
 
     public function applicationListRole(): string
     {
-        $data['url_users_list'] = base_url() . 'admin/listUsers';
-        $data['url_role_list'] = base_url() . 'admin/listRole';
-        $data['url_product_list'] = base_url() . 'admin/listProduct';
-        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct';
+        $data = $this->defaultLoadSideBar();
 
         $data['getListRole'] = $this->MstRoleModel->MdlSelect();
         return view('Back\Admin\Users\role-list', $data);
@@ -52,34 +54,30 @@ class Admin extends BaseController
 
     public function applicationListProduct(): string
     {
-        $data['url_users_list'] = base_url() . 'admin/listUsers';
-        $data['url_role_list'] = base_url() . 'admin/listRole';
-        $data['url_product_list'] = base_url() . 'admin/listProduct';
-        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct';
+        $data = $this->defaultLoadSideBar();
 
-        $data['getList'] = $this->ProductModel->MdlProductSelect();
         return view('Back\Admin\Users\product-list', $data);
     }
 
     public function applicationListSourceProduct(): string
     {
-        $data['url_users_list'] = base_url() . 'admin/listUsers';
-        $data['url_role_list'] = base_url() . 'admin/listRole';
-        $data['url_product_list'] = base_url() . 'admin/listProduct';
-        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct';
+        $data = $this->defaultLoadSideBar();
 
         $data['getList'] = $this->ProductModel->MdlSourceProductSelect();
-        return view('Back\Admin\Users\source-product-list', $data);
+        return view('Back\Admin\Product\source-product-list', $data);
     }
 
     public function applicationListDetailProduct($id): string
     {
-        $data['url_users_list'] = base_url() . 'admin/listUsers';
-        $data['url_role_list'] = base_url() . 'admin/listRole';
-        $data['url_product_list'] = base_url() . 'admin/listProduct';
-        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct';
+        $data = $this->defaultLoadSideBar();
+        $query = $this->ProductModel->MdlDetailProductSelectByIdProduct($id);
+        if(count($query)>0){
+            $data['title'] = $query[0]['name_product'];
+        }else{
+            $data['title'] = 'Detail Product';
+        }
+        $data['getList'] = $query;
 
-        $data['getList'] = $this->ProductModel->MdlDetailProductSelectByIdProduct($id);
-        return view('Back\Admin\Users\detail-product-list', $data);
+        return view('Back\Admin\Product\detail-product-list', $data);
     }
 }
