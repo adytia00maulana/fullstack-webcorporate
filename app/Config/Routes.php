@@ -7,9 +7,9 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 // routing back / wp admin
-$routes->get('private/auth/login', 'Auth::login');
-$routes->get('private/auth/check', 'Auth::check');
-$routes->get('private/auth/logout', 'Auth::logout');
+$routes->get('/auth/login', 'Auth::login');
+$routes->post('/auth/check', 'Auth::check');
+$routes->get('auth/logout', 'Auth::logout');
 $routes->get('/admin', 'Admin::index');
 $routes->get('/admin/listUsers', 'Admin::applicationListUsers');
 $routes->get('/admin/listRole', 'Admin::applicationListRole');

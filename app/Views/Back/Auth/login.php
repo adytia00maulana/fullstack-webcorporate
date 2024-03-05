@@ -1,5 +1,7 @@
 <?= $this->extend('adm_layout/default') ?>
 
+<?php// $this->extend('adm_layout/default_old') ?>
+
 <?= $this->section('content') ?>
     <div class="content">
         <body>
@@ -14,7 +16,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="#" class="needs-validation" novalidate="">
+                        <form method="POST" action="<?= base_url('auth/check') ?>" class="needs-validation" novalidate="">
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
@@ -43,9 +45,6 @@
                         </div>
                         <div class="row sm-gutters"></div>
                     </div>
-                    <!-- <div class="mt-5 text-muted text-center">
-                    Don't have an account? <a href="<?php echo base_url(); ?>dist/auth_register">Create One</a>
-                    </div> -->
                     <div class="simple-footer font-weight-bold">
                         Copyright &copy; Sruntulan <?= date('Y') ?>
                     </div>

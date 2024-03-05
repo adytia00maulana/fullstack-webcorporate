@@ -188,4 +188,6 @@ class App extends BaseConfig
     public $product          = 'product';
     public $source_product   = 'source_product';
     public $detail_product   = 'detail_product';
+    
+    public $tbl_users        = 'users';
 }
