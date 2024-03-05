@@ -49,6 +49,7 @@ body {
     border-bottom: solid 3px #192FC2;
     transform: scaleX(0);
     transition: transform 250ms ease-in-out;
+    padding: 4px 0;
 }
 
 .nav-link:hover:after {
@@ -329,7 +330,7 @@ h5, .text-saran .text-cara-memilih-produk {
     margin-left: 0.5em;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 768px) {
 .content-wrapper {
     line-height: 1.8;
     padding: 0.8em;
@@ -342,11 +343,18 @@ h5, .text-saran .text-cara-memilih-produk {
     transition: 0.3s;
 }
 
+.footer {
+    font-size: 20px;
+    font-weight: 700;
+    color: rgb(230, 230, 230)!important;
+    text-shadow: 1px 1px 1px rgba(0,0, 0.3);
+}
+
 .nav-link {
     color: rgb(230, 230, 230)!important;
     font-size: 18px;
     text-shadow: 1px 2px 1px rgba(0,0, 0.3);
-    margin: 0 0.1em;
+    margin: 0 0.5em;
 }
 
 .nav-link:after {
@@ -355,10 +363,11 @@ h5, .text-saran .text-cara-memilih-produk {
     border-bottom: solid 3px #192FC2;
     transform: scaleX(0);
     transition: transform 250ms ease-in-out;
+    width: 24%;
 }
 
 .nav-link:hover:after {
-        transform: scaleX(1);
+    transform: scaleX(1);
 }
 
    /* text inside slider video */
@@ -371,11 +380,6 @@ h5, .text-saran .text-cara-memilih-produk {
    .desc-heading {
     text-shadow: 2px 1px 1px rgb(128, 209, 163);
     font-size: 600;
-   }
-
-   .footer {
-    font-size: 18px;
-    font-weight: 600;
    }
 
    .desc-korean-ginseng {
@@ -483,15 +487,37 @@ h5, .text-saran .text-cara-memilih-produk {
 
 
 /* mobile */
-@media only screen and (min-width: 600px) {
-  body {
-    background-color: lightblue;
-  }
-
+@media only screen and (max-width: 600px) {
    .content-wrapper {
     line-height: 1.8;
     padding: 0.8em;
    }
+
+   .nav-link {
+    color: rgb(230, 230, 230)!important;
+    font-size: 14px;
+    text-shadow: 1px 2px 1px rgba(0,0, 0.3);
+    margin: 0 1.5em;
+}
+
+.nav-link:after {
+    display:block;
+    content: '';
+    border-bottom: solid 3px #192FC2;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+}
+
+.nav-link:hover:after {
+    transform: scaleX(1);
+}
+
+.footer {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgb(230, 230, 230)!important;
+    text-shadow: 1px 1px 1px rgba(0,0, 0.3);
+}
 
    /* text inside slider video */
     .title-heading {
@@ -503,11 +529,6 @@ h5, .text-saran .text-cara-memilih-produk {
    .desc-heading {
     text-shadow: 2px 1px 1px rgb(128, 209, 163);
     font-size: 600;
-   }
-
-   .footer {
-    font-size: 14px;
-    font-weight: 600;
    }
 
    .desc-korean-ginseng {
