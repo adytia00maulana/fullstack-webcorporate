@@ -3,141 +3,204 @@ use CodeIgniter\Model;
 
 class ProductModel extends Model
 {
-    // Create
-    public function MdlInsert()
+    private $tableProduct, $tableSourceProduct, $tableDetailProduct;
+    public function __construct()
     {
-        $tableProduct = config('app')->product;
+        $this->db = \Config\Database::connect();
+        $this->tableProduct = config('app')->product;
+        $this->tableSourceProduct = config('app')->source_product;
+        $this->tableDetailProduct = config('app')->detail_product;
+    }
 
-        $data = $this->request->getPost();
-        unset($data['submit']);
-        unset($data['csrf_test_name']);
+    // Retrieve Source Product all
+    public function MdlProductSelect(): array
+    {
+        $sqlQuery = "select * from ".$this->tableProduct;
+        $query = $this->db->query($sqlQuery);
+        return $query->getResultArray();
+    }
 
-        $data['id'] = $this->request->getPost('id');
-        $data['id_product_detail'] = $this->request->getPost('id_product_detail');
-        $data['code'] = $this->request->getPost('code');
-        $data['name'] = $this->request->getPost('name');
-        $data['active'] = strlen($this->request->getPost('active')) ? "1" : "0";
-        $data['created_by'] = $this->session->get('userdata')['USER_ID'];
-        $data['created_date'] = date("Y-m-d H:i:s");
-        $data['updated_by'] = $this->session->get('userdata')['USER_ID'];
-        $data['updated_date'] = date("Y-m-d H:i:s");
+    // Retrieve Product Active Users
+    public function MdlProductSelectByActive(): array
+    {
+        $sqlQuery = "select * from ".$this->tableProduct." where active = '1'";
+        $query = $this->db->query($sqlQuery);
+        return $query->getResultArray();
+    }
 
-        $res = $this->db->table($tableProduct)->insert($data);
-        dd($res);
-        if ($res) {
-            //Update Order Number
-            $parent_id = $data['parent_id'];
-            $tid = $data['tid'];
-            $appid = $data['app_id'];
-            $sSQL = "
-				SELECT id
-				FROM $tableProduct
-			";
+    // Retrieve Product By id
+    public function MdlProductSelectById($id): array
+    {
+        if(isset($id)){
+            $sqlQuery = "select * from ".$this->tableProduct." where id =".$id;
+            $query = $this->db->query($sqlQuery);
+        }
+        return $query->getResultObject();
+    }
 
-            $ambil = $this->db->query($sSQL);
-            dd($ambil);
-            if ($ambil->getNumRows() > 0) {
-                foreach ($ambil->getResult() as $rows) {
-                    $tid++;
-                    $data = array(
-                        'tid' => $tid
-                    );
-
-                    $this->db->table($tableProduct)->update($data, ['id' => $rows->id]);
-                }
-            }
+    // Insert Product Data
+    public function MdlProductInsert($body = [])
+    {
+        $result = null;
+        if(strlen($body) > 0){
+            $data = $body;
+            $data['created_date'] = date("Y-m-d H:i:s");
+            $result = $this->db->insert($this->tableProduct, $data);
         }
 
-        return $res;
+        return $result;
     }
 
-    // Updated
-    public function MdlUpdate($id)
+    // Updated Product Data
+    public function MdlProductUpdatedById($id = 0, $body = [])
     {
-        $tableProduct = config('app')->product;
-
-        helper('uniqueid');
-        $id = uniqueid();
-
-        $data = $this->request->getPost();
-        unset($data['submit']);
-        unset($data['csrf_test_name']);
-
-        $data['id'] = $id;
-        $data['id_product_detail'] = $id;
-        $data['code'] = $id;
-        $data['name'] = $id;
-        $data['active'] = strlen($this->request->getPost('active')) ? "1" : "0";
-        $data['created_by'] = $this->session->get('userdata')['USER_ID'];
-        $data['created_date'] = date("Y-m-d H:i:s");
-        $data['updated_by'] = $this->session->get('userdata')['USER_ID'];
-        $data['updated_date'] = date("Y-m-d H:i:s");
-
-        $res = $this->db->table($tableProduct)->insert($data);
-        if ($res) {
-            //Update Order Number
-            $parent_id = $data['parent_id'];
-            $tid = $data['tid'];
-            $appid = $data['app_id'];
-            $sSQL = "
-				SELECT id
-				FROM $tableProduct
-			";
-
-            $ambil = $this->db->query($sSQL);
-            dd($ambil);
-            if ($ambil->getNumRows() > 0) {
-                foreach ($ambil->getResult() as $rows) {
-                    $tid++;
-                    $data = array(
-                        'tid' => $tid
-                    );
-
-                    $this->db->table($tableProduct)->update($data, ['id' => $rows->id]);
-                }
-            }
+        $result = null;
+        if(strlen($body) > 0){
+            $data = $body;
+            $data['updated_date'] = date("Y-m-d H:i:s");
+            $this->db->where('id', $id);
+            $result = $this->db->update($this->tableProduct, $data);
         }
 
-        return $res;
+        return $result;
     }
 
-    // Retrive by Id
-    public function MdlSelectId($id = NULL)
+    // Delete Product Data
+    public function MdlProductDeleteById($id = 0)
     {
-        $hasil = array();
-        if($id != null){
-            $sSQL = "
-                select * from product where id=1 and active =1
-            ";
-            $ambil = $this->db->query($sSQL);
-            dd($ambil);
-            if ($ambil->getNumRows() > 0) {
-                foreach ($ambil->getResult() as $data) {
-                    $hasil[] = $data;
-                }
-            }
+        $result = null;
+        if(isset($id)){
+            $result = $this->db->delete($this->tableProduct, array('id' => $id));
+        }
+        return $result;
+    }
+
+
+    // Retrieve Source Product all
+    public function MdlSourceProductSelect(): array
+    {
+        $sqlQuery = "select * from ".$this->tableSourceProduct;
+        $query = $this->db->query($sqlQuery);
+        return $query->getResultArray();
+    }
+
+    // Retrieve Source Product Active Users
+    public function MdlSourceProductSelectByActive(): array
+    {
+        $sqlQuery = "select * from ".$this->tableSourceProduct." where active = '1'";
+        $query = $this->db->query($sqlQuery);
+        return $query->getResultArray();
+    }
+
+    // Retrieve Source Product By id
+    public function MdlSourceProductSelectById($id): array
+    {
+        if(isset($id)){
+            $sqlQuery = "select * from ".$this->tableSourceProduct." where id =".$id;
+            $query = $this->db->query($sqlQuery);
+        }
+        return $query->getResultObject();
+    }
+
+    // Insert Source Product Data
+    public function MdlSourceProductInsert($body = [])
+    {
+        $result = null;
+        if(strlen($body) > 0){
+            $data = $body;
+            $data['created_date'] = date("Y-m-d H:i:s");
+            $result = $this->db->insert($this->tableSourceProduct, $data);
         }
 
-        return $hasil;
+        return $result;
     }
 
-    // Retrive all
-    public function MdlSelect()
+    // Updated Source Product Data
+    public function MdlSourceProductUpdatedById($id = 0, $body = [])
     {
-        $tableProduct = config('app')->product;
+        $result = null;
+        if(strlen($body) > 0){
+            $data = $body;
+            $data['updated_date'] = date("Y-m-d H:i:s");
+            $this->db->where('id', $id);
+            $result = $this->db->update($this->tableSourceProduct, $data);
+        }
 
-        return $this->db->table($tableProduct)->findAll();
+        return $result;
     }
 
-    // Delete
-    public function MdlDelete($id)
+    // Delete Source Product Data
+    public function MdlSourceProductDeleteById($id = 0)
     {
-        $tableProduct = config('app')->product;
-
-        $res = $this->db->table($tableProduct)->delete(array('id' => $id));
-        return $res;
+        $result = null;
+        if(isset($id)){
+            $result = $this->db->delete($this->tableSourceProduct, array('id' => $id));
+        }
+        return $result;
     }
 
+
+    // Retrieve Detail Product all
+    public function MdlDetailProductSelect(): array
+    {
+        $sqlQuery = "select * from ".$this->tableDetailProduct;
+        $query = $this->db->query($sqlQuery);
+        return $query->getResultArray();
+    }
+
+    // Retrieve Detail Product Active Users
+    public function MdlSelectByActive(): array
+    {
+        $sqlQuery = "select * from ".$this->tableDetailProduct." where active = '1'";
+        $query = $this->db->query($sqlQuery);
+        return $query->getResultArray();
+    }
+
+    // Retrieve Detail Product By id
+    public function MdlSelectById($id): array
+    {
+        if(isset($id)){
+            $sqlQuery = "select * from ".$this->tableDetailProduct." where id =".$id;
+            $query = $this->db->query($sqlQuery);
+        }
+        return $query->getResultObject();
+    }
+
+    // Insert Detail Product Data
+    public function MdlInsert($body = [])
+    {
+        $result = null;
+        if(strlen($body) > 0){
+            $data = $body;
+            $data['created_date'] = date("Y-m-d H:i:s");
+            $result = $this->db->insert($this->tableDetailProduct, $data);
+        }
+
+        return $result;
+    }
+
+    // Updated Detail Product Data
+    public function MdlUpdatedById($id = 0, $body = [])
+    {
+        $result = null;
+        if(strlen($body) > 0){
+            $data = $body;
+            $data['updated_date'] = date("Y-m-d H:i:s");
+            $this->db->where('id', $id);
+            $result = $this->db->update($this->tableDetailProduct, $data);
+        }
+
+        return $result;
+    }
+
+    // Delete Detail Product Data
+    public function MdlDeleteById($id = 0)
+    {
+        $result = null;
+        if(isset($id)){
+            $result = $this->db->delete($this->tableDetailProduct, array('id' => $id));
+        }
+        return $result;
+    }
 }
-
 ?>
