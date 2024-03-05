@@ -4,15 +4,16 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use MstRoleModel;
 use MstUserModel;
 
 class Admin extends BaseController
 {
-    private $MstUserModel;
+    private $MstUserModel, $MstRoleModel;
     public function __construct()
     {
         $this->MstUserModel = model(MstUserModel::class);
-        $this->mst_users = config('app')->mst_users;
+        $this->MstRoleModel = model(MstRoleModel::class);
     }
 
     public function index(): string
@@ -27,7 +28,7 @@ class Admin extends BaseController
         $data['url_users_list'] = base_url() . 'admin/applicationListUsers';
         $data['url_role_list'] = base_url() . 'admin/applicationListRole';
 
-        // $hasil = $this->MstUserModel->MdlSelect();
+        $data['getListUser'] = $this->MstUserModel->MdlSelect();
         return view('Back\Admin\Users\users-list', $data);
     }
 
@@ -35,6 +36,8 @@ class Admin extends BaseController
     {
         $data['url_users_list'] = base_url() . 'admin/applicationListUsers';
         $data['url_role_list'] = base_url() . 'admin/applicationListRole';
+
+        $data['getListRole'] = $this->MstRoleModel->MdlSelect();
         return view('Back\Admin\Users\role-list', $data);
     }
 }

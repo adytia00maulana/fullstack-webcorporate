@@ -14,48 +14,53 @@
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table table-striped table-md">
+                            <thead class="table-primary">
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
+                                <th>Role Name</th>
+                                <th>Created By</th>
                                 <th>Created At</th>
+                                <th>Updated By</th>
+                                <th>Updated At</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Irwansyah Saputra</td>
-                                <td>2017-01-09</td>
-                                <td><div class="badge badge-success">Active</div></td>
-                                <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Hasan Basri</td>
-                                <td>2017-01-09</td>
-                                <td><div class="badge badge-success">Active</div></td>
-                                <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Kusnadi</td>
-                                <td>2017-01-11</td>
-                                <td><div class="badge badge-danger">Not Active</div></td>
-                                <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Rizal Fakhri</td>
-                                <td>2017-01-11</td>
-                                <td><div class="badge badge-success">Active</div></td>
-                                <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Isnap Kiswandi</td>
-                                <td>2017-01-17</td>
-                                <td><div class="badge badge-success">Active</div></td>
-                                <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $no = 0; foreach($getListRole as $row): $no++;?>
+                            <?php
+                                $id = $row['id'];
+                                $role_name = $row['role_name'];
+                                $active = $row['active'];
+                                $created_by = $row['created_by'];
+                                $created_date = $row['created_date'];
+                                $updated_by = $row['updated_by'];
+                                $updated_date = $row['updated_date'];
+                            ?>
+                                <tr>
+                                    <td><?= $no ?></td>
+                                    <td><?= $role_name ?></td>
+                                    <td><?= $created_date? date('D, d M Y H:i:s', strtotime($created_date)): '' ?></td>
+                                    <td><?= $created_by ?></td>
+                                    <td><?= $updated_by? $updated_by : 'No Updated' ?></td>
+                                    <td><?= $updated_date? date('D, d M Y H:i:s', strtotime($updated_date)): 'No Updated' ?></td>
+                                    <td>
+                                        <?php
+                                        if(isset($active)){
+                                            if($active == 1){
+                                                echo('<div class="badge badge-success">Active</div>');
+                                            }else{
+                                                echo('<div class="badge badge-danger">Not Active</div>');
+                                            }
+                                        }else{
+                                            echo('<div class="badge badge-danger">Not Active</div>');
+                                        }
+                                        ?>
+                                    </td>
+                                    <td><a href="#" class="btn btn-secondary">Detail</a></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
                         </table>
                     </div>
                 </div>

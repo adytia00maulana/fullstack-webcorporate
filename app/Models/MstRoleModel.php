@@ -2,23 +2,23 @@
 
 use CodeIgniter\Model;
 
-class MstUserModel extends Model
+class MstRoleModel extends Model
 {
     public function __construct()
     {
         $this->db = \Config\Database::connect();
-        $this->tableMstUsers = config('app')->mst_users;
+        $this->tableMstRole = config('app')->mst_role;
     }
     // Retrieve all
     public function MdlSelect(): array
     {
-        $sqlQuery = "select * from ".$this->tableMstUsers;
+        $sqlQuery = "select * from ".$this->tableMstRole;
         $query = $this->db->query($sqlQuery);
         return $query->getResultArray();
     }
     public function MdlSelectByActive(): array
     {
-        $sqlQuery = "select * from ".$this->tableMstUsers." where active = '1'";
+        $sqlQuery = "select * from ".$this->tableMstRole." where active = '1'";
         $query = $this->db->query($sqlQuery);
         return $query->getResultArray();
     }

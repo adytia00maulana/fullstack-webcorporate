@@ -26,6 +26,7 @@
         <li class="dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Master Produk</span></a>
             <ul class="dropdown-menu">
+                <li><a class="nav-link" href="bootstrap-alert.html">Source Produk</a></li>
                 <li><a class="nav-link" href="bootstrap-alert.html">Produk</a></li>
                 <li><a class="nav-link" href="bootstrap-alert.html">Galeri</a></li>
             </ul>
