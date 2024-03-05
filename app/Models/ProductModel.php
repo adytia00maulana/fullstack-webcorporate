@@ -149,7 +149,7 @@ class ProductModel extends Model
     }
 
     // Retrieve Detail Product Active Users
-    public function MdlSelectByActive(): array
+    public function MdlDetailProductSelectByActive(): array
     {
         $sqlQuery = "select * from ".$this->tableDetailProduct." where active = '1'";
         $query = $this->db->query($sqlQuery);
@@ -157,7 +157,7 @@ class ProductModel extends Model
     }
 
     // Retrieve Detail Product By id
-    public function MdlSelectById($id): array
+    public function MdlDetailProductSelectById($id): array
     {
         if(isset($id)){
             $sqlQuery = "select * from ".$this->tableDetailProduct." where id =".$id;
@@ -166,8 +166,18 @@ class ProductModel extends Model
         return $query->getResultObject();
     }
 
+    // Retrieve Detail Product By id product
+    public function MdlDetailProductSelectByIdProduct($id_product): array
+    {
+        if(isset($id_product)){
+            $sqlQuery = "select * from ".$this->tableDetailProduct." where id_product =".$id_product;
+            $query = $this->db->query($sqlQuery);
+        }
+        return $query->getResultArray();
+    }
+
     // Insert Detail Product Data
-    public function MdlInsert($body = [])
+    public function MdlDetailProductInsert($body = [])
     {
         $result = null;
         if(strlen($body) > 0){
@@ -180,7 +190,7 @@ class ProductModel extends Model
     }
 
     // Updated Detail Product Data
-    public function MdlUpdatedById($id = 0, $body = [])
+    public function MdlDetailProductUpdatedById($id = 0, $body = [])
     {
         $result = null;
         if(strlen($body) > 0){
@@ -194,7 +204,7 @@ class ProductModel extends Model
     }
 
     // Delete Detail Product Data
-    public function MdlDeleteById($id = 0)
+    public function MdlDetailProductDeleteById($id = 0)
     {
         $result = null;
         if(isset($id)){

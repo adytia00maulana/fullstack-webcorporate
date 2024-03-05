@@ -72,14 +72,14 @@ class Admin extends BaseController
         return view('Back\Admin\Users\source-product-list', $data);
     }
 
-    public function applicationListDetailProduct(): string
+    public function applicationListDetailProduct($id): string
     {
         $data['url_users_list'] = base_url() . 'admin/listUsers';
         $data['url_role_list'] = base_url() . 'admin/listRole';
         $data['url_product_list'] = base_url() . 'admin/listProduct';
         $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct';
 
-        $data['getList'] = $this->ProductModel->MdlDetailProductSelect();
+        $data['getList'] = $this->ProductModel->MdlDetailProductSelectByIdProduct($id);
         return view('Back\Admin\Users\detail-product-list', $data);
     }
 }

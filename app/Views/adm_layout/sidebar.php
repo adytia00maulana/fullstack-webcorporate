@@ -23,7 +23,7 @@
             </ul>
         </li>
         <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Master Produk</span></a>
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Produk</span></a>
             <ul class="dropdown-menu">
                 <li><a class="nav-link" href="<?php if(isset($url_source_product_list)) echo $url_source_product_list ?>">Source Produk</a></li>
                 <li><a class="nav-link" href="<?php if(isset($url_product_list)) echo $url_product_list ?>">Produk</a></li>
