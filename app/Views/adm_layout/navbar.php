@@ -1,38 +1,31 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-      <nav class="navbar navbar-secondary navbar-expand-lg">
-        <div class="container">
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
-              <ul class="dropdown-menu">
-                <li class="nav-item"><a href="<?php echo base_url(); ?>dist/index_0" class="nav-link">General Dashboard</a></li>
-                <li class="nav-item"><a href="<?php echo base_url(); ?>dist/index" class="nav-link">Ecommerce Dashboard</a></li>
-              </ul>
-            </li>
-            <li class="nav-item <?php echo $this->uri->segment(2) == 'layout_top_navigation' ? 'active' : ''; ?>">
-              <a href="#" class="nav-link"><i class="far fa-heart"></i><span>Top Navigation</span></a>
-            </li>
-            <li class="nav-item dropdown">
-              <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="far fa-clone"></i><span>Multiple Dropdown</span></a>
-              <ul class="dropdown-menu">
-                <li class="nav-item"><a href="#" class="nav-link">Not Dropdown Link</a></li>
-                <li class="nav-item dropdown"><a href="#" class="nav-link has-dropdown">Hover Me</a>
-                  <ul class="dropdown-menu">
-                    <li class="nav-item"><a href="#" class="nav-link">Link</a></li>
-                    <li class="nav-item dropdown"><a href="#" class="nav-link has-dropdown">Link 2</a>
-                      <ul class="dropdown-menu">
-                        <li class="nav-item"><a href="#" class="nav-link">Link</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Link</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Link</a></li>
-                      </ul>
-                    </li>
-                    <li class="nav-item"><a href="#" class="nav-link">Link 3</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
+<div class="navbar-bg"></div>
+<nav class="navbar navbar-expand-lg main-navbar">
+    <form class="form-inline mr-auto">
+        <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+        </ul>
+    </form>
+    <ul class="navbar-nav navbar-right">
+        <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                <img alt="image" src="<?php echo base_url(); ?>assets/admin/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div></a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-title">Logged in 5 min ago</div>
+                <a href="features-profile.html" class="dropdown-item has-icon">
+                    <i class="far fa-user"></i> Profile
+                </a>
+                <a href="features-activities.html" class="dropdown-item has-icon">
+                    <i class="fas fa-bolt"></i> Activities
+                </a>
+                <a href="features-settings.html" class="dropdown-item has-icon">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item has-icon text-danger">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </li>
+    </ul>
+</nav>

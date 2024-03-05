@@ -10,6 +10,12 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('private/auth/login', 'Auth::login');
 $routes->get('private/auth/check', 'Auth::check');
 $routes->get('private/auth/logout', 'Auth::logout');
+$routes->get('/admin', 'Admin::index');
+$routes->get('/admin/listUsers', 'Admin::applicationListUsers');
+$routes->get('/admin/listRole', 'Admin::applicationListRole');
+$routes->get('/admin/listProduct', 'Admin::applicationListProduct');
+$routes->get('/admin/listSourceProduct', 'Admin::applicationListSourceProduct');
+$routes->get('/admin/listDetailProduct/(:any)', 'Admin::applicationListDetailProduct/$1');
 
 // routing front / company profile
 $routes->get('/', 'Home::index');
