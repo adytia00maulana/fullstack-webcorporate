@@ -70,6 +70,7 @@ class MstUserModel extends Model
         if(isset($id)){
             $result = $this->db->delete($this->tableMstUsers, array('id' => $id));
         }
+        
         return $result;
     }
 }
