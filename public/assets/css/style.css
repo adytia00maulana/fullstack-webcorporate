@@ -11,34 +11,54 @@ body {
     flex-direction: column;
 }
 
+.navbar, .footer{
+    background: #b6acac
+}
+
 .content-wrapper {
     position: relative;
     min-height: 100vh;
 }
 
-footer {
+.footer {
     margin-top: auto;
-    font-size: 24px;
-    text-shadow: 0 0 1px #eaeaea;
-    color: bisque;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 700;
+    color: rgb(230, 230, 230)!important;
+    text-shadow: 1px 1px 1px rgba(0,0, 0.3);
 }
 
 
 /* styling for content */
 .navbar-nav>li>a:hover {
-    color: seagreen !important;
+    color: #87fe50 !important;
+    font-weight: 700;
+    font-size: 18px;
+    transition: 0.3s;
 }
 
 .nav-link {
-    font-size: 24px;
-    color: rgb(107, 117, 218) !important;
+    color: rgb(230, 230, 230)!important;
+    font-size: 18px;
+    text-shadow: 1px 2px 1px rgba(0,0, 0.3);
+}
+
+.nav-link:after {
+    display:block;
+    content: '';
+    border-bottom: solid 3px #192FC2;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+}
+
+.nav-link:hover:after {
+    transform: scaleX(1);
 }
 
 .font-pathway-extreme {
   font-family: "Pathway Extreme", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 600;
+  font-weight: 700;
   font-style: normal;
   font-variation-settings:
   "wdth" 100;
@@ -47,14 +67,7 @@ footer {
 .font-outfit {
     font-family: "Outfit", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 500;
-    font-style: normal;
-}
-
-.text-heebo {
-    font-family: "Heebo", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
+    font-weight: 700;
     font-style: normal;
 }
 
@@ -65,16 +78,52 @@ footer {
     font-style: normal;
 }
 
-.section-visi-misi {
-    line-height: 1.8;
-    font-size: 26px;
+/* font heebo only for content */
+.text-heebo {
+    font-family: "Heebo", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
 }
 
-.section-ceo-speech {
-    line-height: 1.5;
-    font-size: 22px;
+.title-heading, .desc-heading, .heading-visi-misi, .heading-ceo-speech {
+    text-shadow: 1px 1px 0 rgb(90, 138, 111);
+    color: black;
+    font-weight: 700;
+    transition: .3s ease-in-out, box-shadow .3s ease-in-out;
 }
 
+/* text inside slider video & animation for all heading */
+.title-heading:hover, .desc-heading:hover, .heading-visi-misi:hover, .heading-ceo-speech:hover {
+    color: #4BE106 !important;
+    font-weight: 700;
+    transition: all 0.6s;
+    font-size: 58px;
+}
+
+.heading-visi-misi:after, .heading-ceo-speech:after {
+    display:block;
+    content: '';
+    border-bottom: solid 5px #192FC2;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+}
+
+.heading-visi-misi:hover:after, .heading-ceo-speech:hover:after {
+    transform: scaleX(1);
+    padding: 4px 0;
+}
+
+.title-heading {
+    font-size: 48px;
+}
+
+.desc-heading {
+    font-size: 36px;
+    padding: 3rem 0;
+}
+
+/* slider video slide */
 .video-background-holder {
     position: relative;
     background-color: black;
@@ -117,12 +166,14 @@ footer {
 
 /* visi misi */
 .section-visi-misi {
-    line-height: 2.4;
+    line-height: 1.8;
+    font-size: 24px;
 }
 
-/* ceo */
+/* section ceo speech */
 .section-ceo-speech {
-    line-height: 1.8;
+    line-height: 1.5;
+    font-size: 22px;
 }
 
 .text-ceo {
@@ -135,10 +186,22 @@ footer {
 
 /* page contact us */
 .section-contact-us {
-    /* background: lightgreen; */
     background-image: linear-gradient(to top, #d7d731 , rgb(154, 204, 176));
 }
 
+/* page about us */
+.section-about-us {
+    line-height: 1.8;
+}
+
+.section-about-us {
+     background-image: linear-gradient(to top, #d7d731 , rgb(154, 204, 176));
+     line-height: 2.5;
+     font-size: 22px;
+     padding: 7rem;
+}
+
+/* page contact us */
 .container-contact {
   background: #FFFFFF;
   width: 900px;
@@ -194,18 +257,19 @@ footer {
     background-color: greenyellow;
     background-image: linear-gradient(to top, #d7d731 , rgb(154, 204, 176));
 }
-    .section-faq {
-        font-weight: 500;
-        padding: 0 1.6em;
-    }
 
-   .desc-korean-ginseng {
-    font-size: 20px;
+.section-faq {
+    font-weight: 500;
+    padding: 0 1.6em;
+}
+
+.desc-korean-ginseng {
+    font-size: 22px;
     text-align: left;
     text-wrap:wrap;
     letter-spacing: 1px;
     font-weight: 500;
-   }
+}
 
 .text-head {
     font-size: clamp(2rem, 4vw, 4rem);
@@ -214,7 +278,7 @@ footer {
 }
 
 .aturan-konsumsi, .text-sub-head {
-    font-size: 26px;
+    font-size: 28px;
     color: black;
 }
 
@@ -231,19 +295,19 @@ footer {
 
 .aturan-konsumsi, p {
     margin-bottom: 2em !important;
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .cara-memilih-produk {
     line-height: 1.6;
     padding-top: 2em;
     margin-left: 4em;
-    font-size: 20px;
+    font-size: 22px;
 }
 
 
 h5, .text-saran .text-cara-memilih-produk {
-     font-size: 30px;
+     font-size: 32px;
      font-family: Arial, Helvetica, sans-serif;
      text-shadow: 0 2px 2px #65fa15;
      position: relative;
@@ -251,7 +315,7 @@ h5, .text-saran .text-cara-memilih-produk {
 }
 
 .text-sub-head-kosmetik {
-    font-size: 24px;
+    font-size: 26px;
 }
 
 .rules
@@ -260,14 +324,166 @@ h5, .text-saran .text-cara-memilih-produk {
 }
 
 .list-kosmetik li {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 600;
     margin-left: 0.5em;
 }
 
+@media only screen and (min-width: 768px) {
+.content-wrapper {
+    line-height: 1.8;
+    padding: 0.8em;
+}
 
-/* mobile 360 */
-@media only screen and (max-width: 600px) {
+.navbar-nav>li>a:hover {
+    color: #87fe50 !important;
+    font-weight: 700;
+    font-size: 22px;
+    transition: 0.3s;
+}
+
+.nav-link {
+    color: rgb(230, 230, 230)!important;
+    font-size: 18px;
+    text-shadow: 1px 2px 1px rgba(0,0, 0.3);
+    margin: 0 0.1em;
+}
+
+.nav-link:after {
+    display:block;
+    content: '';
+    border-bottom: solid 3px #192FC2;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+}
+
+.nav-link:hover:after {
+        transform: scaleX(1);
+}
+
+   /* text inside slider video */
+    .title-heading {
+    font-size: 600;
+    font-size: 22px;
+    text-shadow: 2px 1px 1px rgb(128, 209, 163);
+   }
+
+   .desc-heading {
+    text-shadow: 2px 1px 1px rgb(128, 209, 163);
+    font-size: 600;
+   }
+
+   .footer {
+    font-size: 18px;
+    font-weight: 600;
+   }
+
+   .desc-korean-ginseng {
+    font-size: 16px;
+    text-align: left;
+   }
+
+   .desc-rules {
+        margin-top: 3rem;
+        line-height: 1.5;
+        font-size: 20px;
+    }
+
+    .aturan-konsumsi, p {
+        margin-bottom: 2em !important;
+        font-size: 16px;
+    }
+
+    /* styling text for section saran dan pemakaian in device mobile */
+    .text-produk-show, text-sub-menu-saran, hr {
+        display: none;
+    }
+
+    .text-sub-menu-saran::after {
+        content: 'saran dan pemakaian serta cara memilih produk ginseng';
+        text-transform: capitalize;
+        text-shadow: 2px 1px #eaeaea;
+        color: seagreen;
+        font-size: 18px;
+        margin: 1em;
+    }
+
+    .aturan-konsumsi {
+        font-size: 18px;
+        text-align: left;
+    }
+
+    .text-sub-head {
+        text-transform: uppercase;
+        text-shadow: 1px 0.1px rgba(0,0,0,0.7);
+        font-size: 16px;
+        letter-spacing: 0;
+    }
+
+    .cara-memilih-produk {
+        position: relative;
+        left: -3em;
+    }
+
+    .aturan-konsumsi, .text-aturan-konsumsi,
+    .cara-memilih-produk, .text-cara-memilih {    
+        font-size: 16px;
+        text-transform: capitalize;
+    }
+    
+    .h5, .text-saran {
+     font-size: 20px;
+     text-shadow: 2px 1px #eaeaea;
+     color: seagreen;
+    }
+
+    h5, .text-cara-memilih-produk {
+     font-size: 22px;
+     position: relative;
+     left: 3em;
+     text-shadow: 2px 1px #eaeaea;
+     color: seagreen;
+    }
+    /* end styling text for section saran dan pemakaian in device mobile */
+
+    .kosmetik {
+        text-align: left;
+        line-height: 1.4;
+    }
+
+    .kosmetik .text-head {
+        font-size: clamp(2.4rem, 4vw, 4rem);
+        padding: 0.2em 0;
+    }
+
+    .text-sub-head-kosmetik {
+        font-size: 20px;
+        margin-left: 0.4em;
+    }
+
+    .list-kosmetik li {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .text-list-kosmetik {
+        padding-left: 0.3em;
+        text-transform: capitalize;
+        text-align: left;
+    }
+
+    .section-about-us {
+     background-image: linear-gradient(to top, #d7d731 , rgb(154, 204, 176));
+     line-height: 1.5;
+     font-size: 22px;
+     padding: 1rem;
+    }
+}
+
+
+
+/* mobile */
+@media only screen and (min-width: 600px) {
   body {
     background-color: lightblue;
   }
@@ -275,6 +491,23 @@ h5, .text-saran .text-cara-memilih-produk {
    .content-wrapper {
     line-height: 1.8;
     padding: 0.8em;
+   }
+
+   /* text inside slider video */
+    .title-heading {
+    font-size: 600;
+    font-size: 18px;
+    text-shadow: 2px 1px 1px rgb(128, 209, 163);
+   }
+
+   .desc-heading {
+    text-shadow: 2px 1px 1px rgb(128, 209, 163);
+    font-size: 600;
+   }
+
+   .footer {
+    font-size: 14px;
+    font-weight: 600;
    }
 
    .desc-korean-ginseng {
@@ -370,4 +603,12 @@ h5, .text-saran .text-cara-memilih-produk {
         text-transform: capitalize;
         text-align: left;
     }
+
+    .section-about-us {
+     background-image: linear-gradient(to top, #d7d731 , rgb(154, 204, 176));
+     line-height: 1.5;
+     font-size: 18px;
+     padding: 3rem;
+    }
+
 }

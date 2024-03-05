@@ -12,9 +12,9 @@
             <div class="video-background-content container h-100">
                 <div class="d-flex h-100 text-center align-items-center">
                     <div class="w-100 text-white">
-                    <h1 class="font-weight-bold font-italic">PT Makmur Bersama Indonesia</h1>
+                    <h1 class="font-weight-bold font-italic title-heading">PT Makmur Bersama Indonesia</h1>
                     <div class="content">
-                        <h4>Deskripsi Slider</h4>
+                        <h4 class="desc-heading">Deskripsi Slider</h4>
                     </div>
                 </div>
             </div>
@@ -24,12 +24,12 @@
 
 <div class="section-visi-misi mt-3 mb-3 pt-3 pb-3 font-heebo">
     <div class="container">
-        <h1 class="font-weight-bold font-italic text-center mb-3">Visi & Misi</h1>
+        <h1 class="font-weight-bold font-italic text-center mb-3 heading-visi-misi">Visi & Misi</h1>
         <div class="row">
-            <div class="col-md-6 text-heebo">
+            <div class="col-md-6">
                 <p>Visi : Menjadikan Perusahaan Distributor yang baik dan terpercaya</p>
             </div>
-            <div class="col-md-6 text-heebo">
+            <div class="col-md-6">
                 <p>Misi : Sebagai Importir untuk produk-produk Kosmetika, Ginseng dan  Produk  lainnya dengan mutu dan kualitas yang baik dan dipercaya masyarakat. <br>
                 Menjadikan kemitraan kerjasama yang baik dan mitra bisnis yang saling menguntungkan</p>
             </div>
@@ -74,7 +74,7 @@
 
 <div class="section-ceo-speech mt-5 pt-5">
     <div class="container">
-        <h1 class="font-weight-bold font-italic text-center mb-3">Sambutan CEO</h1>
+        <h1 class="font-weight-bold font-italic text-center mb-3 heading-ceo-speech">Sambutan CEO</h1>
         <div class="row">
             <div class="col-md-6">
                 <p class="text-sm-left text-wrap text-ceo">
