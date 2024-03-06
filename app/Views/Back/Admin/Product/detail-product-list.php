@@ -84,11 +84,20 @@
                             <li class="page-item disabled">
                                 <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
                             </li>
-                            <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
+                            <?php
+                                $no = 1;
+                                $active = false;
+                                $paginate = 1;
+                                if(isset($activePaginate)) $paginate = $activePaginate;
+                                if(isset($listPaginate)) $no = 0;
+                                foreach ($listPaginate as $data): $no = $data;?>
+                                    <li class="page-item <?= ($paginate == $data)? "active":"";?>"><a class="page-link" href="#"><?= $no ?><span class="sr-only">(current)</span></a></li>
+                                <?php endforeach; ?>
+                            <!-- <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
                             <li class="page-item">
                                 <a class="page-link" href="#">2</a>
                             </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li> -->
                             <li class="page-item">
                                 <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
                             </li>

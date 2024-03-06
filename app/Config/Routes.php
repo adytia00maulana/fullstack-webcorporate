@@ -15,7 +15,7 @@ $routes->get('/admin/listUsers', 'Admin::applicationListUsers');
 $routes->get('/admin/listRole', 'Admin::applicationListRole');
 $routes->get('/admin/listProduct', 'Admin::applicationListProduct');
 $routes->get('/admin/listSourceProduct', 'Admin::applicationListSourceProduct');
-$routes->get('/admin/listDetailProduct/(:any)', 'Admin::applicationListDetailProduct/$1');
+$routes->get('/admin/listDetailProduct/(:any)/(:num)', 'Admin::applicationListDetailProduct/$1/$2');
 
 // routing front / company profile
 $routes->get('/', 'Home::index');

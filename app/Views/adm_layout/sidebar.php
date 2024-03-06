@@ -30,7 +30,7 @@
                     $id = $data['id'];
                     $name = $data['name'];
                     ?>
-                    <li><a class="nav-link" href="<?php if(isset($url_detail_product_list)) echo $url_detail_product_list.$id ?>"><?=$name?></a></li>
+                    <li><a class="nav-link" href="<?php $paginate = 1; if(isset($url_detail_product_list)) echo $url_detail_product_list.$id."/".$paginate ?>"><?=$name?></a></li>
                 <?php endforeach; ?>
             </ul>
         </li>

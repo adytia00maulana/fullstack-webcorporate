@@ -199,29 +199,58 @@ class ProductModel extends Model
     public function MdlPaginateDetailProductByIdProduct($id_product, $no_paginate): array
     {
         if(isset($id_product)){
-            $sqlQuery = "select 
-                dp.id,
-                dp.id_product,
-                p.name as name_product,
-                dp.id_source_product,
-                sp.name as name_source_product,
-                dp.code,
-                dp.name,
-                dp.filename,
-                dp.filepath,
-                dp.description,
-                dp.active,
-                dp.created_by,
-                dp.created_date,
-                dp.updated_by,
-                dp.updated_date
-                from ".$this->tableDetailProduct." dp left join ".$this->tableProduct." p on dp.id_product  = p.id
+            $sqlQuery =
+                "select 
+                    dp.id,
+                    dp.id_product,
+                    p.name as name_product,
+                    dp.id_source_product,
+                    sp.name as name_source_product,
+                    dp.code,
+                    dp.name,
+                    dp.filename,
+                    dp.filepath,
+                    dp.description,
+                    dp.active,
+                    dp.created_by,
+                    dp.created_date,
+                    dp.updated_by,
+                    dp.updated_date
+                from ".$this->tableDetailProduct." dp 
+                left join ".$this->tableProduct." p on
+                dp.id_product = p.id
                 left join ".$this->tableSourceProduct." sp on
                 dp.id_source_product = sp.id
-                where id_product =".$id_product. "order by dp.id asc limit ".$no_paginate.",5";
+                where id_product = ".$id_product." order by dp.id asc limit ".$no_paginate.",5";
             $query = $this->db->query($sqlQuery);
         }
         return $query->getResultArray();
+    }
+
+    // Retrieve Detail Product By id product
+    public function MdlCountPaginateDetailProductByIdProduct($id_product): array
+    {
+        $result = array(1);
+
+        if(isset($id_product)){
+            $sqlQuery = "select 
+                dp.id
+                from ".$this->tableDetailProduct." dp left join ".$this->tableProduct." p on dp.id_product  = p.id
+                left join ".$this->tableSourceProduct." sp on
+                dp.id_source_product = sp.id
+                where id_product =".$id_product;
+            $query = $this->db->query($sqlQuery);
+
+            $getPaginateLength = $query->getNumRows()/5;
+            if ($getPaginateLength > 0) {
+                $result = array();
+                for ($i = 0; $i<$getPaginateLength; $i++){
+                    $result[] = $i+1;
+                }
+            }
+        }
+
+        return $result;
     }
 
     // Insert Detail Product Data
