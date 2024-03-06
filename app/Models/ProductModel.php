@@ -196,8 +196,10 @@ class ProductModel extends Model
     }
 
     // Retrieve Detail Product By id product
-    public function MdlPaginateDetailProductByIdProduct($id_product, $no_paginate): array
+    public function MdlPaginateDetailProductByIdProduct($id_product, $no_paginate=0): array
     {
+        $no_paginate = ($no_paginate-1) * 5;
+
         if(isset($id_product)){
             $sqlQuery =
                 "select 

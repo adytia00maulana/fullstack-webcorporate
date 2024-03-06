@@ -87,11 +87,9 @@
                             <?php
                                 $no = 1;
                                 $active = false;
-                                $paginate = 1;
-                                if(isset($activePaginate)) $paginate = $activePaginate;
                                 if(isset($listPaginate)) $no = 0;
                                 foreach ($listPaginate as $data): $no = $data;?>
-                                    <li class="page-item <?= ($paginate == $data)? "active":"";?>"><a class="page-link" href="#"><?= $no ?><span class="sr-only">(current)</span></a></li>
+                                    <li class="page-item <?= (($activePaginate ?? 1) == $data)? "active":"";?>"><a class="page-link" href="<?php $paginate = $no; if(isset($url_detail_product_list)) echo $url_detail_product_list.$id_product."/".$paginate ?>"><?= $no ?></a></li>
                                 <?php endforeach; ?>
                             <!-- <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
                             <li class="page-item">

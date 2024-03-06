@@ -69,8 +69,6 @@ class Admin extends BaseController
 
     public function applicationListDetailProduct($id, $paginate): string
     {
-        $data['activePaginate'] = $paginate;
-        if($paginate == 1) $paginate = 0;
         $data = $this->defaultLoadSideBar();
         $queryProduct = $this->ProductModel->MdlPaginateDetailProductByIdProduct($id, $paginate);
         $queryListPaginateProduct = $this->ProductModel->MdlCountPaginateDetailProductByIdProduct($id);
@@ -80,6 +78,8 @@ class Admin extends BaseController
         }else{
             $data['title'] = 'Detail Product';
         }
+        $data['activePaginate'] = $paginate;
+        $data['id_product'] = $id;
         $data['getList'] = $queryProduct;
         $data['listPaginate'] = $queryListPaginateProduct;
 
