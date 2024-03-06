@@ -13,6 +13,7 @@ class Admin extends BaseController
     private $MstUserModel, $MstRoleModel, $ProductModel;
     public function __construct()
     {
+        $session = session();
         $this->MstUserModel = model(MstUserModel::class);
         $this->MstRoleModel = model(MstRoleModel::class);
         $this->ProductModel = model(ProductModel::class);

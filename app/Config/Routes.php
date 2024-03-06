@@ -6,10 +6,11 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-// routing back / wp admin
-$routes->get('/auth/login', 'Auth::login');
-$routes->post('/auth/check', 'Auth::check');
-$routes->get('auth/logout', 'Auth::logout');
+// routing auth login
+$routes->get('/login', 'Auth::index');
+$routes->get('/logout', 'Auth::logout');
+$routes->post('/auth', 'Auth::loginAuth');
+
 $routes->get('/admin', 'Admin::index');
 $routes->get('/admin/listUsers', 'Admin::applicationListUsers');
 $routes->get('/admin/listRole', 'Admin::applicationListRole');

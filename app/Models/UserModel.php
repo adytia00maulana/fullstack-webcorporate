@@ -17,11 +17,18 @@ class UserModel extends Model
         return $query->getResultArray();
     }
 
-    public function checkEmail($data): array
+    // public function check($data): array
+    // {
+    //     $sqlQuery = "select * from ".$this->table." where email = '$data' ";
+    //     $query = $this->db->query($sqlQuery);
+    //     return $query->getFieldNames();
+    // }
+    
+    public function countRow(): int
     {
-        $sqlQuery = "select * from ".$this->table." where email = '$data' ";
+        $sqlQuery = "select * from ".$this->table;
         $query = $this->db->query($sqlQuery);
-        return $query->getResultArray();
+        return $query->getNumRows();
     }
 
     public function getUserActive(): array

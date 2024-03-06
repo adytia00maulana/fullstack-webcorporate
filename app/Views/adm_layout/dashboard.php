@@ -10,7 +10,6 @@
             <div class="breadcrumb-item">Advanced Forms</div>
         </div> -->
     </div>
-
     <div class="section-body">
         <h2 class="section-title">Advanced Forms</h2>
         <p class="section-lead">We provide advanced input fields, such as date picker, color picker, and so on.</p>
