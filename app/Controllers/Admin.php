@@ -23,7 +23,7 @@ class Admin extends BaseController
         $data['url_users_list'] = base_url() . 'admin/listUsers';
         $data['url_role_list'] = base_url() . 'admin/listRole';
         $data['url_detail_product_list'] = base_url() . 'admin/listDetailProduct/';
-        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct';
+        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct/';
         $data['getListProduct'] = $this->ProductModel->MdlProductSelect();
 
         return $data;
@@ -59,11 +59,15 @@ class Admin extends BaseController
         return view('Back\Admin\Users\product-list', $data);
     }
 
-    public function applicationListSourceProduct(): string
+    public function applicationListSourceProduct($paginate): string
     {
         $data = $this->defaultLoadSideBar();
+        $queryList = $this->ProductModel->MdlSourceProductListPaginate($paginate);
+        $queryListPaginate = $this->ProductModel->MdlCountPaginateSourceProduct();
+        $data['listPaginate'] = $queryListPaginate;
+        $data['activePaginate'] = $paginate;
 
-        $data['getList'] = $this->ProductModel->MdlSourceProductSelect();
+        $data['getList'] = $queryList;
         return view('Back\Admin\Product\source-product-list', $data);
     }
 

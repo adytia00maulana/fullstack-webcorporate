@@ -92,6 +92,36 @@ class ProductModel extends Model
         return $query->getResultArray();
     }
 
+    // Retrieve Source Product Paginate
+    public function MdlSourceProductListPaginate($no_paginate): array
+    {
+        $no_paginate = ($no_paginate-1) * 5;
+
+        $sqlQuery = "select * from ".$this->tableSourceProduct." order by id asc limit ".$no_paginate.",5";
+        $query = $this->db->query($sqlQuery);
+
+        return $query->getResultArray();
+    }
+
+    // Paginate Source Product
+    public function MdlCountPaginateSourceProduct(): array
+    {
+        $result = array(1);
+
+        $sqlQuery = "select * from ".$this->tableSourceProduct;
+        $query = $this->db->query($sqlQuery);
+
+        $getPaginateLength = $query->getNumRows()/5;
+        if ($getPaginateLength > 0) {
+            $result = array();
+            for ($i = 0; $i<$getPaginateLength; $i++){
+                $result[] = $i+1;
+            }
+        }
+
+        return $result;
+    }
+
     // Retrieve Source Product By id
     public function MdlSourceProductSelectById($id): array
     {

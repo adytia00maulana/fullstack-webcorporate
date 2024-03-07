@@ -27,10 +27,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php $no = 0; foreach($getList as $row): $no++;?>
+                            <?php
+                                $no = 0;
+                                if(isset($activePaginate)){
+                                    if($activePaginate > 1) $no = (($activePaginate - 1) * 5);
+                                }
+                                foreach($getList as $row): $no++;
+                            ?>
                             <?php
                                 $id = $row['id'];
-                                $role_name = $row['role_name'];
+                                $name = $row['name'];
                                 $active = $row['active'];
                                 $created_by = $row['created_by'];
                                 $created_date = $row['created_date'];
@@ -39,7 +45,7 @@
                             ?>
                                 <tr>
                                     <td><?= $no ?></td>
-                                    <td><?= $role_name ?></td>
+                                    <td><?= $name ?></td>
                                     <td><?= $created_date? date('D, d M Y H:i:s', strtotime($created_date)): '' ?></td>
                                     <td><?= $created_by ?></td>
                                     <td><?= $updated_by? $updated_by : 'No Updated' ?></td>
@@ -70,11 +76,18 @@
                             <li class="page-item disabled">
                                 <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
                             </li>
-                            <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
+                            <?php
+                            $no = 1;
+                            $active = false;
+                            if(isset($listPaginate)) $no = 0;
+                            foreach ($listPaginate as $data): $no = $data;?>
+                                <li class="page-item <?= (($activePaginate ?? 1) == $data)? "active":"";?>"><a class="page-link" href="<?php $paginate = $no; if(isset($url_source_product_list)) echo $url_source_product_list.$paginate ?>"><?= $no ?></a></li>
+                            <?php endforeach; ?>
+                            <!-- <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
                             <li class="page-item">
                                 <a class="page-link" href="#">2</a>
                             </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li> -->
                             <li class="page-item">
                                 <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
                             </li>
