@@ -82,6 +82,7 @@ class Admin extends BaseController
         $data['id_product'] = $id;
         $data['getList'] = $queryProduct;
         $data['listPaginate'] = $queryListPaginateProduct;
+        $data['plugin'] = base_url().'Back/Admin/Product/Config/plugin';
 
         return view('Back\Admin\Product\detail-product-list', $data);
     }
