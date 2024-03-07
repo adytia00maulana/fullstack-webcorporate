@@ -30,7 +30,13 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php $no = 0; foreach($getList as $row): $no++;?>
+                            <?php
+                                $no = 0;
+                                if(isset($activePaginate)){
+                                    if($activePaginate > 1) $no = (($activePaginate - 1) * 5);
+                                }
+                                foreach($getList as $row): $no++;
+                            ?>
                             <?php
                                 $id = $row['id'];
                                 $id_product = $row['id_product'];
