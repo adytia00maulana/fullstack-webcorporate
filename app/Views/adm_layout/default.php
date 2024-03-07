@@ -76,5 +76,6 @@
         <script src="<?php echo base_url(); ?>assets/admin/js/custom.js"></script>
 
         <?= $this->include('Back/Admin/Product/Config/plugin-detail-product'); ?>
+        <?= $this->include('Back/Admin/Product/Config/plugin-source-product'); ?>
     </body>
 </html>

@@ -66,9 +66,14 @@ class Admin extends BaseController
         $queryListPaginate = $this->ProductModel->MdlCountPaginateSourceProduct();
         $data['listPaginate'] = $queryListPaginate;
         $data['activePaginate'] = $paginate;
-
+        $data['postData'] = base_url()."admin/postDataSource";
         $data['getList'] = $queryList;
+
         return view('Back\Admin\Product\source-product-list', $data);
+    }
+
+    public function postSourceProduct(): void {
+        dd($_POST);
     }
 
     public function applicationListDetailProduct($id, $paginate): string

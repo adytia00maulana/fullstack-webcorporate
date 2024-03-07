@@ -16,6 +16,7 @@ $routes->get('/admin/listRole', 'Admin::applicationListRole');
 $routes->get('/admin/listProduct', 'Admin::applicationListProduct');
 $routes->get('/admin/listSourceProduct/(:num)', 'Admin::applicationListSourceProduct/$1');
 $routes->get('/admin/listDetailProduct/(:any)/(:num)', 'Admin::applicationListDetailProduct/$1/$2');
+$routes->get('/admin/postDataSource', 'Admin::postSourceProduct');
 
 // routing front / company profile
 $routes->get('/', 'Home::index');
