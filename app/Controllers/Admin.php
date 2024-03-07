@@ -18,22 +18,27 @@ class Admin extends BaseController
         $this->ProductModel = model(ProductModel::class);
     }
 
-    public function index(): string
+    public function defaultLoadSideBar(): array
     {
         $data['url_users_list'] = base_url() . 'admin/listUsers';
         $data['url_role_list'] = base_url() . 'admin/listRole';
-        $data['url_product_list'] = base_url() . 'admin/listProduct';
-        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct';
+        $data['url_detail_product_list'] = base_url() . 'admin/listDetailProduct/';
+        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct/';
+        $data['getListProduct'] = $this->ProductModel->MdlProductSelect();
+
+        return $data;
+    }
+
+    public function index(): string
+    {
+        $data = $this->defaultLoadSideBar();
 
         return view('adm_layout\dashboard', $data);
     }
 
     public function applicationListUsers(): string
     {
-        $data['url_users_list'] = base_url() . 'admin/listUsers';
-        $data['url_role_list'] = base_url() . 'admin/listRole';
-        $data['url_product_list'] = base_url() . 'admin/listProduct';
-        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct';
+        $data = $this->defaultLoadSideBar();
 
         $data['getListUser'] = $this->MstUserModel->MdlSelect();
         return view('Back\Admin\Users\users-list', $data);
@@ -41,10 +46,7 @@ class Admin extends BaseController
 
     public function applicationListRole(): string
     {
-        $data['url_users_list'] = base_url() . 'admin/listUsers';
-        $data['url_role_list'] = base_url() . 'admin/listRole';
-        $data['url_product_list'] = base_url() . 'admin/listProduct';
-        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct';
+        $data = $this->defaultLoadSideBar();
 
         $data['getListRole'] = $this->MstRoleModel->MdlSelect();
         return view('Back\Admin\Users\role-list', $data);
@@ -52,34 +54,45 @@ class Admin extends BaseController
 
     public function applicationListProduct(): string
     {
-        $data['url_users_list'] = base_url() . 'admin/listUsers';
-        $data['url_role_list'] = base_url() . 'admin/listRole';
-        $data['url_product_list'] = base_url() . 'admin/listProduct';
-        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct';
+        $data = $this->defaultLoadSideBar();
 
-        $data['getList'] = $this->ProductModel->MdlProductSelect();
         return view('Back\Admin\Users\product-list', $data);
     }
 
-    public function applicationListSourceProduct(): string
+    public function applicationListSourceProduct($paginate): string
     {
-        $data['url_users_list'] = base_url() . 'admin/listUsers';
-        $data['url_role_list'] = base_url() . 'admin/listRole';
-        $data['url_product_list'] = base_url() . 'admin/listProduct';
-        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct';
+        $data = $this->defaultLoadSideBar();
+        $queryList = $this->ProductModel->MdlSourceProductListPaginate($paginate);
+        $queryListPaginate = $this->ProductModel->MdlCountPaginateSourceProduct();
+        $data['listPaginate'] = $queryListPaginate;
+        $data['activePaginate'] = $paginate;
+        $data['postData'] = base_url()."admin/postDataSource";
+        $data['getList'] = $queryList;
 
-        $data['getList'] = $this->ProductModel->MdlSourceProductSelect();
-        return view('Back\Admin\Users\source-product-list', $data);
+        return view('Back\Admin\Product\source-product-list', $data);
     }
 
-    public function applicationListDetailProduct($id): string
-    {
-        $data['url_users_list'] = base_url() . 'admin/listUsers';
-        $data['url_role_list'] = base_url() . 'admin/listRole';
-        $data['url_product_list'] = base_url() . 'admin/listProduct';
-        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct';
+    public function postSourceProduct(): void {
+        dd($_POST);
+    }
 
-        $data['getList'] = $this->ProductModel->MdlDetailProductSelectByIdProduct($id);
-        return view('Back\Admin\Users\detail-product-list', $data);
+    public function applicationListDetailProduct($id, $paginate): string
+    {
+        $data = $this->defaultLoadSideBar();
+        $queryProduct = $this->ProductModel->MdlPaginateDetailProductByIdProduct($id, $paginate);
+        $queryListPaginateProduct = $this->ProductModel->MdlCountPaginateDetailProductByIdProduct($id);
+
+        if(count($queryProduct)>0){
+            $data['title'] = $queryProduct[0]['name_product'];
+        }else{
+            $data['title'] = 'Detail Product';
+        }
+        $data['activePaginate'] = $paginate;
+        $data['id_product'] = $id;
+        $data['getList'] = $queryProduct;
+        $data['listPaginate'] = $queryListPaginateProduct;
+        $data['plugin'] = base_url().'Back/Admin/Product/Config/plugin';
+
+        return view('Back\Admin\Product\detail-product-list', $data);
     }
 }
