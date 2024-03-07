@@ -63,7 +63,7 @@
                                         }
                                         ?>
                                     </td>
-                                    <td><a class="btn btn-secondary" id="modal-source-product">Detail</a></td>
+                                    <td><a class="btn btn-secondary" id="modal-source-product" onclick="showModal(<?= $id ?>)">Detail</a></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
@@ -99,37 +99,70 @@
     </section>
 
     <form class="modal-part" id="modal-source-product-value" action="<?php if(isset($postData)) echo $postData;?>" method="post">
-        <?php // echo form_open($postData, array('class' => 'modal-part', 'id' => 'modal-source-product-value'));?>
-        <?php // csrf_field(); ?>
-            <p>This login form is taken from elements with <code>#modal-login-part</code> id.</p>
-            <div class="form-group">
-                <label>Username</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Email" name="email"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <i class="fas fa-lock"></i>
-                        </div>
-                    </div>
-                    <input type="password" class="form-control" placeholder="Password" name="password">
-                </div>
-            </div>
-            <div class="form-group mb-0">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" name="remember" class="custom-control-input" id="remember-me">
-                    <label class="custom-control-label" for="remember-me">Remember Me</label>
-                </div>
-            </div>
-        <?php // form_close(); ?>
     </form>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?php echo form_open($postData);?>
+                <?= csrf_field(); ?>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="id">Id</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="ID" id="id" name="id" value="0"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="role_name">Role</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Role" id="role_name" name="role_name"/>
+                        </div>
+                    </div>
+                    <div class="form-group mb-0">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" name="active" class="custom-control-input" id="active">
+                            <label class="custom-control-label" for="active">Active?</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="created_by">Created By</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Created By" id="created_by" name="created_by"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="created_date">Created Date</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Created Date" id="created_date" name="created_date"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updated_by">Updated By</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Updated By" id="updated_by" name="updated_by"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updated_date">Updated Date</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Updated Date" id="updated_date" name="updated_date"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                <?php echo form_close(); ?>
+            </div>
+        </div>
+    </div>
 <?= $this->endSection() ?>

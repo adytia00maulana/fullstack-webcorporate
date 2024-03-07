@@ -129,7 +129,7 @@ class ProductModel extends Model
             $sqlQuery = "select * from ".$this->tableSourceProduct." where id =".$id;
             $query = $this->db->query($sqlQuery);
         }
-        return $query->getResultObject();
+        return $query->getResultArray();
     }
 
     // Insert Source Product Data

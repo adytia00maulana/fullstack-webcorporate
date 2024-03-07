@@ -67,13 +67,20 @@ class Admin extends BaseController
         $data['listPaginate'] = $queryListPaginate;
         $data['activePaginate'] = $paginate;
         $data['postData'] = base_url()."admin/postDataSource";
+        $data['getDataById'] = base_url()."admin/getDataSource/";
         $data['getList'] = $queryList;
 
         return view('Back\Admin\Product\source-product-list', $data);
     }
 
-    public function postSourceProduct(): void {
-        dd($_POST);
+    public function getSourceProduct($id) {
+        return $this->ProductModel->MdlSourceProductSelectById($id);
+    }
+
+    public function postSourceProduct() {
+        $data = $_POST;
+        unset($data['csrf_test_name']);
+        dd($data);
     }
 
     public function applicationListDetailProduct($id, $paginate): string
