@@ -160,7 +160,11 @@ class ProductModel extends Model
     {
         $result = null;
         if(isset($id)){
-            $result = $this->db->table($this->tableSourceProduct)->delete($this->tableSourceProduct, array('id' => $id));
+            // $result = $this->db->table($this->tableSourceProduct)->delete($this->tableSourceProduct, array('id' => $id));
+            $result = $this->db
+                ->table($this->tableSourceProduct)
+                ->where(["id" => $id])
+                ->delete();
         }
         return $result;
     }

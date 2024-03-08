@@ -98,10 +98,14 @@ class Admin extends BaseController
         return redirect()->to(base_url().'admin/listSourceProduct/1');
     }
 
-    public function deleteSourceProduct($id): RedirectResponse {
-        $this->ProductModel->$this->MdlSourceProductDeleteById($id);
-
-        return redirect()->to(base_url().'admin/listSourceProduct/1');
+    public function deleteSourceProduct($id) {
+        $result = $this->ProductModel->$this->MdlSourceProductDeleteById($id);
+        if($result) {
+            return "User record is deleted successfully.";
+        } else {
+            return "Something went wrong";
+        }
+        // return redirect()->to(base_url().'admin/listSourceProduct/1');
     }
 
     public function applicationListDetailProduct($id, $paginate): string

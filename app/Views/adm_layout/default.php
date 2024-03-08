@@ -63,9 +63,11 @@
         <script src="<?php echo base_url(); ?>assets/admin/modules/simple-weather/jquery.simpleWeather.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/chart.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/summernote/summernote-bs4.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/modules/sweetalert/sweetalert.min.js"></script>
 
         <!-- Page Specific JS File
         <script src="<?php // echo base_url(); ?>assets/admin/js/page/index-0.js"></script>-->
+        <script src="<?php echo base_url(); ?>assets/admin/js/page/modules-sweetalert.js"></script>
 
         <!-- Template JS File -->
         <script src="<?php echo base_url(); ?>assets/admin/js/scripts.js"></script>

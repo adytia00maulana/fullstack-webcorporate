@@ -1,35 +1,63 @@
 <script>
-    $("#modal-5").fireModal({
-        title: 'Login',
-        body: $("#modal-login-part"),
-        footerClass: 'bg-whitesmoke',
-        autoFocus: false,
-        onFormSubmit: function(modal, e, form) {
-            // Form Data
-            let form_data = $(e.target).serialize();
-            console.log(form_data)
+    function showModalProduct(id) {
+        let url = '<?php if(isset($getDataById)) echo $getDataById ?>';
 
-            // DO AJAX HERE
-            let fake_ajax = setTimeout(function() {
-                form.stopProgress();
-                modal.find('.modal-body').prepend('<div class="alert alert-info">Please check your browser console</div>')
+        if(id == null){
+            $('#id').val(null);
+            $('#name').val("");
+            $('#active').prop("checked", false);
+            $('#created_by').val("");
+            $('#created_date').val("");
+            $('#updated_by').val("");
+            $('#updated_date').val("");
+            $("#sourceProductModal").modal('show');
+        }else {
+            $("#id").val(id);
+            const urlWithId = url+id;
 
-                clearInterval(fake_ajax);
-            }, 1500);
+            if(url == null) return;
 
-            e.preventDefault();
-        },
-        shown: function(modal, form) {
-            console.log(form)
-        },
-        buttons: [
-            {
-                text: 'Login',
-                submit: true,
-                class: 'btn btn-primary btn-shadow',
-                handler: function(modal) {
+            $.ajax({
+                url: urlWithId,
+                type: 'get',
+                dataType: 'json',
+            }).done((success)=>{
+                var data = success[0];
+                let convertActive = data.active == 1? true: false;
+
+                $('#id').val(data.id);
+                $('#name').val(data.name);
+                $('#active').prop("checked", convertActive);
+                $('#created_by').val(data.created_by);
+                $('#created_date').val(data.created_date);
+                $('#updated_by').val(data.updated_by);
+                $('#updated_date').val(data.updated_date);
+                $("#sourceProductModal").modal('show');
+            }).fail((error)=>{
+                console.error(error);
+            })
+        }
+    }
+    function deleteProduct(id) {
+        const url = "<?php if(isset($deleteDataById)) echo $deleteDataById ?>";
+
+        swal({
+            title: 'Are you sure?',
+            text: 'Once deleted, you will not be able to recover this data!',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal('Poof! Your Data has been deleted!', {
+                        icon: 'success',
+                    }).then(()=>{
+                        window.location.href=url+Number(id);
+                    });
+                } else {
+                    swal('Your Data is safe!');
                 }
-            }
-        ]
-    });
+            });
+    }
 </script>

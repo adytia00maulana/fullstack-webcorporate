@@ -77,7 +77,7 @@
                                         }
                                         ?>
                                     </td>
-                                    <td><button type="button" class="btn btn-secondary" id="modal-5">Detail</button></td>
+                                    <td><button type="button" class="btn btn-secondary">Detail</button></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
@@ -110,37 +110,135 @@
                 </div>
             </div>
 
-            <form class="modal-part" id="modal-login-part">
-                <p>This login form is taken from elements with <code>#modal-login-part</code> id.</p>
+            <div class="modal-part">
                 <div class="form-group">
-                    <label>Username</label>
+                    <label for="table">ID</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
                                 <i class="fas fa-envelope"></i>
                             </div>
                         </div>
-                        <input type="text" class="form-control" placeholder="Email" name="email">
+                        <input type="text" class="form-control" placeholder="ID" name="id_product" id="id_product">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Password</label>
+                    <label for="id_product">ID Product</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <i class="fas fa-lock"></i>
+                                <i class="fas fa-envelope"></i>
                             </div>
                         </div>
-                        <input type="password" class="form-control" placeholder="Password" name="password">
+                        <input type="text" class="form-control" placeholder="ID Product" name="id_product_product" id="id_product_product">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_product_product">Product Name</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Product Name" name="name_product_product" id="name_product_product">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name_product_product">ID Source Product</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="ID Source Product" name="id_source_product_product" id="id_source_product_product">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_source_product_product">Source Product Name</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Source Product Name" name="name_source_product_product" id="name_source_product_product">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name_source_product_product">Code Detail Product</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Code Detail Product" name="code_product" id="code_product">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="code_product">Detail Product Name</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Detail Product Name" name="name_product" id="name_product">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name_product">File Name</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="File Name" name="filename_product" id="filename_product">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="filename_product">File Path</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="File Path" name="filepath_product" id="filepath_product">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="filepath_product">Description</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Description" name="description_product" id="description_product">
                     </div>
                 </div>
                 <div class="form-group mb-0">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" name="remember" class="custom-control-input" id="remember-me">
-                        <label class="custom-control-label" for="remember-me">Remember Me</label>
+                        <input type="checkbox" name="active_product" id="active_product" class="custom-control-input" value="1">
+                        <label class="custom-control-label" for="active">Active?</label>
                     </div>
                 </div>
-            </form>
+                <div class="form-group">
+                    <label for="description_product">Created By</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Created By" name="created_by_product" id="created_by_product">
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 <?= $this->endSection() ?>
