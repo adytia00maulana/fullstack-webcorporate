@@ -82,7 +82,15 @@ class Admin extends BaseController
     public function postSourceProduct() {
         $data = $_POST;
         unset($data['csrf_test_name']);
-        $this->ProductModel->MdlSourceProductInsert($data);
+        if(!isset($data['active'])) $data['active'] = "0";
+        $id = $data['id'];
+
+        if($id == NULL){
+            $data['id'] = 0;
+            $this->ProductModel->MdlSourceProductInsert($data);
+        }else{
+            $this->ProductModel->MdlSourceProductUpdatedById($id, $data);
+        }
 
         return redirect()->to(base_url().'admin/listSourceProduct/1');
     }

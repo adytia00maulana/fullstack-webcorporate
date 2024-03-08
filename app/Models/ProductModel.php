@@ -135,29 +135,22 @@ class ProductModel extends Model
     // Insert Source Product Data
     public function MdlSourceProductInsert($body)
     {
-        // $result = null;
-        // if(strlen($body) > 0){
         $data = $body;
         $data['id'] = 0;
         $data['created_date'] = date("Y-m-d H:i:s");
         $data['updated_by'] = "";
         $data['updated_date'] = "";
         $result = $this->db->table($this->tableSourceProduct)->insert($data);
-        // }
 
         return $result;
     }
 
     // Updated Source Product Data
-    public function MdlSourceProductUpdatedById($id = 0, $body = [])
+    public function MdlSourceProductUpdatedById($id, $body)
     {
-        $result = null;
-        if(strlen($body) > 0){
-            $data = $body;
-            $data['updated_date'] = date("Y-m-d H:i:s");
-            $this->db->where('id', $id);
-            $result = $this->db->update($this->tableSourceProduct, $data);
-        }
+        $data = $body;
+        $data['updated_date'] = date("Y-m-d H:i:s");
+        $result = $this->db->table($this->tableSourceProduct)->update($data, ['id' => $id]);
 
         return $result;
     }
