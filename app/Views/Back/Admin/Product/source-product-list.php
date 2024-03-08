@@ -17,7 +17,7 @@
                             <thead class="table-primary">
                             <tr>
                                 <th>#</th>
-                                <th>Role Name</th>
+                                <th>Originated From</th>
                                 <th>Created By</th>
                                 <th>Created At</th>
                                 <th>Updated By</th>
@@ -114,43 +114,43 @@
                 <?php echo form_open($postData);?>
                 <?= csrf_field(); ?>
                 <div class="modal-body">
-                    <div class="form-group">
+                    <div class="form-group" hidden="hidden">
                         <label for="id">Id</label>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="ID" id="id" name="id" value="0"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="role_name">Role</label>
+                        <label for="name">Originated From</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Role" id="role_name" name="role_name"/>
+                            <input type="text" class="form-control" placeholder="originated from" id="name" name="name"/>
                         </div>
                     </div>
                     <div class="form-group mb-0">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="active" class="custom-control-input" id="active">
+                            <input type="checkbox" name="active" class="custom-control-input" id="active" value="1">
                             <label class="custom-control-label" for="active">Active?</label>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" hidden="hidden">
                         <label for="created_by">Created By</label>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Created By" id="created_by" name="created_by"/>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" hidden="hidden">
                         <label for="created_date">Created Date</label>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Created Date" id="created_date" name="created_date"/>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" hidden="hidden">
                         <label for="updated_by">Updated By</label>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Updated By" id="updated_by" name="updated_by"/>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" hidden="hidden">
                         <label for="updated_date">Updated Date</label>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Updated Date" id="updated_date" name="updated_date"/>

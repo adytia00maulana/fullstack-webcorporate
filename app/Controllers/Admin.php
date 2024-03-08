@@ -74,13 +74,17 @@ class Admin extends BaseController
     }
 
     public function getSourceProduct($id) {
-        return $this->ProductModel->MdlSourceProductSelectById($id);
+        $query = $this->ProductModel->MdlSourceProductSelectById($id);
+        $result = json_encode($query);
+        return $result;
     }
 
     public function postSourceProduct() {
         $data = $_POST;
         unset($data['csrf_test_name']);
-        dd($data);
+        $this->ProductModel->MdlSourceProductInsert($data);
+
+        return redirect()->to(base_url().'admin/listSourceProduct/1');
     }
 
     public function applicationListDetailProduct($id, $paginate): string

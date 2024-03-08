@@ -63,20 +63,31 @@
     //});
 
     function showModal(id) {
-        let url = '<?= $getDataById ?>';
+        let url = '<?php if(isset($getDataById)) echo $getDataById ?>';
 
         if(id != null) $("#id").val(id);
         const urlWithId = url+id;
 
+        if(url == null) return;
+
         $.ajax({
-            url: urlWithId,
-            type: 'POST',
-        }).success((res) => {
-            console.log(res);
-            // showAlert('Data berhasil dihapus.', 'alert-success');
-        }).error((xhr, status) => {
-            // showAlert('Gagal, terjadi kesalahan ketika menghapus data.', 'alert-danger');
-        });
-        // $("#exampleModal").modal('show');
+           url: urlWithId,
+           type: 'get',
+            dataType: 'json',
+        }).done((success)=>{
+            var data = success[0];
+            let convertActive = data.active == 1? true: false;
+
+            $('#id').val(data.id);
+            $('#name').val(data.name);
+            $('#active').prop("checked", convertActive);
+            $('#created_by').val(data.created_by);
+            $('#created_date').val(data.created_date);
+            $('#updated_by').val(data.updated_by);
+            $('#updated_date').val(data.updated_date);
+            $("#exampleModal").modal('show');
+        }).fail((error)=>{
+            console.error(error);
+        })
     }
 </script>
