@@ -64,7 +64,10 @@
                                         }
                                         ?>
                                     </td>
-                                    <td><a class="btn btn-secondary" id="modal-source-product" onclick="showModal(<?= $id ?>)">Detail</a></td>
+                                    <td>
+                                        <a class="btn btn-secondary" id="modal-source-product" onclick="showModal(<?= $id ?>)">Detail</a>
+                                        <a class="btn btn-warning text-white" id="modal-source-product" onclick="deleteShowModal(<?= $id ?>)">Delete</a>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

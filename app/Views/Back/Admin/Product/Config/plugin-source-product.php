@@ -101,4 +101,25 @@
             })
         }
     }
+    function deleteShowModal(id) {
+        const urlDelete = "<?php if(isset($deleteDataById)) echo $deleteDataById ?>";
+        swal({
+            title: 'Are you sure?',
+            text: 'Once deleted, you will not be able to recover this imaginary file!',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal('Poof! Your Data has been deleted!', {
+                        icon: 'success',
+                    }).then(()=>{
+                        window.location.href=urlDelete+id;
+                    });
+                } else {
+                    swal('Your Data is safe!');
+                }
+            });
+    }
 </script>

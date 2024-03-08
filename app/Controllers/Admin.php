@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
 use MstRoleModel;
 use MstUserModel;
@@ -68,6 +69,7 @@ class Admin extends BaseController
         $data['activePaginate'] = $paginate;
         $data['postData'] = base_url()."admin/postDataSource";
         $data['getDataById'] = base_url()."admin/getDataSource/";
+        $data['deleteDataById'] = base_url()."admin/deleteDataSource/";
         $data['getList'] = $queryList;
 
         return view('Back\Admin\Product\source-product-list', $data);
@@ -75,11 +77,12 @@ class Admin extends BaseController
 
     public function getSourceProduct($id) {
         $query = $this->ProductModel->MdlSourceProductSelectById($id);
-        $result = json_encode($query);
-        return $result;
+
+        return json_encode($query);
     }
 
-    public function postSourceProduct() {
+    public function postSourceProduct(): RedirectResponse
+    {
         $data = $_POST;
         unset($data['csrf_test_name']);
         if(!isset($data['active'])) $data['active'] = "0";
@@ -91,6 +94,12 @@ class Admin extends BaseController
         }else{
             $this->ProductModel->MdlSourceProductUpdatedById($id, $data);
         }
+
+        return redirect()->to(base_url().'admin/listSourceProduct/1');
+    }
+
+    public function deleteSourceProduct($id): RedirectResponse {
+        $this->ProductModel->$this->MdlSourceProductDeleteById($id);
 
         return redirect()->to(base_url().'admin/listSourceProduct/1');
     }

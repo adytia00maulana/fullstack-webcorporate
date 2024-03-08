@@ -18,6 +18,7 @@ $routes->get('/admin/listSourceProduct/(:num)', 'Admin::applicationListSourcePro
 $routes->get('/admin/listDetailProduct/(:any)/(:num)', 'Admin::applicationListDetailProduct/$1/$2');
 $routes->post('/admin/postDataSource', 'Admin::postSourceProduct');
 $routes->get('/admin/getDataSource/(:any)', 'Admin::getSourceProduct/$1');
+$routes->get('/admin/deleteDataSource/(:any)', 'Admin::deleteSourceProduct/$1');
 
 // routing front / company profile
 $routes->get('/', 'Home::index');
