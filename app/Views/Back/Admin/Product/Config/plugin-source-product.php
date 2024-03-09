@@ -39,7 +39,7 @@
         }
     }
     function deleteShowModal(id) {
-        const url = "<?php if(isset($deleteDataById)) echo $deleteDataById ?>";
+        const url = "<?php if(isset($deleteDataById)) echo $deleteDataById ?>"+id;
 
         swal({
             title: 'Are you sure?',
@@ -48,16 +48,16 @@
             buttons: true,
             dangerMode: true,
         })
-            .then((willDelete) => {
-                if (willDelete) {
-                    swal('Poof! Your Data has been deleted!', {
-                        icon: 'success',
-                    }).then(()=>{
-                        window.location.href=url+Number(id);
-                    });
-                } else {
-                    swal('Your Data is safe!');
-                }
-            });
+        .then((willDelete) => {
+            if (willDelete) {
+                swal('Poof! Your Data has been deleted!', {
+                    icon: 'success',
+                }).then(()=>{
+                    window.location.href=url;
+                });
+            } else {
+                swal('Your Data is safe!');
+            }
+        });
     }
 </script>

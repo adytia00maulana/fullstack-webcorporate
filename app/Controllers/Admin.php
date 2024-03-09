@@ -99,13 +99,9 @@ class Admin extends BaseController
     }
 
     public function deleteSourceProduct($id) {
-        $result = $this->ProductModel->$this->MdlSourceProductDeleteById($id);
-        if($result) {
-            return "User record is deleted successfully.";
-        } else {
-            return "Something went wrong";
-        }
-        // return redirect()->to(base_url().'admin/listSourceProduct/1');
+        $this->ProductModel->MdlSourceProductSelectByIdDel($id);
+
+        return redirect()->to(base_url().'admin/listSourceProduct/1');
     }
 
     public function applicationListDetailProduct($id, $paginate): string

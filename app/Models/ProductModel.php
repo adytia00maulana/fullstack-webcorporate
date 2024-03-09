@@ -156,17 +156,12 @@ class ProductModel extends Model
     }
 
     // Delete Source Product Data
-    public function MdlSourceProductDeleteById($id)
+    public function MdlSourceProductSelectByIdDel($id)
     {
-        $result = null;
         if(isset($id)){
-            // $result = $this->db->table($this->tableSourceProduct)->delete($this->tableSourceProduct, array('id' => $id));
-            $result = $this->db
-                ->table($this->tableSourceProduct)
-                ->where(["id" => $id])
-                ->delete();
+            $sqlQuery = "DELETE FROM ".$this->tableSourceProduct." where id =".$id;
+            $this->db->query($sqlQuery);
         }
-        return $result;
     }
 
 
