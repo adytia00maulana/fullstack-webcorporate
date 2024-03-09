@@ -8,6 +8,7 @@
         <!-- General CSS Files -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/fontawesome/css/all.min.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/summernote/summernote-bs4.css">
 
         <!-- CSS Libraries -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/weather-icon/css/weather-icons.min.css">
@@ -64,6 +65,7 @@
         <script src="<?php echo base_url(); ?>assets/admin/modules/chart.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/summernote/summernote-bs4.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/sweetalert/sweetalert.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/modules/summernote/summernote-bs4.js"></script>
 
         <!-- Page Specific JS File
         <script src="<?php // echo base_url(); ?>assets/admin/js/page/index-0.js"></script>-->

@@ -9,7 +9,7 @@ use MstRoleModel;
 use MstUserModel;
 use ProductModel;
 
-class Admin extends BaseController
+class Utilities extends BaseController
 {
     private $MstUserModel, $MstRoleModel, $ProductModel;
     public function __construct()
@@ -44,7 +44,7 @@ class Admin extends BaseController
         $data['totalSourceProduct'] = count($querySourceProduct);
         $data['totalDetailProduct'] = count($queryDetailProduct);
 
-        return view('adm_layout\dashboard', $data);
+        return view('Back\Admin\About_us\about_us', $data);
     }
 
     public function applicationListUsers(): string
