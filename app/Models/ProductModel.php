@@ -75,13 +75,10 @@ class ProductModel extends Model
     }
 
     // Delete Product Data
-    public function MdlProductDeleteById($id = 0)
+    public function MdlProductDeleteById($id): void
     {
-        $result = null;
-        if(isset($id)){
-            $result = $this->db->delete($this->tableProduct, array('id' => $id));
-        }
-        return $result;
+        $sqlQuery = "DELETE FROM ".$this->tableProduct." where id =".$id;
+        $this->db->query($sqlQuery);
     }
 
     // Retrieve Product Paginate

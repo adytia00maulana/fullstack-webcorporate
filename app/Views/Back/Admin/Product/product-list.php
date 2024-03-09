@@ -9,9 +9,10 @@
         <div class="section-body">
             <div class="card">
                 <div class="card-header">
-                    <h4>Product</h4>
+                    <h4>Master Product</h4>
                 </div>
                 <div class="card-body p-0">
+                    <a class="float-right btn btn-primary text-white" id="modal-source-product" onclick="showModalProduct(null)">Add</a>
                     <div class="table-responsive">
                         <table class="table table-striped table-md">
                             <thead class="table-primary">
@@ -119,19 +120,27 @@
                     <div class="form-group">
                         <label for="id_source_product">Source Product</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="originated from" id="id_source_product" name="id_source_product"/>
+                            <select class="form-control" id="id_source_product" name="id_source_product">
+                                <option value="">Choose Data</option>
+                                <?php $iSourceData = 0; foreach ($getSourceProductList as $dataSourceProduct): $iSourceData++;
+                                $idSourceData = $dataSourceProduct['id'];
+                                $nameSourceData = $dataSourceProduct['name'];
+                                ?>
+                                <option value="<?= $idSourceData ?>"><?= $nameSourceData ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="code">Product Code</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="originated from" id="code" name="code"/>
+                            <input type="text" class="form-control" placeholder="Product Code" id="code" name="code"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="name">Product Name</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="originated from" id="name" name="name"/>
+                            <input type="text" class="form-control" placeholder="Product Name" id="name" name="name"/>
                         </div>
                     </div>
                     <div class="form-group mb-0">

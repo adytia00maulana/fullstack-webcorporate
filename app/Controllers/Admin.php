@@ -66,6 +66,7 @@ class Admin extends BaseController
         $data['getDataById'] = base_url()."admin/getDataProduct/";
         $data['deleteDataById'] = base_url()."admin/deleteDataProduct/";
         $data['getList'] = $queryList;
+        $data['getSourceProductList'] = $this->ProductModel->MdlSourceProductSelect();
 
         return view('Back\Admin\Product\product-list', $data);
     }
@@ -94,7 +95,7 @@ class Admin extends BaseController
     }
 
     public function deleteProduct($id) {
-        $this->ProductModel->MdlSourceProductSelectByIdDel($id);
+        $this->ProductModel->MdlProductDeleteById($id);
 
         return redirect()->to(base_url().'admin/listProduct/1');
     }
