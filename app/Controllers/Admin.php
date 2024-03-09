@@ -147,17 +147,18 @@ class Admin extends BaseController
     public function applicationListDetailProduct($id, $paginate): string
     {
         $data = $this->defaultLoadSideBar();
-        $queryProduct = $this->ProductModel->MdlPaginateDetailProductByIdProduct($id, $paginate);
+        $queryProduct = $this->ProductModel->MdlProductSelectById($id);
+        $queryDetailProduct = $this->ProductModel->MdlPaginateDetailProductByIdProduct($id, $paginate);
         $queryListPaginateProduct = $this->ProductModel->MdlCountPaginateDetailProductByIdProduct($id);
 
         if(count($queryProduct)>0){
-            $data['title'] = $queryProduct[0]['name_product'];
+            $data['title'] = isset($queryProduct[0]->name)? $queryProduct[0]->name : "";
         }else{
             $data['title'] = 'Detail Product';
         }
         $data['activePaginate'] = $paginate;
         $data['id_product'] = $id;
-        $data['getList'] = $queryProduct;
+        $data['getList'] = $queryDetailProduct;
         $data['listPaginate'] = $queryListPaginateProduct;
         $data['getSourceProductList'] = $this->ProductModel->MdlSourceProductSelect();
         $data['getProductList'] = $this->ProductModel->MdlProductSelect();

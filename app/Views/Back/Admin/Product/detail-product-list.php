@@ -121,7 +121,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="detailProductModalLabel">Product</h5>
+                    <h5 class="modal-title" id="detailProductModalLabel"><?= $title ?? 'Detail Product' ?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -149,18 +149,19 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" hidden="hidden">
                         <label for="id_product">ID Product</label>
                         <div class="input-group">
-                            <select class="form-control" id="id_product" name="id_product">
+                            <input type="text" class="form-control" id="id_product" name="id_product" value="<?= $id_product ?>">
+                            <!-- <select class="form-control" id="id_product" name="id_product">
                                 <option value="">Choose Data</option>
-                                <?php $iData = 0; foreach ($getProductList as $dataProduct): $iData++;
+                                <?php /*$iData = 0; foreach ($getProductList as $dataProduct): $iData++;
                                     $idData = $dataProduct['id'];
                                     $nameData = $dataProduct['name'];
                                     ?>
                                     <option value="<?= $idData ?>"><?= $nameData ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                                <?php endforeach; */?>
+                            </select> -->
                         </div>
                     </div>
                     <div class="form-group">

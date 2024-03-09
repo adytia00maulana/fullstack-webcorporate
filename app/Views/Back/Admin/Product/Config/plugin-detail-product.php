@@ -5,7 +5,7 @@
         if(id == null){
             $('#id').val(null);
             $('#id_source_product').val("");
-            $('#id_product').val("");
+            // $('#id_product').val("");
             $('#code').val("");
             $('#name').val("");
             $('#filename').val("");
