@@ -13,12 +13,15 @@ $routes->get('auth/logout', 'Auth::logout');
 $routes->get('/admin', 'Admin::index');
 $routes->get('/admin/listUsers', 'Admin::applicationListUsers');
 $routes->get('/admin/listRole', 'Admin::applicationListRole');
-$routes->get('/admin/listProduct', 'Admin::applicationListProduct');
+$routes->get('/admin/listProduct/(:any)', 'Admin::applicationListProduct/$1');
 $routes->get('/admin/listSourceProduct/(:num)', 'Admin::applicationListSourceProduct/$1');
 $routes->get('/admin/listDetailProduct/(:any)/(:num)', 'Admin::applicationListDetailProduct/$1/$2');
 $routes->post('/admin/postDataSource', 'Admin::postSourceProduct');
 $routes->get('/admin/getDataSource/(:any)', 'Admin::getSourceProduct/$1');
 $routes->get('/admin/deleteDataSource/(:any)', 'Admin::deleteSourceProduct/$1');
+$routes->post('/admin/postDataProduct', 'Admin::postProduct');
+$routes->get('/admin/getDataProduct/(:any)', 'Admin::getProduct/$1');
+$routes->get('/admin/deleteDataProduct/(:any)', 'Admin::deleteProduct/$1');
 
 // routing front / company profile
 $routes->get('/', 'Home::index');

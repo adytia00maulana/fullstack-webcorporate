@@ -23,6 +23,7 @@ class Admin extends BaseController
     {
         $data['url_users_list'] = base_url() . 'admin/listUsers';
         $data['url_role_list'] = base_url() . 'admin/listRole';
+        $data['url_product_list'] = base_url() . 'admin/listProduct/';
         $data['url_detail_product_list'] = base_url() . 'admin/listDetailProduct/';
         $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct/';
         $data['getListProduct'] = $this->ProductModel->MdlProductSelect();
@@ -53,11 +54,49 @@ class Admin extends BaseController
         return view('Back\Admin\Users\role-list', $data);
     }
 
-    public function applicationListProduct(): string
+    public function applicationListProduct($paginate): string
     {
         $data = $this->defaultLoadSideBar();
+        if($paginate == null) $paginate = 1;
+        $queryList = $this->ProductModel->MdlProductListPaginate($paginate);
+        $queryListPaginate = $this->ProductModel->MdlCountPaginateProduct();
+        $data['listPaginate'] = $queryListPaginate;
+        $data['activePaginate'] = $paginate;
+        $data['postData'] = base_url()."admin/postDataProduct";
+        $data['getDataById'] = base_url()."admin/getDataProduct/";
+        $data['deleteDataById'] = base_url()."admin/deleteDataProduct/";
+        $data['getList'] = $queryList;
 
-        return view('Back\Admin\Users\product-list', $data);
+        return view('Back\Admin\Product\product-list', $data);
+    }
+
+    public function getProduct($id) {
+        $query = $this->ProductModel->MdlProductSelectById($id);
+
+        return json_encode($query);
+    }
+
+    public function postProduct(): RedirectResponse
+    {
+        $data = $_POST;
+        unset($data['csrf_test_name']);
+        if(!isset($data['active'])) $data['active'] = "0";
+        $id = $data['id'];
+
+        if($id == NULL){
+            $data['id'] = 0;
+            $this->ProductModel->MdlProductInsert($data);
+        }else{
+            $this->ProductModel->MdlProductUpdatedById($id, $data);
+        }
+
+        return redirect()->to(base_url().'admin/listProduct/1');
+    }
+
+    public function deleteProduct($id) {
+        $this->ProductModel->MdlSourceProductSelectByIdDel($id);
+
+        return redirect()->to(base_url().'admin/listProduct/1');
     }
 
     public function applicationListSourceProduct($paginate): string

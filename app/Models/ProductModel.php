@@ -15,7 +15,7 @@ class ProductModel extends Model
     // Retrieve Source Product all
     public function MdlProductSelect(): array
     {
-        $sqlQuery = "select * from ".$this->tableProduct;
+         $sqlQuery = "select * from ".$this->tableProduct;
         $query = $this->db->query($sqlQuery);
         return $query->getResultArray();
     }
@@ -32,35 +32,44 @@ class ProductModel extends Model
     public function MdlProductSelectById($id): array
     {
         if(isset($id)){
-            $sqlQuery = "select * from ".$this->tableProduct." where id =".$id;
+            $sqlQuery = "select
+                p.id,
+                p.id_source_product,
+                sc.name as source_product_name,
+                p.code,
+                p.name,
+                p.active,
+                p.created_by,
+                p.created_date,
+                p.updated_by,
+                p.updated_date
+                from ". $this->tableProduct ." p 
+                left join ". $this->tableSourceProduct ." sc
+                on p.id_source_product = sc.id where p.id =".$id;
             $query = $this->db->query($sqlQuery);
         }
         return $query->getResultObject();
     }
 
     // Insert Product Data
-    public function MdlProductInsert($body = [])
+    public function MdlProductInsert($body)
     {
-        $result = null;
-        if(strlen($body) > 0){
-            $data = $body;
-            $data['created_date'] = date("Y-m-d H:i:s");
-            $result = $this->db->insert($this->tableProduct, $data);
-        }
+        $data = $body;
+        $data['id'] = 0;
+        $data['created_date'] = date("Y-m-d H:i:s");
+        $data['updated_by'] = "";
+        $data['updated_date'] = "";
+        $result = $this->db->table($this->tableProduct)->insert($data);
 
         return $result;
     }
 
     // Updated Product Data
-    public function MdlProductUpdatedById($id = 0, $body = [])
+    public function MdlProductUpdatedById($id, $body)
     {
-        $result = null;
-        if(strlen($body) > 0){
-            $data = $body;
-            $data['updated_date'] = date("Y-m-d H:i:s");
-            $this->db->where('id', $id);
-            $result = $this->db->update($this->tableProduct, $data);
-        }
+        $data = $body;
+        $data['updated_date'] = date("Y-m-d H:i:s");
+        $result = $this->db->table($this->tableProduct)->update($data, ['id' => $id]);
 
         return $result;
     }
@@ -72,6 +81,50 @@ class ProductModel extends Model
         if(isset($id)){
             $result = $this->db->delete($this->tableProduct, array('id' => $id));
         }
+        return $result;
+    }
+
+    // Retrieve Product Paginate
+    public function MdlProductListPaginate($no_paginate): array
+    {
+        $no_paginate = ($no_paginate-1) * 5;
+
+        $sqlQuery = "select
+            p.id,
+            p.id_source_product,
+            sc.name as source_product_name,
+            p.code,
+            p.name,
+            p.active,
+            p.created_by,
+            p.created_date,
+            p.updated_by,
+            p.updated_date
+            from ". $this->tableProduct ." p 
+            left join ". $this->tableSourceProduct ." sc
+            on p.id_source_product = sc.id order by id asc limit ".$no_paginate.",5";
+        
+        $query = $this->db->query($sqlQuery);
+
+        return $query->getResultArray();
+    }
+
+    // Paginate Product
+    public function MdlCountPaginateProduct(): array
+    {
+        $result = array(1);
+
+        $sqlQuery = "select * from ".$this->tableProduct;
+        $query = $this->db->query($sqlQuery);
+
+        $getPaginateLength = $query->getNumRows()/5;
+        if ($getPaginateLength > 0) {
+            $result = array();
+            for ($i = 0; $i<$getPaginateLength; $i++){
+                $result[] = $i+1;
+            }
+        }
+
         return $result;
     }
 

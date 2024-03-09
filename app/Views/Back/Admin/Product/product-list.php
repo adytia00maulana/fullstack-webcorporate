@@ -17,7 +17,9 @@
                             <thead class="table-primary">
                             <tr>
                                 <th>#</th>
-                                <th>Role Name</th>
+                                <th>Source Product</th>
+                                <th>Product Code</th>
+                                <th>Product Name</th>
                                 <th>Created By</th>
                                 <th>Created At</th>
                                 <th>Updated By</th>
@@ -30,7 +32,10 @@
                             <?php $no = 0; foreach($getList as $row): $no++;?>
                             <?php
                                 $id = $row['id'];
-                                $role_name = $row['role_name'];
+                                $id_source_product = $row['id_source_product'];
+                                $source_product_name = $row['source_product_name'];
+                                $code = $row['code'];
+                                $name = $row['name'];
                                 $active = $row['active'];
                                 $created_by = $row['created_by'];
                                 $created_date = $row['created_date'];
@@ -39,7 +44,9 @@
                             ?>
                                 <tr>
                                     <td><?= $no ?></td>
-                                    <td><?= $role_name ?></td>
+                                    <td><?= $source_product_name ?></td>
+                                    <td><?= $code ?></td>
+                                    <td><?= $name ?></td>
                                     <td><?= $created_date? date('D, d M Y H:i:s', strtotime($created_date)): '' ?></td>
                                     <td><?= $created_by ?></td>
                                     <td><?= $updated_by? $updated_by : 'No Updated' ?></td>
@@ -57,7 +64,10 @@
                                         }
                                         ?>
                                     </td>
-                                    <td><a href="#" class="btn btn-secondary">Detail</a></td>
+                                    <td>
+                                        <a class="btn btn-secondary" onclick="showModalProduct(<?= $id ?>)">Detail</a>
+                                        <a class="btn btn-warning text-white" onclick="deleteProduct(<?= $id ?>)">Delete</a>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
@@ -70,11 +80,13 @@
                             <li class="page-item disabled">
                                 <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
                             </li>
-                            <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <?php
+                            $no = 1;
+                            $active = false;
+                            if(isset($listPaginate)) $no = 0;
+                            foreach ($listPaginate as $data): $no = $data;?>
+                                <li class="page-item <?= (($activePaginate ?? 1) == $data)? "active":"";?>"><a class="page-link" href="<?php $paginate = $no; if(isset($url_product_list)) echo $url_product_list.$paginate ?>"><?= $no ?></a></li>
+                            <?php endforeach; ?>
                             <li class="page-item">
                                 <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
                             </li>
@@ -84,4 +96,81 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel">Master Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?php echo form_open($postData);?>
+                <?= csrf_field(); ?>
+                <div class="modal-body">
+                    <div class="form-group" hidden="hidden">
+                        <label for="id">Id</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="ID" id="id" name="id" value="0"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_source_product">Source Product</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="originated from" id="id_source_product" name="id_source_product"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="code">Product Code</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="originated from" id="code" name="code"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Product Name</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="originated from" id="name" name="name"/>
+                        </div>
+                    </div>
+                    <div class="form-group mb-0">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" name="active" class="custom-control-input" id="active" value="1">
+                            <label class="custom-control-label" for="active">Active?</label>
+                        </div>
+                    </div>
+                    <div class="form-group" hidden="hidden">
+                        <label for="created_by">Created By</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Created By" id="created_by" name="created_by"/>
+                        </div>
+                    </div>
+                    <div class="form-group" hidden="hidden">
+                        <label for="created_date">Created Date</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Created Date" id="created_date" name="created_date"/>
+                        </div>
+                    </div>
+                    <div class="form-group" hidden="hidden">
+                        <label for="updated_by">Updated By</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Updated By" id="updated_by" name="updated_by"/>
+                        </div>
+                    </div>
+                    <div class="form-group" hidden="hidden">
+                        <label for="updated_date">Updated Date</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Updated Date" id="updated_date" name="updated_date"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                <?php echo form_close(); ?>
+            </div>
+        </div>
+    </div>
 <?= $this->endSection() ?>

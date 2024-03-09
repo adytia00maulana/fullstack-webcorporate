@@ -1,16 +1,18 @@
 <script>
-    function showModalDetailProduct(id) {
+    function showModalProduct(id) {
         let url = '<?php if(isset($getDataById)) echo $getDataById ?>';
 
         if(id == null){
             $('#id').val(null);
+            $('#id_source_product').val("");
+            $('#code').val("");
             $('#name').val("");
             $('#active').prop("checked", false);
             $('#created_by').val("");
             $('#created_date').val("");
             $('#updated_by').val("");
             $('#updated_date').val("");
-            $("#sourceProductModal").modal('show');
+            $("#productModal").modal('show');
         }else {
             $("#id").val(id);
             const urlWithId = url+id;
@@ -26,19 +28,21 @@
                 let convertActive = data.active == 1? true: false;
 
                 $('#id').val(data.id);
+                $('#id_source_product').val(data.id_source_product);
+                $('#code').val(data.code);
                 $('#name').val(data.name);
                 $('#active').prop("checked", convertActive);
                 $('#created_by').val(data.created_by);
                 $('#created_date').val(data.created_date);
                 $('#updated_by').val(data.updated_by);
                 $('#updated_date').val(data.updated_date);
-                $("#sourceProductModal").modal('show');
+                $("#productModal").modal('show');
             }).fail((error)=>{
                 console.error(error);
             })
         }
     }
-    function deleteDetailProduct(id) {
+    function deleteProduct(id) {
         const url = "<?php if(isset($deleteDataById)) echo $deleteDataById ?>";
 
         swal({

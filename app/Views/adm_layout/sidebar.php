@@ -22,10 +22,11 @@
                 <li><a class="nav-link" href="<?php if(isset($url_users_list)) echo $url_users_list ?>">Users</a></li>
             </ul>
         </li>
+        <li><a href="<?php $paginateSource=1; if(isset($url_source_product_list)) echo $url_source_product_list.$paginateSource ?>" class="nav-link"><i class="fas fa-map-marker-alt"></i> <span>Source Product</span></a></li>
+        <li><a href="<?php if(isset($url_product_list)) echo $url_product_list."1" ?>" class="nav-link"><i class="fas fa-store"></i> <span>Master Product</span></a></li>
         <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Produk</span></a>
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Product</span></a>
             <ul class="dropdown-menu">
-                <li><a class="nav-link" href="<?php $paginateSource=1; if(isset($url_source_product_list)) echo $url_source_product_list.$paginateSource ?>">Source Produk</a></li>
                 <?php $i = 0; foreach ($getListProduct as $data): $i++;
                     $id = $data['id'];
                     $name = $data['name'];
