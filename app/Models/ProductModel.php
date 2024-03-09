@@ -54,9 +54,11 @@ class ProductModel extends Model
     // Insert Product Data
     public function MdlProductInsert($body)
     {
+        $now = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
+        $timeStamp = $now->format("Y-m-d H:i:s");
         $data = $body;
         $data['id'] = 0;
-        $data['created_date'] = date("Y-m-d H:i:s");
+        $data['created_date'] = $timeStamp;
         $data['updated_by'] = "";
         $data['updated_date'] = "";
         $result = $this->db->table($this->tableProduct)->insert($data);
@@ -67,8 +69,10 @@ class ProductModel extends Model
     // Updated Product Data
     public function MdlProductUpdatedById($id, $body)
     {
+        $now = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
+        $timeStamp = $now->format("Y-m-d H:i:s");
         $data = $body;
-        $data['updated_date'] = date("Y-m-d H:i:s");
+        $data['updated_date'] = $timeStamp;
         $result = $this->db->table($this->tableProduct)->update($data, ['id' => $id]);
 
         return $result;
@@ -185,9 +189,11 @@ class ProductModel extends Model
     // Insert Source Product Data
     public function MdlSourceProductInsert($body)
     {
+        $now = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
+        $timeStamp = $now->format("Y-m-d H:i:s");
         $data = $body;
         $data['id'] = 0;
-        $data['created_date'] = date("Y-m-d H:i:s");
+        $data['created_date'] = $timeStamp;
         $data['updated_by'] = "";
         $data['updated_date'] = "";
         $result = $this->db->table($this->tableSourceProduct)->insert($data);
@@ -198,8 +204,10 @@ class ProductModel extends Model
     // Updated Source Product Data
     public function MdlSourceProductUpdatedById($id, $body)
     {
+        $now = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
+        $timeStamp = $now->format("Y-m-d H:i:s");
         $data = $body;
-        $data['updated_date'] = date("Y-m-d H:i:s");
+        $data['updated_date'] = $timeStamp;
         $result = $this->db->table($this->tableSourceProduct)->update($data, ['id' => $id]);
 
         return $result;
@@ -333,12 +341,14 @@ class ProductModel extends Model
     // Insert Detail Product Data
     public function MdlDetailProductInsert($body = [])
     {
-        $result = null;
-        if(strlen($body) > 0){
-            $data = $body;
-            $data['created_date'] = date("Y-m-d H:i:s");
-            $result = $this->db->insert($this->tableDetailProduct, $data);
-        }
+        $now = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
+        $timeStamp = $now->format("Y-m-d H:i:s");
+        $data = $body;
+        $data['id'] = 0;
+        $data['created_date'] = $timeStamp;
+        $data['updated_by'] = "";
+        $data['updated_date'] = "";
+        $result = $this->db->table($this->tableDetailProduct)->insert($data);
 
         return $result;
     }
@@ -346,13 +356,11 @@ class ProductModel extends Model
     // Updated Detail Product Data
     public function MdlDetailProductUpdatedById($id = 0, $body = [])
     {
-        $result = null;
-        if(strlen($body) > 0){
-            $data = $body;
-            $data['updated_date'] = date("Y-m-d H:i:s");
-            $this->db->where('id', $id);
-            $result = $this->db->update($this->tableDetailProduct, $data);
-        }
+        $now = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
+        $timeStamp = $now->format("Y-m-d H:i:s");
+        $data = $body;
+        $data['updated_date'] = $timeStamp;
+        $result = $this->db->table($this->tableDetailProduct)->update($data, ['id' => $id]);
 
         return $result;
     }
@@ -360,10 +368,9 @@ class ProductModel extends Model
     // Delete Detail Product Data
     public function MdlDetailProductDeleteById($id = 0)
     {
-        $result = null;
         if(isset($id)){
-            $result = $this->db->delete($this->tableDetailProduct, array('id' => $id));
+            $sqlQuery = "DELETE FROM ".$this->tableDetailProduct." where id =".$id;
+            $this->db->query($sqlQuery);
         }
-        return $result;
     }
 }

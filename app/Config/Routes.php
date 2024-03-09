@@ -22,6 +22,9 @@ $routes->get('/admin/deleteDataSource/(:any)', 'Admin::deleteSourceProduct/$1');
 $routes->post('/admin/postDataProduct', 'Admin::postProduct');
 $routes->get('/admin/getDataProduct/(:any)', 'Admin::getProduct/$1');
 $routes->get('/admin/deleteDataProduct/(:any)', 'Admin::deleteProduct/$1');
+$routes->post('/admin/postDataDetailProduct', 'Admin::postDetailProduct');
+$routes->get('/admin/getDataDetailProduct/(:any)', 'Admin::getDetailProduct/$1');
+$routes->get('/admin/deleteDataDetailProduct/(:any)', 'Admin::deleteDetailProduct/$1');
 
 // routing front / company profile
 $routes->get('/', 'Home::index');

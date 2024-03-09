@@ -159,8 +159,44 @@ class Admin extends BaseController
         $data['id_product'] = $id;
         $data['getList'] = $queryProduct;
         $data['listPaginate'] = $queryListPaginateProduct;
-        $data['plugin'] = base_url().'Back/Admin/Product/Config/plugin';
+        $data['getSourceProductList'] = $this->ProductModel->MdlSourceProductSelect();
+        $data['getProductList'] = $this->ProductModel->MdlProductSelect();
+        $data['postData'] = base_url()."admin/postDataDetailProduct";
+        $data['getDataById'] = base_url()."admin/getDataDetailProduct/";
+        $data['deleteDataById'] = base_url()."admin/deleteDataDetailProduct/";
 
         return view('Back\Admin\Product\detail-product-list', $data);
     }
+
+    public function getDetailProduct($id) {
+        $query = $this->ProductModel->MdlDetailProductSelectById($id);
+
+        return json_encode($query);
+    }
+
+    public function postDetailProduct()
+    {
+        $data = $_POST;
+        unset($data['csrf_test_name']);
+        if(!isset($data['active'])) $data['active'] = "0";
+        $id = $data['id'];
+
+        if($id == NULL){
+            $data['id'] = 0;
+            $this->ProductModel->MdlDetailProductInsert($data);
+        }else{
+            $this->ProductModel->MdlDetailProductUpdatedById($id, $data);
+        }
+
+        $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
+        return $redirect;
+    }
+
+    public function deleteDetailProduct($id) {
+        $this->ProductModel->MdlDetailProductDeleteById($id);
+
+        $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
+        return $redirect;
+    }
+
 }

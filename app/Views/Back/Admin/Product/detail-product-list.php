@@ -12,6 +12,7 @@
                     <h4><?= $title ?? 'Detail Product' ?></h4>
                 </div>
                 <div class="card-body p-0">
+                    <a class="float-right btn btn-primary text-white" id="modal-source-product" onclick="showModalDetailProduct(null)">Add</a>
                     <div class="table-responsive">
                         <table class="table table-striped table-md" id="table-detail-product">
                             <thead class="table-primary">
@@ -77,7 +78,10 @@
                                         }
                                         ?>
                                     </td>
-                                    <td><button type="button" class="btn btn-secondary">Detail</button></td>
+                                    <td>
+                                        <a class="btn btn-secondary" onclick="showModalDetailProduct(<?= $id ?>)">Detail</a>
+                                        <a class="btn btn-warning text-white" onclick="deleteDetailProduct(<?= $id ?>)">Delete</a>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
@@ -109,136 +113,99 @@
                     </nav>
                 </div>
             </div>
-
-            <div class="modal-part">
-                <div class="form-group">
-                    <label for="table">ID</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" placeholder="ID" name="id_product" id="id_product">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="id_product">ID Product</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" placeholder="ID Product" name="id_product_product" id="id_product_product">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="id_product_product">Product Name</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Product Name" name="name_product_product" id="name_product_product">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="name_product_product">ID Source Product</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" placeholder="ID Source Product" name="id_source_product_product" id="id_source_product_product">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="id_source_product_product">Source Product Name</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Source Product Name" name="name_source_product_product" id="name_source_product_product">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="name_source_product_product">Code Detail Product</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Code Detail Product" name="code_product" id="code_product">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="code_product">Detail Product Name</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Detail Product Name" name="name_product" id="name_product">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="name_product">File Name</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" placeholder="File Name" name="filename_product" id="filename_product">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="filename_product">File Path</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" placeholder="File Path" name="filepath_product" id="filepath_product">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="filepath_product">Description</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Description" name="description_product" id="description_product">
-                    </div>
-                </div>
-                <div class="form-group mb-0">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" name="active_product" id="active_product" class="custom-control-input" value="1">
-                        <label class="custom-control-label" for="active">Active?</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="description_product">Created By</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Created By" name="created_by_product" id="created_by_product">
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
+
+        <!-- Modal -->
+    <div class="modal fade" id="detailProductModal" aria-labelledby="detailProductModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailProductModalLabel">Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?php echo form_open($postData);?>
+                <?= csrf_field(); ?>
+                <div class="modal-body">
+                    <div class="form-group" hidden="hidden">
+                        <label for="id">ID</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="ID" name="id" id="id" value="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_source_product">Source Product</label>
+                        <div class="input-group">
+                            <select class="form-control" id="id_source_product" name="id_source_product">
+                                <option value="">Choose Data</option>
+                                <?php $iSourceData = 0; foreach ($getSourceProductList as $dataSourceProduct): $iSourceData++;
+                                    $idSourceData = $dataSourceProduct['id'];
+                                    $nameSourceData = $dataSourceProduct['name'];
+                                    ?>
+                                    <option value="<?= $idSourceData ?>"><?= $nameSourceData ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_product">ID Product</label>
+                        <div class="input-group">
+                            <select class="form-control" id="id_product" name="id_product">
+                                <option value="">Choose Data</option>
+                                <?php $iData = 0; foreach ($getProductList as $dataProduct): $iData++;
+                                    $idData = $dataProduct['id'];
+                                    $nameData = $dataProduct['name'];
+                                    ?>
+                                    <option value="<?= $idData ?>"><?= $nameData ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="code">Code Detail Product</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Code Detail Product" name="code" id="code">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Detail Product Name</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Detail Product Name" name="name" id="name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="filename">File Name</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="File Name" name="filename" id="filename">
+                        </div>
+                    </div>
+                    <div class="form-group" hidden="hidden">
+                        <label for="filepath">File Path</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="File Path" name="filepath" id="filepath">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Description" name="description" id="description">
+                        </div>
+                    </div>
+                    <div class="form-group mb-0">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" name="active" id="active" class="custom-control-input" value="1">
+                            <label class="custom-control-label" for="active">Active?</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                <?php echo form_close(); ?>
+            </div>
+        </div>
+    </div>
 <?= $this->endSection() ?>
