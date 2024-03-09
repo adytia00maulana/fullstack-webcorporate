@@ -34,6 +34,14 @@ class Admin extends BaseController
     public function index(): string
     {
         $data = $this->defaultLoadSideBar();
+        $queryUsers = $this->MstUserModel->MdlSelect();
+        $queryUsersActive = $this->MstUserModel->MdlSelectByActive();
+        $querySourceProduct = $this->ProductModel->MdlSourceProductSelect();
+        $queryDetailProduct = $this->ProductModel->MdlDetailProductSelect();
+        $data['totalUsers'] = count($queryUsers);
+        $data['totalUsersActive'] = count($queryUsersActive);
+        $data['totalSourceProduct'] = count($querySourceProduct);
+        $data['totalDetailProduct'] = count($queryDetailProduct);
 
         return view('adm_layout\dashboard', $data);
     }
