@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
+use FaqModel;
 use MstRoleModel;
 use MstUserModel;
 use ProductModel;
@@ -12,13 +13,14 @@ use AboutUsModel;
 
 class Utilities extends BaseController
 {
-    private $AboutUsModel, $MstUserModel, $MstRoleModel, $ProductModel;
+    private $AboutUsModel, $FaqModel, $MstUserModel, $MstRoleModel, $ProductModel;
     public function __construct()
     {
         $this->MstUserModel = model(MstUserModel::class);
         $this->MstRoleModel = model(MstRoleModel::class);
         $this->ProductModel = model(ProductModel::class);
         $this->AboutUsModel = model(AboutUsModel::class);
+        $this->FaqModel     = model(FaqModel::class);
     }
 
     public function defaultLoadSideBar(): array
@@ -29,6 +31,7 @@ class Utilities extends BaseController
         $data['url_detail_product_list'] = base_url() . 'admin/listDetailProduct/';
         $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct/';
         $data['url_about_us'] = base_url() . 'admin/utilities/aboutUs';
+        $data['url_faq'] = base_url() . 'admin/utilities/faq';
         $data['getListProduct'] = $this->ProductModel->MdlProductSelect();
 
         return $data;
@@ -43,6 +46,17 @@ class Utilities extends BaseController
         // $data['deleteById'] = base_url() . 'admin/utilities/aboutUs/deleteAboutUsById/';
 
         return view('Back\Admin\About_us\about_us', $data);
+    }
+
+    public function indexFaq(): string
+    {
+        $data = $this->defaultLoadSideBar();
+        $data['getData'] = $this->FaqModel->MdlFaqSelectById(1);
+        // $data['getById'] = base_url() . 'admin/utilities/aboutUs/getAboutUsById/';
+        $data['post'] = base_url() . 'admin/utilities/faq/postFaq';
+        // $data['deleteById'] = base_url() . 'admin/utilities/aboutUs/deleteAboutUsById/';
+
+        return view('Back\Admin\Faq\faq', $data);
     }
 
     public function getAboutUs($id) {
@@ -69,6 +83,35 @@ class Utilities extends BaseController
 
     public function deleteAboutUs($id) {
         $this->AboutUsModel->MdlAboutUsDeleteById($id);
+
+        $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
+        return $redirect;
+    }
+
+    public function getFaq($id) {
+        $query = $this->FaqModel->MdlFaqSelectById($id);
+
+        return json_encode($query);
+    }
+
+    public function postFaq()
+    {
+        $data = $_POST;
+        unset($data['csrf_test_name']);
+        $id = $data['id'];
+        if($id == NULL){
+            $data['id'] = 0;
+            $this->FaqModel->MdlFaqInsert($data);
+        }else{
+            $this->FaqModel->MdlFaqUpdatedById($id, $data);
+        }
+
+        $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
+        return $redirect;
+    }
+
+    public function deleteFaq($id) {
+        $this->FaqModel->MdlFaqDeleteById($id);
 
         $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
         return $redirect;
