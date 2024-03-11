@@ -22,8 +22,8 @@ class Admin extends BaseController
 
     public function defaultLoadSideBar(): array
     {
-        $data['url_users_list'] = base_url() . 'admin/listUsers';
-        $data['url_role_list'] = base_url() . 'admin/listRole';
+        // $data['url_users_list'] = base_url() . 'admin/listUsers';
+        // $data['url_role_list'] = base_url() . 'admin/listRole';
         $data['url_product_list'] = base_url() . 'admin/listProduct/';
         $data['url_detail_product_list'] = base_url() . 'admin/listDetailProduct/';
         $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct/';

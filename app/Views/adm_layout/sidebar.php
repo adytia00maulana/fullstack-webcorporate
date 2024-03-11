@@ -15,13 +15,13 @@
             </ul>
         </li> -->
         <li class="menu-header">Menu</li>
-        <li class="dropdown">
+        <!-- <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Master Users</span></a>
             <ul class="dropdown-menu">
-                <li><a class="nav-link" href="<?php if(isset($url_role_list)) echo $url_role_list ?>">Role</a></li>
-                <li><a class="nav-link" href="<?php if(isset($url_users_list)) echo $url_users_list ?>">Users</a></li>
+                <li><a class="nav-link" href="<?php // if(isset($url_role_list)) echo $url_role_list ?>">Role</a></li>
+                <li><a class="nav-link" href="<?php // if(isset($url_users_list)) echo $url_users_list ?>">Users</a></li>
             </ul>
-        </li>
+        </li> -->
         <li><a href="<?php $paginateSource=1; if(isset($url_source_product_list)) echo $url_source_product_list.$paginateSource ?>" class="nav-link"><i class="fas fa-map-marker-alt"></i> <span>Source Product</span></a></li>
         <li><a href="<?php if(isset($url_product_list)) echo $url_product_list."1" ?>" class="nav-link"><i class="fas fa-store"></i> <span>Master Product</span></a></li>
         <li class="dropdown">

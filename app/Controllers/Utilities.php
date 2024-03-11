@@ -25,8 +25,8 @@ class Utilities extends BaseController
 
     public function defaultLoadSideBar(): array
     {
-        $data['url_users_list'] = base_url() . 'admin/listUsers';
-        $data['url_role_list'] = base_url() . 'admin/listRole';
+        // $data['url_users_list'] = base_url() . 'admin/listUsers';
+        // $data['url_role_list'] = base_url() . 'admin/listRole';
         $data['url_product_list'] = base_url() . 'admin/listProduct/';
         $data['url_detail_product_list'] = base_url() . 'admin/listDetailProduct/';
         $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct/';
@@ -117,4 +117,43 @@ class Utilities extends BaseController
     //     return $redirect;
     // }
 
+    public function uploadGallery() {
+        $nameFile = "";
+        $file = $this->request->getFile('fupload');
+        if ($file->isValid() && !$file->hasMoved()) {
+            if (!$this->validate([
+                // 'menuid' => 'required',
+                'fupload' => 'mime_in[fupload,image/png,image/jpg,image/jpeg]|is_image[fupload]'
+            ])) {
+                // $validation = \Config\Services::validation();
+                // $msg = $validation->getError('fupload'); //$validation->listErrors();
+                $msg = "<strong>Info!</strong> File upload tidak sesuai format.";
+                $this->session->setFlashdata('message', $msg);
+                return redirect()->to('/' . config('app')->siteAdmin . '/mstKampus/add');
+            }
+
+            $path = realpath('./themes/PixelAdmin/images/kampus');
+            $nameFile = $file->getName();
+            $file->move($path, $nameFile, true);
+        }
+
+        $res = $this->appModel->MDL_Insert($nameFile);
+        if ($res) {
+            // Log Activity
+            $ket = "Master Institusi Pendidikan, Success insert data";
+            $this->authModel->saveLogActivity($ket);
+
+            $msg = "<strong>Well done!</strong> Success save data.";
+            $this->session->setFlashdata('message', $msg);
+            return redirect()->to('/' . config('app')->siteAdmin . '/mstKampus');
+        } else {
+            // Log Activity
+            $ket = "Master Institusi Pendidikan, Fail insert data";
+            $this->authModel->saveLogActivity($ket);
+
+            $msg = "<strong>Warning!</strong> Fail save data.";
+            $this->session->setFlashdata('message', $msg);
+            return redirect()->to('/' . config('app')->siteAdmin . '/mstKampus/add');
+        }
+    }
 }
