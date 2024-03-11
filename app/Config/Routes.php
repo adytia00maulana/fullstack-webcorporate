@@ -26,14 +26,14 @@ $routes->get('/admin/deleteDataProduct/(:any)', 'Admin::deleteProduct/$1');
 $routes->post('/admin/postDataDetailProduct', 'Admin::postDetailProduct');
 $routes->get('/admin/getDataDetailProduct/(:any)', 'Admin::getDetailProduct/$1');
 $routes->get('/admin/deleteDataDetailProduct/(:any)', 'Admin::deleteDetailProduct/$1');
-$routes->get('/admin/utilities/aboutUs', 'Utilities::index');
-$routes->get('/admin/utilities/aboutUs/getAboutUsById/(:any)', 'Utilities::getAboutUs/$1');
-$routes->post('/admin/utilities/aboutUs/postAboutUs', 'Utilities::postAboutUs');
-$routes->get('/admin/utilities/aboutUs/deleteAboutUsById/(:any)', 'Utilities::deleteAboutUs/$1');
-$routes->get('/admin/utilities/faq', 'Utilities::indexFaq');
-$routes->get('/admin/utilities/faq/getFaqById/(:any)', 'Utilities::getFaq/$1');
-$routes->post('/admin/utilities/faq/postFaq', 'Utilities::postFaq');
-$routes->get('/admin/utilities/faq/deleteFaqById/(:any)', 'Utilities::deleteFaq/$1');
+// $routes->get('/admin/utilities/aboutUs', 'Utilities::index');
+// $routes->get('/admin/utilities/aboutUs/getAboutUsById/(:any)', 'Utilities::getAboutUs/$1');
+// $routes->post('/admin/utilities/aboutUs/postAboutUs', 'Utilities::postAboutUs');
+// $routes->get('/admin/utilities/aboutUs/deleteAboutUsById/(:any)', 'Utilities::deleteAboutUs/$1');
+// $routes->get('/admin/utilities/faq', 'Utilities::indexFaq');
+// $routes->get('/admin/utilities/faq/getFaqById/(:any)', 'Utilities::getFaq/$1');
+// $routes->post('/admin/utilities/faq/postFaq', 'Utilities::postFaq');
+// $routes->get('/admin/utilities/faq/deleteFaqById/(:any)', 'Utilities::deleteFaq/$1');
 
 // routing front / company profile
 $routes->get('/', 'Home::index');

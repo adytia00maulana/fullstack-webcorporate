@@ -30,8 +30,8 @@ class Utilities extends BaseController
         $data['url_product_list'] = base_url() . 'admin/listProduct/';
         $data['url_detail_product_list'] = base_url() . 'admin/listDetailProduct/';
         $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct/';
-        $data['url_about_us'] = base_url() . 'admin/utilities/aboutUs';
-        $data['url_faq'] = base_url() . 'admin/utilities/faq';
+        // $data['url_about_us'] = base_url() . 'admin/utilities/aboutUs';
+        // $data['url_faq'] = base_url() . 'admin/utilities/faq';
         $data['getListProduct'] = $this->ProductModel->MdlProductSelect();
 
         return $data;
@@ -59,62 +59,62 @@ class Utilities extends BaseController
         return view('Back\Admin\Faq\faq', $data);
     }
 
-    public function getAboutUs($id) {
-        $query = $this->AboutUsModel->MdlAboutUsSelectById($id);
+    // public function getAboutUs($id) {
+    //     $query = $this->AboutUsModel->MdlAboutUsSelectById($id);
 
-        return json_encode($query);
-    }
+    //     return json_encode($query);
+    // }
 
-    public function postAboutUs()
-    {
-        $data = $_POST;
-        unset($data['csrf_test_name']);
-        $id = $data['id'];
-        if($id == NULL){
-            $data['id'] = 0;
-            $this->AboutUsModel->MdlAboutUsInsert($data);
-        }else{
-            $this->AboutUsModel->MdlAboutUsUpdatedById($id, $data);
-        }
+    // public function postAboutUs()
+    // {
+    //     $data = $_POST;
+    //     unset($data['csrf_test_name']);
+    //     $id = $data['id'];
+    //     if($id == NULL){
+    //         $data['id'] = 0;
+    //         $this->AboutUsModel->MdlAboutUsInsert($data);
+    //     }else{
+    //         $this->AboutUsModel->MdlAboutUsUpdatedById($id, $data);
+    //     }
 
-        $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
-        return $redirect;
-    }
+    //     $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
+    //     return $redirect;
+    // }
 
-    public function deleteAboutUs($id) {
-        $this->AboutUsModel->MdlAboutUsDeleteById($id);
+    // public function deleteAboutUs($id) {
+    //     $this->AboutUsModel->MdlAboutUsDeleteById($id);
 
-        $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
-        return $redirect;
-    }
+    //     $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
+    //     return $redirect;
+    // }
 
-    public function getFaq($id) {
-        $query = $this->FaqModel->MdlFaqSelectById($id);
+    // public function getFaq($id) {
+    //     $query = $this->FaqModel->MdlFaqSelectById($id);
 
-        return json_encode($query);
-    }
+    //     return json_encode($query);
+    // }
 
-    public function postFaq()
-    {
-        $data = $_POST;
-        unset($data['csrf_test_name']);
-        $id = $data['id'];
-        if($id == NULL){
-            $data['id'] = 0;
-            $this->FaqModel->MdlFaqInsert($data);
-        }else{
-            $this->FaqModel->MdlFaqUpdatedById($id, $data);
-        }
+    // public function postFaq()
+    // {
+    //     $data = $_POST;
+    //     unset($data['csrf_test_name']);
+    //     $id = $data['id'];
+    //     if($id == NULL){
+    //         $data['id'] = 0;
+    //         $this->FaqModel->MdlFaqInsert($data);
+    //     }else{
+    //         $this->FaqModel->MdlFaqUpdatedById($id, $data);
+    //     }
 
-        $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
-        return $redirect;
-    }
+    //     $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
+    //     return $redirect;
+    // }
 
-    public function deleteFaq($id) {
-        $this->FaqModel->MdlFaqDeleteById($id);
+    // public function deleteFaq($id) {
+    //     $this->FaqModel->MdlFaqDeleteById($id);
 
-        $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
-        return $redirect;
-    }
+    //     $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
+    //     return $redirect;
+    // }
 
 }
