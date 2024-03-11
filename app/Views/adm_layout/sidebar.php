@@ -22,21 +22,23 @@
                 <li><a class="nav-link" href="<?php if(isset($url_users_list)) echo $url_users_list ?>">Users</a></li>
             </ul>
         </li>
+        <li><a href="<?php $paginateSource=1; if(isset($url_source_product_list)) echo $url_source_product_list.$paginateSource ?>" class="nav-link"><i class="fas fa-map-marker-alt"></i> <span>Source Product</span></a></li>
+        <li><a href="<?php if(isset($url_product_list)) echo $url_product_list."1" ?>" class="nav-link"><i class="fas fa-store"></i> <span>Master Product</span></a></li>
         <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Produk</span></a>
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Product</span></a>
             <ul class="dropdown-menu">
-                <li><a class="nav-link" href="<?php if(isset($url_source_product_list)) echo $url_source_product_list ?>">Source Produk</a></li>
-                <li><a class="nav-link" href="<?php if(isset($url_product_list)) echo $url_product_list ?>">Produk</a></li>
-                <li><a class="nav-link" href="bootstrap-alert.html">Galeri</a></li>
+                <?php $i = 0; foreach ($getListProduct as $data): $i++;
+                    $id = $data['id'];
+                    $name = $data['name'];
+                    ?>
+                    <li><a class="nav-link" href="<?php $paginate = 1; if(isset($url_detail_product_list)) echo $url_detail_product_list.$id."/".$paginate ?>"><?=$name?></a></li>
+                <?php endforeach; ?>
             </ul>
         </li>
-        <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Lain - lain</span></a>
-            <ul class="dropdown-menu">
-                <li><a class="nav-link" href="components-article.html">Tentang Kami</a></li>
-                <li><a class="nav-link" href="components-hero.html">Kontak</a></li>
-            </ul>
-        </li>
+        <li><a href="<?php if(isset($url_about_us)) echo $url_about_us ?>" class="nav-link"><i class="fas fa-globe"></i> <span>About Us</span></a></li>
+        <li><a href="<?php if(isset($url_faq)) echo $url_faq ?>" class="nav-link"><i class="fas fa-user"></i> <span>Faq</span></a></li>
+        <!-- <li><a href="<?php //if(isset($url_product_list)) echo $url_product_list ?>" class="nav-link"><i class="fas fa-user"></i> <span>Contact</span></a></li> -->
+        <li><a href="<?php if(isset($url_product_list)) echo $url_product_list ?>" class="nav-link"><i class="fas fa-address-card"></i> <span>Gallery</span></a></li>
         <!-- <li class="dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Forms</span></a>
             <ul class="dropdown-menu">

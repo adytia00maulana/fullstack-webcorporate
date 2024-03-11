@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script src="<?php echo base_url(); ?>assets/modules/popper.js"></script>
 <script src="<?php echo base_url(); ?>assets/modules/tooltip.js"></script>
 <script src="<?php echo base_url(); ?>assets/modules/bootstrap/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="<?php  echo base_url(); ?>assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/modules/moment.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/stisla.js"></script>
 
@@ -18,20 +18,15 @@ if ($this->uri->segment(2) == "" || $this->uri->segment(2) == "index") {
   <script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/owlcarousel2/dist/owl.carousel.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
-  <script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
   <?php
 } elseif ($this->uri->segment(2) == "index_0") {
   ?>
   <script src="<?php echo base_url(); ?>assets/modules/simple-weather/jquery.simpleWeather.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
-  <script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
   <?php
 } elseif ($this->uri->segment(2) == "bootstrap_card") {
   ?>
-  <script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/jquery-ui/jquery-ui.min.js"></script>
   <?php
 } elseif ($this->uri->segment(2) == "bootstrap_modal") {
@@ -44,7 +39,6 @@ if ($this->uri->segment(2) == "" || $this->uri->segment(2) == "index") {
   <?php
 } elseif ($this->uri->segment(2) == "components_gallery") {
   ?>
-  <script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
   <?php
 } elseif ($this->uri->segment(2) == "components_multiple_upload") {
   ?>
@@ -54,9 +48,6 @@ if ($this->uri->segment(2) == "" || $this->uri->segment(2) == "index") {
   ?>
   <script src="<?php echo base_url(); ?>assets/modules/jquery.sparkline.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-  <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.indonesia.js"></script>
   <?php
 } elseif ($this->uri->segment(2) == "components_table") {
   ?>
@@ -124,9 +115,6 @@ if ($this->uri->segment(2) == "" || $this->uri->segment(2) == "index") {
 } elseif ($this->uri->segment(2) == "modules_vector_map") {
   ?>
   <script src="<?php echo base_url(); ?>assets/modules/izitoast/js/iziToast.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-  <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.indonesia.js"></script>
   <?php
 } elseif ($this->uri->segment(2) == "auth_register") {
   ?>
@@ -156,7 +144,6 @@ if ($this->uri->segment(2) == "" || $this->uri->segment(2) == "index") {
 } elseif ($this->uri->segment(2) == "features_tickets") {
   ?>
   <script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
-  <script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
   <?php
 } elseif ($this->uri->segment(2) == "utilities_contact") {
   ?>
@@ -173,7 +160,7 @@ if ($this->uri->segment(2) == "" || $this->uri->segment(2) == "index") {
   <?php
 } elseif ($this->uri->segment(2) == "index_0") {
   ?>
-  <script src="<?php echo base_url(); ?>assets/js/page/index-0.js"></script>
+  <!-- <script src="<?php // echo base_url(); ?>assets/js/page/index-0.js"></script> -->
   <?php
 } elseif ($this->uri->segment(2) == "bootstrap_modal") {
   ?>

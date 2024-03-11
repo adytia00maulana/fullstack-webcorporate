@@ -8,9 +8,9 @@
         <!-- General CSS Files -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/fontawesome/css/all.min.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/summernote/summernote-bs4.css">
 
         <!-- CSS Libraries -->
-        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/jqvmap/dist/jqvmap.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/weather-icon/css/weather-icons.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/weather-icon/css/weather-icons-wind.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/summernote/summernote-bs4.css">
@@ -63,16 +63,20 @@
         <!-- JS Libraies -->
         <script src="<?php echo base_url(); ?>assets/admin/modules/simple-weather/jquery.simpleWeather.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/chart.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/modules/jqvmap/dist/jquery.vmap.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/summernote/summernote-bs4.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/modules/sweetalert/sweetalert.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/modules/summernote/summernote-bs4.js"></script>
 
-        <!-- Page Specific JS File -->
-        <script src="<?php echo base_url(); ?>assets/admin/js/page/index-0.js"></script>
+        <!-- Page Specific JS File
+        <script src="<?php // echo base_url(); ?>assets/admin/js/page/index-0.js"></script>-->
+        <script src="<?php echo base_url(); ?>assets/admin/js/page/modules-sweetalert.js"></script>
 
         <!-- Template JS File -->
         <script src="<?php echo base_url(); ?>assets/admin/js/scripts.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/js/custom.js"></script>
+
+        <?= $this->include('Back/Admin/Product/Config/plugin-source-product'); ?>
+        <?= $this->include('Back/Admin/Product/Config/plugin-product'); ?>
+        <?= $this->include('Back/Admin/Product/Config/plugin-detail-product'); ?>
     </body>
 </html>

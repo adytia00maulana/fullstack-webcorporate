@@ -16,14 +16,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <?php
   if ($this->uri->segment(2) == "" || $this->uri->segment(2) == "index") {
     ?>
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jqvmap.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css">
     <?php
   } elseif ($this->uri->segment(2) == "index_0") {
     ?>
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jqvmap.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/weather-icon/css/weather-icons.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/weather-icon/css/weather-icons-wind.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.css">
@@ -46,7 +44,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php
   } elseif ($this->uri->segment(2) == "components_statistic") {
     ?>
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jqvmap.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/flag-icon-css/css/flag-icon.min.css">
     <?php
   } elseif ($this->uri->segment(2) == "components_user") {
@@ -97,7 +94,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   } elseif ($this->uri->segment(2) == "modules_vector_map") {
     ?>
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/izitoast/css/iziToast.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jqvmap.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/flag-icon-css/css/flag-icon.min.css">
     <?php
   } elseif ($this->uri->segment(2) == "modules_weather_icon") {
