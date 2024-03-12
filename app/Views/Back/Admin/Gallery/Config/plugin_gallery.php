@@ -34,7 +34,7 @@
     }
 
     function deleteGallery(id) {
-        const url = "<?php if(isset($deleteDataById)) echo $deleteDataById ?>";
+        const url = "<?php if(isset($deleteById)) echo $deleteById ?>";
 
         swal({
             title: 'Are you sure?',

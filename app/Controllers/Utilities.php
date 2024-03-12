@@ -119,6 +119,7 @@ class Utilities extends BaseController
         $data['upload'] = base_url() . 'admin/utilities/gallery/upload/';
         $data['getById'] = base_url() . 'admin/utilities/gallery/getGalleryById/';
         $data['idUpdated'] = 0;
+        $data['deleteById'] = base_url() . 'admin/utilities/gallery/deleteById/';
 
         return view('Back\Admin\Gallery\gallery', $data);
     }
@@ -186,4 +187,11 @@ class Utilities extends BaseController
 
         return print_r('<script type="text/javascript">window.history.back();</script>');
     }
+
+     public function deleteGallery($id) {
+         $this->GalleryModel->MdlDeleteById($id);
+         unlink('../public/assets/admin/img/gallery/');
+         $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
+         return $redirect;
+     }
 }
