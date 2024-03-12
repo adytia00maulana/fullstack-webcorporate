@@ -5,7 +5,7 @@
         ]
     });
 
-    function changeFileGallery(value){
+    function changeFileGallery(value, id){
         var fileList = value;
         let label = '';
         if(fileList.length > 0){
@@ -20,10 +20,16 @@
             //         }
             //     }
             // }
-            $('#labelFile').html(fileList.length + ' Files');
-            $('#uploadFile').show();
+            if(id === '0'){
+                $('#labelFile').html(fileList.length + ' Files');
+                $('#uploadFile').show();
+            } else {
+                $('#updatedFileUpload'+id).html(fileList.length + ' Files');
+                $('#updatedFile'+id).show();
+            }
         } else {
             $('#uploadFile').hide();
+            $('#updatedFile'+id).hide();
         }
     }
 

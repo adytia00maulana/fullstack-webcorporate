@@ -138,10 +138,13 @@ class Utilities extends BaseController
                     if (!$this->validate([
                         'fileUpload' => 'mime_in[fileUpload,image/png,image/jpg,image/jpeg]|is_image[fileUpload]'
                     ])) {
-                        print_r('<script type="text/javascript">alert("File upload tidak sesuai format");</script>');
+                        print_r('<script type="text/javascript">alert("File upload does not match the format"); window.history.back();</script>');
+                        exit();
                     }
                     $newName = $img->getName();
                     $newPath = '../public/assets/admin/img/gallery/' . $newName;
+                    $path = realpath('../public/assets/admin/img/gallery');
+                    $img->move($path, $newName);
 
                     if($id == 0){
                         $value = array(
@@ -153,8 +156,6 @@ class Utilities extends BaseController
                             'updated_by' => '',
                             'updated_date' => ''
                         );
-                        $path = realpath('../public/assets/admin/img/gallery');
-                        $img->move($path, $newName);
                         $res = $this->GalleryModel->MdlInsert($value);
                         if ($res) {
                             print_r('<script type="text/javascript">alert("Upload '. $newName .' Success");</script>');
@@ -162,7 +163,21 @@ class Utilities extends BaseController
                             print_r('<script type="text/javascript">alert("Upload '. $newName .' Failed");</script>');
                         }
                     }else{
-                        dd('ini bukan nol');
+                        $value = array(
+                            'id' => $id,
+                            'filename' => $newName,
+                            'filepath' => $newPath,
+                            'created_by' => 'SYSTEM',
+                            'created_date' => '',
+                            'updated_by' => 'SYSTEM',
+                            'updated_date' => ''
+                        );
+                        $res = $this->GalleryModel->MdlUpdatedById($id, $value);
+                        if ($res) {
+                            print_r('<script type="text/javascript">alert("Upload '. $newName .' Success");</script>');
+                        } else {
+                            print_r('<script type="text/javascript">alert("Upload '. $newName .' Failed");</script>');
+                        }
                     }
                 }
 
@@ -170,39 +185,5 @@ class Utilities extends BaseController
         }
 
         return print_r('<script type="text/javascript">window.history.back();</script>');
-
-        // dd(service('request')->getFile('fileUpload'));
-//        $file = $this->request->getFile('fileUpload');
-//        if ($file->isValid() && !$file->hasMoved()) {
-//            if (!$this->validate([
-//                'fileUpload' => 'mime_in[fileUpload,image/png,image/jpg,image/jpeg]|is_image[fileUpload]'
-//            ])) {
-//                $msg = "<strong>Info!</strong> File upload tidak sesuai format.";
-//                $this->session->setFlashdata('message', $msg);
-//                return redirect()->to('/' . config('app')->siteAdmin . '/mstKampus/add');
-//            }
-//
-//            $path = realpath('./themes/PixelAdmin/images/kampus');
-//            $nameFile = $file->getName();
-//            $file->move($path, $nameFile, true);
-//        }
-//
-//        $res = $this->appModel->MDL_Insert($nameFile);
-//        if ($res) {
-//            // Log Activity
-//            $ket = "Master Institusi Pendidikan, Success insert data";
-//            $this->authModel->saveLogActivity($ket);
-//
-//            $msg = "<strong>Well done!</strong> Success save data.";
-//            $this->session->setFlashdata('message', $msg);
-//            return redirect()->to('/' . config('app')->siteAdmin . '/mstKampus');
-//        } else {
-//            // Log Activity
-//            $ket = "Master Institusi Pendidikan, Fail insert data";
-//            $this->authModel->saveLogActivity($ket);
-//
-//            $msg = "<strong>Warning!</strong> Fail save data.";
-//            $this->session->setFlashdata('message', $msg);
-//        }
     }
 }
