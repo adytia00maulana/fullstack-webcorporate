@@ -34,6 +34,8 @@ $routes->get('/admin/deleteDataDetailProduct/(:any)', 'Admin::deleteDetailProduc
 // $routes->get('/admin/utilities/faq/getFaqById/(:any)', 'Utilities::getFaq/$1');
 // $routes->post('/admin/utilities/faq/postFaq', 'Utilities::postFaq');
 // $routes->get('/admin/utilities/faq/deleteFaqById/(:any)', 'Utilities::deleteFaq/$1');
+$routes->get('/admin/utilities/gallery', 'Utilities::indexGallery');
+$routes->post('/admin/utilities/gallery/upload/(:any)', 'Utilities::uploadGallery/$1');
 
 // routing front / company profile
 $routes->get('/', 'Home::index');
