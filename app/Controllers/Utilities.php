@@ -117,46 +117,55 @@ class Utilities extends BaseController
         $data = $this->defaultLoadSideBar();
         $data['getList'] = $this->GalleryModel->MdlSelect();
         $data['upload'] = base_url() . 'admin/utilities/gallery/upload/';
+        $data['getById'] = base_url() . 'admin/utilities/gallery/getGalleryById/';
+        $data['idUpdated'] = 0;
 
         return view('Back\Admin\Gallery\gallery', $data);
     }
 
+     public function getGallery($id) {
+         $query = $this->GalleryModel->MdlSelectById($id);
+
+         return json_encode($query);
+     }
+
     public function uploadGallery($id) {
         $body = array();
         if(isset($id)){
-            if($id == 0){
-                $getFile = service('request')->getFiles();
-                foreach ($getFile['fileUpload'] as $img) {
-                    if ($img->isValid() && ! $img->hasMoved()) {
-                        if (!$this->validate([
-                            'fileUpload' => 'mime_in[fileUpload,image/png,image/jpg,image/jpeg]|is_image[fileUpload]'
-                        ])) {
-                            print_r('<script type="text/javascript">alert("File upload tidak sesuai format");</script>');
-                        }
-                        $newName = $img->getName();
-                        $newPath = '../public/assets/admin/img/gallery/' . $newName;
+            $getFile = service('request')->getFiles();
+            foreach ($getFile['fileUpload'] as $img) {
+                if ($img->isValid() && ! $img->hasMoved()) {
+                    if (!$this->validate([
+                        'fileUpload' => 'mime_in[fileUpload,image/png,image/jpg,image/jpeg]|is_image[fileUpload]'
+                    ])) {
+                        print_r('<script type="text/javascript">alert("File upload tidak sesuai format");</script>');
+                    }
+                    $newName = $img->getName();
+                    $newPath = '../public/assets/admin/img/gallery/' . $newName;
+
+                    if($id == 0){
                         $value = array(
                             'id' => null,
                             'filename' => $newName,
                             'filepath' => $newPath,
-                            'created_by' => '',
+                            'created_by' => 'SYSTEM',
                             'created_date' => '',
                             'updated_by' => '',
                             'updated_date' => ''
                         );
-                         $path = realpath('../public/assets/admin/img/gallery');
-                         $img->move($path, $newName);
-                    }
-
-                    $res = $this->GalleryModel->MdlInsert($value);
-                    if ($res) {
-                        print_r('<script type="text/javascript">alert("Upload '. $newName .' Success");</script>');
-                    } else {
-                        print_r('<script type="text/javascript">alert("Upload '. $newName .' Failed");</script>');
+                        $path = realpath('../public/assets/admin/img/gallery');
+                        $img->move($path, $newName);
+                        $res = $this->GalleryModel->MdlInsert($value);
+                        if ($res) {
+                            print_r('<script type="text/javascript">alert("Upload '. $newName .' Success");</script>');
+                        } else {
+                            print_r('<script type="text/javascript">alert("Upload '. $newName .' Failed");</script>');
+                        }
+                    }else{
+                        dd('ini bukan nol');
                     }
                 }
-            }else{
-                dd('ini bukan nol');
+
             }
         }
 
