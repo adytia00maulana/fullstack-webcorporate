@@ -183,9 +183,13 @@ class App extends BaseConfig
 	*/
     
     // Table Database Name
-    public $mst_role         = 'mst_role';
-    public $mst_users        = 'mst_users';
-    public $product          = 'product';
-    public $source_product   = 'source_product';
-    public $detail_product   = 'detail_product';
+    public $mst_role        = 'mst_role';
+    public $mst_users       = 'mst_users';
+    public $product         = 'product';
+    public $source_product  = 'source_product';
+    public $detail_product  = 'detail_product';
+    // public $about_us        = 'about_us';
+    // public $faq             = 'faq';
+
+    public $tbl_users       = 'users';
 }

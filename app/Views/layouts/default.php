@@ -24,7 +24,7 @@
     <title><?= $title; ?></title>
   </head>
   <body>
-	<nav class="navbar navbar-expand-lg navbar-dark fw-bold sticky-top font-pathway-extreme" style="background-color: silver">
+	<nav class="navbar navbar-expand-lg navbar-dark fw-bold sticky-top font-pathway-extreme">
 		<div class="container">
 			<a class="navbar-brand text-uppercase" href="<?= base_url('#') ?>">
 			<img src="<?= base_url('assets/img/logo_mbi.png') ?>" width="90px" class="img-fluid" alt="">
@@ -61,7 +61,7 @@
 			<?= $this->renderSection('content') ?>			
 		</div>
 	
-		<footer class="footer p-3 bg-secondary">
+		<footer class="footer p-3 font-pathway-extreme">
 			<div class="container text-center">Copyright &copy <?= Date('Y') ?> Makmur Bersama Indonesia</div>
 		</footer>
 
