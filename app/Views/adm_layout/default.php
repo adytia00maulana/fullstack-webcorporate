@@ -14,6 +14,9 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/weather-icon/css/weather-icons.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/weather-icon/css/weather-icons-wind.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/summernote/summernote-bs4.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/datatables/datatables.min.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css">
 
         <!-- Template CSS -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/style.css">
@@ -60,12 +63,16 @@
         <script src="<?php echo base_url(); ?>assets/admin/modules/moment.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/js/stisla.js"></script>
 
-        <!-- JS Libraies -->
+        <!-- JS Libraries -->
         <script src="<?php echo base_url(); ?>assets/admin/modules/simple-weather/jquery.simpleWeather.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/chart.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/summernote/summernote-bs4.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/sweetalert/sweetalert.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/summernote/summernote-bs4.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/modules/datatables/datatables.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/modules/jquery-ui/jquery-ui.min.js"></script>
 
         <!-- Page Specific JS File
         <script src="<?php // echo base_url(); ?>assets/admin/js/page/index-0.js"></script>-->
@@ -78,5 +85,12 @@
         <?= $this->include('Back/Admin/Product/Config/plugin-source-product'); ?>
         <?= $this->include('Back/Admin/Product/Config/plugin-product'); ?>
         <?= $this->include('Back/Admin/Product/Config/plugin-detail-product'); ?>
+        <?= $this->include('Back/Admin/Gallery/Config/plugin_gallery'); ?>
+
+        <script>
+            const url = '<?= base_url().'login' ?>'
+            const session = '<?= isset($_SESSION['username'])? $_SESSION['username'] : "" ?>'
+            if(!session) window.location.href=url;
+        </script>
     </body>
 </html>

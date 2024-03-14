@@ -5,22 +5,16 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
-use FaqModel;
-use MstRoleModel;
-use MstUserModel;
+use GalleryModel;
 use ProductModel;
-use AboutUsModel;
 
 class Utilities extends BaseController
 {
-    private $AboutUsModel, $FaqModel, $MstUserModel, $MstRoleModel, $ProductModel;
+    public $GalleryModel, $ProductModel;
     public function __construct()
     {
-        $this->MstUserModel = model(MstUserModel::class);
-        $this->MstRoleModel = model(MstRoleModel::class);
+        $this->GalleryModel = model(GalleryModel::class);
         $this->ProductModel = model(ProductModel::class);
-        $this->AboutUsModel = model(AboutUsModel::class);
-        $this->FaqModel     = model(FaqModel::class);
     }
 
     public function defaultLoadSideBar(): array
@@ -33,31 +27,32 @@ class Utilities extends BaseController
         // $data['url_about_us'] = base_url() . 'admin/utilities/aboutUs';
         // $data['url_faq'] = base_url() . 'admin/utilities/faq';
         $data['getListProduct'] = $this->ProductModel->MdlProductSelect();
+        $data['url_gallery'] = base_url() . 'admin/utilities/gallery';
 
         return $data;
     }
 
-    public function index(): string
-    {
-        $data = $this->defaultLoadSideBar();
-        $data['getData'] = $this->AboutUsModel->MdlAboutUsSelectById(1);
-        // $data['getById'] = base_url() . 'admin/utilities/aboutUs/getAboutUsById/';
-        $data['post'] = base_url() . 'admin/utilities/aboutUs/postAboutUs';
-        // $data['deleteById'] = base_url() . 'admin/utilities/aboutUs/deleteAboutUsById/';
+    // public function index(): string
+    // {
+        // $data = $this->defaultLoadSideBar();
+        // $data['getData'] = $this->AboutUsModel->MdlAboutUsSelectById(1);
+        // // $data['getById'] = base_url() . 'admin/utilities/aboutUs/getAboutUsById/';
+        // $data['post'] = base_url() . 'admin/utilities/aboutUs/postAboutUs';
+        // // $data['deleteById'] = base_url() . 'admin/utilities/aboutUs/deleteAboutUsById/';
 
-        return view('Back\Admin\About_us\about_us', $data);
-    }
+        // return view('Back\Admin\About_us\about_us', $data);
+    // }
 
-    public function indexFaq(): string
-    {
-        $data = $this->defaultLoadSideBar();
-        $data['getData'] = $this->FaqModel->MdlFaqSelectById(1);
-        // $data['getById'] = base_url() . 'admin/utilities/aboutUs/getAboutUsById/';
-        $data['post'] = base_url() . 'admin/utilities/faq/postFaq';
-        // $data['deleteById'] = base_url() . 'admin/utilities/aboutUs/deleteAboutUsById/';
+    // public function indexFaq(): string
+    // {
+        // $data = $this->defaultLoadSideBar();
+        // $data['getData'] = $this->FaqModel->MdlFaqSelectById(1);
+        // // $data['getById'] = base_url() . 'admin/utilities/aboutUs/getAboutUsById/';
+        // $data['post'] = base_url() . 'admin/utilities/faq/postFaq';
+        // // $data['deleteById'] = base_url() . 'admin/utilities/aboutUs/deleteAboutUsById/';
 
-        return view('Back\Admin\Faq\faq', $data);
-    }
+        // return view('Back\Admin\Faq\faq', $data);
+    // }
 
     // public function getAboutUs($id) {
     //     $query = $this->AboutUsModel->MdlAboutUsSelectById($id);
@@ -117,43 +112,90 @@ class Utilities extends BaseController
     //     return $redirect;
     // }
 
-    public function uploadGallery() {
-        $nameFile = "";
-        $file = $this->request->getFile('fupload');
-        if ($file->isValid() && !$file->hasMoved()) {
-            if (!$this->validate([
-                // 'menuid' => 'required',
-                'fupload' => 'mime_in[fupload,image/png,image/jpg,image/jpeg]|is_image[fupload]'
-            ])) {
-                // $validation = \Config\Services::validation();
-                // $msg = $validation->getError('fupload'); //$validation->listErrors();
-                $msg = "<strong>Info!</strong> File upload tidak sesuai format.";
-                $this->session->setFlashdata('message', $msg);
-                return redirect()->to('/' . config('app')->siteAdmin . '/mstKampus/add');
-            }
+    public function indexGallery()
+    {
+        $data = $this->defaultLoadSideBar();
+        $data['getList'] = $this->GalleryModel->MdlSelect();
+        $data['upload'] = base_url() . 'admin/utilities/gallery/upload/';
+        $data['getById'] = base_url() . 'admin/utilities/gallery/getGalleryById/';
+        $data['idUpdated'] = 0;
+        $data['deleteById'] = base_url() . 'admin/utilities/gallery/deleteById/';
 
-            $path = realpath('./themes/PixelAdmin/images/kampus');
-            $nameFile = $file->getName();
-            $file->move($path, $nameFile, true);
-        }
-
-        $res = $this->appModel->MDL_Insert($nameFile);
-        if ($res) {
-            // Log Activity
-            $ket = "Master Institusi Pendidikan, Success insert data";
-            $this->authModel->saveLogActivity($ket);
-
-            $msg = "<strong>Well done!</strong> Success save data.";
-            $this->session->setFlashdata('message', $msg);
-            return redirect()->to('/' . config('app')->siteAdmin . '/mstKampus');
-        } else {
-            // Log Activity
-            $ket = "Master Institusi Pendidikan, Fail insert data";
-            $this->authModel->saveLogActivity($ket);
-
-            $msg = "<strong>Warning!</strong> Fail save data.";
-            $this->session->setFlashdata('message', $msg);
-            return redirect()->to('/' . config('app')->siteAdmin . '/mstKampus/add');
-        }
+        return view('Back\Admin\Gallery\gallery', $data);
     }
+
+     public function getGallery($id) {
+         $query = $this->GalleryModel->MdlSelectById($id);
+
+         return json_encode($query);
+     }
+
+    public function uploadGallery($id) {
+        $path = realpath(ROOTPATH."/public/assets/img/gallery");
+        $body = array();
+        if(isset($id)){
+            $getFile = service('request')->getFiles();
+            foreach ($getFile['fileUpload'] as $img) {
+                if ($img->isValid() && ! $img->hasMoved()) {
+                    $validate = $img->getClientMimeType() === "image/png"|$img->getClientMimeType() === "image/jpg"|$img->getClientMimeType() === "image/jpeg";
+                    if (!$validate) {
+                        print_r('<script type="text/javascript">alert("File upload does not match the format"); window.history.back();</script>');
+                        exit();
+                    }
+                    $newName = $img->getName();
+                    $newPath = ROOTPATH.'/public/assets/admin/img/gallery/' . $newName;
+                    $img->move($path, $newName);
+
+                    if($id == 0){
+                        $value = array(
+                            'id' => null,
+                            'filename' => $newName,
+                            'filepath' => $newPath,
+                            'created_by' => 'SYSTEM',
+                            'created_date' => '',
+                            'updated_by' => '',
+                            'updated_date' => ''
+                        );
+                        $res = $this->GalleryModel->MdlInsert($value);
+                        if ($res) {
+                            print_r('<script type="text/javascript">alert("Upload '. $newName .' Success");</script>');
+                        } else {
+                            print_r('<script type="text/javascript">alert("Upload '. $newName .' Failed");</script>');
+                        }
+                    }else{
+                        $value = array(
+                            'id' => $id,
+                            'filename' => $newName,
+                            'filepath' => $newPath,
+                            'created_by' => 'SYSTEM',
+                            'created_date' => '',
+                            'updated_by' => 'SYSTEM',
+                            'updated_date' => ''
+                        );
+                        $res = $this->GalleryModel->MdlUpdatedById($id, $value);
+                        if ($res) {
+                            print_r('<script type="text/javascript">alert("Upload '. $newName .' Success");</script>');
+                        } else {
+                            print_r('<script type="text/javascript">alert("Upload '. $newName .' Failed");</script>');
+                        }
+                    }
+                }
+
+            }
+        }
+
+        return print_r('<script type="text/javascript">window.history.back();</script>');
+    }
+
+     public function deleteGallery($id, $filePath) {
+//          $path = realpath(ROOTPATH."/public/assets/img/gallery/".$filePath);
+//         $path = '../public/assets/admin/img/gallery/'.$filePath;
+//         $path2 = dirname(__FILE__, 3).'/public/assets/admin/img/gallery/'.$filePath;
+//         $path = 'images/'.$filePath;
+//         dd($path);
+//         unlink($path2);
+         $this->GalleryModel->MdlDeleteById($id);
+         $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
+         return $redirect;
+     }
 }
