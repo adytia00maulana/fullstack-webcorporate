@@ -86,5 +86,11 @@
         <?= $this->include('Back/Admin/Product/Config/plugin-product'); ?>
         <?= $this->include('Back/Admin/Product/Config/plugin-detail-product'); ?>
         <?= $this->include('Back/Admin/Gallery/Config/plugin_gallery'); ?>
+
+        <script>
+            const url = '<?= base_url().'login' ?>'
+            const session = '<?= isset($_SESSION['username'])? $_SESSION['username'] : "" ?>'
+            if(!session) window.location.href=url;
+        </script>
     </body>
 </html>

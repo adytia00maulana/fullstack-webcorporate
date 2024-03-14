@@ -37,7 +37,7 @@ $routes->get('/admin/deleteDataDetailProduct/(:any)', 'Admin::deleteDetailProduc
 $routes->get('/admin/utilities/gallery', 'Utilities::indexGallery');
 $routes->get('/admin/utilities/gallery/getGalleryById/(:any)', 'Utilities::getGallery/$1');
 $routes->post('/admin/utilities/gallery/upload/(:any)', 'Utilities::uploadGallery/$1');
-$routes->get('/admin/utilities/gallery/deleteById/(:any)', 'Utilities::deleteGallery/$1');
+$routes->get('/admin/utilities/gallery/deleteById/(:any)/(:any)', 'Utilities::deleteGallery/$1/$2');
 
 // routing front / company profile
 $routes->get('/', 'Home::index');

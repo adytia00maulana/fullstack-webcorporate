@@ -33,9 +33,9 @@
         }
     }
 
-    function deleteGallery(id) {
+    function deleteGallery(id, filePath) {
         const url = "<?php if(isset($deleteById)) echo $deleteById ?>";
-
+        let urlGet = url+Number(id)+'/'+filePath
         swal({
             title: 'Are you sure?',
             text: 'Once deleted, you will not be able to recover this data!',
@@ -48,7 +48,7 @@
                     swal('Poof! Your Data has been deleted!', {
                         icon: 'success',
                     }).then(()=>{
-                        window.location.href=url+Number(id);
+                        window.location.href=urlGet;
                     });
                 } else {
                     swal('Your Data is safe!');

@@ -16,7 +16,7 @@
                 <?php if(isset($upload)) echo form_open_multipart($upload."0"); ?>
                 <?= csrf_field(); ?>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile" name="fileUpload[]" multiple onchange="changeFileGallery(event.target.files, '0')">
+                    <input type="file" class="custom-file-input" id="customFile" name="fileUpload[]" multiple accept="image/*" onchange="changeFileGallery(event.target.files, '0')">
                     <label class="custom-file-label" for="customFile" id="labelFile">Choose file .PNG, .JPG or .JPEG</label>
                 </div>
                 <button type="submit" class="btn btn-info" id="uploadFile" style="display: none">Upload</button>
@@ -59,11 +59,11 @@
                                     <?= csrf_field(); ?>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" name="fileUpload[]" onchange="changeFileGallery(event.target.files, <?= $id ?>)">
-                                        <label class="custom-file-label" id="updatedFileUpload<?= $id ?>">Choose file .PNG, .JPG or .JPEG</label>
+                                        <label class="custom-file-label" id="updatedFileUpload<?= $id ?>"></label>
                                     </div>
                                     <button type="submit" class="btn btn-info" id="updatedFile<?= $id ?>" style="display: none">Upload</button>
                                     <?php echo form_close(); ?>
-                                    <a class="btn btn-warning text-white" onclick="deleteGallery(<?= $id ?>)">Delete</a>
+                                    <a class="btn btn-warning text-white" onclick="deleteGallery(<?= $id ?>, '<?= $filename ?>')">Delete</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

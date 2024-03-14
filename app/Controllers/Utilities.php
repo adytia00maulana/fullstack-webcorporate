@@ -131,20 +131,19 @@ class Utilities extends BaseController
      }
 
     public function uploadGallery($id) {
+        $path = realpath(ROOTPATH."/public/assets/img/gallery");
         $body = array();
         if(isset($id)){
             $getFile = service('request')->getFiles();
             foreach ($getFile['fileUpload'] as $img) {
                 if ($img->isValid() && ! $img->hasMoved()) {
-                    if (!$this->validate([
-                        'fileUpload' => 'mime_in[fileUpload,image/png,image/jpg,image/jpeg]|is_image[fileUpload]'
-                    ])) {
+                    $validate = $img->getClientMimeType() === "image/png"|$img->getClientMimeType() === "image/jpg"|$img->getClientMimeType() === "image/jpeg";
+                    if (!$validate) {
                         print_r('<script type="text/javascript">alert("File upload does not match the format"); window.history.back();</script>');
                         exit();
                     }
                     $newName = $img->getName();
-                    $newPath = '../public/assets/admin/img/gallery/' . $newName;
-                    $path = realpath('../public/assets/admin/img/gallery');
+                    $newPath = ROOTPATH.'/public/assets/admin/img/gallery/' . $newName;
                     $img->move($path, $newName);
 
                     if($id == 0){
@@ -188,9 +187,14 @@ class Utilities extends BaseController
         return print_r('<script type="text/javascript">window.history.back();</script>');
     }
 
-     public function deleteGallery($id) {
+     public function deleteGallery($id, $filePath) {
+//          $path = realpath(ROOTPATH."/public/assets/img/gallery/".$filePath);
+//         $path = '../public/assets/admin/img/gallery/'.$filePath;
+//         $path2 = dirname(__FILE__, 3).'/public/assets/admin/img/gallery/'.$filePath;
+//         $path = 'images/'.$filePath;
+//         dd($path);
+//         unlink($path2);
          $this->GalleryModel->MdlDeleteById($id);
-         unlink('../public/assets/admin/img/gallery/');
          $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
          return $redirect;
      }
