@@ -55,4 +55,12 @@
                 }
             });
     }
+
+    function viewImgGallery(fileName) {
+        const path = '<?= base_url().'assets/img/gallery/' ?>'
+        let url = path+fileName;
+        img = '<img src="'+url+'" class="d-block w-100" alt="...">';
+        popup = window.open('');
+        popup.document.write(img);
+    }
 </script>

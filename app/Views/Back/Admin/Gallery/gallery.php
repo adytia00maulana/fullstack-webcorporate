@@ -64,6 +64,7 @@
                                     <button type="submit" class="btn btn-info" id="updatedFile<?= $id ?>" style="display: none">Upload</button>
                                     <?php echo form_close(); ?>
                                     <a class="btn btn-warning text-white" onclick="deleteGallery(<?= $id ?>, '<?= $filename ?>')">Delete</a>
+                                    <a class="btn btn-secondary" onclick="viewImgGallery('<?= $filename ?>')">View</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
