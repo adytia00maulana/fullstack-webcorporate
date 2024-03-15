@@ -7,6 +7,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+	<!-- cdn font awesome 6 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 	<!-- style css -->
 	<link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>" />
 	<link rel="stylesheet" href="<?= base_url('assets/css/product.css') ?>" />
@@ -24,10 +26,10 @@
     <title><?= $title; ?></title>
   </head>
   <body>
-	<nav class="navbar navbar-expand-lg navbar-dark fw-bold sticky-top font-pathway-extreme">
+	<nav class="navbar navbar-expand-lg navbar-dark fw-bold sticky-top font-pathway-extreme bg-success">
 		<div class="container">
 			<a class="navbar-brand text-uppercase" href="<?= base_url('#') ?>">
-			<img src="<?= base_url('assets/img/logo_mbi.png') ?>" width="90px" class="img-fluid" alt="">
+			<img src="<?= base_url('assets/img/logo_new.png') ?>" width="90px" class="img-fluid" alt="">
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -61,8 +63,8 @@
 			<?= $this->renderSection('content') ?>			
 		</div>
 	
-		<footer class="footer p-3 font-pathway-extreme">
-			<div class="container text-center">Copyright &copy <?= Date('Y') ?> Makmur Bersama Indonesia</div>
+		<footer class="footer p-3 font-pathway-extreme bg-success">
+			<div class="container text-center">Copyright &copy <?= Date('Y') ?> Multi Bestri Indonesia</div>
 		</footer>
 
 	<!-- Optional JavaScript; choose one of the two! -->
