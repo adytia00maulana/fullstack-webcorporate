@@ -12,7 +12,7 @@
             <div class="video-background-content container h-100">
                 <div class="d-flex h-100 text-center align-items-center">
                     <div class="w-100 text-white">
-                    <h1 class="font-weight-bold font-italic title-heading">PT Makmur Bersama Indonesia</h1>
+                    <h1 class="font-weight-bold font-italic title-heading">PT Multi Bestri Indonesia</h1>
                     <div class="content">
                         <h4 class="desc-heading">Deskripsi Slider</h4>
                     </div>
@@ -22,22 +22,7 @@
     </div>
 </div>
 
-<div class="section-visi-misi mt-3 mb-3 pt-3 pb-3 font-heebo">
-    <div class="container">
-        <h1 class="font-weight-bold font-italic text-center mb-3 heading-visi-misi">Visi & Misi</h1>
-        <div class="row">
-            <div class="col-md-6">
-                <p>Visi : Menjadikan Perusahaan Distributor yang baik dan terpercaya</p>
-            </div>
-            <div class="col-md-6">
-                <p>Misi : Sebagai Importir untuk produk-produk Kosmetika, Ginseng dan  Produk  lainnya dengan mutu dan kualitas yang baik dan dipercaya masyarakat. <br>
-                Menjadikan kemitraan kerjasama yang baik dan mitra bisnis yang saling menguntungkan</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="section-slider">
+<div class="section-slider mt-5 pt-5">
     <div class="slider-produk">
         <div class="row">
             <div class="col-md-12">
@@ -49,13 +34,10 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="<?= base_url('assets/master/home/bg_ambas.png') ?>" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="<?= base_url('assets/master/home/bg_ambas.png') ?>" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
                         <img src="<?= base_url('assets/master/home/bg_produk.png') ?>" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="<?= base_url('assets/master/home/bg_ambas.png') ?>" class="d-block w-100" alt="...">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
@@ -69,6 +51,42 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="section-company-value bg-success">
+    <div class="container">
+        <div class="card-company-value p-5 m-5 text-center">
+        <div class="row">
+                <div class="col-md-4 p-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <i class="fa-solid fa-ranking-star fa-5x"></i>
+                            <p class="card-text font-weight-bold">Jaminan Kualitas</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur libero explicabo quos, similique beatae tenetur?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <i class="fa-solid fa-comments-dollar fa-5x"></i>
+                            <p class="card-text font-weight-bold"> Open For Reseller</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur libero explicabo quos, similique beatae tenetur?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <i class="fa-solid fa-list-check fa-5x"></i>
+                            <p class="card-text text-center font-weight-bold">Produk Tersertifikasi</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur libero explicabo quos, similique beatae tenetur?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
     </div>
 </div>
 
