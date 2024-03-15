@@ -187,13 +187,9 @@ class Utilities extends BaseController
         return print_r('<script type="text/javascript">window.history.back();</script>');
     }
 
-     public function deleteGallery($id, $filePath) {
-//          $path = realpath(ROOTPATH."/public/assets/img/gallery/".$filePath);
-//         $path = '../public/assets/admin/img/gallery/'.$filePath;
-//         $path2 = dirname(__FILE__, 3).'/public/assets/admin/img/gallery/'.$filePath;
-//         $path = 'images/'.$filePath;
-//         dd($path);
-//         unlink($path2);
+     public function deleteGallery($id, $fileName) {
+         $path = './assets/img/gallery/'.$fileName;
+         unlink($path);
          $this->GalleryModel->MdlDeleteById($id);
          $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
          return $redirect;
