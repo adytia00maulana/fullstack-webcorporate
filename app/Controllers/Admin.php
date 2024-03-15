@@ -98,8 +98,10 @@ class Admin extends BaseController
 
         if($id == NULL){
             $data['id'] = 0;
+            $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
             $this->ProductModel->MdlProductInsert($data);
         }else{
+            $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
             $this->ProductModel->MdlProductUpdatedById($id, $data);
         }
 
@@ -142,8 +144,10 @@ class Admin extends BaseController
 
         if($id == NULL){
             $data['id'] = 0;
+            $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
             $this->ProductModel->MdlSourceProductInsert($data);
         }else{
+            $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
             $this->ProductModel->MdlSourceProductUpdatedById($id, $data);
         }
 
@@ -213,8 +217,10 @@ class Admin extends BaseController
 
             if($id == NULL){
                 $data['id'] = 0;
+                $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
                 $this->ProductModel->MdlDetailProductInsert($data);
             }else{
+                $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
                 $this->ProductModel->MdlDetailProductUpdatedById($id, $data);
             }
         }

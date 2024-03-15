@@ -151,7 +151,7 @@ class Utilities extends BaseController
                             'id' => null,
                             'filename' => $newName,
                             'filepath' => $newPath,
-                            'created_by' => 'SYSTEM',
+                            'created_by' => isset($_SESSION['username'])? session()->get('username'): "SYSTEM",
                             'created_date' => '',
                             'updated_by' => '',
                             'updated_date' => ''
@@ -167,7 +167,7 @@ class Utilities extends BaseController
                             'id' => $id,
                             'filename' => $newName,
                             'filepath' => $newPath,
-                            'created_by' => 'SYSTEM',
+                            'created_by' => isset($_SESSION['username'])? session()->get('username'): "SYSTEM",
                             'created_date' => '',
                             'updated_by' => 'SYSTEM',
                             'updated_date' => ''
