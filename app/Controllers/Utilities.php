@@ -40,7 +40,7 @@ class Utilities extends BaseController
         // $data['post'] = base_url() . 'admin/utilities/aboutUs/postAboutUs';
         // // $data['deleteById'] = base_url() . 'admin/utilities/aboutUs/deleteAboutUsById/';
 
-        // return view('Back\Admin\About_us\about_us', $data);
+        // return view('Back/Admin/About_us/about_us', $data);
     // }
 
     // public function indexFaq(): string
@@ -51,7 +51,7 @@ class Utilities extends BaseController
         // $data['post'] = base_url() . 'admin/utilities/faq/postFaq';
         // // $data['deleteById'] = base_url() . 'admin/utilities/aboutUs/deleteAboutUsById/';
 
-        // return view('Back\Admin\Faq\faq', $data);
+        // return view('Back/Admin/Faq/faq', $data);
     // }
 
     // public function getAboutUs($id) {
@@ -121,7 +121,7 @@ class Utilities extends BaseController
         $data['idUpdated'] = 0;
         $data['deleteById'] = base_url() . 'admin/utilities/gallery/deleteById/';
 
-        return view('Back\Admin\Gallery\gallery', $data);
+        return view('Back/Admin/Gallery/gallery', $data);
     }
 
      public function getGallery($id) {

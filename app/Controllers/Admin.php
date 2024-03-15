@@ -47,7 +47,7 @@ class Admin extends BaseController
         $data['totalSourceProduct'] = count($querySourceProduct);
         $data['totalDetailProduct'] = count($queryDetailProduct);
 
-        return view('adm_layout\dashboard', $data);
+        return view('adm_layout/dashboard', $data);
     }
 
     public function applicationListUsers(): string
@@ -55,7 +55,7 @@ class Admin extends BaseController
         $data = $this->defaultLoadSideBar();
 
         $data['getListUser'] = $this->MstUserModel->MdlSelect();
-        return view('Back\Admin\Users\users-list', $data);
+        return view('Back/Admin/Users/users-list', $data);
     }
 
     public function applicationListRole(): string
@@ -63,7 +63,7 @@ class Admin extends BaseController
         $data = $this->defaultLoadSideBar();
 
         $data['getListRole'] = $this->MstRoleModel->MdlSelect();
-        return view('Back\Admin\Users\role-list', $data);
+        return view('Back/Admin/Users/role-list', $data);
     }
 
     public function applicationListProduct($paginate): string
@@ -80,7 +80,7 @@ class Admin extends BaseController
         $data['getList'] = $queryList;
         $data['getSourceProductList'] = $this->ProductModel->MdlSourceProductSelect();
 
-        return view('Back\Admin\Product\product-list', $data);
+        return view('Back/Admin/Product/product-list', $data);
     }
 
     public function getProduct($id) {
@@ -126,7 +126,7 @@ class Admin extends BaseController
         $data['deleteDataById'] = base_url()."admin/deleteDataSource/";
         $data['getList'] = $queryList;
 
-        return view('Back\Admin\Product\source-product-list', $data);
+        return view('Back/Admin/Product/source-product-list', $data);
     }
 
     public function getSourceProduct($id) {
@@ -182,7 +182,7 @@ class Admin extends BaseController
         $data['getDataById'] = base_url()."admin/getDataDetailProduct/";
         $data['deleteDataById'] = base_url()."admin/deleteDataDetailProduct/";
 
-        return view('Back\Admin\Product\detail-product-list', $data);
+        return view('Back/Admin/Product/detail-product-list', $data);
     }
 
     public function getDetailProduct($id) {
