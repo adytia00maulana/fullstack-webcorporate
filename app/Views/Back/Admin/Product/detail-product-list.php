@@ -126,7 +126,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <?php echo form_open($postData);?>
+                <?php echo form_open_multipart($postData);?>
                 <?= csrf_field(); ?>
                 <div class="modal-body">
                     <div class="form-group" hidden="hidden">
@@ -178,7 +178,12 @@
                     </div>
                     <div class="form-group">
                         <label for="filename">File Name</label>
-                        <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="fileUpload" onchange="changeFileDetailProduct()">
+                            <label class="custom-file-label" id="fileUploadDetailProduct">Choose File</label>
+                        </div>
+                        <a class="btn btn-secondary" id="fileUploadViewDetailProduct" style="display: none" onclick="viewImgDetailProduct()">View</a>
+                        <div class="input-group" hidden="hidden">
                             <input type="text" class="form-control" placeholder="File Name" name="filename" id="filename">
                         </div>
                     </div>
