@@ -1,17 +1,19 @@
 <?php
 
 namespace App\Controllers;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class Home extends BaseController
 {
-    
+
     public function index(): string {
         $data = ['title' => 'Home'];
         return view('front/home', $data);
     }
     
-    public function about(): string {
-        $data = ['title' => 'About'];
+    public function about() {
+        $data = ['title' => 'about'];
         return view('front/about', $data);
     }
 

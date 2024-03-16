@@ -11,7 +11,8 @@ body {
     flex-direction: column;
 }
 
-.navbar, .footer{
+.navbar,
+.footer {
     background: #b6acac
 }
 
@@ -22,10 +23,10 @@ body {
 
 .footer {
     margin-top: auto;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
-    color: rgb(230, 230, 230)!important;
-    text-shadow: 1px 1px 1px rgba(0,0, 0.3);
+    color: #fff !important;
+    text-shadow: 1px 2px 1px rgba(0, 0, 0.3);
 }
 
 
@@ -37,32 +38,23 @@ body {
     transition: 0.3s;
 }
 
+.navbar-nav .dropdown-menu .nav-link:hover {
+    color: #87fe50 !important;
+}
+
 .nav-link {
-    color: rgb(230, 230, 230)!important;
+    color: #fff !important;
     font-size: 18px;
-    text-shadow: 1px 2px 1px rgba(0,0, 0.3);
-}
-
-.nav-link:after {
-    display:block;
-    content: '';
-    border-bottom: solid 3px #192FC2;
-    transform: scaleX(0);
-    transition: transform 250ms ease-in-out;
-    padding: 4px 0;
-}
-
-.nav-link:hover:after {
-    transform: scaleX(1);
+    text-shadow: 1px 2px 1px rgba(0, 0, 0.3);
 }
 
 .font-pathway-extreme {
-  font-family: "Pathway Extreme", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-  font-variation-settings:
-  "wdth" 100;
+    font-family: "Pathway Extreme", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-variation-settings:
+        "wdth"100;
 }
 
 .font-outfit {
@@ -87,7 +79,10 @@ body {
     font-style: normal;
 }
 
-.title-heading, .desc-heading, .heading-visi-misi, .heading-ceo-speech {
+.title-heading,
+.desc-heading,
+.heading-visi-misi,
+.heading-ceo-speech {
     text-shadow: 1px 1px 0 rgb(90, 138, 111);
     color: black;
     font-weight: 700;
@@ -95,22 +90,27 @@ body {
 }
 
 /* text inside slider video & animation for all heading */
-.title-heading:hover, .desc-heading:hover, .heading-visi-misi:hover, .heading-ceo-speech:hover {
+.title-heading:hover,
+.desc-heading:hover,
+.heading-visi-misi:hover,
+.heading-ceo-speech:hover {
     color: #4BE106 !important;
     font-weight: 700;
     transition: all 0.6s;
     font-size: 58px;
 }
 
-.heading-visi-misi:after, .heading-ceo-speech:after {
-    display:block;
+.heading-visi-misi:after,
+.heading-ceo-speech:after {
+    display: block;
     content: '';
     border-bottom: solid 5px #192FC2;
     transform: scaleX(0);
     transition: transform 250ms ease-in-out;
 }
 
-.heading-visi-misi:hover:after, .heading-ceo-speech:hover:after {
+.heading-visi-misi:hover:after,
+.heading-ceo-speech:hover:after {
     transform: scaleX(1);
     padding: 4px 0;
 }
@@ -180,14 +180,14 @@ body {
 .text-ceo {
     font-size: clamp(1rem, 1vw, 3rem);
     letter-spacing: 1.3px;
-    text-wrap:wrap;
+    text-wrap: wrap;
     text-transform: capitalize;
     font-weight: 500;
 }
 
 /* page contact us */
 .section-contact-us {
-    background-image: linear-gradient(to top, #d7d731 , rgb(154, 204, 176));
+    background-image: linear-gradient(to top, #d7d731, rgb(154, 204, 176));
 }
 
 /* page about us */
@@ -196,67 +196,74 @@ body {
 }
 
 .section-about-us {
-     background-image: linear-gradient(to top, #d7d731 , rgb(154, 204, 176));
-     line-height: 2.5;
-     font-size: 22px;
-     padding: 7rem;
+    background-image: linear-gradient(to top, #d7d731, rgb(154, 204, 176));
+    line-height: 2.5;
+    font-size: 22px;
+    padding: 7rem;
 }
 
 /* page contact us */
 .container-contact {
-  background: #FFFFFF;
-  width: 900px;
-  height: 650px;
-  margin: 5% auto;
-  position: relative;
+    background: #FFFFFF;
+    width: 900px;
+    height: 650px;
+    margin: 5% auto;
+    position: relative;
 }
+
 .container-contact .map {
-  width: 45%;
-  float: left;
+    width: 45%;
+    float: left;
 }
+
 .container-contact .contact-form {
-  width: 53%;
-  margin-left: 2%;
-  float: left;
+    width: 53%;
+    margin-left: 2%;
+    float: left;
 }
+
 .container-contact .contact-form .title {
-  font-size: 2.5em;
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-  color: #242424;
-  margin: 5% 8%;
+    font-size: 2.5em;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    color: #242424;
+    margin: 5% 8%;
 }
+
 .container-contact .contact-form .subtitle {
-  font-size: 1.2em;
-  font-weight: 400;
-  margin: 0 4% 5% 8%;
+    font-size: 1.2em;
+    font-weight: 400;
+    margin: 0 4% 5% 8%;
 }
+
 .container-contact .contact-form input,
 .container-contact .contact-form textarea {
-  width: 330px;
-  padding: 3%;
-  margin: 2% 8%;
-  color: #242424;
-  border: 1px solid #B7B7B7;
+    width: 330px;
+    padding: 3%;
+    margin: 2% 8%;
+    color: #242424;
+    border: 1px solid #B7B7B7;
 }
+
 .container-contact .contact-form input::placeholder,
 .container-contact .contact-form textarea::placeholder {
-  color: #242424;
+    color: #242424;
 }
+
 .container-contact .contact-form .btn-send {
-  background: #A383C9;
-  width: 180px;
-  height: 60px;
-  color: #FFFFFF;
-  font-weight: 700;
-  margin: 2% 8%;
-  border: none;
+    background: #A383C9;
+    width: 180px;
+    height: 60px;
+    color: #FFFFFF;
+    font-weight: 700;
+    margin: 2% 8%;
+    border: none;
 }
 
 /* page FAQ */
 .body-wrapper {
     background-color: greenyellow;
-    background-image: linear-gradient(to top, #d7d731 , rgb(154, 204, 176));
+    background-image: linear-gradient(to top, #d7d731, rgb(154, 204, 176));
 }
 
 .section-faq {
@@ -267,7 +274,7 @@ body {
 .desc-korean-ginseng {
     font-size: 22px;
     text-align: left;
-    text-wrap:wrap;
+    text-wrap: wrap;
     letter-spacing: 1px;
     font-weight: 500;
 }
@@ -278,7 +285,8 @@ body {
     color: #fffa6d;
 }
 
-.aturan-konsumsi, .text-sub-head {
+.aturan-konsumsi,
+.text-sub-head {
     font-size: 28px;
     color: black;
 }
@@ -288,13 +296,15 @@ body {
     line-height: 1.5;
 }
 
-.aturan-konsumsi, h2 {
+.aturan-konsumsi,
+h2 {
     text-align: left;
     font-size: clamp(1rem, 2vw, 1rem);
     letter-spacing: 0.2px;
 }
 
-.aturan-konsumsi, p {
+.aturan-konsumsi,
+p {
     margin-bottom: 2em !important;
     font-size: 22px;
 }
@@ -307,20 +317,20 @@ body {
 }
 
 
-h5, .text-saran .text-cara-memilih-produk {
-     font-size: 32px;
-     font-family: Arial, Helvetica, sans-serif;
-     text-shadow: 0 2px 2px #65fa15;
-     position: relative;
-     left: 2em;
+h5,
+.text-saran .text-cara-memilih-produk {
+    font-size: 32px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: 0 2px 2px #65fa15;
+    position: relative;
+    left: 2em;
 }
 
 .text-sub-head-kosmetik {
     font-size: 26px;
 }
 
-.rules
-.kosmetik {
+.rules .kosmetik {
     line-height: 1.2;
 }
 
@@ -331,75 +341,78 @@ h5, .text-saran .text-cara-memilih-produk {
 }
 
 @media only screen and (max-width: 768px) {
-.content-wrapper {
-    line-height: 1.8;
-    padding: 0.8em;
-}
+    .content-wrapper {
+        line-height: 1.8;
+        padding: 0.8em;
+    }
 
-.navbar-nav>li>a:hover {
-    color: #87fe50 !important;
-    font-weight: 700;
-    font-size: 22px;
-    transition: 0.3s;
-}
+    .navbar-nav>li>a:hover {
+        color: #87fe50 !important;
+        font-weight: 700;
+        font-size: 22px;
+        transition: 0.3s;
+    }
 
-.footer {
-    font-size: 20px;
-    font-weight: 700;
-    color: rgb(230, 230, 230)!important;
-    text-shadow: 1px 1px 1px rgba(0,0, 0.3);
-}
+    .footer {
+        font-size: 20px;
+        font-weight: 700;
+        color: rgb(230, 230, 230) !important;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0.3);
+    }
 
-.nav-link {
-    color: rgb(230, 230, 230)!important;
-    font-size: 18px;
-    text-shadow: 1px 2px 1px rgba(0,0, 0.3);
-    margin: 0 0.5em;
-}
+    .nav-link {
+        color: rgb(230, 230, 230) !important;
+        font-size: 18px;
+        text-shadow: 1px 2px 1px rgba(0, 0, 0.3);
+        margin: 0 0.5em;
+    }
 
-.nav-link:after {
-    display:block;
-    content: '';
-    border-bottom: solid 3px #192FC2;
-    transform: scaleX(0);
-    transition: transform 250ms ease-in-out;
-    width: 24%;
-}
+    .nav-link:after {
+        display: block;
+        content: '';
+        border-bottom: solid 3px #192FC2;
+        transform: scaleX(0);
+        transition: transform 250ms ease-in-out;
+        width: 24%;
+    }
 
-.nav-link:hover:after {
-    transform: scaleX(1);
-}
+    .nav-link:hover:after {
+        transform: scaleX(1);
+    }
 
-   /* text inside slider video */
+    /* text inside slider video */
     .title-heading {
-    font-size: 600;
-    font-size: 22px;
-    text-shadow: 2px 1px 1px rgb(128, 209, 163);
-   }
+        font-size: 600;
+        font-size: 22px;
+        text-shadow: 2px 1px 1px rgb(128, 209, 163);
+    }
 
-   .desc-heading {
-    text-shadow: 2px 1px 1px rgb(128, 209, 163);
-    font-size: 600;
-   }
+    .desc-heading {
+        text-shadow: 2px 1px 1px rgb(128, 209, 163);
+        font-size: 600;
+    }
 
-   .desc-korean-ginseng {
-    font-size: 16px;
-    text-align: left;
-   }
+    .desc-korean-ginseng {
+        font-size: 16px;
+        text-align: left;
+    }
 
-   .desc-rules {
+    .desc-rules {
         margin-top: 3rem;
         line-height: 1.5;
         font-size: 20px;
     }
 
-    .aturan-konsumsi, p {
+    .aturan-konsumsi,
+    p {
         margin-bottom: 2em !important;
         font-size: 16px;
     }
 
     /* styling text for section saran dan pemakaian in device mobile */
-    .text-produk-show, text-sub-menu-saran, hr {
+    .text-produk-show,
+    text-sub-menu-saran,
+    hr {
         display: none;
     }
 
@@ -419,7 +432,7 @@ h5, .text-saran .text-cara-memilih-produk {
 
     .text-sub-head {
         text-transform: uppercase;
-        text-shadow: 1px 0.1px rgba(0,0,0,0.7);
+        text-shadow: 1px 0.1px rgba(0, 0, 0, 0.7);
         font-size: 16px;
         letter-spacing: 0;
     }
@@ -429,25 +442,30 @@ h5, .text-saran .text-cara-memilih-produk {
         left: -3em;
     }
 
-    .aturan-konsumsi, .text-aturan-konsumsi,
-    .cara-memilih-produk, .text-cara-memilih {    
+    .aturan-konsumsi,
+    .text-aturan-konsumsi,
+    .cara-memilih-produk,
+    .text-cara-memilih {
         font-size: 16px;
         text-transform: capitalize;
     }
-    
-    .h5, .text-saran {
-     font-size: 20px;
-     text-shadow: 2px 1px #eaeaea;
-     color: seagreen;
+
+    .h5,
+    .text-saran {
+        font-size: 20px;
+        text-shadow: 2px 1px #eaeaea;
+        color: seagreen;
     }
 
-    h5, .text-cara-memilih-produk {
-     font-size: 22px;
-     position: relative;
-     left: 3em;
-     text-shadow: 2px 1px #eaeaea;
-     color: seagreen;
+    h5,
+    .text-cara-memilih-produk {
+        font-size: 22px;
+        position: relative;
+        left: 3em;
+        text-shadow: 2px 1px #eaeaea;
+        color: seagreen;
     }
+
     /* end styling text for section saran dan pemakaian in device mobile */
 
     .kosmetik {
@@ -477,10 +495,10 @@ h5, .text-saran .text-cara-memilih-produk {
     }
 
     .section-about-us {
-     background-image: linear-gradient(to top, #d7d731 , rgb(154, 204, 176));
-     line-height: 1.5;
-     font-size: 22px;
-     padding: 1rem;
+        background-image: linear-gradient(to top, #d7d731, rgb(154, 204, 176));
+        line-height: 1.5;
+        font-size: 22px;
+        padding: 1rem;
     }
 }
 
@@ -488,67 +506,70 @@ h5, .text-saran .text-cara-memilih-produk {
 
 /* mobile */
 @media only screen and (max-width: 600px) {
-   .content-wrapper {
-    line-height: 1.8;
-    padding: 0.8em;
-   }
+    .content-wrapper {
+        line-height: 1.8;
+        padding: 0.8em;
+    }
 
-   .nav-link {
-    color: rgb(230, 230, 230)!important;
-    font-size: 14px;
-    text-shadow: 1px 2px 1px rgba(0,0, 0.3);
-    margin: 0 1.5em;
-}
+    .nav-link {
+        color: rgb(230, 230, 230) !important;
+        font-size: 14px;
+        text-shadow: 1px 2px 1px rgba(0, 0, 0.3);
+        margin: 0 1.5em;
+    }
 
-.nav-link:after {
-    display:block;
-    content: '';
-    border-bottom: solid 3px #192FC2;
-    transform: scaleX(0);
-    transition: transform 250ms ease-in-out;
-}
+    .nav-link:after {
+        display: block;
+        content: '';
+        border-bottom: solid 3px #192FC2;
+        transform: scaleX(0);
+        transition: transform 250ms ease-in-out;
+    }
 
-.nav-link:hover:after {
-    transform: scaleX(1);
-}
+    .nav-link:hover:after {
+        transform: scaleX(1);
+    }
 
-.footer {
-    font-size: 12px;
-    font-weight: 700;
-    color: rgb(230, 230, 230)!important;
-    text-shadow: 1px 1px 1px rgba(0,0, 0.3);
-}
+    .footer {
+        font-size: 12px;
+        font-weight: 700;
+        color: rgb(230, 230, 230) !important;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0.3);
+    }
 
-   /* text inside slider video */
+    /* text inside slider video */
     .title-heading {
-    font-size: 600;
-    font-size: 18px;
-    text-shadow: 2px 1px 1px rgb(128, 209, 163);
-   }
+        font-size: 600;
+        font-size: 18px;
+        text-shadow: 2px 1px 1px rgb(128, 209, 163);
+    }
 
-   .desc-heading {
-    text-shadow: 2px 1px 1px rgb(128, 209, 163);
-    font-size: 600;
-   }
+    .desc-heading {
+        text-shadow: 2px 1px 1px rgb(128, 209, 163);
+        font-size: 600;
+    }
 
-   .desc-korean-ginseng {
-    font-size: 14px;
-    text-align: left;
-   }
+    .desc-korean-ginseng {
+        font-size: 14px;
+        text-align: left;
+    }
 
-   .desc-rules {
+    .desc-rules {
         margin-top: 3rem;
         line-height: 1.5;
         font-size: 18px;
     }
 
-    .aturan-konsumsi, p {
+    .aturan-konsumsi,
+    p {
         margin-bottom: 2em !important;
         font-size: 14px;
     }
 
     /* styling text for section saran dan pemakaian in device mobile */
-    .text-produk-show, text-sub-menu-saran, hr {
+    .text-produk-show,
+    text-sub-menu-saran,
+    hr {
         display: none;
     }
 
@@ -568,7 +589,7 @@ h5, .text-saran .text-cara-memilih-produk {
 
     .text-sub-head {
         text-transform: uppercase;
-        text-shadow: 1px 0.1px rgba(0,0,0,0.7);
+        text-shadow: 1px 0.1px rgba(0, 0, 0, 0.7);
         font-size: 14px;
         letter-spacing: 0;
     }
@@ -578,25 +599,30 @@ h5, .text-saran .text-cara-memilih-produk {
         left: -3em;
     }
 
-    .aturan-konsumsi, .text-aturan-konsumsi,
-    .cara-memilih-produk, .text-cara-memilih {    
+    .aturan-konsumsi,
+    .text-aturan-konsumsi,
+    .cara-memilih-produk,
+    .text-cara-memilih {
         font-size: 12px;
         text-transform: capitalize;
     }
-    
-    .h5, .text-saran {
-     font-size: 18px;
-     text-shadow: 2px 1px #eaeaea;
-     color: seagreen;
+
+    .h5,
+    .text-saran {
+        font-size: 18px;
+        text-shadow: 2px 1px #eaeaea;
+        color: seagreen;
     }
 
-    h5, .text-cara-memilih-produk {
-     font-size: 18px;
-     position: relative;
-     left: 3em;
-     text-shadow: 2px 1px #eaeaea;
-     color: seagreen;
+    h5,
+    .text-cara-memilih-produk {
+        font-size: 18px;
+        position: relative;
+        left: 3em;
+        text-shadow: 2px 1px #eaeaea;
+        color: seagreen;
     }
+
     /* end styling text for section saran dan pemakaian in device mobile */
 
     .kosmetik {
@@ -626,10 +652,10 @@ h5, .text-saran .text-cara-memilih-produk {
     }
 
     .section-about-us {
-     background-image: linear-gradient(to top, #d7d731 , rgb(154, 204, 176));
-     line-height: 1.5;
-     font-size: 18px;
-     padding: 3rem;
+        background-image: linear-gradient(to top, #d7d731, rgb(154, 204, 176));
+        line-height: 1.5;
+        font-size: 18px;
+        padding: 3rem;
     }
 
 }

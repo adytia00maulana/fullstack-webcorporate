@@ -191,6 +191,7 @@ class App extends BaseConfig
     // public $about_us        = 'about_us';
     // public $faq             = 'faq';
     public $gallery         = 'gallery';
+    public $info = 'info';
 
     public $tbl_users       = 'users';
 }

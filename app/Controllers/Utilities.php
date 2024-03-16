@@ -10,10 +10,11 @@ use ProductModel;
 
 class Utilities extends BaseController
 {
-    public $GalleryModel, $ProductModel;
+    public $GalleryModel, $ProductModel, $InfoModel;
     public function __construct()
     {
         $this->GalleryModel = model(GalleryModel::class);
+        $this->InfoModel = model(InfoModel::class);
         $this->ProductModel = model(ProductModel::class);
     }
 
@@ -28,6 +29,7 @@ class Utilities extends BaseController
         // $data['url_faq'] = base_url() . 'admin/utilities/faq';
         $data['getListProduct'] = $this->ProductModel->MdlProductSelect();
         $data['url_gallery'] = base_url() . 'admin/utilities/gallery';
+        $data['url_info'] = base_url() . 'admin/utilities/info';
 
         return $data;
     }
@@ -111,6 +113,12 @@ class Utilities extends BaseController
     //     $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
     //     return $redirect;
     // }
+
+    public function indexInfo() {
+        $data = $this->defaultLoadSideBar();
+        // $data['getList'] = $this->InfoModel->MdlSelect();
+        return view('Back/Admin/Info/info', $data);
+    }
 
     public function indexGallery()
     {
