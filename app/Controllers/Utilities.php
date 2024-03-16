@@ -6,30 +6,23 @@ use App\Controllers\BaseController;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
 use GalleryModel;
+use InfoModel;
 use ProductModel;
 
 class Utilities extends BaseController
 {
-    public $GalleryModel, $ProductModel, $InfoModel;
+    public $GalleryModel, $ProductModel, $InfoModel, $AdminController;
     public function __construct()
     {
         $this->GalleryModel = model(GalleryModel::class);
         $this->InfoModel = model(InfoModel::class);
         $this->ProductModel = model(ProductModel::class);
+        $this->AdminController = new Admin();
     }
 
     public function defaultLoadSideBar(): array
     {
-        // $data['url_users_list'] = base_url() . 'admin/listUsers';
-        // $data['url_role_list'] = base_url() . 'admin/listRole';
-        $data['url_product_list'] = base_url() . 'admin/listProduct/';
-        $data['url_detail_product_list'] = base_url() . 'admin/listDetailProduct/';
-        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct/';
-        // $data['url_about_us'] = base_url() . 'admin/utilities/aboutUs';
-        // $data['url_faq'] = base_url() . 'admin/utilities/faq';
-        $data['getListProduct'] = $this->ProductModel->MdlProductSelect();
-        $data['url_gallery'] = base_url() . 'admin/utilities/gallery';
-        $data['url_info'] = base_url() . 'admin/utilities/info';
+        $data = $this->AdminController->defaultLoadSideBar();
 
         return $data;
     }
