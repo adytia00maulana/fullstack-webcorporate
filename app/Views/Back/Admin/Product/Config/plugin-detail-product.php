@@ -16,6 +16,7 @@
             $('#created_date').val("");
             $('#updated_by').val("");
             $('#updated_date').val("");
+            $('#fileUploadViewDetailProduct').hide();
             $("#detailProductModal").modal('show');
         }else {
             $("#id").val(id);
@@ -44,6 +45,7 @@
                 $('#created_date').val(data.created_date);
                 $('#updated_by').val(data.updated_by);
                 $('#updated_date').val(data.updated_date);
+                $('#fileUploadViewDetailProduct').show();
                 $("#detailProductModal").modal('show');
             }).fail((error)=>{
                 console.error(error);
@@ -71,5 +73,18 @@
                     swal('Your Data is safe!');
                 }
             });
+    }
+
+    function changeFileDetailProduct(){
+        $('#fileUploadDetailProduct').html('File Selected. Save Data for Upload')
+    }
+
+    function viewImgDetailProduct() {
+        const fileName = $('#filename').val();
+        const path = '<?= base_url().'assets/img/products/' ?>'
+        let url = path+fileName;
+        img = '<img src="'+url+'" class="d-block w-100" alt="...">';
+        popup = window.open('');
+        popup.document.write(img);
     }
 </script>

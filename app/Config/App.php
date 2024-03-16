@@ -190,6 +190,8 @@ class App extends BaseConfig
     public $detail_product  = 'detail_product';
     // public $about_us        = 'about_us';
     // public $faq             = 'faq';
+    public $gallery         = 'gallery';
+    public $info = 'info';
 
     public $tbl_users       = 'users';
 }

@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- icon -->
-	<link rel="icon" type="image/x-icon" href="<?= base_url('assets/img/favicon512.png') ?>">
+    <!-- favicon -->
+	<link rel="icon" type="image/x-icon" class="text-success" href="<?= base_url('assets/img/favicon512.png') ?>">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 	<!-- cdn font awesome 6 -->
@@ -38,11 +38,18 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item mr-5 text-capitalize">
-						<a class="nav-link" href="<?= base_url('about') ?>">Tentang Kami</a>
+					<li class="dropdown">
+						<a class="nav-link dropdown-toggle mr-5" role="button" data-toggle="dropdown">Tentang Kami</a>
+						<div class="dropdown-menu">
+							<a class="nav-link" href="<?= base_url('about') ?>">Visi Misi</a>
+						</div>
 					</li>
-					<li class="nav-item mr-5 text-capitalize">
-						<a class="nav-link" href="<?= base_url('product') ?>">Produk</a>
+					<li class="dropdown">
+						<a class="nav-link dropdown-toggle mr-5" role="button" data-toggle="dropdown">Produk</a>
+						<div class="dropdown-menu">
+							<a class="nav-link" href="<?= base_url('product') ?>">Ginseng</a>
+							<a class="nav-link" href="<?= base_url('product') ?>">Kosmetik</a>
+						</div>
 					</li>
 					<li class="nav-item mr-5 text-capitalize">
 						<a class="nav-link" href="<?= base_url('gallery') ?>">Galeri</a>
@@ -53,7 +60,7 @@
 					<li class="nav-item mr-5 text-capitalize">
 						<a class="nav-link" href="<?= base_url('contact') ?>">Kontak Kami</a>
 					</li>
-					<li class="nav-item mr-5 text-capitalize">
+					<li class="nav-item mr-5 text-uppercase">
 						<a class="nav-link" href="<?= base_url('faq') ?>">Faq</a>
 					</li>
 				</ul>

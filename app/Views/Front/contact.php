@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/default') ?>
  
 <?= $this->section('content') ?>
-<div class="section-contact-us">
+<div class="section-contact-us bg-success">
     <div class="row">
     <div class="col-md-12">
             <div class="container-contact">

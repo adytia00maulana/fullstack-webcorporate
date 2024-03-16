@@ -38,7 +38,8 @@
         <!-- <li><a href="<?php // if(isset($url_about_us)) echo $url_about_us ?>" class="nav-link"><i class="fas fa-globe"></i> <span>About Us</span></a></li> -->
         <!-- <li><a href="<?php // if(isset($url_faq)) echo $url_faq ?>" class="nav-link"><i class="fas fa-user"></i> <span>Faq</span></a></li> -->
         <!-- <li><a href="<?php // if(isset($url_product_list)) echo $url_product_list ?>" class="nav-link"><i class="fas fa-user"></i> <span>Contact</span></a></li> -->
-        <li><a href="<?php if(isset($url_product_list)) echo $url_product_list ?>" class="nav-link"><i class="fas fa-address-card"></i> <span>Gallery</span></a></li>
+        <li><a href="<?php if(isset($url_gallery)) echo $url_gallery ?>" class="nav-link"><i class="fas fa-address-card"></i> <span>Gallery</span></a></li>
+        <li><a href="<?php if(isset($url_info)) echo $url_info ?>" class="nav-link"><i class="fas fa-info-circle"></i> <span>Info</span></a></li>
         <!-- <li class="dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Forms</span></a>
             <ul class="dropdown-menu">

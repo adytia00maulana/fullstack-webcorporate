@@ -30,6 +30,8 @@ class Admin extends BaseController
         // $data['url_about_us'] = base_url() . 'admin/utilities/aboutUs';
         // $data['url_faq'] = base_url() . 'admin/utilities/faq';
         $data['getListProduct'] = $this->ProductModel->MdlProductSelect();
+        $data['url_gallery'] = base_url() . 'admin/utilities/gallery';
+        $data['url_info'] = base_url() . 'admin/utilities/info';
 
         return $data;
     }
@@ -46,7 +48,7 @@ class Admin extends BaseController
         $data['totalSourceProduct'] = count($querySourceProduct);
         $data['totalDetailProduct'] = count($queryDetailProduct);
 
-        return view('adm_layout\dashboard', $data);
+        return view('adm_layout/dashboard', $data);
     }
 
     public function applicationListUsers(): string
@@ -54,7 +56,7 @@ class Admin extends BaseController
         $data = $this->defaultLoadSideBar();
 
         $data['getListUser'] = $this->MstUserModel->MdlSelect();
-        return view('Back\Admin\Users\users-list', $data);
+        return view('Back/Admin/Users/users-list', $data);
     }
 
     public function applicationListRole(): string
@@ -62,7 +64,7 @@ class Admin extends BaseController
         $data = $this->defaultLoadSideBar();
 
         $data['getListRole'] = $this->MstRoleModel->MdlSelect();
-        return view('Back\Admin\Users\role-list', $data);
+        return view('Back/Admin/Users/role-list', $data);
     }
 
     public function applicationListProduct($paginate): string
@@ -79,7 +81,7 @@ class Admin extends BaseController
         $data['getList'] = $queryList;
         $data['getSourceProductList'] = $this->ProductModel->MdlSourceProductSelect();
 
-        return view('Back\Admin\Product\product-list', $data);
+        return view('Back/Admin/Product/product-list', $data);
     }
 
     public function getProduct($id) {
@@ -97,8 +99,10 @@ class Admin extends BaseController
 
         if($id == NULL){
             $data['id'] = 0;
+            $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
             $this->ProductModel->MdlProductInsert($data);
         }else{
+            $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
             $this->ProductModel->MdlProductUpdatedById($id, $data);
         }
 
@@ -123,7 +127,7 @@ class Admin extends BaseController
         $data['deleteDataById'] = base_url()."admin/deleteDataSource/";
         $data['getList'] = $queryList;
 
-        return view('Back\Admin\Product\source-product-list', $data);
+        return view('Back/Admin/Product/source-product-list', $data);
     }
 
     public function getSourceProduct($id) {
@@ -141,8 +145,10 @@ class Admin extends BaseController
 
         if($id == NULL){
             $data['id'] = 0;
+            $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
             $this->ProductModel->MdlSourceProductInsert($data);
         }else{
+            $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
             $this->ProductModel->MdlSourceProductUpdatedById($id, $data);
         }
 
@@ -177,7 +183,7 @@ class Admin extends BaseController
         $data['getDataById'] = base_url()."admin/getDataDetailProduct/";
         $data['deleteDataById'] = base_url()."admin/deleteDataDetailProduct/";
 
-        return view('Back\Admin\Product\detail-product-list', $data);
+        return view('Back/Admin/Product/detail-product-list', $data);
     }
 
     public function getDetailProduct($id) {
@@ -192,19 +198,42 @@ class Admin extends BaseController
         unset($data['csrf_test_name']);
         if(!isset($data['active'])) $data['active'] = "0";
         $id = $data['id'];
+        $getFile = service('request')->getFile('fileUpload');
 
-        if($id == NULL){
-            $data['id'] = 0;
-            $this->ProductModel->MdlDetailProductInsert($data);
-        }else{
-            $this->ProductModel->MdlDetailProductUpdatedById($id, $data);
+        if($id != NULL) unlink('./assets/img/products/'.$data['filename']);
+
+        if ($getFile->isValid() && ! $getFile->hasMoved()) {
+            $validate = $getFile->getClientMimeType() === "image/png" | $getFile->getClientMimeType() === "image/jpg" | $getFile->getClientMimeType() === "image/jpeg";
+            if (!$validate) {
+                print_r('<script type="text/javascript">alert("File upload does not match the format"); window.history.back();</script>');
+                exit();
+            }
+            $path = realpath(ROOTPATH."/public/assets/img/products");
+            $newName = $getFile->getName();
+            $newPath = ROOTPATH . '/public/assets/admin/img/products/' . $newName;
+            $data['filename'] = $newName;
+            $data['filepath'] = $newPath;
+            $getFile->move($path, $newName);
+
+
+            if($id == NULL){
+                $data['id'] = 0;
+                $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
+                $this->ProductModel->MdlDetailProductInsert($data);
+            }else{
+                $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
+                $this->ProductModel->MdlDetailProductUpdatedById($id, $data);
+            }
         }
+
 
         $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
         return $redirect;
     }
 
     public function deleteDetailProduct($id) {
+        $queryGetById = $this->ProductModel->MdlDetailProductSelectById($id);
+        dd($queryGetById);
         $this->ProductModel->MdlDetailProductDeleteById($id);
 
         $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
