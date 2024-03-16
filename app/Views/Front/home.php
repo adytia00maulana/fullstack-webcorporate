@@ -63,6 +63,7 @@
                         <div class="card-body">
                             <i class="fa-solid fa-ranking-star fa-5x"></i>
                             <p class="card-text font-weight-bold">Jaminan Kualitas</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur libero explicabo quos, similique beatae tenetur?</p>
                         </div>
                     </div>
                 </div>
@@ -71,6 +72,7 @@
                         <div class="card-body">
                             <i class="fa-solid fa-comments-dollar fa-5x"></i>
                             <p class="card-text font-weight-bold"> Open For Reseller</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur libero explicabo quos, similique beatae tenetur?</p>
                         </div>
                     </div>
                 </div>
@@ -79,6 +81,7 @@
                         <div class="card-body">
                             <i class="fa-solid fa-list-check fa-5x"></i>
                             <p class="card-text text-center font-weight-bold">Produk Tersertifikasi</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur libero explicabo quos, similique beatae tenetur?</p>
                         </div>
                     </div>
                 </div>
