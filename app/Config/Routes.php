@@ -11,6 +11,9 @@ $routes->get('/login', 'Auth::index');
 $routes->get('/logout', 'Auth::logout');
 $routes->post('/auth', 'Auth::loginAuth');
 
+$routes->get('/admin/utilities/info', 'Utilities::indexInfo');
+$routes->get('/admin/list-company-info', 'Admin::getListCompanyInfo');
+
 $routes->get('/admin', 'Admin::index', ['filter' => 'loginFilter']);
 $routes->get('/admin/listUsers', 'Admin::applicationListUsers', ['filter' => 'loginFilter']);
 $routes->get('/admin/listRole', 'Admin::applicationListRole', ['filter' => 'loginFilter']);

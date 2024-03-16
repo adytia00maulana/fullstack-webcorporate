@@ -3,8 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-        <title>PT. Multi Bestri Indonesia</title>
-
+        <title>Dashboard - PT. Multi Bestri Indonesia</title>
+            <!-- favicon -->
+        <link rel="icon" type="image/x-icon" class="text-success" href="<?= base_url('assets/img/favicon512.png') ?>">
         <!-- General CSS Files -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/fontawesome/css/all.min.css">
@@ -54,8 +55,14 @@
         </div>
     </div>
 
-        <!-- General JS Scripts -->
+    <!-- General JS Scripts -->
         <script src="<?php echo base_url(); ?>assets/admin/modules/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.3/tinymce.min.js"></script>
+        <script>
+            tinymce.init({
+                selector: '#text-info',
+            })
+        </script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/popper.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/tooltip.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/bootstrap/js/bootstrap.min.js"></script>
