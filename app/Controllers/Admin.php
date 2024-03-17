@@ -233,6 +233,8 @@ class Admin extends BaseController
 
     public function deleteDetailProduct($id) {
         $urlPrevious = $this->getUrlPrevious();
+        $queryGetById = $this->ProductModel->MdlDetailProductSelectById($id);
+        if(count($queryGetById) > 0) unlink(ROOTPATH . "public/assets/img/products/" . $queryGetById[0]->filename);
         $this->ProductModel->MdlDetailProductDeleteById($id);
         $redirect = redirect()->to(base_url().$urlPrevious);
         return $redirect;

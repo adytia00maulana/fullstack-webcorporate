@@ -57,7 +57,7 @@
     }
 
     function viewImgGallery(fileName) {
-        const path = '<?= base_url().'assets/img/gallery/' ?>'
+        const path = '<?= base_url().'public/assets/img/gallery/' ?>'
         let url = path+fileName;
         img = '<img src="'+url+'" class="d-block w-100" alt="...">';
         popup = window.open('');
