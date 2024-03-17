@@ -192,7 +192,7 @@ class Utilities extends BaseController
          $path = './assets/img/gallery/'.$fileName;
          unlink($path);
          $this->GalleryModel->MdlDeleteById($id);
-         $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
+         $redirect = redirect()->to(base_url().'admin/utilities/gallery');
          return $redirect;
      }
 }
