@@ -8,7 +8,7 @@
             // $('#id_product').val("");
             $('#code').val("");
             $('#name').val("");
-            $('#filename').val("");
+            $('#filename').val("").hide();
             $('#filepath').val("");
             $('#description').val("");
             $('#active').prop("checked", false);
@@ -37,7 +37,7 @@
                 $('#id_product').val(data.id_product);
                 $('#code').val(data.code);
                 $('#name').val(data.name);
-                $('#filename').val(data.filename);
+                $('#filename').val(data.filename).show();
                 $('#filepath').val(data.filepath);
                 $('#description').val(data.description);
                 $('#active').prop("checked", convertActive);
@@ -45,6 +45,7 @@
                 $('#created_date').val(data.created_date);
                 $('#updated_by').val(data.updated_by);
                 $('#updated_date').val(data.updated_date);
+                $('#fileUploadDetailProduct').html("Choose File for edit");
                 $('#fileUploadViewDetailProduct').show();
                 $("#detailProductModal").modal('show');
             }).fail((error)=>{

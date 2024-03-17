@@ -194,27 +194,27 @@ class Admin extends BaseController
 
     public function postDetailProduct()
     {
+        $urlPrevious = $this->getUrlPrevious();
         $data = $_POST;
         unset($data['csrf_test_name']);
         if(!isset($data['active'])) $data['active'] = "0";
         $id = $data['id'];
         $getFile = service('request')->getFile('fileUpload');
 
-        if($id != NULL) unlink(ROOTPATH."public/assets/img/products".$data['filename']);
-
         if ($getFile->isValid() && ! $getFile->hasMoved()) {
             $validate = $getFile->getClientMimeType() === "image/png" | $getFile->getClientMimeType() === "image/jpg" | $getFile->getClientMimeType() === "image/jpeg";
             if (!$validate) {
-                print_r('<script type="text/javascript">alert("File upload does not match the format"); window.history.back();</script>');
+                print_r('<script type="text/javascript">alert("File upload does not match the format"); window.location.href = "'.base_url().$urlPrevious.'";</script>');
                 exit();
             }
             $path = realpath(ROOTPATH."public/assets/img/products");
             $newName = $getFile->getName();
+            if($id != NULL && $newName != NULL) unlink(ROOTPATH . "public/assets/img/products/" . $data['filename']);
+
             $newPath = ROOTPATH . 'public/assets/admin/img/products/' . $newName;
             $data['filename'] = $newName;
             $data['filepath'] = $newPath;
             $getFile->move($path, $newName);
-
 
             if($id == NULL){
                 $data['id'] = 0;
@@ -227,17 +227,27 @@ class Admin extends BaseController
         }
 
 
-        $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
+        $redirect = print_r('<script type="text/javascript">window.location.href = "'.base_url().$urlPrevious.'"</script>');
         return $redirect;
     }
 
     public function deleteDetailProduct($id) {
-        $queryGetById = $this->ProductModel->MdlDetailProductSelectById($id);
-        dd($queryGetById);
+        $urlPrevious = $this->getUrlPrevious();
         $this->ProductModel->MdlDetailProductDeleteById($id);
-
-        $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
+        $redirect = redirect()->to(base_url().$urlPrevious);
         return $redirect;
     }
 
+    public function getUrlPrevious()
+    {
+        $getPrevious = previous_url(true)->getSegments();
+        $result = "";
+        foreach ($getPrevious as $index => $url){
+            if($index > 0){
+                $result .= $url;
+                if($index !== count($getPrevious) - 1) $result .= '/';
+            }
+        }
+        return $result;
+    }
 }
