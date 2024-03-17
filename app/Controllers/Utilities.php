@@ -189,7 +189,7 @@ class Utilities extends BaseController
     }
 
      public function deleteGallery($id, $fileName) {
-         $path = './assets/img/gallery/'.$fileName;
+         $path = ROOTPATH."/public/assets/img/gallery/".$fileName;
          unlink($path);
          $this->GalleryModel->MdlDeleteById($id);
          $redirect = redirect()->to(base_url().'admin/utilities/gallery');
