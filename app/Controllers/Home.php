@@ -32,6 +32,11 @@ class Home extends BaseController
         return view('front/gallery', $data);
     }
 
+    public function brand(): string {
+        $data = ['title' => 'Brand Ambasador'];
+        return view('front/brand', $data);
+    }
+
     public function info(): string {
         $data = ['title' => 'Info'];
         return view('front/info', $data);
