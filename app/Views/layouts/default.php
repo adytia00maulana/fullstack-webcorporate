@@ -12,8 +12,9 @@
 	<!-- cdn font awesome 6 -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 	<!-- style css -->
-	<link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>" />
 	<link rel="stylesheet" href="<?= base_url('assets/css/product.css') ?>" />
+	<link rel="stylesheet" href="<?= base_url('assets/css/brand.css') ?>" />
+	<link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>" />
 	<!-- font google outfit and heebo -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,8 +52,15 @@
 							<a class="nav-link" href="<?= base_url('product') ?>">Kosmetik</a>
 						</div>
 					</li>
-					<li class="nav-item mr-5 text-capitalize">
+					<!-- <li class="nav-item mr-5 text-capitalize">
 						<a class="nav-link" href="<?= base_url('gallery') ?>">Galeri</a>
+					</li> -->
+					<li class="dropdown">
+						<a class="nav-link dropdown-toggle mr-5" role="button" data-toggle="dropdown">Info</a>
+						<div class="dropdown-menu">
+							<a class="nav-link" href="<?= base_url('brand') ?>">Brand Ambasador</a>
+							<a class="nav-link" href="<?= base_url('info') ?>">Even</a>
+						</div>
 					</li>
 					<li class="nav-item mr-5 text-capitalize">
 						<a class="nav-link" href="<?= base_url('info') ?>">Info</a>
@@ -80,7 +88,7 @@
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-
+	<script src="<?= base_url('assets/js/brand.js') ?>"></script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

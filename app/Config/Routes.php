@@ -49,5 +49,6 @@ $routes->get('/contact', 'Home::contact');
 $routes->get('/gallery', 'Home::gallery');
 $routes->get('/product', 'Home::product');
 $routes->get('/info', 'Home::info');
+$routes->get('/brand', 'Home::brand');
 $routes->get('/faq', 'Home::faq');
 
