@@ -200,7 +200,7 @@ class Admin extends BaseController
         $id = $data['id'];
         $getFile = service('request')->getFile('fileUpload');
 
-        if($id != NULL) unlink('./assets/img/products/'.$data['filename']);
+        if($id != NULL) unlink(ROOTPATH."public/assets/img/products".$data['filename']);
 
         if ($getFile->isValid() && ! $getFile->hasMoved()) {
             $validate = $getFile->getClientMimeType() === "image/png" | $getFile->getClientMimeType() === "image/jpg" | $getFile->getClientMimeType() === "image/jpeg";
@@ -208,9 +208,9 @@ class Admin extends BaseController
                 print_r('<script type="text/javascript">alert("File upload does not match the format"); window.history.back();</script>');
                 exit();
             }
-            $path = realpath(ROOTPATH."/public/assets/img/products");
+            $path = realpath(ROOTPATH."public/assets/img/products");
             $newName = $getFile->getName();
-            $newPath = ROOTPATH . '/public/assets/admin/img/products/' . $newName;
+            $newPath = ROOTPATH . 'public/assets/admin/img/products/' . $newName;
             $data['filename'] = $newName;
             $data['filepath'] = $newPath;
             $getFile->move($path, $newName);
