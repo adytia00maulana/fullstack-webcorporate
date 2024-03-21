@@ -59,5 +59,15 @@
         <!-- Template JS File -->
         <script src="<?php echo base_url(); ?>assets/admin/js/scripts.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/js/custom.js"></script>
+        <script>
+            function changePasswordType(event) {
+                const showPassword = event.target.checked;
+                if (showPassword) {
+                    $('#password').prop('type', 'text');
+                } else {
+                    $('#password').prop('type', 'password');
+                }
+            }
+        </script>
     </body>
 </html>

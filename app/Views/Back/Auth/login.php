@@ -28,6 +28,9 @@
                         </div>
                         <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
                         <div class="invalid-feedback text-capitalize">mohon masukkan password anda</div>
+                        <label for="show_password">
+                            <input type="checkbox" id="show_password" onclick="changePasswordType(event)" />
+                        </label>&nbsp;&nbsp;Show Password
                     </div>
 
                     <div class="form-group">
