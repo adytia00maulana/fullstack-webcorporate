@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/weather-icon/css/weather-icons.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/weather-icon/css/weather-icons-wind.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/summernote/summernote-bs4.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/assets/modules/bootstrap-social/bootstrap-social.css">
 
         <!-- Template CSS -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/style.css">
@@ -31,13 +32,12 @@
 
     <body>
         <div id="app">
-        <div class="main-wrapper main-wrapper-1">
-            <!-- Main Content -->
-            <div class="main-content">
-                <?= $this->renderSection('content') ?>
-            </div>
+            <section class="section">
+                <div class="container mt-5">
+                    <?= $this->renderSection('content') ?>
+                </div>
+            </section>
         </div>
-    </div>
 
         <!-- General JS Scripts -->
         <script src="<?php echo base_url(); ?>assets/admin/modules/jquery.min.js"></script>
