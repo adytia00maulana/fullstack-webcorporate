@@ -199,7 +199,13 @@ class Admin extends BaseController
         unset($data['csrf_test_name']);
         if(!isset($data['active'])) $data['active'] = "0";
         $id = $data['id'];
+        $fileName = $data['filename'];
         $getFile = service('request')->getFile('fileUpload');
+
+        if($getFile->getSizeByUnit('mb') > 3) {
+            print_r('<script type="text/javascript">alert("Max Upload 3 Megabyte"); window.location.href = "'.base_url().$urlPrevious.'";</script>');
+            exit();
+        }
 
         if ($getFile->isValid() && ! $getFile->hasMoved()) {
             $validate = $getFile->getClientMimeType() === "image/png" | $getFile->getClientMimeType() === "image/jpg" | $getFile->getClientMimeType() === "image/jpeg";
@@ -209,7 +215,10 @@ class Admin extends BaseController
             }
             $path = realpath(ROOTPATH."public/assets/img/products");
             $newName = $getFile->getName();
-            if($id != NULL && $newName != NULL) unlink(ROOTPATH . "public/assets/img/products/" . $data['filename']);
+
+            if(isset($fileName)){
+                if($id != NULL) unlink(ROOTPATH . "public/assets/img/products/" . $fileName);
+            }
 
             $newPath = ROOTPATH . 'public/assets/admin/img/products/' . $newName;
             $data['filename'] = $newName;
@@ -227,8 +236,7 @@ class Admin extends BaseController
         }
 
 
-        $redirect = print_r('<script type="text/javascript">window.location.href = "'.base_url().$urlPrevious.'"</script>');
-        return $redirect;
+        return print_r('<script type="text/javascript">window.location.href = "'.base_url().$urlPrevious.'"</script>', true);
     }
 
     public function deleteDetailProduct($id) {
@@ -236,11 +244,10 @@ class Admin extends BaseController
         $queryGetById = $this->ProductModel->MdlDetailProductSelectById($id);
         if(count($queryGetById) > 0) unlink(ROOTPATH . "public/assets/img/products/" . $queryGetById[0]->filename);
         $this->ProductModel->MdlDetailProductDeleteById($id);
-        $redirect = redirect()->to(base_url().$urlPrevious);
-        return $redirect;
+        return redirect()->to(base_url().$urlPrevious);
     }
 
-    public function getUrlPrevious()
+    public function getUrlPrevious(): string
     {
         $getPrevious = previous_url(true)->getSegments();
         $result = "";
