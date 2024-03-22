@@ -137,7 +137,7 @@ class Utilities extends BaseController
         $totalSize = 0;
         $getFile = service('request')->getFiles();
         foreach ($getFile['fileUpload'] as $data) {
-            $totalSize += $data->getSize() / 1000000;
+            $totalSize += (int) $data->getSizeByUnit('mb');
         }
         if($totalSize > 8) {
             print_r('<script type="text/javascript">alert("Max Upload 8M"); window.history.back();</script>');
