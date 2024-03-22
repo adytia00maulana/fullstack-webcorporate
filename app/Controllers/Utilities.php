@@ -192,7 +192,7 @@ class Utilities extends BaseController
             }
         }
 
-        return print_r('<script type="text/javascript">window.history.back();</script>');
+        return print_r('<script type="text/javascript">window.history.back();</script>', true);
     }
 
      public function deleteGallery($id, $fileName) {
