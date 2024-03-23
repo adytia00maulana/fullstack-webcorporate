@@ -13,9 +13,14 @@
                 </div>
                 <div class="card-body p-3">
                     <form action="<?= base_url('') ?>" method="post">
-                        <div class="form-group">
-                            <textarea name="info" id="text-info" rows="10" cols="80"></textarea>
-                        </div>
+                    <div class="form-group">
+                        <label for="">event name</label>
+                        <input type="text" class="form-control" name="event_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="">event name</label>
+                        <input type="text" class="form-control" name="event_name">
+                    </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
