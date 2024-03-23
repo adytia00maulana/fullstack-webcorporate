@@ -9,6 +9,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use GalleryModel;
 use InfoModel;
 use ProductModel;
+use InfoModel;
 
 class Utilities extends BaseController
 {
@@ -27,8 +28,17 @@ class Utilities extends BaseController
 
     public function defaultLoadSideBar(): array
     {
+        // $data['url_users_list'] = base_url() . 'admin/listUsers';
+        // $data['url_role_list'] = base_url() . 'admin/listRole';
+        $data['url_product_list'] = base_url() . 'admin/listProduct/';
+        $data['url_detail_product_list'] = base_url() . 'admin/listDetailProduct/';
+        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct/';
+        // $data['url_about_us'] = base_url() . 'admin/utilities/aboutUs';
+        // $data['url_faq'] = base_url() . 'admin/utilities/faq';
+        $data['getListProduct'] = $this->ProductModel->MdlProductSelect();
+        $data['url_gallery'] = base_url() . 'admin/utilities/gallery';
+        $data['url_event'] = base_url() . 'admin/utilities/event';
         $data = $this->AdminController->defaultLoadSideBar();
-
         return $data;
     }
 
@@ -112,10 +122,16 @@ class Utilities extends BaseController
     //     return $redirect;
     // }
 
-    public function indexInfo() {
+    public function indexEvent() {
         $data = $this->defaultLoadSideBar();
-        // $data['getList'] = $this->InfoModel->MdlSelect();
+        $data['events'] = $this->InfoModel->getAllData();
         return view('Back/Admin/Info/info', $data);
+    }
+
+    public function formEvent() {
+        $data = $this->defaultLoadSideBar();
+        $data['events'] = $this->InfoModel->getAllData();
+        return view('Back/Admin/Info/form', $data);
     }
 
     public function indexGallery()
