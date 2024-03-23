@@ -4,7 +4,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- favicon -->
 	<link rel="icon" type="image/x-icon" class="text-success" href="<?= base_url('assets/img/favicon512.png') ?>">
     <!-- Bootstrap CSS -->
@@ -14,6 +13,7 @@
 	<!-- style css -->
 	<link rel="stylesheet" href="<?= base_url('assets/css/product.css') ?>" />
 	<link rel="stylesheet" href="<?= base_url('assets/css/brand.css') ?>" />
+	<link rel="stylesheet" href="<?= base_url('assets/css/info.css') ?>" />
 	<link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>" />
 	<!-- font google outfit and heebo -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,9 +61,6 @@
 							<a class="nav-link" href="<?= base_url('brand') ?>">Brand Ambasador</a>
 							<a class="nav-link" href="<?= base_url('info') ?>">Even</a>
 						</div>
-					</li>
-					<li class="nav-item mr-5 text-capitalize">
-						<a class="nav-link" href="<?= base_url('info') ?>">Info</a>
 					</li>
 					<li class="nav-item mr-5 text-capitalize">
 						<a class="nav-link" href="<?= base_url('contact') ?>">Kontak Kami</a>
