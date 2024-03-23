@@ -13,6 +13,9 @@ use ProductModel;
 class Utilities extends BaseController
 {
     public $GalleryModel, $ProductModel, $InfoModel, $AdminController, $GlobalValidation, $pathUploadGallery, $pathViewGallery, $pathDeleteGallery;
+    public $pathUploadLogo;
+    public $pathViewLogo;
+    public $pathDeleteLogo;
     public function __construct()
     {
         $this->GalleryModel = model(GalleryModel::class);
@@ -23,6 +26,9 @@ class Utilities extends BaseController
         $this->pathUploadGallery = config('app')-> uploadGallery;
         $this->pathViewGallery = config('app')-> viewGallery;
         $this->pathDeleteGallery = config('app')-> deleteGallery;
+        $this->pathUploadLogo = config('app')->uploadLogo;
+        $this->pathViewLogo = config('app')->viewLogo;
+        $this->pathDeleteLogo = config('app')->deleteLogo;
     }
 
     public function defaultLoadSideBar(): array
@@ -204,4 +210,15 @@ class Utilities extends BaseController
          $redirect = redirect()->to(base_url().'admin/utilities/gallery');
          return $redirect;
      }
+
+
+    public function indexLogo()
+    {
+        $data = $this->defaultLoadSideBar();
+        $data['getList'] = $this->GalleryModel->MdlSelect();
+        $data['upload'] = base_url() . 'admin/utilities/logo/upload/';
+        $data['viewPathLogo'] = $this->pathViewLogo;
+
+        return view('Back/Admin/Logo/logo', $data);
+    }
 }
