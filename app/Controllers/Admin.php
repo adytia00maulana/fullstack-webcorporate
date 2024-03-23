@@ -11,13 +11,16 @@ use ProductModel;
 
 class Admin extends BaseController
 {
-    private $MstUserModel, $MstRoleModel, $ProductModel;
+    private $MstUserModel, $MstRoleModel, $ProductModel, $pathUploadProduct, $pathViewProduct, $pathDeleteProduct;
     public function __construct()
     {
         $session = session();
         $this->MstUserModel = model(MstUserModel::class);
         $this->MstRoleModel = model(MstRoleModel::class);
         $this->ProductModel = model(ProductModel::class);
+        $this->pathUploadProduct = config('app')-> uploadProduct;
+        $this->pathViewProduct = config('app')-> viewProduct;
+        $this->pathDeleteProduct = config('app')-> deleteProduct;
     }
 
     public function defaultLoadSideBar(): array
@@ -182,6 +185,7 @@ class Admin extends BaseController
         $data['postData'] = base_url()."admin/postDataDetailProduct";
         $data['getDataById'] = base_url()."admin/getDataDetailProduct/";
         $data['deleteDataById'] = base_url()."admin/deleteDataDetailProduct/";
+        $data['viewPathProduct'] = $this->pathViewProduct;
 
         return view('Back/Admin/Product/detail-product-list', $data);
     }
@@ -199,13 +203,7 @@ class Admin extends BaseController
         unset($data['csrf_test_name']);
         if(!isset($data['active'])) $data['active'] = "0";
         $id = $data['id'];
-        $fileName = $data['filename'];
         $getFile = service('request')->getFile('fileUpload');
-
-        if($getFile->getSizeByUnit('mb') > 3) {
-            print_r('<script type="text/javascript">alert("Max Upload 3 Megabyte"); window.location.href = "'.base_url().$urlPrevious.'";</script>');
-            exit();
-        }
 
         if ($getFile->isValid() && ! $getFile->hasMoved()) {
             $validate = $getFile->getClientMimeType() === "image/png" | $getFile->getClientMimeType() === "image/jpg" | $getFile->getClientMimeType() === "image/jpeg";
@@ -213,26 +211,22 @@ class Admin extends BaseController
                 print_r('<script type="text/javascript">alert("File upload does not match the format"); window.location.href = "'.base_url().$urlPrevious.'";</script>');
                 exit();
             }
-            $path = realpath(ROOTPATH."public/assets/img/products");
+            $path = realpath($this->pathUploadProduct);
             $newName = $getFile->getName();
-
-            if(isset($fileName)){
-                if($id != NULL) unlink(ROOTPATH . "public/assets/img/products/" . $fileName);
-            }
-
-            $newPath = ROOTPATH . 'public/assets/admin/img/products/' . $newName;
-            $data['filename'] = $newName;
-            $data['filepath'] = $newPath;
-            $getFile->move($path, $newName);
+            $data['filepath'] = $path .'/' . $newName;
 
             if($id == NULL){
                 $data['id'] = 0;
                 $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
+                $data['filename'] = $newName;
                 $this->ProductModel->MdlDetailProductInsert($data);
             }else{
+                if($data['filename']) unlink($this->pathDeleteProduct . $data['filename']);
+                $data['filename'] = $newName;
                 $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
                 $this->ProductModel->MdlDetailProductUpdatedById($id, $data);
             }
+            $getFile->move($path, $newName);
         }
 
 
@@ -242,9 +236,10 @@ class Admin extends BaseController
     public function deleteDetailProduct($id) {
         $urlPrevious = $this->getUrlPrevious();
         $queryGetById = $this->ProductModel->MdlDetailProductSelectById($id);
-        if(count($queryGetById) > 0) unlink(ROOTPATH . "public/assets/img/products/" . $queryGetById[0]->filename);
+        if(count($queryGetById) > 0) unlink($this->pathDeleteProduct . $queryGetById[0]->filename);
         $this->ProductModel->MdlDetailProductDeleteById($id);
-        return redirect()->to(base_url().$urlPrevious);
+        $redirect = redirect()->to(base_url().$urlPrevious);
+        return $redirect;
     }
 
     public function getUrlPrevious(): string

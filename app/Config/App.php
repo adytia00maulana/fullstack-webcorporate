@@ -181,7 +181,18 @@ class App extends BaseConfig
 	|--------------------------------------------------------------------------
 	| 
 	*/
-    
+
+    /********* Path Upload View Delete ********/
+    // Product
+    public $uploadProduct    = ROOTPATH."public/assets/img/products";
+    public $viewProduct      = 'assets/img/products/';
+    public $deleteProduct    = ROOTPATH . "public/assets/img/products/";
+
+    // Gallery
+    public $uploadGallery    = ROOTPATH."public/assets/img/gallery";
+    public $viewGallery      = 'assets/img/gallery/';
+    public $deleteGallery    = ROOTPATH."public/assets/img/gallery/";
+
     // Table Database Name
     public $mst_role        = 'mst_role';
     public $mst_users       = 'mst_users';

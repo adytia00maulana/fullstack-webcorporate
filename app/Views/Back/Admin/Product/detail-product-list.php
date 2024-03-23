@@ -179,7 +179,7 @@
                     <div class="form-group">
                         <label for="filename">File</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="File Name" name="filename" id="filename" disabled>
+                            <input type="text" class="form-control" placeholder="File Name" name="filename" id="filename" readonly>
                         </div>
                         <a class="btn btn-secondary" id="fileUploadViewDetailProduct" style="display: none" onclick="viewImgDetailProduct()">View</a>
                         <div class="custom-file">
