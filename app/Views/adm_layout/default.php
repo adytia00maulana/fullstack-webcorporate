@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/datatables/datatables.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/izitoast/css/iziToast.min.css">
 
         <!-- Template CSS -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/style.css">
@@ -80,6 +81,7 @@
         <script src="<?php echo base_url(); ?>assets/admin/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/jquery-ui/jquery-ui.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/modules/izitoast/js/iziToast.min.js"></script>
 
         <!-- Page Specific JS File
         <script src="<?php // echo base_url(); ?>assets/admin/js/page/index-0.js"></script>-->

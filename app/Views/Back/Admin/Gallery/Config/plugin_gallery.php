@@ -1,4 +1,21 @@
 <script>
+    if('<?= session()->getFlashdata('code') ?>'){
+        if('<?= session()->getFlashdata('code') ?>' === '400'){
+            iziToast.error({
+                title: '<?= session()->getFlashdata('message') ?>',
+                message: '<?= session()->getFlashdata('result') ?>',
+                position: 'topRight'
+            });
+        }
+        if('<?= session()->getFlashdata('code') ?>' === '200'){
+            iziToast.info({
+                title: '<?= session()->getFlashdata('message') ?>',
+                message: '<?= session()->getFlashdata('result') ?>',
+                position: 'topRight'
+            });
+        }
+    }
+
     $("#table-gallery").dataTable({
         "columnDefs": [
             { "sortable": false, "targets": [2,3] }
@@ -57,7 +74,11 @@
     }
 
     function viewImgGallery(fileName) {
-        const path = '<?= base_url().'assets/img/gallery/' ?>'
+        const path = '<?php
+            $pathGallery = '';
+            if(isset($viewPathGallery)) $pathGallery = $viewPathGallery;
+            echo base_url(). $pathGallery;
+            ?>'
         let url = path+fileName;
         img = '<img src="'+url+'" class="d-block w-100" alt="...">';
         popup = window.open('');
