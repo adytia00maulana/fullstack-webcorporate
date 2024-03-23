@@ -1,30 +1,41 @@
 <?= $this->extend('adm_layout/default') ?>
 
 <?= $this->section('content') ?>
-    <section class="section">
-        <div class="section-header">
-            <h1>List Company Info</h1>
+<section class="section">
+    <div class="section-header">
+        <h1>List Company Event</h1>
+    </div>
+    <div class="card-body p-0">
+        <a class="btn btn-primary text-white my-2">Add Event</a>
+        <div class="table-responsive">
+            <table class="table table-striped table-md">
+                <thead class="table-primary">
+                    <tr>
+                        <th>#</th>
+                        <th>Event Name</th>
+                        <th>Event Start</th>
+                        <th>Event End</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a class="btn btn-secondary">Detail</a>
+                            <a class="btn btn-warning text-white">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
-        <div class="section-body">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Company Info</h4>
-                </div>
-                <div class="card-body p-3">
-                    <form action="<?= base_url('') ?>" method="post">
-                    <div class="form-group">
-                        <label for="">event name</label>
-                        <input type="text" class="form-control" name="event_name">
-                    </div>
-                    <div class="form-group">
-                        <label for="">event name</label>
-                        <input type="text" class="form-control" name="event_name">
-                    </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
+</section>
 <?= $this->endSection() ?>
