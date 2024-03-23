@@ -7,6 +7,7 @@ use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
 use GalleryModel;
 use ProductModel;
+use InfoModel;
 
 class Utilities extends BaseController
 {
@@ -29,7 +30,7 @@ class Utilities extends BaseController
         // $data['url_faq'] = base_url() . 'admin/utilities/faq';
         $data['getListProduct'] = $this->ProductModel->MdlProductSelect();
         $data['url_gallery'] = base_url() . 'admin/utilities/gallery';
-        $data['url_info'] = base_url() . 'admin/utilities/info';
+        $data['url_event'] = base_url() . 'admin/utilities/event';
 
         return $data;
     }
@@ -114,10 +115,16 @@ class Utilities extends BaseController
     //     return $redirect;
     // }
 
-    public function indexInfo() {
+    public function indexEvent() {
         $data = $this->defaultLoadSideBar();
-        // $data['getList'] = $this->InfoModel->MdlSelect();
+        $data['events'] = $this->InfoModel->getAllData();
         return view('Back/Admin/Info/info', $data);
+    }
+
+    public function formEvent() {
+        $data = $this->defaultLoadSideBar();
+        $data['events'] = $this->InfoModel->getAllData();
+        return view('Back/Admin/Info/form', $data);
     }
 
     public function indexGallery()

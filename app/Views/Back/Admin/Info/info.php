@@ -1,30 +1,43 @@
 <?= $this->extend('adm_layout/default') ?>
 
 <?= $this->section('content') ?>
-    <section class="section">
-        <div class="section-header">
-            <h1>List Company Info</h1>
+<section class="section">
+    <div class="section-header">
+        <h1>List Company Event</h1>
+    </div>
+    <div class="card-body p-0">
+        <a class="btn btn-primary text-white my-2" href="<?= base_url('admin/utilities/form-event') ?>">Add Event</a>
+        <div class="table-responsive">
+            <table class="table table-striped table-md">
+                <thead class="table-primary">
+                    <tr>
+                        <th>#</th>
+                        <th>Event Name</th>
+                        <th>Thumbnail</th>
+                        <th>Event Description</th>
+                        <th>Event Start</th>
+                        <th>Event End</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($events as $data_event) : ?>
+                    <tr>
+                        <td></td>
+                        <td><?= $data_event['event_name'] ?></td>
+                        <td>-</td>
+                        <td class="text-break"><?= $data_event['description'] ?></td>
+                        <td><?= date('Y-m-d', strtotime($data_event['start_date'])); ?></td>
+                        <td><?= date('Y-m-d', strtotime($data_event['end_date'])); ?></td>
+                        <td>
+                            <a class="btn btn-secondary">Detail</a>
+                            <a class="btn btn-warning text-white">Delete</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
-
-        <div class="section-body">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Company Info</h4>
-                </div>
-                <div class="card-body p-3">
-                    <form action="<?= base_url('') ?>" method="post">
-                    <div class="form-group">
-                        <label for="">event name</label>
-                        <input type="text" class="form-control" name="event_name">
-                    </div>
-                    <div class="form-group">
-                        <label for="">event name</label>
-                        <input type="text" class="form-control" name="event_name">
-                    </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
+</section>
 <?= $this->endSection() ?>
