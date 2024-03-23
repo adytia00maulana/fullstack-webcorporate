@@ -204,6 +204,11 @@ class Admin extends BaseController
         if(!isset($data['active'])) $data['active'] = "0";
         $id = $data['id'];
         $getFile = service('request')->getFile('fileUpload');
+        $getFileSize = (int) $getFile->getSizeByUnit('mb');
+        if($getFileSize > 3) {
+            print_r('<script type="text/javascript">alert("Max Upload File 3 Megabyte"); window.location.href = "'.base_url().$urlPrevious.'";</script>');
+            exit();
+        }
 
         if ($getFile->isValid() && ! $getFile->hasMoved()) {
             $validate = $getFile->getClientMimeType() === "image/png" | $getFile->getClientMimeType() === "image/jpg" | $getFile->getClientMimeType() === "image/jpeg";
