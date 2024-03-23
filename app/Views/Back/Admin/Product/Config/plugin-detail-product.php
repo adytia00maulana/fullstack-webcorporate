@@ -82,7 +82,11 @@
 
     function viewImgDetailProduct() {
         const fileName = $('#filename').val();
-        const path = '<?= base_url().'public/assets/img/products/' ?>'
+        const path = '<?php
+            $pathProduct = '';
+            if(isset($viewPathProduct)) $pathProduct = $viewPathProduct;
+            echo base_url(). $pathProduct;
+            ?>'
         let url = path+fileName;
         img = '<img src="'+url+'" class="d-block w-100" alt="...">';
         popup = window.open('');

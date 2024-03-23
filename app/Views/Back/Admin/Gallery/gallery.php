@@ -60,6 +60,7 @@
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" name="fileUpload[]" onchange="changeFileGallery(event.target.files, <?= $id ?>)">
                                         <label class="custom-file-label" id="updatedFileUpload<?= $id ?>"></label>
+                                        <input type="hidden" name="filename" value="<?= $filename ?>">
                                     </div>
                                     <button type="submit" class="btn btn-info" id="updatedFile<?= $id ?>" style="display: none">Upload</button>
                                     <?php echo form_close(); ?>

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Libraries\GlobalValidation;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
 use GalleryModel;
@@ -11,13 +12,17 @@ use ProductModel;
 
 class Utilities extends BaseController
 {
-    public $GalleryModel, $ProductModel, $InfoModel, $AdminController;
+    public $GalleryModel, $ProductModel, $InfoModel, $AdminController, $GlobalValidation, $pathUploadGallery, $pathViewGallery, $pathDeleteGallery;
     public function __construct()
     {
         $this->GalleryModel = model(GalleryModel::class);
         $this->InfoModel = model(InfoModel::class);
         $this->ProductModel = model(ProductModel::class);
         $this->AdminController = new Admin();
+        $this->GlobalValidation = new GlobalValidation();
+        $this->pathUploadGallery = config('app')-> uploadGallery;
+        $this->pathViewGallery = config('app')-> viewGallery;
+        $this->pathDeleteGallery = config('app')-> deleteGallery;
     }
 
     public function defaultLoadSideBar(): array
@@ -121,6 +126,7 @@ class Utilities extends BaseController
         $data['getById'] = base_url() . 'admin/utilities/gallery/getGalleryById/';
         $data['idUpdated'] = 0;
         $data['deleteById'] = base_url() . 'admin/utilities/gallery/deleteById/';
+        $data['viewPathGallery'] = $this->pathViewGallery;
 
         return view('Back/Admin/Gallery/gallery', $data);
     }
@@ -132,28 +138,28 @@ class Utilities extends BaseController
      }
 
     public function uploadGallery($id) {
-        $path = realpath(ROOTPATH."public/assets/img/gallery");
-        $body = array();
+        $msgInfo = $this->GlobalValidation->validation();
         $totalSize = 0;
         $getFile = service('request')->getFiles();
         foreach ($getFile['fileUpload'] as $data) {
             $totalSize += (int) $data->getSizeByUnit('mb');
         }
         if($totalSize > 8) {
-            print_r('<script type="text/javascript">alert("Max Upload 8M"); window.history.back();</script>');
-            exit();
+            session()->setFlashdata($msgInfo);
+            return redirect()->route('admin/utilities/gallery');
         }
         if(isset($id)){
+            $path = $this->pathUploadGallery;
             foreach ($getFile['fileUpload'] as $img) {
                 if ($img->isValid() && ! $img->hasMoved()) {
                     $validate = $img->getClientMimeType() === "image/png"|$img->getClientMimeType() === "image/jpg"|$img->getClientMimeType() === "image/jpeg";
                     if (!$validate) {
-                        print_r('<script type="text/javascript">alert("File upload does not match the format"); window.history.back();</script>');
-                        exit();
+                        $msgInfo['result'] = "File upload does not match the format";
+                        session()->setFlashdata($msgInfo);
+                        return redirect()->route('admin/utilities/gallery');
                     }
                     $newName = $img->getName();
-                    $newPath = ROOTPATH.'/public/assets/admin/img/gallery/' . $newName;
-                    $img->move($path, $newName);
+                    $newPath = $path.'/' . $newName;
 
                     if($id == 0){
                         $value = array(
@@ -166,37 +172,33 @@ class Utilities extends BaseController
                             'updated_date' => ''
                         );
                         $res = $this->GalleryModel->MdlInsert($value);
-                        if ($res) {
-                            print_r('<script type="text/javascript">alert("Upload '. $newName .' Success");</script>');
-                        } else {
-                            print_r('<script type="text/javascript">alert("Upload '. $newName .' Failed");</script>');
-                        }
                     }else{
+                        unlink($this->pathDeleteGallery.$_POST['filename']);
                         $value = array(
                             'id' => $id,
                             'filename' => $newName,
                             'filepath' => $newPath,
-                            'created_by' => isset($_SESSION['username'])? session()->get('username'): "SYSTEM",
                             'created_date' => '',
-                            'updated_by' => 'SYSTEM',
+                            'updated_by' => isset($_SESSION['username'])? session()->get('username'): "SYSTEM",
                             'updated_date' => ''
                         );
                         $res = $this->GalleryModel->MdlUpdatedById($id, $value);
-                        if ($res) {
-                            print_r('<script type="text/javascript">alert("Upload '. $newName .' Success");</script>');
-                        } else {
-                            print_r('<script type="text/javascript">alert("Upload '. $newName .' Failed");</script>');
-                        }
                     }
+                    if ($res) {
+                        print_r('<script type="text/javascript">alert("Upload '. $newName .' Success");</script>');
+                    } else {
+                        print_r('<script type="text/javascript">alert("Upload '. $newName .' Failed");</script>');
+                    }
+                    $img->move($path, $newName);
                 }
             }
         }
 
-        return print_r('<script type="text/javascript">window.history.back();</script>', true);
+        return print_r('<script type="text/javascript">window.location.href="'. base_url() . "admin/utilities/gallery" .'"</script>', true);
     }
 
      public function deleteGallery($id, $fileName) {
-         $path = ROOTPATH."public/assets/img/gallery/".$fileName;
+         $path = $this->pathDeleteGallery.$fileName;
          unlink($path);
          $this->GalleryModel->MdlDeleteById($id);
          $redirect = redirect()->to(base_url().'admin/utilities/gallery');
