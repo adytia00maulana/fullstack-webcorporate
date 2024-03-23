@@ -347,13 +347,6 @@ h5,
         padding: 0.8em;
     }
 
-    .navbar-nav>li>a:hover {
-        color: #87fe50 !important;
-        font-weight: 700;
-        font-size: 22px;
-        transition: 0.3s;
-    }
-
     .footer {
         font-size: 20px;
         font-weight: 700;
@@ -361,7 +354,24 @@ h5,
         text-shadow: 1px 1px 1px rgba(0, 0, 0.3);
     }
 
+    .navbar-nav>li>a:hover {
+        color: #87fe50 !important;
+        font-weight: 700;
+        font-size: 18px;
+        transition: 0.3s;
+    }
+
+    .navbar-nav .dropdown-menu .nav-link:hover {
+        color: #87fe50 !important;
+    }
+
     .nav-link {
+        color: #fff !important;
+        font-size: 18px;
+        text-shadow: 1px 2px 1px rgba(0, 0, 0.3);
+    }
+
+    /* .nav-link {
         color: rgb(230, 230, 230) !important;
         font-size: 18px;
         text-shadow: 1px 2px 1px rgba(0, 0, 0.3);
@@ -379,7 +389,7 @@ h5,
 
     .nav-link:hover:after {
         transform: scaleX(1);
-    }
+    } */
 
     /* text inside slider video */
     .title-heading {
@@ -507,16 +517,44 @@ h5,
 
 /* mobile */
 @media only screen and (max-width: 600px) {
+    body {
+        min-height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+    }
+
     .content-wrapper {
         line-height: 1.8;
         padding: 0.8em;
     }
 
+    .navbar-nav>li>a:hover {
+        color: #87fe50 !important;
+        font-weight: 700;
+        font-size: 18px;
+        transition: 0.3s;
+    }
+
+    .navbar-nav .dropdown-menu .nav-link:hover {
+        color: #87fe50 !important;
+    }
+
     .nav-link {
+        color: #fff !important;
+        font-size: 18px;
+        text-shadow: 1px 2px 1px rgba(0, 0, 0.3);
+    }
+
+    /* .nav-link {
         color: rgb(230, 230, 230) !important;
         font-size: 14px;
         text-shadow: 1px 2px 1px rgba(0, 0, 0.3);
         margin: 0 1.5em;
+    }
+
+    .navbar-nav .dropdown-menu .nav-link:hover {
+        color: #87fe50 !important;
     }
 
     .nav-link:after {
@@ -529,7 +567,7 @@ h5,
 
     .nav-link:hover:after {
         transform: scaleX(1);
-    }
+    } */
 
     .footer {
         font-size: 12px;
