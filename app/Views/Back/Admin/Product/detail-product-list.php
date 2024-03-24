@@ -186,6 +186,7 @@
                             <input type="file" class="custom-file-input" name="fileUpload" onchange="changeFileDetailProduct()">
                             <label class="custom-file-label" id="fileUploadDetailProduct">Choose File</label>
                         </div>
+                        <div class="form-text text-muted">The image must have a maximum size of 3MB</div>
                     </div>
                     <div class="form-group" hidden="hidden">
                         <label for="filepath">File Path</label>

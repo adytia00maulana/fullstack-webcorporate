@@ -19,6 +19,7 @@
                     <input type="file" class="custom-file-input" id="customFile" name="fileUpload[]" multiple accept="image/*" onchange="changeFileGallery(event.target.files, '0')">
                     <label class="custom-file-label" for="customFile" id="labelFile">Choose file .PNG, .JPG or .JPEG</label>
                 </div>
+                <div class="form-text text-muted">The image must have a maximum size of 8MB</div>
                 <button type="submit" class="btn btn-info" id="uploadFile" style="display: none">Upload</button>
                 <?php echo form_close(); ?>
                 <br/>

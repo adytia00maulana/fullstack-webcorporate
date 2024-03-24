@@ -13,9 +13,11 @@ class LogoModel extends Model
     // Retrieve all
     public function MdlSelect(): array
     {
-        $sqlQuery = "select * from ".$this->table;
+        // $sqlQuery = "select * from ".$this->table;
+        $sqlQuery = "select * from ". $this->table ." where id = (select distinct id from logo order by id desc)";
         $query = $this->db->query($sqlQuery);
         return $query->getResultArray();
+        // return $query->getResultObject();
     }
 
     // Retrieve By id
