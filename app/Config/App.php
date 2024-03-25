@@ -193,6 +193,11 @@ class App extends BaseConfig
     public $viewGallery      = 'assets/img/gallery/';
     public $deleteGallery    = ROOTPATH."public/assets/img/gallery/";
 
+    // Logo
+    public $uploadLogo    = ROOTPATH."public/assets/img/logo";
+    public $viewLogo      = 'assets/img/logo/';
+    public $deleteLogo    = ROOTPATH."public/assets/img/logo/";
+
     // Table Database Name
     public $mst_role        = 'mst_role';
     public $mst_users       = 'mst_users';
@@ -203,6 +208,7 @@ class App extends BaseConfig
     // public $faq             = 'faq';
     public $gallery         = 'gallery';
     public $info = 'info';
+    public $logo            = 'logo';
 
     public $tbl_users       = 'users';
 }

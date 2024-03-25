@@ -1,14 +1,14 @@
 <script>
     if('<?= session()->getFlashdata('code') ?>'){
-        if('<?= session()->getFlashdata('code') ?>' === '400'){
+        if('<?= session()->getFlashdata('code') == "400" ?>'){
             iziToast.error({
                 title: '<?= session()->getFlashdata('message') ?>',
                 message: '<?= session()->getFlashdata('result') ?>',
                 position: 'topRight'
             });
         }
-        if('<?= session()->getFlashdata('code') ?>' === '200'){
-            iziToast.info({
+        if('<?= session()->getFlashdata('code') === "200" ?>'){
+            iziToast.success({
                 title: '<?= session()->getFlashdata('message') ?>',
                 message: '<?= session()->getFlashdata('result') ?>',
                 position: 'topRight'

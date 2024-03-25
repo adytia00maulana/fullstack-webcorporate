@@ -6,13 +6,18 @@ use App\Controllers\BaseController;
 use App\Libraries\GlobalValidation;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
-use GalleryModel;   
-use ProductModel;
+use GalleryModel;
 use InfoModel;
+use LogoModel;
+use ProductModel;
 
 class Utilities extends BaseController
 {
     public $GalleryModel, $ProductModel, $InfoModel, $AdminController, $GlobalValidation, $pathUploadGallery, $pathViewGallery, $pathDeleteGallery;
+    public $pathUploadLogo;
+    public $pathViewLogo;
+    public $pathDeleteLogo;
+    public $LogoModel;
     public function __construct()
     {
         $this->GalleryModel = model(GalleryModel::class);
@@ -23,6 +28,10 @@ class Utilities extends BaseController
         $this->pathUploadGallery = config('app')-> uploadGallery;
         $this->pathViewGallery = config('app')-> viewGallery;
         $this->pathDeleteGallery = config('app')-> deleteGallery;
+        $this->pathUploadLogo = config('app')->uploadLogo;
+        $this->pathViewLogo = config('app')->viewLogo;
+        $this->pathDeleteLogo = config('app')->deleteLogo;
+        $this->LogoModel = model(LogoModel::class);
     }
 
     public function defaultLoadSideBar(): array
@@ -231,4 +240,83 @@ class Utilities extends BaseController
          $redirect = redirect()->to(base_url().'admin/utilities/gallery');
          return $redirect;
      }
+
+
+    public function indexLogo()
+    {
+        $data = $this->defaultLoadSideBar();
+        $data['postData'] = base_url()."admin/utilities/logo/postLogo";
+        $data['viewPathLogo'] = $this->pathViewLogo;
+        $data['id'] = null;
+        $data['filename'] = "";
+        $data['title'] = "";
+        $data['created_by'] = "";
+        $data['created_date'] = "";
+        $data['updated_by'] = "";
+        $data['updated_date'] = "";
+        $getLogo = $this->LogoModel->MdlSelect()[0];
+        if($getLogo){
+            $data['id'] = $getLogo['id'];
+            $data['filename'] = $getLogo['filename'];
+            $data['title'] = $getLogo['title'];
+            $data['created_by'] = $getLogo['created_by'];
+            $data['created_date'] = $getLogo['created_date'];
+            $data['updated_by'] = $getLogo['updated_by'];
+            $data['updated_date'] = $getLogo['updated_date'];
+        }
+        return view('Back/Admin/Logo/logo', $data);
+    }
+
+    public function getUpload($id) {
+        $query = $this->LogoModel->MdlSelectById($id);
+
+        return json_encode($query);
+    }
+
+    public function postLogo(){
+        $path = realpath($this->pathUploadLogo);
+        $msgInfo = $this->GlobalValidation->validation();
+        $data = $_POST;
+        unset($data['csrf_test_name']);
+        $id = $data['id'];
+        $getFile = service('request')->getFile('fileUpload');
+        $getFileSize = (int) $getFile->getSizeByUnit('mb');
+        if($getFileSize > 3) {
+            $msgInfo['result'] = "Max Upload File 3 Megabyte";
+            session()->setFlashdata($msgInfo);
+            return redirect()->route('admin/utilities/logo');
+        }
+
+        if ($getFile->isValid() && ! $getFile->hasMoved()) {
+            $validate = $getFile->getClientMimeType() === "image/png" | $getFile->getClientMimeType() === "image/jpg" | $getFile->getClientMimeType() === "image/jpeg";
+            if (!$validate) {
+                $msgInfo['result'] = "File upload does not match the format";
+                session()->setFlashdata($msgInfo);
+                return redirect()->route('admin/utilities/logo');
+            }
+            $newName = $getFile->getName();
+        }
+
+        if($id == NULL){
+            $data['id'] = 0;
+            $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
+            $data['filename'] = $newName;
+            $query = $this->LogoModel->MdlInsert($data);
+        }else{
+             if($data['filename']) unlink($this->pathDeleteLogo . $data['filename']);
+            $data['filename'] = $newName;
+            $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
+            $query = $this->LogoModel->MdlUpdatedById($id, $data);
+        }
+        if ($query) {
+            $msgInfo = $this->GlobalValidation->success();
+            $msgInfo['result'] = "Upload ".$newName." Success";
+        } else {
+            $msgInfo['result'] = "Upload ".$newName." Failed";
+        }
+        session()->setFlashdata($msgInfo);
+        $getFile->move($path, $newName);
+        return redirect()->route('admin/utilities/logo');
+    }
+
 }

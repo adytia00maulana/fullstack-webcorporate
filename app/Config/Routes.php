@@ -43,6 +43,8 @@ $routes->get('/admin/utilities/gallery', 'Utilities::indexGallery', ['filter' =>
 $routes->get('/admin/utilities/gallery/getGalleryById/(:any)', 'Utilities::getGallery/$1', ['filter' => 'loginFilter']);
 $routes->post('/admin/utilities/gallery/upload/(:any)', 'Utilities::uploadGallery/$1', ['filter' => 'loginFilter']);
 $routes->get('/admin/utilities/gallery/deleteById/(:any)/(:any)', 'Utilities::deleteGallery/$1/$2', ['filter' => 'loginFilter']);
+$routes->get('/admin/utilities/logo', 'Utilities::indexLogo', ['filter' => 'loginFilter']);
+$routes->post('/admin/utilities/logo/postLogo', 'Utilities::postLogo', ['filter' => 'loginFilter']);
 
 // routing front / company profile
 $routes->get('/', 'Home::index');
