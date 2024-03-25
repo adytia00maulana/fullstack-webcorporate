@@ -142,6 +142,18 @@ class Utilities extends BaseController
         return view('Back/Admin/Info/form', $data);
     }
 
+    public function PostEvent() {
+        $data = $_POST;
+        if ($data) {
+            $this->InfoModel->InsertData($data);
+            session()->setFlashdata('message', 'Create Event Success');
+            return redirect()->route('admin/utilities/event');
+        } else {
+            alert('oops, error!');
+            return view('Back/Admin/Info/form');
+        }
+    }
+
     public function indexGallery()
     {
         $data = $this->defaultLoadSideBar();
