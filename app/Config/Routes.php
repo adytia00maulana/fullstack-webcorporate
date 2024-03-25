@@ -13,6 +13,7 @@ $routes->post('/auth', 'Auth::loginAuth');
 
 $routes->get('/admin/utilities/event', 'Utilities::indexEvent');
 $routes->get('/admin/utilities/form-event', 'Utilities::FormEvent');
+// $routes->get('/admin/utilities/form-event/(:any)', 'Utilities::FormEvent');
 $routes->post('/admin/utilities/create-event', 'Utilities::PostEvent');
 
 $routes->get('/admin', 'Admin::index', ['filter' => 'loginFilter']);

@@ -8,7 +8,7 @@
     <div class="card-body p-0">
         <a class="btn btn-primary text-white my-2 text-capitalize" href="<?= base_url('admin/utilities/event') ?>">back</a>
         <hr>
-        <form>
+        <form action="<?= base_url('admin/utilities/create-event') ?>" method="post">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>Event Name</label>
@@ -25,11 +25,11 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>Start Date</label>
-                    <input type="text" name="start_date" class="form-control" id="">
+                    <input type="date" name="start_date" class="form-control" id="">
                 </div>
                 <div class="form-group col-md-6">
                     <label>End Date</label>
-                    <input type="text" name="event_date" class="form-control" id="">
+                    <input type="date" name="end_date" class="form-control" id="">
                 </div>
             </div>
             <div class="form-group">

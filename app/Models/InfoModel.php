@@ -10,11 +10,14 @@ class InfoModel extends Model
         $this->table = config('app')->info;
     }
 
-    public function getAllData(): array
-    {
+    public function getAllData(): array {
         $sqlQuery = "select * from ".$this->table;
         $query = $this->db->query($sqlQuery);
         return $query->getResultArray();
+    }
+
+    public function InsertData($data) {
+        return $result = $this->db->table($this->table)->insert($data);
     }
 
 }

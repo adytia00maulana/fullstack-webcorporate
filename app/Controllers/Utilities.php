@@ -6,8 +6,7 @@ use App\Controllers\BaseController;
 use App\Libraries\GlobalValidation;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
-use GalleryModel;
-use InfoModel;
+use GalleryModel;   
 use ProductModel;
 use InfoModel;
 
@@ -132,6 +131,18 @@ class Utilities extends BaseController
         $data = $this->defaultLoadSideBar();
         $data['events'] = $this->InfoModel->getAllData();
         return view('Back/Admin/Info/form', $data);
+    }
+
+    public function PostEvent() {
+        $data = $_POST;
+        if ($data) {
+            $this->InfoModel->InsertData($data);
+            session()->setFlashdata('message', 'Create Event Success');
+            return redirect()->route('admin/utilities/event');
+        } else {
+            alert('oops, error!');
+            return view('Back/Admin/Info/form');
+        }
     }
 
     public function indexGallery()
