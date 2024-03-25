@@ -1,56 +1,38 @@
 <?= $this->extend('layouts/default') ?>
  
 <?= $this->section('content') ?>
-<div class="container">
-    <section class="light">
-        <div class="container py-2">
-            <div class="h1 text-center text-dark" id="pageHeaderTitle">Event</div>
-            <article class="postcard light red">
-                <a class="postcard__img_link" href="#">
-                    <img class="postcard__img" src="https://picsum.photos/501/500" alt="Image Title" />	
-                </a>
-                <div class="postcard__text t-dark">
-                    <h1 class="postcard__title red"><a href="#">Nama Event</a></h1>
-                    <div class="postcard__subtitle small">
-                        <time datetime="2020-05-25 12:00:00">
-                            <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
-                        </time>
+<!-- Events Section -->
+<section id="events" class="events section">
+
+    <div class="container" data-aos="fade-up">
+
+        <div class="row">
+            <div class="col-md-6 d-flex align-items-stretch">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="<?php echo base_url(); ?>assets/front_end/assets/img/events-item-1.jpg" alt="...">
                     </div>
-                    <div class="postcard__bar"></div>
-                    <div class="postcard__preview-txt">even satu</div>
-                </div>
-            </article>
-            <article class="postcard light green">
-                <a class="postcard__img_link" href="#">
-                    <img class="postcard__img" src="https://picsum.photos/500/501" alt="Image Title" />
-                </a>
-                <div class="postcard__text t-dark">
-                    <h1 class="postcard__title green"><a href="#">Nama Event</a></h1>
-                    <div class="postcard__subtitle small">
-                        <time datetime="2020-05-25 12:00:00">
-                            <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
-                        </time>
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="">Introduction to webdesign</a></h5>
+                        <p class="fst-italic text-center">Sunday, September 26th at 7:00 pm</p>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
                     </div>
-                    <div class="postcard__bar"></div>
-                    <div class="postcard__preview-txt">even dua</div>
                 </div>
-            </article>
-            <article class="postcard light yellow">
-                <a class="postcard__img_link" href="#">
-                    <img class="postcard__img" src="https://picsum.photos/501/501" alt="Image Title" />
-                </a>
-                <div class="postcard__text t-dark">
-                    <h1 class="postcard__title yellow"><a href="#">Nama Event</a></h1>
-                    <div class="postcard__subtitle small">
-                        <time datetime="2020-05-25 12:00:00">
-                            <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
-                        </time>
+            </div>
+            <div class="col-md-6 d-flex align-items-stretch">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="<?php echo base_url(); ?>assets/front_end/assets/img/events-item-2.jpg" alt="...">
                     </div>
-                    <div class="postcard__bar"></div>
-                    <div class="postcard__preview-txt">even tiga</div>
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="">Marketing Strategies</a></h5>
+                        <p class="fst-italic text-center">Sunday, November 15th at 7:00 pm</p>
+                        <p class="card-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo</p>
+                    </div>
                 </div>
-            </article>
+
+            </div>
         </div>
-    </section>
-</div>
+    </div>
+</section><!-- /Events Section -->
 <?= $this->endSection() ?>
