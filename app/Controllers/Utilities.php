@@ -10,6 +10,7 @@ use GalleryModel;
 use InfoModel;
 use LogoModel;
 use ProductModel;
+use VisiMisiModel;
 
 class Utilities extends BaseController
 {
@@ -18,6 +19,7 @@ class Utilities extends BaseController
     public $pathViewLogo;
     public $pathDeleteLogo;
     public $LogoModel;
+    public $VisiMisiModel;
     public function __construct()
     {
         $this->GalleryModel = model(GalleryModel::class);
@@ -32,6 +34,7 @@ class Utilities extends BaseController
         $this->pathViewLogo = config('app')->viewLogo;
         $this->pathDeleteLogo = config('app')->deleteLogo;
         $this->LogoModel = model(LogoModel::class);
+        $this->VisiMisiModel = model(VisiMisiModel::class);
     }
 
     public function defaultLoadSideBar(): array
@@ -136,9 +139,13 @@ class Utilities extends BaseController
         return view('Back/Admin/Info/info', $data);
     }
 
-    public function formEvent() {
+    public function formEvent($id=0) {
         $data = $this->defaultLoadSideBar();
-        $data['events'] = $this->InfoModel->getAllData();
+        if($id){
+            $data['events'] = $this->InfoModel->getById($id);
+        }else{
+            $data['events'] = $this->InfoModel->getAllData();
+        }
         return view('Back/Admin/Info/form', $data);
     }
 
@@ -277,6 +284,7 @@ class Utilities extends BaseController
         $path = realpath($this->pathUploadLogo);
         $msgInfo = $this->GlobalValidation->validation();
         $data = $_POST;
+        $newName = "";
         unset($data['csrf_test_name']);
         $id = $data['id'];
         $getFile = service('request')->getFile('fileUpload');
@@ -317,6 +325,54 @@ class Utilities extends BaseController
         session()->setFlashdata($msgInfo);
         $getFile->move($path, $newName);
         return redirect()->route('admin/utilities/logo');
+    }
+
+
+    public function indexVm(): string
+    {
+        $data = $this->defaultLoadSideBar();
+        $data['postData'] = base_url()."admin/utilities/vm/postVm";
+        $data['id'] = null;
+        $data['visi'] = "";
+        $data['misi'] = "";
+        $data['created_by'] = "";
+        $data['created_date'] = "";
+        $data['updated_by'] = "";
+        $data['updated_date'] = "";
+        $getVm = $this->VisiMisiModel->MdlSelect();
+        if(count($getVm) > 0){
+            $data['id'] = $getVm[0]['id'];
+            $data['visi'] = $getVm[0]['visi'];
+            $data['misi'] = $getVm[0]['misi'];
+            $data['created_by'] = $getVm[0]['created_by'];
+            $data['created_date'] = $getVm[0]['created_date'];
+            $data['updated_by'] = $getVm[0]['updated_by'];
+            $data['updated_date'] = $getVm[0]['updated_date'];
+        }
+        return view('Back/Admin/Visi_misi/visi_misi.php', $data);
+    }
+
+    public function postVm(): RedirectResponse
+    {
+        $msgInfo = $this->GlobalValidation->validation();
+        $data = $_POST;
+        unset($data['csrf_test_name']);
+        $id = $data['id'];
+        if($id == 0){
+            $data['id'] = 0;
+            $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
+            $query = $this->VisiMisiModel->MdlInsert($data);
+        }else{
+            $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
+            $query = $this->VisiMisiModel->MdlUpdatedById($id, $data);
+        }
+        if ($query) {
+            $msgInfo = $this->GlobalValidation->success();
+        } else {
+            $msgInfo['result'] = "Failed";
+        }
+        session()->setFlashdata($msgInfo);
+        return redirect()->route('admin/utilities/vm');
     }
 
 }

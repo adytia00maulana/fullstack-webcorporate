@@ -96,5 +96,6 @@
         <?= $this->include('Back/Admin/Product/Config/plugin-detail-product'); ?>
         <?= $this->include('Back/Admin/Gallery/Config/plugin_gallery'); ?>
         <?= $this->include('Back/Admin/Logo/Config/plugin_logo'); ?>
+        <?= $this->include('Back/Admin/Visi_misi/Config/plugin_visi_misi'); ?>
     </body>
 </html>

@@ -36,6 +36,7 @@ class Admin extends BaseController
         $data['url_gallery'] = base_url() . 'admin/utilities/gallery';
         $data['url_event'] = base_url() . 'admin/utilities/event';
         $data['url_logo'] = base_url() . 'admin/utilities/logo';
+        $data['url_visi_misi'] = base_url() . 'admin/utilities/vm';
 
         return $data;
     }

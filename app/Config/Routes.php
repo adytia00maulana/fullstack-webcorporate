@@ -30,7 +30,7 @@ $routes->group('admin', 'Admin::index', ['filter' => 'loginFilter'], static func
     /***** Utilities *****/
     $subRoutes->group('utilities', static function ($UtilRoutes) {
         $UtilRoutes->get('event', 'Utilities::indexEvent');
-        $UtilRoutes->get('form-event', 'Utilities::FormEvent');
+        $UtilRoutes->get('form-event/(:any)', 'Utilities::FormEvent/$1');
         // $UtilRoutes->get('form-event/(:any)', 'Utilities::FormEvent');
         $UtilRoutes->post('create-event', 'Utilities::PostEvent');
         $UtilRoutes->get('gallery', 'Utilities::indexGallery');
@@ -39,6 +39,8 @@ $routes->group('admin', 'Admin::index', ['filter' => 'loginFilter'], static func
         $UtilRoutes->get('gallery/deleteById/(:any)/(:any)', 'Utilities::deleteGallery/$1/$2');
         $UtilRoutes->get('logo', 'Utilities::indexLogo');
         $UtilRoutes->post('logo/postLogo', 'Utilities::postLogo');
+        $UtilRoutes->get('vm', 'Utilities::indexVm');
+        $UtilRoutes->post('vm/postVm', 'Utilities::postVm');
         // $UtilRoutes->get('aboutUs', 'Utilities::index', ['filter' => 'loginFilter']);
         // $UtilRoutes->get('aboutUs/getAboutUsById/(:any)', 'Utilities::getAboutUs/$1', ['filter' => 'loginFilter']);
         // $UtilRoutes->post('aboutUs/postAboutUs', 'Utilities::postAboutUs', ['filter' => 'loginFilter']);

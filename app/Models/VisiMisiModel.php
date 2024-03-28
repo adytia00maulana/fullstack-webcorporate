@@ -2,12 +2,12 @@
 
 use CodeIgniter\Model;
 
-class LogoModel extends Model
+class VisiMisiModel extends Model
 {
     public function __construct()
     {
         $this->db = \Config\Database::connect();
-        $this->table = config('app')->logo;
+        $this->table = config('app')->visi_misi;
     }
 
     // Retrieve all
