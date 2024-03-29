@@ -41,6 +41,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], ['filter' => 'loginF
         $UtilRoutes->get('gallery/getGalleryById/(:any)', 'Utilities::getGallery/$1');
         $UtilRoutes->post('gallery/upload/(:any)', 'Utilities::uploadGallery/$1');
         $UtilRoutes->get('gallery/deleteById/(:any)/(:any)', 'Utilities::deleteGallery/$1/$2');
+        $UtilRoutes->post('gallery/updatePosition', 'Utilities::updatePositionGallery');
         $UtilRoutes->get('logo', 'Utilities::indexLogo');
         $UtilRoutes->post('logo/postLogo', 'Utilities::postLogo');
         $UtilRoutes->get('vm', 'Utilities::indexVm');

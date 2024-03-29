@@ -1,15 +1,16 @@
 <script>
+    let start = 0;
+    let end = 0;
     /************ Start Add Default Datatables and Sorting **********/
     $("#table-gallery").dataTable({});
     $("#table-gallery tbody").sortable({
         start: function (event, ui) {
-            console.log(ui.item.index());
+            start = ui.item.index();
+            // sortingGallery(ui.item.index(), null);
         },
         update: function(event, ui) {
-            var index = $(ui.item).parent().children().get();
-            console.log(ui.item.index());
-            console.log(index);
-        //     sortingGallery()
+            end = ui.item.index();
+            sortingGallery(null, ui.item.index());
         }
     });
     /************ End Add Default Datatables and Sorting **********/
@@ -69,14 +70,25 @@
         popup = window.open('');
         popup.document.write(img);
     }
-    // function sortingGallery(id, filename, filepath){
-    //     alert(id+" "+filename+" "+filepath)
-    // }
 </script>
 <script>
     function sortingGallery(){
-        <?php $data=array(); if((isset($getList))) $data=$getList;?>
-        var b = <?= json_encode($data) ?>;
-        console.log(b)
+        let url = '<?= $updatePosition ?? '' ?>';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {'index_start': start, 'index_end': end},
+            dataType: "JSON",
+            success: function (response) {
+                window.location.href=response;
+            },
+            error: function () {
+                iziToast.error({
+                    title: 'Failed',
+                    message: 'Failed to move data',
+                    position: 'topRight'
+                });
+            }
+        });
     }
 </script>

@@ -106,6 +106,7 @@ class Utilities extends BaseController
         $data['getById'] = base_url() . 'admin/utilities/gallery/getGalleryById/';
         $data['idUpdated'] = 0;
         $data['deleteById'] = base_url() . 'admin/utilities/gallery/deleteById/';
+        $data['updatePosition'] = base_url() . 'admin/utilities/gallery/updatePosition';
         $data['viewPathGallery'] = $this->pathViewGallery;
 
         return view('Back/Admin/Gallery/gallery', $data);
@@ -186,6 +187,25 @@ class Utilities extends BaseController
          $this->GalleryModel->MdlDeleteById($id);
          $redirect = redirect()->to(base_url().'admin/utilities/gallery');
          return $redirect;
+     }
+
+     public function updatePositionGallery() {
+        $data = $_POST;
+        $start = $data['index_start'];
+        $end = $data['index_end'];
+        $selectStart = $this->GalleryModel->MdlGetByPosition($start);
+        $selectEnd = $this->GalleryModel->MdlGetByPosition($end);
+        $idStart = $selectStart[0]['id'];
+        $idEnd = $selectEnd[0]['id'];
+        $selectStart[0]['position'] = $end;
+        $selectEnd[0]['position'] = $start;
+
+        if(count($selectStart)>0) $this->GalleryModel->MdlUpdatedById($idStart, $selectStart[0]);
+        if(count($selectStart)>0) $this->GalleryModel->MdlUpdatedById($idEnd, $selectEnd[0]);
+        $msgInfo = $this->GlobalValidation->success();
+        $msgInfo['result'] = "Successfully moved the data";
+        session()->setFlashdata($msgInfo);
+        return json_encode(base_url().'admin/utilities/gallery');
      }
 
 
