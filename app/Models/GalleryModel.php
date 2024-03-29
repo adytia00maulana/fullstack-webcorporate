@@ -13,7 +13,8 @@ class GalleryModel extends Model
     // Retrieve all
     public function MdlSelect(): array
     {
-        $sqlQuery = "select * from ".$this->table;
+        // $sqlQuery = "select * from ".$this->table;
+        $sqlQuery = "SELECT * FROM ". $this->table ." ORDER BY position asc;";
         $query = $this->db->query($sqlQuery);
         return $query->getResultArray();
     }
@@ -53,6 +54,14 @@ class GalleryModel extends Model
         $result = $this->db->table($this->table)->update($data, ['id' => $id]);
 
         return $result;
+    }
+
+    // Get Data By Position
+    public function MdlGetByPosition($position)
+    {
+        $sqlQuery = "SELECT * FROM ".$this->table." WHERE position=".$position;
+        $query = $this->db->query($sqlQuery);
+        return $query->getResultArray();
     }
 
     // Delete Data

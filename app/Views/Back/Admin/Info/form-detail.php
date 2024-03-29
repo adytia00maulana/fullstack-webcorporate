@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <section class="section">
     <div class="section-header">
-        <h1>Form Event</h1>
+        <h1>Form Update Event</h1>
     </div>
     <div class="section-body">
         <div class="card">
@@ -11,11 +11,12 @@
                 <a class="btn btn-primary text-white my-2 text-capitalize"
                     href="<?= base_url('admin/utilities/event') ?>">back</a>
                 <hr>
-                <form action="<?= base_url('admin/utilities/create-event') ?>" method="post">
+                <form action="<?= base_url('admin/utilities/update-event/' . $events->id) ?>" method="post">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Event Name</label>
-                            <input type="text" class="form-control" name="event_name" id="">
+                            <input type="text" class="form-control" name="event_name" id=""
+                                value="<?= $events->event_name ?>">
                         </div>
                         <div class="form-group col-md-6">
                             <label>Event Thumbnail</label>
@@ -28,16 +29,16 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Start Date</label>
-                            <input type="date" name="start_date" class="form-control" id="">
+                            <input type="date" name="start_date" class="form-control" id="" value="<?= $events->event_name ?>">
                         </div>
                         <div class="form-group col-md-6">
                             <label>End Date</label>
-                            <input type="date" name="end_date" class="form-control" id="">
+                            <input type="date" name="end_date" class="form-control" id="" value="<?= $events->event_name ?>">
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Event Description</label>
-                        <textarea class="form-control" name="description" rows="3"></textarea>
+                        <textarea class="form-control" name="description" rows="3"><?= $events->description; ?></textarea>
                     </div>
                     <button type="submit" class="btn btn-success float-right">Submit</button>
                 </form>

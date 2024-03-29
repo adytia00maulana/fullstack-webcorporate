@@ -184,31 +184,32 @@ class App extends BaseConfig
 
     /********* Path Upload View Delete ********/
     // Product
-    public $uploadProduct    = ROOTPATH."public/assets/img/products";
-    public $viewProduct      = 'assets/img/products/';
-    public $deleteProduct    = ROOTPATH . "public/assets/img/products/";
+    public string $uploadProduct    = ROOTPATH."public/assets/img/products";
+    public string $viewProduct      = 'assets/img/products/';
+    public string $deleteProduct    = ROOTPATH . "public/assets/img/products/";
 
     // Gallery
-    public $uploadGallery    = ROOTPATH."public/assets/img/gallery";
-    public $viewGallery      = 'assets/img/gallery/';
-    public $deleteGallery    = ROOTPATH."public/assets/img/gallery/";
+    public string $uploadGallery    = ROOTPATH."public/assets/img/gallery";
+    public string $viewGallery      = 'assets/img/gallery/';
+    public string $deleteGallery    = ROOTPATH."public/assets/img/gallery/";
 
     // Logo
-    public $uploadLogo    = ROOTPATH."public/assets/img/logo";
-    public $viewLogo      = 'assets/img/logo/';
-    public $deleteLogo    = ROOTPATH."public/assets/img/logo/";
+    public string $uploadLogo       = ROOTPATH."public/assets/img/logo";
+    public string $viewLogo         = 'assets/img/logo/';
+    public string $deleteLogo       = ROOTPATH."public/assets/img/logo/";
 
     // Table Database Name
-    public $mst_role        = 'mst_role';
-    public $mst_users       = 'mst_users';
-    public $product         = 'product';
-    public $source_product  = 'source_product';
-    public $detail_product  = 'detail_product';
-    // public $about_us        = 'about_us';
-    // public $faq             = 'faq';
-    public $gallery         = 'gallery';
-    public $info = 'info';
-    public $logo            = 'logo';
+    public string $mst_role         = 'mst_role';
+    public string $mst_users        = 'mst_users';
+    public string $product          = 'product';
+    public string $source_product   = 'source_product';
+    public string $detail_product   = 'detail_product';
+    // public string $about_us        = 'about_us';
+    // public string $faq             = 'faq';
+    public string $gallery          = 'gallery';
+    public string $info             = 'info';
+    public string $logo             = 'logo';
+    public string $visi_misi        = 'visi_misi';
 
-    public $tbl_users       = 'users';
+    public string $tbl_users        = 'users';
 }
