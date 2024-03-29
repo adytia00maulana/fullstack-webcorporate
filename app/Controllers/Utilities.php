@@ -198,7 +198,9 @@ class Utilities extends BaseController
         $idStart = $selectStart[0]['id'];
         $idEnd = $selectEnd[0]['id'];
         $selectStart[0]['position'] = $end;
+        $selectStart[0]['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
         $selectEnd[0]['position'] = $start;
+        $selectEnd[0]['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
 
         if(count($selectStart)>0) $this->GalleryModel->MdlUpdatedById($idStart, $selectStart[0]);
         if(count($selectStart)>0) $this->GalleryModel->MdlUpdatedById($idEnd, $selectEnd[0]);
