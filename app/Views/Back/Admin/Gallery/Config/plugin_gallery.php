@@ -2,9 +2,12 @@
     /************ Start Add Default Datatables and Sorting **********/
     $("#table-gallery").dataTable({});
     $("#table-gallery tbody").sortable({
+        start: function (event, ui) {
+            console.log(ui.item.index());
+        },
         update: function(event, ui) {
             var index = $(ui.item).parent().children().get();
-            console.log(ui.item.index() + 1);
+            console.log(ui.item.index());
             console.log(index);
         //     sortingGallery()
         }

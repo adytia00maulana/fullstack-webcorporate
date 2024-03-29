@@ -11,7 +11,8 @@ $routes->get('/login', 'Auth::index');
 $routes->get('/logout', 'Auth::logout');
 $routes->post('/auth', 'Auth::loginAuth');
 
-$routes->group('admin', 'Admin::index', ['filter' => 'loginFilter'], static function ($subRoutes) {
+$routes->group('admin', ['namespace' => 'App\Controllers'], ['filter' => 'loginFilter'], static function ($subRoutes) {
+    $subRoutes->add('', 'Admin::index');
     $subRoutes->get('listUsers', 'Admin::applicationListUsers');
     $subRoutes->get('listRole', 'Admin::applicationListRole');
     $subRoutes->get('listProduct/(:any)', 'Admin::applicationListProduct/$1');

@@ -38,11 +38,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php $no = 0; foreach($getList as $row): $no++;?>
+                        <?php $no = null; foreach($getList as $row): $no++;?>
                             <?php
                             $id = $row['id'];
                             $filename = $row['filename'];
                             $filepath = $row['filepath'];
+                            $position = $row['position'];
                             $created_by = $row['created_by'];
                             $created_date = $row['created_date'];
                             $updated_by = $row['updated_by'];

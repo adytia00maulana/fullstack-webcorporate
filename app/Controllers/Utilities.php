@@ -201,6 +201,7 @@ class Utilities extends BaseController
                         session()->setFlashdata($msgInfo);
                         return redirect()->route('admin/utilities/gallery');
                     }
+                    $checkData = count($this->GalleryModel->MdlSelect());
                     $newName = $img->getName();
                     $newPath = $path.'/' . $newName;
 
@@ -209,6 +210,7 @@ class Utilities extends BaseController
                             'id' => null,
                             'filename' => $newName,
                             'filepath' => $newPath,
+                            'position' => $checkData,
                             'created_by' => isset($_SESSION['username'])? session()->get('username'): "SYSTEM",
                             'created_date' => '',
                             'updated_by' => '',
@@ -221,6 +223,7 @@ class Utilities extends BaseController
                             'id' => $id,
                             'filename' => $newName,
                             'filepath' => $newPath,
+                            'position' => $checkData,
                             'created_date' => '',
                             'updated_by' => isset($_SESSION['username'])? session()->get('username'): "SYSTEM",
                             'updated_date' => ''
