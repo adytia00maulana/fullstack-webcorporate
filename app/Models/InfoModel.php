@@ -16,13 +16,18 @@ class InfoModel extends Model
         return $query->getResultArray();
     }
 
-    public function getById($id): array {
+    public function getById($id) {
         $sqlQuery = $this->db->table($this->table)->where('id', $id);
-        return $sqlQuery->get()->getResultArray();
+        return $sqlQuery->get()->getRow();
     }
 
     public function InsertData($data) {
         return $result = $this->db->table($this->table)->insert($data);
+    }
+    
+    public function UpdateData($data, $id) {
+        $result = $this->db->table($this->table)->where('id',$id)->update($data);
+        return $result;
     }
 
 }

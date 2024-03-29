@@ -7,9 +7,9 @@
     </div>
     <div class="card-body p-0">
         <?php if(!empty(session()->getFlashdata('message'))) : ?>
-            <div class="alert alert-success">
+        <div class="alert alert-success">
         <?php echo session()->getFlashdata('message');?>
-            </div>
+        </div>
         <?php endif ?>
         <a class="btn btn-primary text-white my-2" href="<?= base_url('admin/utilities/form-event') ?>">Add Event</a>
         <div class="table-responsive">
@@ -35,7 +35,7 @@
                             <td><?= date('Y-m-d', strtotime($data_event['start_date'])); ?></td>
                             <td><?= date('Y-m-d', strtotime($data_event['end_date'])); ?></td>
                             <td>
-                                <a class="btn btn-secondary" href="<?= base_url('admin/utilities/form-event/'.$data_event['id']) ?>">Detail</a>
+                                <a class="btn btn-secondary" href="<?= base_url('admin/utilities/form-detail-event/'.$data_event['id']) ?>">Detail</a>
                                 <a class="btn btn-warning text-white">Delete</a>
                             </td>
                         </tr>

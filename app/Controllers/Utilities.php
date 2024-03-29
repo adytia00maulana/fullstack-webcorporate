@@ -53,99 +53,15 @@ class Utilities extends BaseController
         return $data;
     }
 
-    // public function index(): string
-    // {
-        // $data = $this->defaultLoadSideBar();
-        // $data['getData'] = $this->AboutUsModel->MdlAboutUsSelectById(1);
-        // // $data['getById'] = base_url() . 'admin/utilities/aboutUs/getAboutUsById/';
-        // $data['post'] = base_url() . 'admin/utilities/aboutUs/postAboutUs';
-        // // $data['deleteById'] = base_url() . 'admin/utilities/aboutUs/deleteAboutUsById/';
-
-        // return view('Back/Admin/About_us/about_us', $data);
-    // }
-
-    // public function indexFaq(): string
-    // {
-        // $data = $this->defaultLoadSideBar();
-        // $data['getData'] = $this->FaqModel->MdlFaqSelectById(1);
-        // // $data['getById'] = base_url() . 'admin/utilities/aboutUs/getAboutUsById/';
-        // $data['post'] = base_url() . 'admin/utilities/faq/postFaq';
-        // // $data['deleteById'] = base_url() . 'admin/utilities/aboutUs/deleteAboutUsById/';
-
-        // return view('Back/Admin/Faq/faq', $data);
-    // }
-
-    // public function getAboutUs($id) {
-    //     $query = $this->AboutUsModel->MdlAboutUsSelectById($id);
-
-    //     return json_encode($query);
-    // }
-
-    // public function postAboutUs()
-    // {
-    //     $data = $_POST;
-    //     unset($data['csrf_test_name']);
-    //     $id = $data['id'];
-    //     if($id == NULL){
-    //         $data['id'] = 0;
-    //         $this->AboutUsModel->MdlAboutUsInsert($data);
-    //     }else{
-    //         $this->AboutUsModel->MdlAboutUsUpdatedById($id, $data);
-    //     }
-
-    //     $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
-    //     return $redirect;
-    // }
-
-    // public function deleteAboutUs($id) {
-    //     $this->AboutUsModel->MdlAboutUsDeleteById($id);
-
-    //     $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
-    //     return $redirect;
-    // }
-
-    // public function getFaq($id) {
-    //     $query = $this->FaqModel->MdlFaqSelectById($id);
-
-    //     return json_encode($query);
-    // }
-
-    // public function postFaq()
-    // {
-    //     $data = $_POST;
-    //     unset($data['csrf_test_name']);
-    //     $id = $data['id'];
-    //     if($id == NULL){
-    //         $data['id'] = 0;
-    //         $this->FaqModel->MdlFaqInsert($data);
-    //     }else{
-    //         $this->FaqModel->MdlFaqUpdatedById($id, $data);
-    //     }
-
-    //     $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
-    //     return $redirect;
-    // }
-
-    // public function deleteFaq($id) {
-    //     $this->FaqModel->MdlFaqDeleteById($id);
-
-    //     $redirect = print_r('<script type="text/javascript">window.history.back();</script>');
-    //     return $redirect;
-    // }
-
     public function indexEvent() {
         $data = $this->defaultLoadSideBar();
         $data['events'] = $this->InfoModel->getAllData();
         return view('Back/Admin/Info/info', $data);
     }
 
-    public function formEvent($id=0) {
+    public function formEvent() {
         $data = $this->defaultLoadSideBar();
-        if($id){
-            $data['events'] = $this->InfoModel->getById($id);
-        }else{
-            $data['events'] = $this->InfoModel->getAllData();
-        }
+        $data['events'] = $this->InfoModel->getAllData();
         return view('Back/Admin/Info/form', $data);
     }
 
@@ -159,6 +75,27 @@ class Utilities extends BaseController
             alert('oops, error!');
             return view('Back/Admin/Info/form');
         }
+    }
+
+    public function formDetail($id) {
+        if ($id) {
+            $data = $this->defaultLoadSideBar();
+            $data['events'] = $this->InfoModel->getById($id);
+            return view('Back/Admin/Info/form-detail', $data);
+        }        
+    }
+
+    public function UpdateEvent($id) {
+        $data = $_POST;
+        if ($data) {
+            $this->InfoModel->UpdateData($data, $id);
+            session()->setFlashdata('message', 'Update Event Success');
+            return redirect()->route('admin/utilities/event');
+        } else {    
+            alert('oops, error!');
+            return view('Back/Admin/Info/form');
+        }
+
     }
 
     public function indexGallery()

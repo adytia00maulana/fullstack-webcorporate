@@ -30,10 +30,13 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], ['filter' => 'loginF
 
     /***** Utilities *****/
     $subRoutes->group('utilities', static function ($UtilRoutes) {
+        // event routes
         $UtilRoutes->get('event', 'Utilities::indexEvent');
-        $UtilRoutes->get('form-event/(:any)', 'Utilities::FormEvent/$1');
-        // $UtilRoutes->get('form-event/(:any)', 'Utilities::FormEvent');
         $UtilRoutes->post('create-event', 'Utilities::PostEvent');
+        $UtilRoutes->get('form-event', 'Utilities::FormEvent');
+        $UtilRoutes->get('form-detail-event/(:any)', 'Utilities::formDetail/$1');
+        $UtilRoutes->post('update-event/(:any)', 'Utilities::UpdateEvent/$1');
+
         $UtilRoutes->get('gallery', 'Utilities::indexGallery');
         $UtilRoutes->get('gallery/getGalleryById/(:any)', 'Utilities::getGallery/$1');
         $UtilRoutes->post('gallery/upload/(:any)', 'Utilities::uploadGallery/$1');
