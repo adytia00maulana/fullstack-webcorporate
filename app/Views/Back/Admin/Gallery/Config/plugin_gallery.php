@@ -10,7 +10,7 @@
         },
         update: function(event, ui) {
             end = ui.item.index();
-            sortingGallery(null, ui.item.index());
+            sortingGallery();
         }
     });
     /************ End Add Default Datatables and Sorting **********/
