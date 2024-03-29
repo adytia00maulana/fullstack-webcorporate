@@ -20,7 +20,7 @@
                     <label class="custom-file-label" for="customFile" id="labelFile">Choose file .PNG, .JPG or .JPEG</label>
                 </div>
                 <div class="form-text text-muted">The image must have a maximum size of 8MB</div>
-                <button type="submit" class="btn btn-info" id="uploadFile" style="display: none">Upload</button>
+                <button type="submit" class="btn btn-info" id="uploadFile" style="display: none" onclick="showLoader()">Upload</button>
                 <?php echo form_close(); ?>
                 <br/>
                 <p></p>
@@ -60,13 +60,13 @@
                                     <?= csrf_field(); ?>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" name="fileUpload[]" onchange="changeFileGallery(event.target.files, <?= $id ?>)">
-                                        <label class="custom-file-label" id="updatedFileUpload<?= $id ?>"></label>
+                                        <label class="custom-file-label" id="updatedFileUpload<?= $id ?>">Edit</label>
                                         <input type="hidden" name="filename" value="<?= $filename ?>">
                                     </div>
-                                    <button type="submit" class="btn btn-info" id="updatedFile<?= $id ?>" style="display: none">Upload</button>
+                                    <button type="submit" class="btn btn-info" id="updatedFile<?= $id ?>" style="display: none" onclick="showLoader()">Upload</button>
                                     <?php echo form_close(); ?>
-                                    <a class="btn btn-warning text-white" onclick="deleteGallery(<?= $id ?>, '<?= $filename ?>')">Delete</a>
-                                    <a class="btn btn-secondary" onclick="viewImgGallery('<?= $filename ?>')">View</a>
+                                    <a class="btn btn-warning text-white" id="deleteFile<?= $id ?>" onclick="deleteGallery(<?= $id ?>, '<?= $filename ?>')">Delete</a>
+                                    <a class="btn btn-secondary" id="viewFile<?= $id ?>" onclick="viewImgGallery('<?= $filename ?>')">View</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

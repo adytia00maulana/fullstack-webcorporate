@@ -23,8 +23,8 @@
                     </div>
                     <div class="form-group row align-items-center">
                         <label for="visi" class="form-control-label col-sm-3 text-md-right" hidden="hidden">Visi</label>
-                        <div class="col-sm-6 col-md-9">
-                            <textarea class="form-control summernote-simple" name="visi" id="visi"><?= $visi ?? '' ?></textarea>
+                        <div class="col-md-12">
+                            <textarea class="form-control summernote" name="visi" id="visi"><?= $visi ?? '' ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -39,8 +39,8 @@
                 <div class="card-body">
                     <div class="form-group row align-items-center">
                         <label for="misi" class="form-control-label col-sm-3 text-md-right" hidden="hidden">Misi</label>
-                        <div class="col-sm-6 col-md-9">
-                            <textarea class="form-control summernote-simple" name="misi" id="misi"><?= $misi ?? '' ?></textarea>
+                        <div class="col-md-12">
+                            <textarea class="form-control summernote" name="misi" id="misi"><?= $misi ?? '' ?></textarea>
                         </div>
                     </div>
                     <div class="form-group row align-items-center" hidden="hidden">

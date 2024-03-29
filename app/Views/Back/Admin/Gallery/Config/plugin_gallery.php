@@ -1,42 +1,20 @@
 <script>
-    if('<?= session()->getFlashdata('code') ?>'){
-        if('<?= session()->getFlashdata('code') == "400" ?>'){
-            iziToast.error({
-                title: '<?= session()->getFlashdata('message') ?>',
-                message: '<?= session()->getFlashdata('result') ?>',
-                position: 'topRight'
-            });
+    /************ Start Add Default Datatables and Sorting **********/
+    $("#table-gallery").dataTable({});
+    $("#table-gallery tbody").sortable({
+        update: function(event, ui) {
+            var index = $(ui.item).parent().children().get();
+            console.log(ui.item.index() + 1);
+            console.log(index);
+        //     sortingGallery()
         }
-        if('<?= session()->getFlashdata('code') === "200" ?>'){
-            iziToast.success({
-                title: '<?= session()->getFlashdata('message') ?>',
-                message: '<?= session()->getFlashdata('result') ?>',
-                position: 'topRight'
-            });
-        }
-    }
-
-    $("#table-gallery").dataTable({
-        "columnDefs": [
-            { "sortable": false, "targets": [2,3] }
-        ]
     });
+    /************ End Add Default Datatables and Sorting **********/
 
     function changeFileGallery(value, id){
         var fileList = value;
         let label = '';
         if(fileList.length > 0){
-            // for (let i = 0; i < fileList.length; i++) {
-            //     label += fileList[i].name;
-            //
-            //     if(fileList.length !== 0) {
-            //         if(i === fileList.length - 1) {
-            //             label += '';
-            //         }else {
-            //             label += ', ';
-            //         }
-            //     }
-            // }
             if(id === '0'){
                 $('#labelFile').html(fileList.length + ' Files');
                 $('#uploadFile').show();
@@ -44,8 +22,12 @@
                 $('#updatedFileUpload'+id).html(fileList.length + ' Files');
                 $('#updatedFile'+id).show();
             }
+            $('#deleteFile'+id).hide();
+            $('#viewFile'+id).hide();
         } else {
             $('#uploadFile').hide();
+            $('#deleteFile'+id).show();
+            $('#viewFile'+id).show();
             $('#updatedFile'+id).hide();
         }
     }
@@ -83,5 +65,15 @@
         img = '<img src="'+url+'" class="d-block w-100" alt="...">';
         popup = window.open('');
         popup.document.write(img);
+    }
+    // function sortingGallery(id, filename, filepath){
+    //     alert(id+" "+filename+" "+filepath)
+    // }
+</script>
+<script>
+    function sortingGallery(){
+        <?php $data=array(); if((isset($getList))) $data=$getList;?>
+        var b = <?= json_encode($data) ?>;
+        console.log(b)
     }
 </script>
