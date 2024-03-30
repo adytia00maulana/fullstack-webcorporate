@@ -2,10 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
 use App\Libraries\GlobalValidation;
 use CodeIgniter\HTTP\RedirectResponse;
-use CodeIgniter\HTTP\ResponseInterface;
 use GalleryModel;
 use InfoModel;
 use LogoModel;
@@ -14,7 +12,9 @@ use VisiMisiModel;
 
 class Utilities extends BaseController
 {
-    public $GalleryModel, $ProductModel, $InfoModel, $AdminController, $GlobalValidation, $pathUploadGallery, $pathViewGallery, $pathDeleteGallery;
+    public $GalleryModel, $ProductModel, $InfoModel, $pathUploadGallery, $pathViewGallery, $pathDeleteGallery;
+    public GlobalValidation $GlobalValidation;
+    public Admin $AdminController;
     public $pathUploadLogo;
     public $pathViewLogo;
     public $pathDeleteLogo;
@@ -108,7 +108,6 @@ class Utilities extends BaseController
         $data['deleteById'] = base_url() . 'admin/utilities/gallery/deleteById/';
         $data['updatePosition'] = base_url() . 'admin/utilities/gallery/updatePosition';
         $data['viewPathGallery'] = $this->pathViewGallery;
-
         return view('Back/Admin/Gallery/gallery', $data);
     }
 
@@ -122,14 +121,15 @@ class Utilities extends BaseController
         $msgInfo = $this->GlobalValidation->validation();
         $totalSize = 0;
         $getFile = service('request')->getFiles();
-        foreach ($getFile['fileUpload'] as $data) {
-            $totalSize += (int) $data->getSizeByUnit('mb');
+        foreach ($getFile['fileUpload'] as $validSize) {
+            $totalSize += (int) $validSize->getSizeByUnit('mb');
         }
         if($totalSize > 8) {
             session()->setFlashdata($msgInfo);
             return redirect()->route('admin/utilities/gallery');
         }
         if(isset($id)){
+            $storeValidate = array();
             $path = $this->pathUploadGallery;
             foreach ($getFile['fileUpload'] as $img) {
                 if ($img->isValid() && ! $img->hasMoved()) {
@@ -169,16 +169,21 @@ class Utilities extends BaseController
                         $res = $this->GalleryModel->MdlUpdatedById($id, $value);
                     }
                     if ($res) {
-                        print_r('<script type="text/javascript">alert("Upload '. $newName .' Success");</script>');
+                        $success = $this->GlobalValidation->success();
+                        $success['result'] = 'Upload '. $newName .' Success';
+                        $storeValidate[] = $success;
                     } else {
-                        print_r('<script type="text/javascript">alert("Upload '. $newName .' Failed");</script>');
+                        $fail = $this->GlobalValidation->validation();
+                        $fail['result'] = 'Upload '. $newName .' Failed';
+                        $storeValidate[] = $fail;
                     }
                     $img->move($path, $newName);
                 }
             }
+            session()->setFlashdata('flashData', $storeValidate);
         }
 
-        return print_r('<script type="text/javascript">window.location.href="'. base_url() . "admin/utilities/gallery" .'"</script>', true);
+        return redirect()->route('admin/utilities/gallery');
     }
 
      public function deleteGallery($id, $fileName) {

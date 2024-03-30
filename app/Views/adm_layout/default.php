@@ -111,11 +111,6 @@
 
     <!-- General JS Scripts -->
         <script src="<?php echo base_url(); ?>assets/admin/modules/jquery.min.js"></script>
-        <script>
-            tinymce.init({
-                selector: '#text-info',
-            })
-        </script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/popper.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/tooltip.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/bootstrap/js/bootstrap.min.js"></script>
@@ -161,6 +156,32 @@
 
         <!-- Toast in Flash data -->
         <script>
+            // Custom Toast
+            let flashData = '<?= json_encode(session()->getFlashdata('flashData')) ?>';
+            if(flashData !== 'null'){
+                let responseFlash = JSON.parse(flashData);
+                if(responseFlash.length > 0){
+                    for (let index = 0; index < responseFlash.length; index++) {
+                        const response = responseFlash[index];
+                        if(response.code === "400"){
+                            iziToast.error({
+                                title: response.message,
+                                message: response.result,
+                                position: 'topRight'
+                            });
+                        }
+                        if(response.code === "200"){
+                            iziToast.success({
+                                title: response.message,
+                                message: response.result,
+                                position: 'topRight'
+                            });
+                        }
+                    }
+                }
+            }
+
+            // Toast For Session
             if('<?= session()->getFlashdata('code') ?>'){
                 if('<?= session()->getFlashdata('code') == "400" ?>'){
                     iziToast.error({
