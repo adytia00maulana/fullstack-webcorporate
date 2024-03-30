@@ -156,7 +156,6 @@ class Utilities extends BaseController
                         );
                         $res = $this->GalleryModel->MdlInsert($value);
                     }else{
-                        unlink($this->pathDeleteGallery.$_POST['filename']);
                         $value = array(
                             'id' => $id,
                             'filename' => $newName,
@@ -167,17 +166,18 @@ class Utilities extends BaseController
                             'updated_date' => ''
                         );
                         $res = $this->GalleryModel->MdlUpdatedById($id, $value);
+                        if ($res) unlink($this->pathDeleteGallery.$_POST['filename']);
                     }
                     if ($res) {
                         $success = $this->GlobalValidation->success();
                         $success['result'] = 'Upload '. $newName .' Success';
                         $storeValidate[] = $success;
+                        $img->move($path, $newName);
                     } else {
                         $fail = $this->GlobalValidation->validation();
                         $fail['result'] = 'Upload '. $newName .' Failed';
                         $storeValidate[] = $fail;
                     }
-                    $img->move($path, $newName);
                 }
             }
             session()->setFlashdata('flashData', $storeValidate);
@@ -278,19 +278,22 @@ class Utilities extends BaseController
             $data['filename'] = $newName;
             $query = $this->LogoModel->MdlInsert($data);
         }else{
-             if($data['filename']) unlink($this->pathDeleteLogo . $data['filename']);
+            $oldFile = $data['filename'];
             $data['filename'] = $newName;
             $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
             $query = $this->LogoModel->MdlUpdatedById($id, $data);
+            if($query) {
+                 if($oldFile) unlink($this->pathDeleteLogo . $oldFile);
+            }
         }
         if ($query) {
             $msgInfo = $this->GlobalValidation->success();
             $msgInfo['result'] = "Upload ".$newName." Success";
+            $getFile->move($path, $newName);
         } else {
             $msgInfo['result'] = "Upload ".$newName." Failed";
         }
         session()->setFlashdata($msgInfo);
-        $getFile->move($path, $newName);
         return redirect()->route('admin/utilities/logo');
     }
 

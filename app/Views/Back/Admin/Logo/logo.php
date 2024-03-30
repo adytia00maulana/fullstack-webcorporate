@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div class="card-footer bg-whitesmoke text-md-right">
-                    <button type="submit" class="btn btn-primary" id="save-btn">Save Changes</button>
+                    <button type="submit" class="btn btn-primary" id="save-btn" onclick="showLoader()">Save Changes</button>
                 </div>
             </div>
         <?php echo form_close(); ?>

@@ -2124,6 +2124,7 @@ var GlobalEmitter = /** @class */ (function () {
             selectstart: this.handleSelectStart,
             contextmenu: this.handleContextMenu
         });
+        /*
         // because we need to call preventDefault
         // because https://www.chromestatus.com/features/5093566007214080
         // TODO: investigate performance because this is a global handler
@@ -2138,6 +2139,7 @@ var GlobalEmitter = /** @class */ (function () {
             _this.handleScroll($.Event(ev));
         }, true // useCapture
         );
+         */
     };
     GlobalEmitter.prototype.unbind = function () {
         this.stopListeningTo($(document));
