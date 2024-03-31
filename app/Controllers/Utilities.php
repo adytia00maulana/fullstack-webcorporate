@@ -341,15 +341,15 @@ class Utilities extends BaseController
         $data['created_date'] = "";
         $data['updated_by'] = "";
         $data['updated_date'] = "";
-        $getLogo = $this->LogoModel->MdlSelect()[0];
-        if($getLogo){
-            $data['id'] = $getLogo['id'];
-            $data['filename'] = $getLogo['filename'];
-            $data['title'] = $getLogo['title'];
-            $data['created_by'] = $getLogo['created_by'];
-            $data['created_date'] = $getLogo['created_date'];
-            $data['updated_by'] = $getLogo['updated_by'];
-            $data['updated_date'] = $getLogo['updated_date'];
+        $getLogo = $this->LogoModel->MdlSelect();
+        if(count($getLogo) > 0){
+            $data['id'] = $getLogo[0]['id'];
+            $data['filename'] = $getLogo[0]['filename'];
+            $data['title'] = $getLogo[0]['title'];
+            $data['created_by'] = $getLogo[0]['created_by'];
+            $data['created_date'] = $getLogo[0]['created_date'];
+            $data['updated_by'] = $getLogo[0]['updated_by'];
+            $data['updated_date'] = $getLogo[0]['updated_date'];
         }
         return view('Back/Admin/Logo/logo', $data);
     }
@@ -386,8 +386,7 @@ class Utilities extends BaseController
             $newName = $getFile->getName();
             if($getFile->getClientExtension() === "JPG") $newName = strtolower($getFile->getName());
         }
-
-        if($id == NULL){
+        if($id == 0){
             $idUniqFile = 'logo_';
             $data['id'] = 0;
             $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";

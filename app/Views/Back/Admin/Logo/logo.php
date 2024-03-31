@@ -71,9 +71,13 @@
                         <div class="col-sm-6 col-md-9">
                             <img
                                     src="<?php
-                                    $pathLogo = $viewPathLogo ?? '';
-                                    $imgLogo = $filename ?? '';
-                                    echo base_url(). $pathLogo.$imgLogo;
+                                    if($filename == null){
+                                        echo '';
+                                    }else{
+                                        $pathLogo = $viewPathLogo ?? '';
+                                        $imgLogo = $filename ?? '';
+                                        echo base_url(). $pathLogo.$imgLogo;
+                                    }
                                     ?>"
                                     style="max-width: 200px" alt="Responsive image"
                                     onclick="viewImgLogo('<?= $filename ?>')"
