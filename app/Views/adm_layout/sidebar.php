@@ -42,6 +42,7 @@
         <!-- <li><a href="<?php // if(isset($url_product_list)) echo $url_product_list ?>" class="nav-link"><i class="fas fa-user"></i> <span>Contact</span></a></li> -->
         <li><a href="<?php if(isset($url_gallery)) echo $url_gallery ?>" class="nav-link"><i class="fas fa-address-card"></i> <span>Gallery</span></a></li>
         <li><a href="<?php if(isset($url_event)) echo $url_event ?>" class="nav-link"><i class="fas fa-info-circle"></i> <span>Event</span></a></li>
+        <li><a href="<?php if(isset($url_store)) echo $url_store ?>" class="nav-link"><i class="fas fa-store"></i> <span>Store</span></a></li>
         <li><a href="<?php if(isset($url_visi_misi)) echo $url_visi_misi ?>" class="nav-link"><i class="fas fa-flag"></i> <span>Visi and Misi</span></a></li>
         <!-- <li class="dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Forms</span></a>

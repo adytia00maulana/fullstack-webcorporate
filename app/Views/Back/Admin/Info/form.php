@@ -26,19 +26,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-6">
-                            <label for="start_date">Start Date</label>
-                            <input id="start_date" type="date" name="start_date" class="form-control">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Start Date</label>
+                            <input type="date" name="start_date" class="form-control" id="" required>
                         </div>
-                        <div class="col-md-6">
-                            <label for="end_date">End Date</label>
-                            <input id="end_date" type="date" name="end_date" class="form-control">
+                        <div class="form-group col-md-6">
+                            <label>End Date</label>
+                            <input type="date" name="end_date" class="form-control" id="" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="description">Event Description</label>
-                        <textarea id="description" class="form-control" name="description" rows="8" style="height:100px"></textarea>
+                        <label>Event Description</label>
+                        <textarea class="form-control" name="description" rows="3" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-success float-right">Submit</button>
                 <?php echo form_close(); ?>
