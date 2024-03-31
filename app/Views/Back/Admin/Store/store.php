@@ -20,7 +20,6 @@
                         <th>Store Name</th>
                         <th>Store Link</th>
                         <th>Thumbnail</th>
-                        <th>Status</th>
                         <th>Create</th>
                         <th>Update</th>
                         <th>Action</th>
@@ -33,13 +32,8 @@
                             <td><?= $data_store['store_name']; ?></td>
                             <td><?= $data_store['store_link'] ?></td>
                             <td>-</td>
-                        <?php if($data_store['is_active'] == 1) : ?>
-                            <td>active</td>
-                        <?php else : ?>
-                            <td>inactive</td>
-                        <?php endif; ?>
-                            <td><?= $data_store['created'] ?></td>
-                            <td><?= $data_store['updated'] ?></td>
+                            <td><?= date('Y-m-d', strtotime($data_store['created'])) ?></td>
+                            <td><?= date('Y-m-d', strtotime($data_store['updated'])) ?></td>
                             <td>
                                 <a class="btn btn-secondary" href="<?= base_url('admin/utilities/form-detail-store/'.$data_store['id']) ?>">Detail</a>
                                 <a class="btn btn-warning text-white">Delete</a>

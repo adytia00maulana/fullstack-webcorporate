@@ -27,13 +27,9 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <label>Store Link</label>
                             <input type="text" name="store_link" class="form-control" id="" value="<?= $stores->store_link ?>">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Status</label>
-                            <input type="text" name="is_active" class="form-control" id="" value="<?= $stores->is_active ?>">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success float-right">Submit</button>

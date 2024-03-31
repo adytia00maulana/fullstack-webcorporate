@@ -26,17 +26,9 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <label>Store Link</label>
                             <input type="text" name="store_link" class="form-control" id="" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Status</label>
-                            <select name="is_active" id="" class="form-control" required>
-                                <option value="">-- Select Status --</option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success float-right">Submit</button>
