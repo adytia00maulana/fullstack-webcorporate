@@ -39,6 +39,7 @@ class Admin extends BaseController
         $data['url_event'] = base_url() . 'admin/utilities/event';
         $data['url_logo'] = base_url() . 'admin/utilities/logo';
         $data['url_visi_misi'] = base_url() . 'admin/utilities/vm';
+        $data['url_ba'] = base_url() . 'admin/utilities/ba';
 
         return $data;
     }
@@ -222,6 +223,9 @@ class Admin extends BaseController
         if(!isset($data['active'])) $data['active'] = "0";
         $id = $data['id'];
         $getFile = service('request')->getFile('fileUpload');
+        $checkData = $this->ProductModel->MdlProductSelect();
+        $totalFile = count($checkData);
+        $idUniqFile = 0;
         $getFileSize = (int) $getFile->getSizeByUnit('mb');
         if($getFileSize > 3) {
             $msgInfo['result'] = "Max Upload File 3 Megabyte";
@@ -242,13 +246,15 @@ class Admin extends BaseController
             $data['filepath'] = $path .'/' . $newName;
 
             if($id == NULL){
+                $idUniqFile = 'product_'.$totalFile.'_';
                 $data['id'] = 0;
                 $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
-                $data['filename'] = $newName;
+                $data['filename'] = $idUniqFile.$newName;
                 $res = $this->ProductModel->MdlDetailProductInsert($data);
             }else{
+                $idUniqFile = 'product_'.$totalFile.$id.'_';
                 $oldFile = $data['filename'];
-                $data['filename'] = $newName;
+                $data['filename'] = $idUniqFile.$newName;
                 $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
                 $res = $this->ProductModel->MdlDetailProductUpdatedById($id, $data);
                 if($res) {
@@ -257,7 +263,7 @@ class Admin extends BaseController
             }
             if ($res) {
                 $msgInfo = $this->GlobalValidation->success();
-                $getFile->move($path, $newName);
+                $getFile->move($path, $idUniqFile.$newName);
             } else {
                 $msgInfo['result'] = "Failed to save data";
             }

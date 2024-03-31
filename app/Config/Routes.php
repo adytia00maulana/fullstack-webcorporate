@@ -46,6 +46,10 @@ $routes->group('admin', ['filter' => 'loginFilter'], static function ($subRoutes
         $UtilRoutes->post('logo/postLogo', 'Utilities::postLogo');
         $UtilRoutes->get('vm', 'Utilities::indexVm');
         $UtilRoutes->post('vm/postVm', 'Utilities::postVm');
+        $UtilRoutes->get('ba', 'Utilities::indexBrandAmbassador');
+        $UtilRoutes->post('ba/upload/(:any)', 'Utilities::uploadBrandAmbassador/$1');
+        $UtilRoutes->get('ba/deleteById/(:any)/(:any)', 'Utilities::deleteBrandAmbassador/$1/$2');
+        $UtilRoutes->post('ba/updatePosition', 'Utilities::updatePositionBrandAmbassador');
         // $UtilRoutes->get('aboutUs', 'Utilities::index', ['filter' => 'loginFilter']);
         // $UtilRoutes->get('aboutUs/getAboutUsById/(:any)', 'Utilities::getAboutUs/$1', ['filter' => 'loginFilter']);
         // $UtilRoutes->post('aboutUs/postAboutUs', 'Utilities::postAboutUs', ['filter' => 'loginFilter']);

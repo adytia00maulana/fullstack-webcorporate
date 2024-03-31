@@ -92,4 +92,12 @@ class BrandAmbassadorModel extends Model
 
         return $result;
     }
+
+    // Get Data By Position
+    public function MdlGetByPosition($position)
+    {
+        $sqlQuery = "SELECT * FROM ".$this->table." WHERE position=".$position;
+        $query = $this->db->query($sqlQuery);
+        return $query->getResultArray();
+    }
 }

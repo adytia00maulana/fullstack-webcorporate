@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Libraries\GlobalValidation;
+use BrandAmbassadorModel;
 use CodeIgniter\HTTP\RedirectResponse;
 use GalleryModel;
 use InfoModel;
@@ -21,8 +22,12 @@ class Utilities extends BaseController
     public $pathUploadEvent;
     public $pathViewEvent;
     public $pathDeleteEvent;
+    public $pathUploadBrandAmbassador;
+    public $pathViewBrandAmbassador;
+    public $pathDeleteBrandAmbassador;
     public $LogoModel;
     public $VisiMisiModel;
+    public $brandAmbassadorModel;
     public function __construct()
     {
         $this->GalleryModel = model(GalleryModel::class);
@@ -39,22 +44,16 @@ class Utilities extends BaseController
         $this->pathUploadEvent = config('app')->uploadEvent;
         $this->pathViewEvent = config('app')->viewEvent;
         $this->pathDeleteEvent = config('app')->deleteEvent;
+        $this->pathUploadBrandAmbassador = config('app')->uploadBrandAmbassador;
+        $this->pathViewBrandAmbassador = config('app')->viewBrandAmbassador;
+        $this->pathDeleteBrandAmbassador = config('app')->deleteBrandAmbassador;
         $this->LogoModel = model(LogoModel::class);
         $this->VisiMisiModel = model(VisiMisiModel::class);
+        $this->brandAmbassadorModel = model(BrandAmbassadorModel::class);
     }
 
     public function defaultLoadSideBar(): array
     {
-        // $data['url_users_list'] = base_url() . 'admin/listUsers';
-        // $data['url_role_list'] = base_url() . 'admin/listRole';
-        $data['url_product_list'] = base_url() . 'admin/listProduct/';
-        $data['url_detail_product_list'] = base_url() . 'admin/listDetailProduct/';
-        $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct/';
-        // $data['url_about_us'] = base_url() . 'admin/utilities/aboutUs';
-        // $data['url_faq'] = base_url() . 'admin/utilities/faq';
-        $data['getListProduct'] = $this->ProductModel->MdlProductSelect();
-        $data['url_gallery'] = base_url() . 'admin/utilities/gallery';
-        $data['url_event'] = base_url() . 'admin/utilities/event';
         $data = $this->AdminController->defaultLoadSideBar();
         return $data;
     }
@@ -77,6 +76,8 @@ class Utilities extends BaseController
         unset($data['csrf_test_name']);
         $getFile = service('request')->getFile('fileUpload');
         if($getFile){
+            $checkData = $this->InfoModel->getAllData();
+            $totalFile = count($checkData);
             $getFileSize = (int) $getFile->getSizeByUnit('mb');
             if($getFileSize > 3) {
                 $msgInfo['result'] = "Max Upload File 3 Megabyte";
@@ -95,10 +96,11 @@ class Utilities extends BaseController
                 if($getFile->getClientExtension() === "JPG") $newName = strtolower($getFile->getName());
 
                 if ($data) {
-                    $data['filename'] = $newName;
+                    $idUniqFile = 'event_'.$totalFile.'_';
+                    $data['filename'] = $idUniqFile.$newName;
                     $res = $this->InfoModel->InsertData($data);
                     if($res) {
-                        $getFile->move($path, $newName);
+                        $getFile->move($path, $idUniqFile.$newName);
                         $msgInfo = $this->GlobalValidation->success();
                     }else{
                         $msgInfo['result'] = "Failed to save data";
@@ -109,6 +111,10 @@ class Utilities extends BaseController
                     session()->setFlashdata($msgInfo);
                     return redirect()->to(base_url('admin/utilities/form-event'));
                 }
+            }else{
+                $msgInfo['result'] = "Please Selected File";
+                session()->setFlashdata($msgInfo);
+                return redirect()->to(base_url('admin/utilities/form-event'));
             }
         }else{
             $msgInfo['result'] = "Please Selected File";
@@ -173,12 +179,13 @@ class Utilities extends BaseController
                 if($getFile->getClientExtension() === "JPG") $newName = strtolower($getFile->getName());
 
                 if ($data) {
+                    $idUniqFile = 'event_'.$id.'_';
                     $oldFile = $data['filename'];
-                    $data['filename'] = $newName;
+                    $data['filename'] = $idUniqFile.$newName;
                     $res = $this->InfoModel->UpdateData($data, $id);
                     if($res) {
                         if($oldFile) unlink($this->pathDeleteEvent . $oldFile);
-                        $getFile->move($path, $newName);
+                        $getFile->move($path, $idUniqFile.$newName);
                         $msgInfo = $this->GlobalValidation->success();
                     }else{
                         $msgInfo['result'] = "Failed to save data";
@@ -221,7 +228,9 @@ class Utilities extends BaseController
     public function uploadGallery($id) {
         $msgInfo = $this->GlobalValidation->validation();
         $totalSize = 0;
+        $idUniqFile = 0;
         $getFile = service('request')->getFiles();
+        $totalFile = count($getFile['fileUpload']);
         foreach ($getFile['fileUpload'] as $validSize) {
             $totalSize += (int) $validSize->getSizeByUnit('mb');
         }
@@ -232,7 +241,7 @@ class Utilities extends BaseController
         if(isset($id)){
             $storeValidate = array();
             $path = $this->pathUploadGallery;
-            foreach ($getFile['fileUpload'] as $img) {
+            foreach ($getFile['fileUpload'] as $key=>$img) {
                 if ($img->isValid() && ! $img->hasMoved()) {
                     $validate = $img->getClientMimeType() === "image/png"|$img->getClientMimeType() === "image/jpg"|$img->getClientMimeType() === "image/jpeg";
                     if (!$validate) {
@@ -242,13 +251,14 @@ class Utilities extends BaseController
                     }
                     $checkData = count($this->GalleryModel->MdlSelect());
                     $newName = $img->getName();
-                    if($getFile->getClientExtension() === "JPG") $newName = strtolower($getFile->getName());
+                    if($img->getClientExtension() === "JPG") $newName = strtolower($img->getName());
                     $newPath = $path.'/' . $newName;
 
                     if($id == 0){
+                        $idUniqFile = 'gallery_'.$totalFile.$key.'_';
                         $value = array(
                             'id' => null,
-                            'filename' => $newName,
+                            'filename' => $idUniqFile.$newName,
                             'filepath' => $newPath,
                             'position' => $checkData,
                             'created_by' => isset($_SESSION['username'])? session()->get('username'): "SYSTEM",
@@ -258,9 +268,10 @@ class Utilities extends BaseController
                         );
                         $res = $this->GalleryModel->MdlInsert($value);
                     }else{
+                        $idUniqFile = 'gallery_'.$id.'_';
                         $value = array(
                             'id' => $id,
-                            'filename' => $newName,
+                            'filename' => $idUniqFile.$newName,
                             'filepath' => $newPath,
                             'position' => $checkData,
                             'created_date' => '',
@@ -274,7 +285,7 @@ class Utilities extends BaseController
                         $success = $this->GlobalValidation->success();
                         $success['result'] = 'Upload '. $newName .' Success';
                         $storeValidate[] = $success;
-                        $img->move($path, $newName);
+                        $img->move($path, $idUniqFile.$newName);
                     } else {
                         $fail = $this->GlobalValidation->validation();
                         $fail['result'] = 'Upload '. $newName .' Failed';
@@ -352,6 +363,7 @@ class Utilities extends BaseController
     public function postLogo(){
         $path = realpath($this->pathUploadLogo);
         $msgInfo = $this->GlobalValidation->validation();
+        $idUniqFile = 0;
         $data = $_POST;
         $newName = "";
         unset($data['csrf_test_name']);
@@ -376,13 +388,15 @@ class Utilities extends BaseController
         }
 
         if($id == NULL){
+            $idUniqFile = 'logo_';
             $data['id'] = 0;
             $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
-            $data['filename'] = $newName;
+            $data['filename'] = $idUniqFile.$newName;
             $query = $this->LogoModel->MdlInsert($data);
         }else{
+            $idUniqFile = 'logo_'.$id.'_';
             $oldFile = $data['filename'];
-            $data['filename'] = $newName;
+            $data['filename'] = $idUniqFile.$newName;
             $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
             $query = $this->LogoModel->MdlUpdatedById($id, $data);
             if($query) {
@@ -392,7 +406,7 @@ class Utilities extends BaseController
         if ($query) {
             $msgInfo = $this->GlobalValidation->success();
             $msgInfo['result'] = "Upload ".$newName." Success";
-            $getFile->move($path, $newName);
+            $getFile->move($path, $idUniqFile.$newName);
         } else {
             $msgInfo['result'] = "Upload ".$newName." Failed";
         }
@@ -446,6 +460,119 @@ class Utilities extends BaseController
         }
         session()->setFlashdata($msgInfo);
         return redirect()->route('admin/utilities/vm');
+    }
+
+
+    public function indexBrandAmbassador()
+    {
+        $data = $this->defaultLoadSideBar();
+        $data['getList'] = $this->brandAmbassadorModel->MdlSelect();
+        $data['upload'] = base_url() . 'admin/utilities/ba/upload/';
+        $data['idUpdated'] = 0;
+        $data['deleteById'] = base_url() . 'admin/utilities/ba/deleteById/';
+        $data['updatePosition'] = base_url() . 'admin/utilities/ba/updatePosition';
+        $data['viewPathBa'] = $this->pathViewBrandAmbassador;
+        return view('Back/Admin/Brand_ambassador/brandAmbassador', $data);
+    }
+
+    public function uploadBrandAmbassador($id) {
+        $msgInfo = $this->GlobalValidation->validation();
+        $totalSize = 0;
+        $getFile = service('request')->getFiles();
+        $totalFile = count($getFile['fileUpload']);
+        $idUniqFile = 0;
+        foreach ($getFile['fileUpload'] as $validSize) {
+            $totalSize += (int) $validSize->getSizeByUnit('mb');
+        }
+        if($totalSize > 8) {
+            session()->setFlashdata($msgInfo);
+            return redirect()->route('admin/utilities/ba');
+        }
+        if(isset($id)){
+            $storeValidate = array();
+            $path = $this->pathUploadBrandAmbassador;
+            foreach ($getFile['fileUpload'] as $key=>$img) {
+                if ($img->isValid() && ! $img->hasMoved()) {
+                    $validate = $img->getClientMimeType() === "image/png"|$img->getClientMimeType() === "image/jpg"|$img->getClientMimeType() === "image/jpeg";
+                    if (!$validate) {
+                        $msgInfo['result'] = "File upload does not match the format";
+                        session()->setFlashdata($msgInfo);
+                        return redirect()->route('admin/utilities/ba');
+                    }
+                    $checkData = count($this->brandAmbassadorModel->MdlSelect());
+                    $newName = $img->getName();
+                    if($img->getClientExtension() === "JPG") $newName = strtolower($img->getName());
+
+                    if($id == 0){
+                        $idUniqFile = 'ba_'.$totalFile.$key.'_';
+                        $value = array(
+                            'id' => null,
+                            'filename' => $idUniqFile.$newName,
+                            'position' => $checkData,
+                            'created_by' => isset($_SESSION['username'])? session()->get('username'): "SYSTEM",
+                            'created_date' => '',
+                            'updated_by' => '',
+                            'updated_date' => ''
+                        );
+                        $res = $this->brandAmbassadorModel->MdlInsert($value);
+                    }else{
+                        $idUniqFile = 'ba_'.$totalFile.$id.'_';
+                        $value = array(
+                            'id' => $id,
+                            'filename' => $idUniqFile.$newName,
+                            'position' => $checkData,
+                            'created_date' => '',
+                            'updated_by' => isset($_SESSION['username'])? session()->get('username'): "SYSTEM",
+                            'updated_date' => ''
+                        );
+                        $res = $this->brandAmbassadorModel->MdlUpdatedById($id, $value);
+                        if ($res) unlink($this->pathDeleteBrandAmbassador.$_POST['filename']);
+                    }
+                    if ($res) {
+                        $success = $this->GlobalValidation->success();
+                        $success['result'] = 'Upload '. $newName .' Success';
+                        $storeValidate[] = $success;
+                        $img->move($path, $idUniqFile.$newName);
+                    } else {
+                        $fail = $this->GlobalValidation->validation();
+                        $fail['result'] = 'Upload '. $newName .' Failed';
+                        $storeValidate[] = $fail;
+                    }
+                }
+            }
+            session()->setFlashdata('flashData', $storeValidate);
+        }
+
+        return redirect()->route('admin/utilities/ba');
+    }
+
+    public function deleteBrandAmbassador($id, $fileName) {
+        $path = $this->pathDeleteBrandAmbassador.$fileName;
+        unlink($path);
+        $this->brandAmbassadorModel->MdlDeleteById($id);
+        $redirect = redirect()->to(base_url().'admin/utilities/ba');
+        return $redirect;
+    }
+
+    public function updatePositionBrandAmbassador() {
+        $data = $_POST;
+        $start = $data['index_start'];
+        $end = $data['index_end'];
+        $selectStart = $this->brandAmbassadorModel->MdlGetByPosition($start);
+        $selectEnd = $this->brandAmbassadorModel->MdlGetByPosition($end);
+        $idStart = $selectStart[0]['id'];
+        $idEnd = $selectEnd[0]['id'];
+        $selectStart[0]['position'] = $end;
+        $selectStart[0]['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
+        $selectEnd[0]['position'] = $start;
+        $selectEnd[0]['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
+
+        if(count($selectStart)>0) $this->brandAmbassadorModel->MdlUpdatedById($idStart, $selectStart[0]);
+        if(count($selectStart)>0) $this->brandAmbassadorModel->MdlUpdatedById($idEnd, $selectEnd[0]);
+        $msgInfo = $this->GlobalValidation->success();
+        $msgInfo['result'] = "Successfully moved the data";
+        session()->setFlashdata($msgInfo);
+        return json_encode(base_url().'admin/utilities/ba');
     }
 
 }
