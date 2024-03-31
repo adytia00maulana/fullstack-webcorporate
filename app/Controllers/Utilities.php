@@ -15,8 +15,8 @@ use StoreModel;
 class Utilities extends BaseController
 {
     public $GalleryModel, $ProductModel, $InfoModel, $StoreModel, $AdminController, $GlobalValidation, $pathUploadGallery, $pathViewGallery, $pathDeleteGallery;
-    public GlobalValidation $GlobalValidation;
-    public Admin $AdminController;
+    // public GlobalValidation $GlobalValidation;
+    // public Admin $AdminController;
     public $pathUploadLogo;
     public $pathViewLogo;
     public $pathDeleteLogo;
