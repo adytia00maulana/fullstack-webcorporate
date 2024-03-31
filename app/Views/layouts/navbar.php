@@ -8,7 +8,8 @@
                 }else{
                     echo '';
                 }?>"
-        >Home</a></li>
+        >Home</a>
+    </li>
     <li>
         <a
                 href="<?= base_url(). 'about'; ?>"
@@ -18,7 +19,19 @@
                 }else{
                     echo '';
                 }?>"
-        >Visi Misi</a></li>
+        >Visi Misi</a>
+    <!-- </li>
+    <li>
+        <a
+                href="<?php // base_url(). 'contact'; ?>"
+                class="<?php
+                //if(isset($activeUrl)){
+                //    if($activeUrl.'/contact' == (string) current_url()) echo 'active';
+                //}else{
+                //    echo '';
+                //}?>"
+        >Kontak Kami</a>
+    </li> -->
     <li class="dropdown has-dropdown">
         <a
                 href="#"
@@ -28,11 +41,27 @@
                 }else{
                     echo '';
                 }?>"
-        ><span>Produk</span> <i class="bi bi-chevron-down"></i></a>
+        ><span>Produk</span> <i class="bi bi-chevron-down"></i>
+        </a>
         <ul>
-            <li><a href="<?= base_url(). 'product'; ?>">Korean Ginseng</a></li>
-            <li><a href="<?= base_url(). 'product'; ?>">Kosmetik</a></li>
+            <?php $i=0; foreach($getListProduct as $row): $i++;
+                $id = $row['id'];
+                $name = $row['name'];
+            ?>
+            <li><a href="<?= base_url(). 'product'.$id; ?>"><?= $name ?></a></li>
+            <?php endforeach; ?>
         </ul>
+    </li>
+    <li>
+        <a
+                href="<?= base_url(). 'about'; ?>"
+                class="<?php
+                if(isset($activeUrl)){
+                    if($activeUrl.'/about' == (string) current_url()) echo 'active';
+                }else{
+                    echo '';
+                }?>"
+        >Berita</a>
     </li>
     <li>
         <a
@@ -44,6 +73,26 @@
                     echo '';
                 }?>"
         >Galeri</a>
+    </li>
+    <li class="dropdown has-dropdown">
+        <a
+                href="#"
+                class="<?php
+                if(isset($activeUrl)){
+                    if($activeUrl.'/product' == (string) current_url()) echo 'active';
+                }else{
+                    echo '';
+                }?>"
+        ><span>Toko</span> <i class="bi bi-chevron-down"></i>
+        </a>
+        <ul>
+            <?php $i=0; foreach($getListStores as $row): $i++;
+                $id = $row['id'];
+                $name = $row['name'];
+                ?>
+                <li><a href="<?= base_url(). 'product'.$id; ?>"><?= $name ?></a></li>
+            <?php endforeach; ?>
+        </ul>
     </li>
     <li class="dropdown has-dropdown">
         <a href=""
@@ -59,49 +108,26 @@
         ><span>Info</span> <i class="bi bi-chevron-down"></i>
         </a>
         <ul>
-            <li><a href="<?= base_url(). 'brand'; ?>">Brand Ambasador</a></li>
-            <li><a href="<?= base_url(). 'info'; ?>">Event</a></li>
+            <?php $i=0; foreach($getListInfo as $row): $i++;
+                $id = $row['id'];
+                $name = $row['name'];
+                $code = $row['code'];
+                ?>
+                <li><a href="<?= base_url(). $code; ?>"><?= $name ?></a></li>
+            <?php endforeach; ?>
         </ul>
     </li>
-    <!-- <li class="megamenu has-dropdown"><a href="#"><span>Mega Menu</span> <i class="bi bi-chevron-down"></i></a>
-        <ul>
-            <li>
-                <a href="#">Column 1 link 1</a>
-                <a href="#">Column 1 link 2</a>
-                <a href="#">Column 1 link 3</a>
-            </li>
-            <li>
-                <a href="#">Column 2 link 1</a>
-                <a href="#">Column 2 link 2</a>
-                <a href="#">Column 3 link 3</a>
-            </li>
-            <li>
-                <a href="#">Column 3 link 1</a>
-                <a href="#">Column 3 link 2</a>
-                <a href="#">Column 3 link 3</a>
-            </li>
-            <li>
-                <a href="#">Column 4 link 1</a>
-                <a href="#">Column 4 link 2</a>
-                <a href="#">Column 4 link 3</a>
-            </li>
-            <li>
-                <a href="#">Column 5 link 1</a>
-                <a href="#">Column 5 link 2</a>
-                <a href="#">Column 5 link 3</a>
-            </li>
-        </ul>
-    </li> -->
     <li>
         <a
                 href="<?= base_url(). 'contact'; ?>"
                 class="<?php
-                if(isset($activeUrl)){
-                    if($activeUrl.'/contact' == (string) current_url()) echo 'active';
-                }else{
-                    echo '';
-                }?>"
-        >Kontak Kami</a></li>
+    if(isset($activeUrl)){
+        if($activeUrl.'/contact' == (string) current_url()) echo 'active';
+    }else{
+        echo '';
+    }?>"
+        >Kontak Kami</a>
+    </li>
     <li>
         <a
                 href="<?= base_url(). 'faq'; ?>"
@@ -111,6 +137,7 @@
                 }else{
                     echo '';
                 }?>"
-        >FAQ</a></li>
+        >FAQ</a>
+    </li>
 </ul>
 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
