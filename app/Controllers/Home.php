@@ -65,7 +65,7 @@ class Home extends BaseController
         return view('front/about', $data);
     }
 
-    public function product(): string {
+    public function product($id): string {
         $data = $this->defaultLoad();
         $data['title'] = 'Product';
 
