@@ -11,6 +11,10 @@
             $('#filename').val("").hide();
             $('#filepath').val("");
             $('#description').val("");
+            $('#packaging').val("");
+            $('#composition').val("");
+            $('#usage_method').val("");
+            $('#benefits').val("");
             $('#active').prop("checked", false);
             $('#created_by').val("");
             $('#created_date').val("");
@@ -40,6 +44,10 @@
                 $('#filename').val(data.filename).show();
                 $('#filepath').val(data.filepath);
                 $('#description').val(data.description);
+                $('#packaging').val(data.packaging);
+                $('#composition').val(data.composition);
+                $('#usage_method').val(data.usage_method);
+                $('#benefits').val(data.benefits);
                 $('#active').prop("checked", convertActive);
                 $('#created_by').val(data.created_by);
                 $('#created_date').val(data.created_date);

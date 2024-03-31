@@ -198,7 +198,30 @@
                         <label for="description">Description</label>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Description" name="description" id="description">
-                            <!-- <textarea class="form-control summernote" name="description" id="description"></textarea> -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="packaging">Packaging</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Packaging" name="packaging" id="packaging">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="composition">Composition</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Composition" name="composition" id="composition">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="usage_method">Usage Method</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Usage Method" name="usage_method" id="usage_method">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="benefits">Benefits</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Benefits" name="benefits" id="benefits">
                         </div>
                     </div>
                     <div class="form-group mb-0">

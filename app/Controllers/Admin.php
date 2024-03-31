@@ -225,7 +225,6 @@ class Admin extends BaseController
         $getFile = service('request')->getFile('fileUpload');
         $checkData = $this->ProductModel->MdlProductSelect();
         $totalFile = count($checkData);
-        $idUniqFile = 0;
         $getFileSize = (int) $getFile->getSizeByUnit('mb');
         if($getFileSize > 3) {
             $msgInfo['result'] = "Max Upload File 3 Megabyte";
@@ -266,6 +265,19 @@ class Admin extends BaseController
                 $getFile->move($path, $idUniqFile.$newName);
             } else {
                 $msgInfo['result'] = "Failed to save data";
+            }
+            session()->setFlashdata($msgInfo);
+        } else {
+            if($id == NULL){
+                $msgInfo['result'] = "Please fill in all data";
+            }else{
+                $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
+                $res = $this->ProductModel->MdlDetailProductUpdatedById($id, $data);
+                if ($res) {
+                    $msgInfo = $this->GlobalValidation->success();
+                } else {
+                    $msgInfo['result'] = "Failed to save data";
+                }
             }
             session()->setFlashdata($msgInfo);
         }
