@@ -11,36 +11,37 @@
                 <a class="btn btn-primary text-white my-2 text-capitalize"
                     href="<?= base_url('admin/utilities/event') ?>">back</a>
                 <hr>
-                <form action="<?= base_url('admin/utilities/create-event') ?>" method="post">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label>Event Name</label>
-                            <input type="text" class="form-control" name="event_name" id="">
+                <?php echo form_open_multipart(base_url('admin/utilities/create-event'));?>
+                    <?= csrf_field(); ?>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label for="event_name">Event Name</label>
+                            <input id="event_name" type="text" class="form-control" name="event_name">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="col-md-6">
                             <label>Event Thumbnail</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile">
-                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                <input type="file" class="custom-file-input" id="fileUpload" name="fileUpload" onchange="changeFileEvent()">
+                                <label class="custom-file-label" for="fileUpload" id="labelFileUploadEvent">Choose file</label>
                             </div>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label>Start Date</label>
-                            <input type="date" name="start_date" class="form-control" id="">
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label for="start_date">Start Date</label>
+                            <input id="start_date" type="date" name="start_date" class="form-control">
                         </div>
-                        <div class="form-group col-md-6">
-                            <label>End Date</label>
-                            <input type="date" name="end_date" class="form-control" id="">
+                        <div class="col-md-6">
+                            <label for="end_date">End Date</label>
+                            <input id="end_date" type="date" name="end_date" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Event Description</label>
-                        <textarea class="form-control" name="description" rows="3"></textarea>
+                        <label for="description">Event Description</label>
+                        <textarea id="description" class="form-control" name="description" rows="8" style="height:100px"></textarea>
                     </div>
                     <button type="submit" class="btn btn-success float-right">Submit</button>
-                </form>
+                <?php echo form_close(); ?>
             </div>
         </div>
     </div>

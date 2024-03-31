@@ -238,6 +238,7 @@ class Admin extends BaseController
             }
             $path = realpath($this->pathUploadProduct);
             $newName = $getFile->getName();
+            if($getFile->getClientExtension() === "JPG") $newName = strtolower($getFile->getName());
             $data['filepath'] = $path .'/' . $newName;
 
             if($id == NULL){

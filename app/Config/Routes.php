@@ -33,7 +33,7 @@ $routes->group('admin', ['filter' => 'loginFilter'], static function ($subRoutes
         // event routes
         $UtilRoutes->get('event', 'Utilities::indexEvent');
         $UtilRoutes->post('create-event', 'Utilities::PostEvent');
-        $UtilRoutes->get('form-event', 'Utilities::FormEvent');
+        $UtilRoutes->get('form-event', 'Utilities::formEvent');
         $UtilRoutes->get('form-detail-event/(:any)', 'Utilities::formDetail/$1');
         $UtilRoutes->post('update-event/(:any)', 'Utilities::UpdateEvent/$1');
 

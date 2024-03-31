@@ -18,6 +18,9 @@ class Utilities extends BaseController
     public $pathUploadLogo;
     public $pathViewLogo;
     public $pathDeleteLogo;
+    public $pathUploadEvent;
+    public $pathViewEvent;
+    public $pathDeleteEvent;
     public $LogoModel;
     public $VisiMisiModel;
     public function __construct()
@@ -33,6 +36,9 @@ class Utilities extends BaseController
         $this->pathUploadLogo = config('app')->uploadLogo;
         $this->pathViewLogo = config('app')->viewLogo;
         $this->pathDeleteLogo = config('app')->deleteLogo;
+        $this->pathUploadEvent = config('app')->uploadEvent;
+        $this->pathViewEvent = config('app')->viewEvent;
+        $this->pathDeleteEvent = config('app')->deleteEvent;
         $this->LogoModel = model(LogoModel::class);
         $this->VisiMisiModel = model(VisiMisiModel::class);
     }
@@ -61,41 +67,136 @@ class Utilities extends BaseController
 
     public function formEvent() {
         $data = $this->defaultLoadSideBar();
-        $data['events'] = $this->InfoModel->getAllData();
         return view('Back/Admin/Info/form', $data);
     }
 
     public function PostEvent() {
+        $msgInfo = $this->GlobalValidation->validation();
+        $path = realpath($this->pathUploadEvent);
         $data = $_POST;
-        if ($data) {
-            $this->InfoModel->InsertData($data);
-            session()->setFlashdata('message', 'Create Event Success');
-            return redirect()->route('admin/utilities/event');
-        } else {
-            alert('oops, error!');
-            return view('Back/Admin/Info/form');
+        unset($data['csrf_test_name']);
+        $getFile = service('request')->getFile('fileUpload');
+        if($getFile){
+            $getFileSize = (int) $getFile->getSizeByUnit('mb');
+            if($getFileSize > 3) {
+                $msgInfo['result'] = "Max Upload File 3 Megabyte";
+                session()->setFlashdata($msgInfo);
+                return redirect()->to(base_url('admin/utilities/form-event'));
+            }
+            if ($getFile->isValid() && ! $getFile->hasMoved()) {
+                $validate = $getFile->getClientMimeType() === "image/png" | $getFile->getClientMimeType() === "image/jpg" | $getFile->getClientMimeType() === "image/jpeg";
+                if (!$validate) {
+                    $msgInfo['result'] = "File upload does not match the format";
+                    session()->setFlashdata($msgInfo);
+                    return redirect()->to(base_url('admin/utilities/form-event'));
+                }
+
+                $newName = $getFile->getName();
+                if($getFile->getClientExtension() === "JPG") $newName = strtolower($getFile->getName());
+
+                if ($data) {
+                    $data['filename'] = $newName;
+                    $res = $this->InfoModel->InsertData($data);
+                    if($res) {
+                        $getFile->move($path, $newName);
+                        $msgInfo = $this->GlobalValidation->success();
+                    }else{
+                        $msgInfo['result'] = "Failed to save data";
+                    }
+                    session()->setFlashdata($msgInfo);
+                } else {
+                    $msgInfo['result'] = "Please Insert Value";
+                    session()->setFlashdata($msgInfo);
+                    return redirect()->to(base_url('admin/utilities/form-event'));
+                }
+            }
+        }else{
+            $msgInfo['result'] = "Please Selected File";
+            session()->setFlashdata($msgInfo);
+            return redirect()->to(base_url('admin/utilities/form-event'));
         }
+
+        return redirect()->route('admin/utilities/event');
     }
 
     public function formDetail($id) {
+        $data = $this->defaultLoadSideBar();
+        $data['viewPathEvent'] = $this->pathViewEvent;
+        $msgInfo = $this->GlobalValidation->validation();
         if ($id) {
-            $data = $this->defaultLoadSideBar();
-            $data['events'] = $this->InfoModel->getById($id);
-            return view('Back/Admin/Info/form-detail', $data);
-        }        
+            $dataEvents = $this->InfoModel->getById($id);
+            if($dataEvents){
+                $data['id'] = $dataEvents['id'];
+                $data['event_name'] = $dataEvents['event_name'];
+                $data['img_name'] = $dataEvents['img_name'];
+                $data['description'] = $dataEvents['description'];
+                $data['filename'] = $dataEvents['filename'];
+                $data['start_date'] = $dataEvents['start_date'];
+                $data['end_date'] = $dataEvents['end_date'];
+                $data['created'] = $dataEvents['created'];
+                $data['updated'] = $dataEvents['updated'];
+            }else{
+                $msgInfo['result'] = "Data not Found";
+                session()->setFlashdata($msgInfo);
+                return redirect()->route('admin/utilities/event');
+            }
+        }else{
+            $msgInfo['result'] = "Data not Found";
+            session()->setFlashdata($msgInfo);
+            return redirect()->route('admin/utilities/event');
+        }
+        return view('Back/Admin/Info/form-detail', $data);
     }
 
     public function UpdateEvent($id) {
+        $msgInfo = $this->GlobalValidation->validation();
+        $path = realpath($this->pathUploadEvent);
         $data = $_POST;
-        if ($data) {
-            $this->InfoModel->UpdateData($data, $id);
-            session()->setFlashdata('message', 'Update Event Success');
-            return redirect()->route('admin/utilities/event');
-        } else {    
-            alert('oops, error!');
-            return view('Back/Admin/Info/form');
+        unset($data['csrf_test_name']);
+        $getFile = service('request')->getFile('fileUpload');
+        if($getFile){
+            $getFileSize = (int) $getFile->getSizeByUnit('mb');
+            if($getFileSize > 3) {
+                $msgInfo['result'] = "Max Upload File 3 Megabyte";
+                session()->setFlashdata($msgInfo);
+                return redirect()->to(base_url().'admin/utilities/form-detail-event/'.$id);
+            }
+            if ($getFile->isValid() && ! $getFile->hasMoved()) {
+                $validate = $getFile->getClientMimeType() === "image/png" | $getFile->getClientMimeType() === "image/jpg" | $getFile->getClientMimeType() === "image/jpeg";
+                if (!$validate) {
+                    $msgInfo['result'] = "File upload does not match the format";
+                    session()->setFlashdata($msgInfo);
+                    return redirect()->to(base_url().'admin/utilities/form-detail-event/'.$id);
+                }
+
+                $newName = $getFile->getName();
+                if($getFile->getClientExtension() === "JPG") $newName = strtolower($getFile->getName());
+
+                if ($data) {
+                    $oldFile = $data['filename'];
+                    $data['filename'] = $newName;
+                    $res = $this->InfoModel->UpdateData($data, $id);
+                    if($res) {
+                        if($oldFile) unlink($this->pathDeleteEvent . $oldFile);
+                        $getFile->move($path, $newName);
+                        $msgInfo = $this->GlobalValidation->success();
+                    }else{
+                        $msgInfo['result'] = "Failed to save data";
+                    }
+                    session()->setFlashdata($msgInfo);
+                } else {
+                    $msgInfo['result'] = "Please Insert Value";
+                    session()->setFlashdata($msgInfo);
+                    return redirect()->to(base_url().'admin/utilities/form-detail-event/'.$id);
+                }
+            }
+        }else{
+            $msgInfo['result'] = "Please Selected File";
+            session()->setFlashdata($msgInfo);
+            return redirect()->to(base_url().'admin/utilities/form-detail-event/'.$id);
         }
 
+        return $this->formDetail($id);
     }
 
     public function indexGallery()
@@ -141,6 +242,7 @@ class Utilities extends BaseController
                     }
                     $checkData = count($this->GalleryModel->MdlSelect());
                     $newName = $img->getName();
+                    if($getFile->getClientExtension() === "JPG") $newName = strtolower($getFile->getName());
                     $newPath = $path.'/' . $newName;
 
                     if($id == 0){
@@ -270,6 +372,7 @@ class Utilities extends BaseController
                 return redirect()->route('admin/utilities/logo');
             }
             $newName = $getFile->getName();
+            if($getFile->getClientExtension() === "JPG") $newName = strtolower($getFile->getName());
         }
 
         if($id == NULL){

@@ -198,6 +198,11 @@ class App extends BaseConfig
     public string $viewLogo         = 'assets/img/logo/';
     public string $deleteLogo       = ROOTPATH."public/assets/img/logo/";
 
+    // Event
+    public string $uploadEvent       = ROOTPATH."public/assets/img/event";
+    public string $viewEvent         = 'assets/img/event/';
+    public string $deleteEvent       = ROOTPATH."public/assets/img/event/";
+
     // Table Database Name
     public string $mst_role         = 'mst_role';
     public string $mst_users        = 'mst_users';
