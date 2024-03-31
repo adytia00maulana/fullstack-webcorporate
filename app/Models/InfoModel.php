@@ -18,7 +18,7 @@ class InfoModel extends Model
 
     public function getById($id) {
         $sqlQuery = $this->db->table($this->table)->where('id', $id);
-        return $sqlQuery->get()->getRow();
+        return $sqlQuery->get()->getRowArray();
     }
 
     public function InsertData($data) {

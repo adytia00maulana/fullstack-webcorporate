@@ -56,6 +56,14 @@ class GalleryModel extends Model
         return $result;
     }
 
+    // Get Data By Position
+    public function MdlGetByPosition($position)
+    {
+        $sqlQuery = "SELECT * FROM ".$this->table." WHERE position=".$position;
+        $query = $this->db->query($sqlQuery);
+        return $query->getResultArray();
+    }
+
     // Delete Data
     public function MdlDeleteById($id): void
     {

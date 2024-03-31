@@ -197,7 +197,36 @@
                     <div class="form-group">
                         <label for="description">Description</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Description" name="description" id="description">
+                            <!-- <input type="text" class="form-control" placeholder="Description" name="description" id="description"> -->
+                            <textarea class="form-control" style="height: 100px" name="description" id="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="packaging">Packaging</label>
+                        <div class="input-group">
+                            <!-- <input type="text" class="form-control" placeholder="Packaging" name="packaging" id="packaging"> -->
+                            <textarea class="form-control" style="height: 100px" name="packaging" id="packaging"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="composition">Composition</label>
+                        <div class="input-group">
+                            <!-- <input type="text" class="form-control" placeholder="Composition" name="composition" id="composition"> -->
+                            <textarea class="form-control" style="height: 100px" name="composition" id="composition"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="usage_method">Usage Method</label>
+                        <div class="input-group">
+                            <!-- <input type="text" class="form-control" placeholder="Usage Method" name="usage_method" id="usage_method"> -->
+                            <textarea class="form-control" style="height: 100px" name="usage_method" id="usage_method"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="benefits">Benefits</label>
+                        <div class="input-group">
+                            <!-- <input type="text" class="form-control" placeholder="Benefits" name="benefits" id="benefits"> -->
+                            <textarea class="form-control" style="height: 100px" name="benefits" id="benefits"></textarea>
                         </div>
                     </div>
                     <div class="form-group mb-0">

@@ -198,6 +198,16 @@ class App extends BaseConfig
     public string $viewLogo         = 'assets/img/logo/';
     public string $deleteLogo       = ROOTPATH."public/assets/img/logo/";
 
+    // Event
+    public string $uploadEvent       = ROOTPATH."public/assets/img/event";
+    public string $viewEvent         = 'assets/img/event/';
+    public string $deleteEvent       = ROOTPATH."public/assets/img/event/";
+
+    // Brand Ambassador
+    public string $uploadBrandAmbassador       = ROOTPATH."public/assets/img/ba";
+    public string $viewBrandAmbassador         = 'assets/img/ba/';
+    public string $deleteBrandAmbassador       = ROOTPATH."public/assets/img/ba/";
+
     // Table Database Name
     public string $mst_role         = 'mst_role';
     public string $mst_users        = 'mst_users';
@@ -209,6 +219,7 @@ class App extends BaseConfig
     public string $store            = 'store';
     public string $logo             = 'logo';
     public string $visi_misi        = 'visi_misi';
+    public string $ba               = 'brand_ambassador';
 
     public string $tbl_users        = 'users';
 }

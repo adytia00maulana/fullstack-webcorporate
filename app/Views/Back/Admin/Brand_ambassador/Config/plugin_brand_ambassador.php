@@ -1,21 +1,21 @@
 <script>
-    let start = 0;
-    let end = 0;
+    let startBa = 0;
+    let endBa = 0;
     /************ Start Add Default Datatables and Sorting **********/
-    $("#table-gallery").dataTable({});
-    $("#table-gallery tbody").sortable({
+    $("#table-ba").dataTable({});
+    $("#table-ba tbody").sortable({
         start: function (event, ui) {
-            start = ui.item.index();
-            // sortingGallery(ui.item.index(), null);
+            startBa = ui.item.index();
+            // sortingBa(ui.item.index(), null);
         },
         update: function(event, ui) {
-            end = ui.item.index();
-            sortingGallery();
+            endBa = ui.item.index();
+            sortingBa();
         }
     });
     /************ End Add Default Datatables and Sorting **********/
 
-    function changeFileGallery(value, id){
+    function changeFileBa(value, id){
         var fileList = value;
         let label = '';
         if(fileList.length > 0){
@@ -36,7 +36,7 @@
         }
     }
 
-    function deleteGallery(id, filePath) {
+    function deleteBa(id, filePath) {
         const url = "<?php if(isset($deleteById)) echo $deleteById ?>";
         let urlGet = url+Number(id)+'/'+filePath
         swal({
@@ -59,11 +59,11 @@
             });
     }
 
-    function viewImgGallery(fileName) {
+    function viewImgBa(fileName) {
         const path = '<?php
-            $pathGallery = '';
-            if(isset($viewPathGallery)) $pathGallery = $viewPathGallery;
-            echo base_url(). $pathGallery;
+            $pathBa = '';
+            if(isset($viewPathBa)) $pathBa = $viewPathBa;
+            echo base_url(). $pathBa;
             ?>'
         let url = path+fileName;
         img = '<img src="'+url+'" class="d-block w-100" alt="...">';
@@ -72,12 +72,12 @@
     }
 </script>
 <script>
-    function sortingGallery(){
+    function sortingBa(){
         let url = '<?= $updatePosition ?? '' ?>';
         $.ajax({
             type: "POST",
             url: url,
-            data: {'index_start': start, 'index_end': end},
+            data: {'index_start': startBa, 'index_end': endBa},
             dataType: "JSON",
             success: function (response) {
                 window.location.href=response;

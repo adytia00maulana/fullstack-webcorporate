@@ -11,7 +11,7 @@ $routes->get('/login', 'Auth::index');
 $routes->get('/logout', 'Auth::logout');
 $routes->post('/auth', 'Auth::loginAuth');
 
-$routes->group('admin', ['namespace' => 'App\Controllers'], ['filter' => 'loginFilter'], static function ($subRoutes) {
+$routes->group('admin', ['filter' => 'loginFilter'], static function ($subRoutes) {
     $subRoutes->add('', 'Admin::index');
     $subRoutes->get('listUsers', 'Admin::applicationListUsers');
     $subRoutes->get('listRole', 'Admin::applicationListRole');
@@ -33,7 +33,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], ['filter' => 'loginF
         // event routes
         $UtilRoutes->get('event', 'Utilities::indexEvent');
         $UtilRoutes->post('create-event', 'Utilities::PostEvent');
-        $UtilRoutes->get('form-event', 'Utilities::FormEvent');
+        $UtilRoutes->get('form-event', 'Utilities::formEvent');
         $UtilRoutes->get('form-detail-event/(:any)', 'Utilities::formDetail/$1');
         $UtilRoutes->post('update-event/(:any)', 'Utilities::UpdateEvent/$1');
         
@@ -47,10 +47,15 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], ['filter' => 'loginF
         $UtilRoutes->get('gallery/getGalleryById/(:any)', 'Utilities::getGallery/$1');
         $UtilRoutes->post('gallery/upload/(:any)', 'Utilities::uploadGallery/$1');
         $UtilRoutes->get('gallery/deleteById/(:any)/(:any)', 'Utilities::deleteGallery/$1/$2');
+        $UtilRoutes->post('gallery/updatePosition', 'Utilities::updatePositionGallery');
         $UtilRoutes->get('logo', 'Utilities::indexLogo');
         $UtilRoutes->post('logo/postLogo', 'Utilities::postLogo');
         $UtilRoutes->get('vm', 'Utilities::indexVm');
         $UtilRoutes->post('vm/postVm', 'Utilities::postVm');
+        $UtilRoutes->get('ba', 'Utilities::indexBrandAmbassador');
+        $UtilRoutes->post('ba/upload/(:any)', 'Utilities::uploadBrandAmbassador/$1');
+        $UtilRoutes->get('ba/deleteById/(:any)/(:any)', 'Utilities::deleteBrandAmbassador/$1/$2');
+        $UtilRoutes->post('ba/updatePosition', 'Utilities::updatePositionBrandAmbassador');
         // $UtilRoutes->get('aboutUs', 'Utilities::index', ['filter' => 'loginFilter']);
         // $UtilRoutes->get('aboutUs/getAboutUsById/(:any)', 'Utilities::getAboutUs/$1', ['filter' => 'loginFilter']);
         // $UtilRoutes->post('aboutUs/postAboutUs', 'Utilities::postAboutUs', ['filter' => 'loginFilter']);

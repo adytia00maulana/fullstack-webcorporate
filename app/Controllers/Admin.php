@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Libraries\GlobalValidation;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
 use MstRoleModel;
@@ -12,15 +13,16 @@ use ProductModel;
 class Admin extends BaseController
 {
     private $MstUserModel, $MstRoleModel, $ProductModel, $pathUploadProduct, $pathViewProduct, $pathDeleteProduct;
+    public GlobalValidation $GlobalValidation;
     public function __construct()
     {
-        $session = session();
         $this->MstUserModel = model(MstUserModel::class);
         $this->MstRoleModel = model(MstRoleModel::class);
         $this->ProductModel = model(ProductModel::class);
         $this->pathUploadProduct = config('app')-> uploadProduct;
         $this->pathViewProduct = config('app')-> viewProduct;
         $this->pathDeleteProduct = config('app')-> deleteProduct;
+        $this->GlobalValidation = new GlobalValidation();
     }
 
     public function defaultLoadSideBar(): array
@@ -36,6 +38,7 @@ class Admin extends BaseController
         $data['url_store'] = base_url() . 'admin/utilities/store';
         $data['url_logo'] = base_url() . 'admin/utilities/logo';
         $data['url_visi_misi'] = base_url() . 'admin/utilities/vm';
+        $data['url_ba'] = base_url() . 'admin/utilities/ba';
 
         return $data;
     }
@@ -104,12 +107,18 @@ class Admin extends BaseController
         if($id == NULL){
             $data['id'] = 0;
             $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
-            $this->ProductModel->MdlProductInsert($data);
+            $res = $this->ProductModel->MdlProductInsert($data);
         }else{
             $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
-            $this->ProductModel->MdlProductUpdatedById($id, $data);
+            $res = $this->ProductModel->MdlProductUpdatedById($id, $data);
         }
-
+        if ($res) {
+            $msgInfo = $this->GlobalValidation->success();
+        } else {
+            $msgInfo = $this->GlobalValidation->validation();
+            $msgInfo['result'] = "Failed to save data";
+        }
+        session()->setFlashdata($msgInfo);
         return redirect()->to(base_url().'admin/listProduct/1');
     }
 
@@ -150,11 +159,18 @@ class Admin extends BaseController
         if($id == NULL){
             $data['id'] = 0;
             $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
-            $this->ProductModel->MdlSourceProductInsert($data);
+            $res = $this->ProductModel->MdlSourceProductInsert($data);
         }else{
             $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
-            $this->ProductModel->MdlSourceProductUpdatedById($id, $data);
+            $res = $this->ProductModel->MdlSourceProductUpdatedById($id, $data);
         }
+        if ($res) {
+            $msgInfo = $this->GlobalValidation->success();
+        } else {
+            $msgInfo = $this->GlobalValidation->validation();
+            $msgInfo['result'] = "Failed to save data";
+        }
+        session()->setFlashdata($msgInfo);
 
         return redirect()->to(base_url().'admin/listSourceProduct/1');
     }
@@ -199,40 +215,70 @@ class Admin extends BaseController
 
     public function postDetailProduct()
     {
+        $msgInfo = $this->GlobalValidation->validation();
         $urlPrevious = $this->getUrlPrevious();
         $data = $_POST;
         unset($data['csrf_test_name']);
         if(!isset($data['active'])) $data['active'] = "0";
         $id = $data['id'];
         $getFile = service('request')->getFile('fileUpload');
+        $checkData = $this->ProductModel->MdlProductSelect();
+        $totalFile = count($checkData);
         $getFileSize = (int) $getFile->getSizeByUnit('mb');
         if($getFileSize > 3) {
-            print_r('<script type="text/javascript">alert("Max Upload File 3 Megabyte"); window.location.href = "'.base_url().$urlPrevious.'";</script>');
-            exit();
+            $msgInfo['result'] = "Max Upload File 3 Megabyte";
+            session()->setFlashdata($msgInfo);
+            return redirect()->to(base_url().$urlPrevious);
         }
 
         if ($getFile->isValid() && ! $getFile->hasMoved()) {
             $validate = $getFile->getClientMimeType() === "image/png" | $getFile->getClientMimeType() === "image/jpg" | $getFile->getClientMimeType() === "image/jpeg";
             if (!$validate) {
-                print_r('<script type="text/javascript">alert("File upload does not match the format"); window.location.href = "'.base_url().$urlPrevious.'";</script>');
-                exit();
+                $msgInfo['result'] = "File upload does not match the format";
+                session()->setFlashdata($msgInfo);
+                return redirect()->to(base_url().$urlPrevious);
             }
             $path = realpath($this->pathUploadProduct);
             $newName = $getFile->getName();
+            if($getFile->getClientExtension() === "JPG") $newName = strtolower($getFile->getName());
             $data['filepath'] = $path .'/' . $newName;
 
             if($id == NULL){
+                $idUniqFile = 'product_'.$totalFile.'_';
                 $data['id'] = 0;
                 $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
-                $data['filename'] = $newName;
-                $this->ProductModel->MdlDetailProductInsert($data);
+                $data['filename'] = $idUniqFile.$newName;
+                $res = $this->ProductModel->MdlDetailProductInsert($data);
             }else{
-                if($data['filename']) unlink($this->pathDeleteProduct . $data['filename']);
-                $data['filename'] = $newName;
+                $idUniqFile = 'product_'.$totalFile.$id.'_';
+                $oldFile = $data['filename'];
+                $data['filename'] = $idUniqFile.$newName;
                 $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
-                $this->ProductModel->MdlDetailProductUpdatedById($id, $data);
+                $res = $this->ProductModel->MdlDetailProductUpdatedById($id, $data);
+                if($res) {
+                    if ($oldFile) unlink($this->pathDeleteProduct . $oldFile);
+                }
             }
-            $getFile->move($path, $newName);
+            if ($res) {
+                $msgInfo = $this->GlobalValidation->success();
+                $getFile->move($path, $idUniqFile.$newName);
+            } else {
+                $msgInfo['result'] = "Failed to save data";
+            }
+            session()->setFlashdata($msgInfo);
+        } else {
+            if($id == NULL){
+                $msgInfo['result'] = "Please fill in all data";
+            }else{
+                $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
+                $res = $this->ProductModel->MdlDetailProductUpdatedById($id, $data);
+                if ($res) {
+                    $msgInfo = $this->GlobalValidation->success();
+                } else {
+                    $msgInfo['result'] = "Failed to save data";
+                }
+            }
+            session()->setFlashdata($msgInfo);
         }
 
 
