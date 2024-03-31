@@ -3,19 +3,20 @@
 <?= $this->section('content') ?>
 <section class="section">
     <div class="section-header">
-        <h1>Form Event</h1>
+        <h1>Form Update Store</h1>
     </div>
     <div class="section-body">
         <div class="card">
             <div class="card-body">
                 <a class="btn btn-primary text-white my-2 text-capitalize"
-                    href="<?= base_url('admin/utilities/event') ?>">back</a>
+                    href="<?= base_url('admin/utilities/store') ?>">back</a>
                 <hr>
-                <form action="<?= base_url('admin/utilities/create-event') ?>" method="post">
+                <form action="<?= base_url('admin/utilities/update-store/' . $stores->id) ?>" method="post">
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>Event Name</label>
-                            <input type="text" class="form-control" name="event_name" id="" required>
+                            <label>Store Name</label>
+                            <input type="text" class="form-control" name="store_name" id=""
+                                value="<?= $stores->store_name ?>">
                         </div>
                         <div class="form-group col-md-6">
                             <label>Event Thumbnail</label>
@@ -27,17 +28,13 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>Start Date</label>
-                            <input type="date" name="start_date" class="form-control" id="" required>
+                            <label>Store Link</label>
+                            <input type="text" name="store_link" class="form-control" id="" value="<?= $stores->store_link ?>">
                         </div>
                         <div class="form-group col-md-6">
-                            <label>End Date</label>
-                            <input type="date" name="end_date" class="form-control" id="" required>
+                            <label>Status</label>
+                            <input type="text" name="is_active" class="form-control" id="" value="<?= $stores->is_active ?>">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Event Description</label>
-                        <textarea class="form-control" name="description" rows="3" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-success float-right">Submit</button>
                 </form>

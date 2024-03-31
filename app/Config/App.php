@@ -204,10 +204,9 @@ class App extends BaseConfig
     public string $product          = 'product';
     public string $source_product   = 'source_product';
     public string $detail_product   = 'detail_product';
-    // public string $about_us        = 'about_us';
-    // public string $faq             = 'faq';
     public string $gallery          = 'gallery';
     public string $info             = 'info';
+    public string $store            = 'store';
     public string $logo             = 'logo';
     public string $visi_misi        = 'visi_misi';
 

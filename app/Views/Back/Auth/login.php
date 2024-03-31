@@ -3,9 +3,8 @@
 <?= $this->section('content') ?>
 <div class="row">
     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-        <div class="login-brand bg-secondary">
+        <div class="login-brand bg-success p-2" style="border-radius: 4px; position: relative; top: 1.8em;">
              <img src="<?php  echo base_url(); ?>assets/img/logo_new.png" alt="logo" width="170">
-        <!-- <img src="<?php // echo base_url(); ?>assets/img/logo_mbi.png" alt="logo" width="150"> -->
         </div>
         <?php if(session()->getFlashdata('msg')): ?>
             <div class="alert alert-danger"><?= session()->getFlashdata('msg') ?></div>
@@ -28,7 +27,7 @@
                         </div>
                         <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
                         <div class="invalid-feedback text-capitalize">mohon masukkan password anda</div>
-                        <label for="show_password">
+                        <label for="show_password" class="mt-3">
                             <input type="checkbox" id="show_password" onclick="changePasswordType(event)" />
                         </label>&nbsp;&nbsp;Show Password
                     </div>
@@ -48,7 +47,7 @@
                 <div class="row sm-gutters"></div>
             </div>
             <div class="simple-footer font-weight-bold">
-                Copyright &copy; IGS <?= date('Y') ?>
+                Copyright &copy; IGS 2023
             </div>
         </div>
     </div>

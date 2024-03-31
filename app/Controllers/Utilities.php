@@ -11,10 +11,11 @@ use InfoModel;
 use LogoModel;
 use ProductModel;
 use VisiMisiModel;
+use StoreModel;
 
 class Utilities extends BaseController
 {
-    public $GalleryModel, $ProductModel, $InfoModel, $AdminController, $GlobalValidation, $pathUploadGallery, $pathViewGallery, $pathDeleteGallery;
+    public $GalleryModel, $ProductModel, $InfoModel, $StoreModel, $AdminController, $GlobalValidation, $pathUploadGallery, $pathViewGallery, $pathDeleteGallery;
     public $pathUploadLogo;
     public $pathViewLogo;
     public $pathDeleteLogo;
@@ -24,6 +25,7 @@ class Utilities extends BaseController
     {
         $this->GalleryModel = model(GalleryModel::class);
         $this->InfoModel = model(InfoModel::class);
+        $this->StoreModel = model(StoreModel::class);
         $this->ProductModel = model(ProductModel::class);
         $this->AdminController = new Admin();
         $this->GlobalValidation = new GlobalValidation();
@@ -44,14 +46,37 @@ class Utilities extends BaseController
         $data['url_product_list'] = base_url() . 'admin/listProduct/';
         $data['url_detail_product_list'] = base_url() . 'admin/listDetailProduct/';
         $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct/';
-        // $data['url_about_us'] = base_url() . 'admin/utilities/aboutUs';
-        // $data['url_faq'] = base_url() . 'admin/utilities/faq';
         $data['getListProduct'] = $this->ProductModel->MdlProductSelect();
         $data['url_gallery'] = base_url() . 'admin/utilities/gallery';
-        $data['url_event'] = base_url() . 'admin/utilities/event';
         $data = $this->AdminController->defaultLoadSideBar();
         return $data;
     }
+
+    public function indexStore() {
+        $data = $this->defaultLoadSideBar();
+        $data['stores'] = $this->StoreModel->getAllData();
+        return view('Back/Admin/Store/store' , $data);
+    }
+
+
+    public function formStore() {
+        $data = $this->defaultLoadSideBar();
+        $data['stores'] = $this->StoreModel->getAllData();
+        return view('Back/Admin/Store/form', $data);
+    }
+
+    public function PostStore() {
+        $data = $_POST;
+        if ($data) {
+            $this->StoreModel->InsertData($data);
+            session()->setFlashdata('message', 'Create Store Success');
+            return redirect()->route('admin/utilities/store');
+        } else {
+            alert('oops, error!');
+            return view('Back/Admin/Store/form');
+        }
+    }
+    
 
     public function indexEvent() {
         $data = $this->defaultLoadSideBar();
@@ -75,6 +100,27 @@ class Utilities extends BaseController
             alert('oops, error!');
             return view('Back/Admin/Info/form');
         }
+    }
+
+    public function formDetailStore($id) {
+        if ($id) {
+            $data = $this->defaultLoadSideBar();
+            $data['stores'] = $this->StoreModel->getById($id);
+            return view('Back/Admin/Store/form-detail', $data);
+        }        
+    }
+
+    public function UpdateStore($id) {
+        $data = $_POST;
+        if ($data) {
+            $this->StoreModel->UpdateData($data, $id);
+            session()->setFlashdata('message', 'Update Event Success');
+            return redirect()->route('admin/utilities/store');
+        } else {    
+            alert('oops, error!');
+            return view('Back/Admin/Store/form');
+        }
+
     }
 
     public function formDetail($id) {

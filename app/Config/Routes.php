@@ -36,6 +36,12 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], ['filter' => 'loginF
         $UtilRoutes->get('form-event', 'Utilities::FormEvent');
         $UtilRoutes->get('form-detail-event/(:any)', 'Utilities::formDetail/$1');
         $UtilRoutes->post('update-event/(:any)', 'Utilities::UpdateEvent/$1');
+        
+        $UtilRoutes->get('store', 'Utilities::indexStore');
+        $UtilRoutes->post('create-store', 'Utilities::PostStore');
+        $UtilRoutes->get('form-store', 'Utilities::FormStore');
+        $UtilRoutes->get('form-detail-store/(:any)', 'Utilities::formDetailStore/$1');
+        $UtilRoutes->post('update-store/(:any)', 'Utilities::UpdateStore/$1');
 
         $UtilRoutes->get('gallery', 'Utilities::indexGallery');
         $UtilRoutes->get('gallery/getGalleryById/(:any)', 'Utilities::getGallery/$1');
