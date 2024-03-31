@@ -72,7 +72,7 @@ $routes->get('/', 'Home::index');
 $routes->get('/about', 'Home::about');
 $routes->get('/contact', 'Home::contact');
 $routes->get('/gallery', 'Home::gallery');
-$routes->get('/product', 'Home::product');
+$routes->get('/product/(:any)', 'Home::product/$1');
 $routes->get('/info', 'Home::info');
 $routes->get('/brand', 'Home::brand');
 $routes->get('/faq', 'Home::faq');
