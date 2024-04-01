@@ -1,4 +1,4 @@
-<div class="container footer-top">
+<!-- <div class="container footer-top">
     <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
             <a href="<?= base_url() ?>" class="logo d-flex align-items-center">
@@ -52,7 +52,7 @@
         </div>
 
     </div>
-</div>
+</div> -->
 
 <!-- <div class="container copyright text-center mt-4"> -->
 <div class="container text-center mt-4">

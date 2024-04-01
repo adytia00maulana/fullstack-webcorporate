@@ -12,7 +12,7 @@
     </li>
     <li>
         <a
-                href="<?= base_url(). 'about'; ?>"
+                href="<?= base_url(). 'vm'; ?>"
                 class="<?php
                 if(isset($activeUrl)){
                     if($activeUrl.'/about' == (string) current_url()) echo 'active';
@@ -34,21 +34,24 @@
     </li> -->
     <li class="dropdown has-dropdown">
         <a
-                href="#"
-                class="<?php
-                if(isset($activeUrl)){
-                    if($activeUrl.'/product' == (string) current_url()) echo 'active';
-                }else{
-                    echo '';
-                }?>"
-        ><span>Produk</span> <i class="bi bi-chevron-down"></i>
+            href="#"
+            class="<?php
+            if(isset($activeUrl)){
+                if($activeUrl.'/product' == (string) current_url()) echo 'active';
+            }else{
+                echo '';
+            }?>"
+        >
+            <span>Produk</span> <i class="bi bi-chevron-down"></i>
         </a>
         <ul>
             <?php $i=0; foreach($getListProduct as $row): $i++;
                 $id = $row['id'];
                 $name = $row['name'];
             ?>
-            <li><a href="<?= base_url(). 'product'.$id; ?>"><?= $name ?></a></li>
+            <li>
+                <a href="<?= base_url(). 'product/'.$id; ?>"><?= $name ?></a>
+            </li>
             <?php endforeach; ?>
         </ul>
     </li>
@@ -119,7 +122,7 @@
     </li>
     <li>
         <a
-                href="<?= base_url(). 'contact'; ?>"
+                href="<?= base_url(). 'about'; ?>"
                 class="<?php
     if(isset($activeUrl)){
         if($activeUrl.'/contact' == (string) current_url()) echo 'active';

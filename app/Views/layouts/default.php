@@ -10,7 +10,7 @@
 
     <!-- Favicons -->
     <link href="<?php echo base_url(); ?>assets/img/favicon512.png" rel="icon">
-    <link href="<?php echo base_url(); ?>assets/front_end/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- <link href="<?php echo base_url(); ?>assets/front_end/assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
 
     <!-- Fonts -->
 
@@ -66,6 +66,8 @@
 <!-- Main JS File -->
 <script src="<?php echo base_url(); ?>assets/front_end/assets/js/main.js"></script>
 
+<!-- Custom -->
+<?= $this->include('Front/Config/plugin_fornt_end'); ?>
 </body>
 
 </html>

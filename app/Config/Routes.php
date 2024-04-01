@@ -69,10 +69,11 @@ $routes->group('admin', ['filter' => 'loginFilter'], static function ($subRoutes
 
 // routing front / company profile
 $routes->get('/', 'Home::index');
+$routes->get('/vm', 'Home::visiMisi');
 $routes->get('/about', 'Home::about');
-$routes->get('/contact', 'Home::contact');
 $routes->get('/gallery', 'Home::gallery');
 $routes->get('/product/(:any)', 'Home::product/$1');
+$routes->get('/detailProduct/(:any)', 'Home::detailProduct/$1');
 $routes->get('/info', 'Home::info');
 $routes->get('/brand', 'Home::brand');
 $routes->get('/faq', 'Home::faq');
