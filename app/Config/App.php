@@ -184,29 +184,29 @@ class App extends BaseConfig
 
     /********* Path Upload View Delete ********/
     // Product
-    public string $uploadProduct    = ROOTPATH."public/assets/img/products";
-    public string $viewProduct      = 'assets/img/products/';
-    public string $deleteProduct    = ROOTPATH . "public/assets/img/products/";
+    public string $uploadProduct    = ROOTPATH."public/assets/admin/img/products";
+    public string $viewProduct      = 'assets/admin/img/products/';
+    public string $deleteProduct    = ROOTPATH . "public/assets/admin/img/products/";
 
     // Gallery
-    public string $uploadGallery    = ROOTPATH."public/assets/img/gallery";
-    public string $viewGallery      = 'assets/img/gallery/';
-    public string $deleteGallery    = ROOTPATH."public/assets/img/gallery/";
+    public string $uploadGallery    = ROOTPATH."public/assets/admin/img/gallery";
+    public string $viewGallery      = 'assets/admin/img/gallery/';
+    public string $deleteGallery    = ROOTPATH."public/assets/admin/img/gallery/";
 
     // Logo
-    public string $uploadLogo       = ROOTPATH."public/assets/img/logo";
-    public string $viewLogo         = 'assets/img/logo/';
-    public string $deleteLogo       = ROOTPATH."public/assets/img/logo/";
+    public string $uploadLogo       = ROOTPATH."public/assets/admin/img/logo";
+    public string $viewLogo         = 'assets/admin/img/logo/';
+    public string $deleteLogo       = ROOTPATH."public/assets/admin/img/logo/";
 
     // Event
-    public string $uploadEvent       = ROOTPATH."public/assets/img/event";
-    public string $viewEvent         = 'assets/img/event/';
-    public string $deleteEvent       = ROOTPATH."public/assets/img/event/";
+    public string $uploadEvent       = ROOTPATH."public/assets/admin/img/event";
+    public string $viewEvent         = 'assets/admin/img/event/';
+    public string $deleteEvent       = ROOTPATH."public/assets/admin/img/event/";
 
     // Brand Ambassador
-    public string $uploadBrandAmbassador       = ROOTPATH."public/assets/img/ba";
-    public string $viewBrandAmbassador         = 'assets/img/ba/';
-    public string $deleteBrandAmbassador       = ROOTPATH."public/assets/img/ba/";
+    public string $uploadBrandAmbassador       = ROOTPATH."public/assets/admin/img/ba";
+    public string $viewBrandAmbassador         = 'assets/admin/img/ba/';
+    public string $deleteBrandAmbassador       = ROOTPATH."public/assets/admin/img/ba/";
 
     // Table Database Name
     public string $mst_role         = 'mst_role';

@@ -27,6 +27,7 @@ class Admin extends BaseController
 
     public function defaultLoadSideBar(): array
     {
+        $data['title'] = 'Admin Template Default';
         // $data['url_users_list'] = base_url() . 'admin/listUsers';
         // $data['url_role_list'] = base_url() . 'admin/listRole';
         $data['url_product_list'] = base_url() . 'admin/listProduct/';
@@ -46,6 +47,7 @@ class Admin extends BaseController
     public function index(): string
     {
         $data = $this->defaultLoadSideBar();
+        $data['title'] = 'Dashboard';
         $queryUsers = $this->MstUserModel->MdlSelect();
         $queryUsersActive = $this->MstUserModel->MdlSelectByActive();
         $querySourceProduct = $this->ProductModel->MdlSourceProductSelect();
@@ -61,6 +63,7 @@ class Admin extends BaseController
     public function applicationListUsers(): string
     {
         $data = $this->defaultLoadSideBar();
+        $data['title'] = 'Users';
 
         $data['getListUser'] = $this->MstUserModel->MdlSelect();
         return view('Back/Admin/Users/users-list', $data);
@@ -69,6 +72,7 @@ class Admin extends BaseController
     public function applicationListRole(): string
     {
         $data = $this->defaultLoadSideBar();
+        $data['title'] = 'Role';
 
         $data['getListRole'] = $this->MstRoleModel->MdlSelect();
         return view('Back/Admin/Users/role-list', $data);
@@ -77,6 +81,7 @@ class Admin extends BaseController
     public function applicationListProduct($paginate): string
     {
         $data = $this->defaultLoadSideBar();
+        $data['title'] = 'Product';
         if($paginate == null) $paginate = 1;
         $queryList = $this->ProductModel->MdlProductListPaginate($paginate);
         $queryListPaginate = $this->ProductModel->MdlCountPaginateProduct();
@@ -131,6 +136,7 @@ class Admin extends BaseController
     public function applicationListSourceProduct($paginate): string
     {
         $data = $this->defaultLoadSideBar();
+        $data['title'] = 'Source Product';
         $queryList = $this->ProductModel->MdlSourceProductListPaginate($paginate);
         $queryListPaginate = $this->ProductModel->MdlCountPaginateSourceProduct();
         $data['listPaginate'] = $queryListPaginate;

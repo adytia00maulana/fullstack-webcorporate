@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-        <title>Dashboard - PT. Multi Bestri Indonesia</title>
+        <title><?= $title ?? 'Admin Template' ?></title>
             <!-- favicon -->
         <link rel="icon" type="image/x-icon" class="text-success" href="<?= base_url('assets/img/favicon512.png') ?>">
         <!-- General CSS Files -->
