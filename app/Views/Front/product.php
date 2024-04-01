@@ -19,34 +19,29 @@
                 $filename = $dataDetailProd['filename'];
                 $filepath = $dataDetailProd['filepath'];
                 $description = $dataDetailProd['description'];
-                $active = $dataDetailProd['active'];
-                $created_by = $dataDetailProd['created_by'];
-                $created_date = $dataDetailProd['created_date'];
-                $updated_by = $dataDetailProd['updated_by'];
-                $updated_date = $dataDetailProd['updated_date'];
             ?>
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="<?= $no*100?>">
                 <div class="course-item">
                     <img src="<?= base_url().$viewPathProduct.$filename ?>" class="img-fluid" alt="...">
                     <div class="course-content">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <p class="category"><?= $name_product ?></p>
-                        <!-- <p class="price">$169</p> -->
-                    </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <p class="category"><?= $name_product ?></p>
+                            <!-- <p class="price">$169</p> -->
+                        </div>
 
-                    <h3><a href="<?= $url_detail_product.$id ?>"><?= $name ?></a></h3>
-                    <p class="description" data-toggle="tooltip" data-placement="right" title="<?= (chunk_split($description, 100, "\n")); ?>"><?= (chunk_split($description, 100, "\n")); ?></p>
-                    <!-- <div class="trainer d-flex justify-content-between align-items-center">
-                        <div class="trainer-profile d-flex align-items-center">
-                        <img src="assets/img/trainers/trainer-1-2.jpg" class="img-fluid" alt="">
-                        <a href="" class="trainer-link">Antonio</a>
-                        </div>
-                        <div class="trainer-rank d-flex align-items-center">
-                        <i class="bi bi-person user-icon"></i>&nbsp;50
-                        &nbsp;&nbsp;
-                        <i class="bi bi-heart heart-icon"></i>&nbsp;65
-                        </div>
-                    </div> -->
+                        <h3><a href="<?= $url_detail_product.$id ?>"><?= $name ?></a></h3>
+                        <p class="description" data-toggle="tooltip" data-placement="right" title="<?= (chunk_split($description, 100, "\r\n")); ?>"><?= chunk_split($description, 100, "\r\n") ?? '-'; ?></p>
+                        <!-- <div class="trainer d-flex justify-content-between align-items-center">
+                            <div class="trainer-profile d-flex align-items-center">
+                            <img src="<?=base_url(); ?>assets/front_end/assets/img/trainers/trainer-1-2.jpg" class="img-fluid" alt="">
+                            <a href="" class="trainer-link">Antonio</a>
+                            </div>
+                            <div class="trainer-rank d-flex align-items-center">
+                            <i class="bi bi-person user-icon"></i>&nbsp;50
+                            &nbsp;&nbsp;
+                            <i class="bi bi-heart heart-icon"></i>&nbsp;65
+                            </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
