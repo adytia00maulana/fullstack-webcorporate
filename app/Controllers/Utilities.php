@@ -252,6 +252,14 @@ class Utilities extends BaseController
                     session()->setFlashdata($msgInfo);
                     return redirect()->to(base_url().'admin/utilities/form-detail-event/'.$id);
                 }
+            }else{
+                $res = $this->InfoModel->UpdateData($data, $id);
+                if($res) {
+                    $msgInfo = $this->GlobalValidation->success();
+                }else{
+                    $msgInfo['result'] = "Failed to save data";
+                }
+                session()->setFlashdata($msgInfo);
             }
         }else{
             $msgInfo['result'] = "Please Selected File";

@@ -68,7 +68,7 @@
                         </div>
                     </div><div class="form-group row align-items-center">
                         <label class="form-control-label col-sm-3 text-md-right">Image Logo</label>
-                        <div class="col-sm-6 col-md-9">
+                        <div class="col-sm-6 col-md-auto bg-secondary p-2 border-5">
                             <img
                                     src="<?php
                                     if($filename == null){
