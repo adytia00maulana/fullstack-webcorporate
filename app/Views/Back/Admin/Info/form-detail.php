@@ -53,7 +53,7 @@
                 <?= csrf_field(); ?>
                 <input type="hidden" name="id" id="id" value="<?= $id ?? '' ?>">
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile" name="fileUpload[]" multiple accept="image/*" onchange="changeFileEvent(event.target.files, '0')">
+                    <input type="file" class="custom-file-input" id="customFile" name="fileUpload[]" multiple accept="image/*" onchange="changeFileDetailEvent(event.target.files, '0')">
                     <label class="custom-file-label" for="customFile" id="labelFile">Choose file .PNG, .JPG or .JPEG</label>
                 </div>
                 <div class="form-text text-muted">The image must have a maximum size of 8MB</div>
@@ -97,14 +97,14 @@
                                     <?= csrf_field(); ?>
                                     <input type="hidden" name="id_event" id="id_event" value="<?= $id ?? '' ?>">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="fileUpload[]" onchange="changeFileEvent(event.target.files, <?= $id ?>)">
+                                        <input type="file" class="custom-file-input" name="fileUpload[]" onchange="changeFileDetailEvent(event.target.files, <?= $id ?>)">
                                         <label class="custom-file-label" id="updatedFileUpload<?= $id ?>">Edit</label>
                                         <input type="hidden" name="filename" value="<?= $filename ?>">
                                     </div>
                                     <button type="submit" class="btn btn-info" id="updatedFile<?= $id ?>" style="display: none" onclick="showLoader()">Upload</button>
                                     <?php echo form_close(); ?>
-                                    <a class="btn btn-warning text-white" id="deleteFile<?= $id ?>" onclick="deleteEvent(<?= $id ?>, '<?= $filename ?>')">Delete</a>
-                                    <a class="btn btn-secondary" id="viewFile<?= $id ?>" onclick="viewImgEvent('<?= $filename ?>')">View</a>
+                                    <a class="btn btn-warning text-white" id="deleteFile<?= $id ?>" onclick="deleteDetailEvent(<?= $id ?>, '<?= $filename ?>')">Delete</a>
+                                    <a class="btn btn-secondary" id="viewFile<?= $id ?>" onclick="viewImgDetailEvent('<?= $filename ?>')">View</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

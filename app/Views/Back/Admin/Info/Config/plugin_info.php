@@ -12,29 +12,43 @@
                 ?>'
             let url = path+fileName;
             img = '<img src="'+url+'" class="d-block w-100" alt="...">';
-            popup = window.open('test');
+            popup = window.open('');
+            popup.document.write(img);
+        }
+    }
+
+    function viewImgDetailEvent(fileName) {
+        if(fileName){
+            const path = '<?php
+                $pathPathDetailEvent = '';
+                if(isset($viewPathDetailEvent)) $pathPathDetailEvent = $viewPathDetailEvent;
+                echo base_url(). $pathPathDetailEvent;
+                ?>'
+            let url = path+fileName;
+            img = '<img src="'+url+'" class="d-block w-100" alt="...">';
+            popup = window.open('');
             popup.document.write(img);
         }
     }
 </script>
 <script>
-    let start = 0;
-    let end = 0;
+    let startEvent = 0;
+    let endEvent = 0;
     /************ Start Add Default Datatables and Sorting **********/
     $("#table-event").dataTable({});
     $("#table-event tbody").sortable({
         start: function (event, ui) {
-            start = ui.item.index();
+            startEvent = ui.item.index();
             // sortingEvent(ui.item.index(), null);
         },
         update: function(event, ui) {
-            end = ui.item.index();
+            endEvent = ui.item.index();
             sortingEvent();
         }
     });
     /************ End Add Default Datatables and Sorting **********/
 
-    function changeFileEvent(value, id){
+    function changeFileDetailEvent(value, id){
         var fileList = value;
         let label = '';
         if(fileList.length > 0){
@@ -55,7 +69,7 @@
         }
     }
 
-    function deleteEvent(id, filePath) {
+    function deleteDetailEvent(id, filePath) {
         const url = "<?php if(isset($deleteById)) echo $deleteById ?>";
         let urlGet = url+Number(id)+'/'+filePath
         swal({
@@ -84,7 +98,7 @@
         $.ajax({
             type: "POST",
             url: url,
-            data: {'index_start': start, 'index_end': end},
+            data: {'index_start': startEvent, 'index_end': endEvent},
             dataType: "JSON",
             success: function (response) {
                 window.location.href=response;

@@ -23,7 +23,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr <?= empty($getList) ? '': "hidden='hidden'" ?>>
+                        <tr <?= empty($events) ? '': "hidden='hidden'" ?>>
                             <td colspan="7" class="text-center">No data available in table</td>
                         </tr>
                         <?php
