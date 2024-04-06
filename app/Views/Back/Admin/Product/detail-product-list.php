@@ -31,6 +31,9 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <tr <?= empty($getList) ? '': "hidden='hidden'" ?>>
+                                <td colspan="10" class="text-center">No data available in table</td>
+                            </tr>
                             <?php
                                 $no = 0;
                                 if(isset($activePaginate)){
