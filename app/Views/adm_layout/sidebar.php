@@ -1,9 +1,9 @@
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-        <a href="<?php echo base_url('admin'); ?>">PT. Multi Bestri Indonesia</a>
+        <a href="<?php echo base_url('admin'); ?>"><?= $site_name ?? 'Admin Template' ?></a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
-        <a href="<?php echo base_url('admin'); ?>">MBI</a>
+        <a href="<?php echo base_url('admin'); ?>"><?= $sort_name_site ?? 'AT' ?></a>
     </div>
     <ul class="sidebar-menu">
         <!-- <li class="menu-header">Dashboard</li>

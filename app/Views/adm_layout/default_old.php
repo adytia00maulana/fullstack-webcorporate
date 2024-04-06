@@ -3,7 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-        <title>PT. Multi Bestri Indonesia</title>
+        <title><?= $site_name ?? 'Admin Template' ?></title>
+        <!-- favicon -->
+        <link rel="icon" type="image/x-icon" class="text-success" href="<?= $img_icon ?? base_url('assets/img/favicon512.png') ?>">
 
         <!-- General CSS Files -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/modules/bootstrap/css/bootstrap.min.css">

@@ -9,10 +9,11 @@ use CodeIgniter\HTTP\ResponseInterface;
 use MstRoleModel;
 use MstUserModel;
 use ProductModel;
+use LogoModel;
 
 class Admin extends BaseController
 {
-    private $MstUserModel, $MstRoleModel, $ProductModel, $pathUploadProduct, $pathViewProduct, $pathDeleteProduct;
+    private $MstUserModel, $MstRoleModel, $ProductModel, $pathUploadProduct, $pathViewProduct, $pathDeleteProduct, $LogoModel, $pathViewLogo;
     public GlobalValidation $GlobalValidation;
     public function __construct()
     {
@@ -22,12 +23,14 @@ class Admin extends BaseController
         $this->pathUploadProduct = config('app')-> uploadProduct;
         $this->pathViewProduct = config('app')-> viewProduct;
         $this->pathDeleteProduct = config('app')-> deleteProduct;
+        $this->pathViewLogo = config('app')-> viewLogo;
         $this->GlobalValidation = new GlobalValidation();
+        $this->LogoModel = model(LogoModel::class);
     }
 
     public function defaultLoadSideBar(): array
     {
-        $data['title'] = 'Admin Template Default';
+        $data['title'] = 'Admin Template';
         // $data['url_users_list'] = base_url() . 'admin/listUsers';
         // $data['url_role_list'] = base_url() . 'admin/listRole';
         $data['url_product_list'] = base_url() . 'admin/listProduct/';
@@ -40,6 +43,15 @@ class Admin extends BaseController
         $data['url_logo'] = base_url() . 'admin/utilities/logo';
         $data['url_visi_misi'] = base_url() . 'admin/utilities/vm';
         $data['url_ba'] = base_url() . 'admin/utilities/ba';
+        $data['pathViewLogo'] = $this->pathViewLogo;
+        $queryLogo = $this->LogoModel->MdlSelect();
+        $data['site_name'] = 'Admin Template';
+        $data['sort_name_site'] = 'AT';
+        $data['img_icon'] = base_url().'assets/img/favicon512.png';
+        if(!empty($queryLogo)) $data['title'] = $queryLogo[0]['title'];
+        if(!empty($queryLogo)) $data['site_name'] = $queryLogo[0]['title'];
+        if(!empty($queryLogo)) $data['sort_name_site'] = $queryLogo[0]['sort_name'];
+        if(!empty($queryLogo)) $data['img_icon'] = base_url().$this->pathViewLogo.$queryLogo[0]['filename'];
 
         return $data;
     }

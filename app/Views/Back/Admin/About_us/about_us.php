@@ -37,7 +37,7 @@
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3" for="title">Title</label>
                                 <div class="col-sm-12 col-md-7">
                                     <input type="text" class="form-control" id="title" name="title" value="<?php
-                                        $title = 'PT. Multi Bestri Indonesia';
+                                        $title = 'Admin Template';
                                         if(isset($getData)){
                                             if(count($getData) > 0) $title = $getData[0]['title'];
                                         }

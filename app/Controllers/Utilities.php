@@ -18,7 +18,6 @@ class Utilities extends BaseController
     // public GlobalValidation $GlobalValidation;
     // public Admin $AdminController;
     public $pathUploadLogo;
-    public $pathViewLogo;
     public $pathDeleteLogo;
     public $pathUploadEvent;
     public $pathViewEvent;
@@ -41,7 +40,6 @@ class Utilities extends BaseController
         $this->pathViewGallery = config('app')-> viewGallery;
         $this->pathDeleteGallery = config('app')-> deleteGallery;
         $this->pathUploadLogo = config('app')->uploadLogo;
-        $this->pathViewLogo = config('app')->viewLogo;
         $this->pathDeleteLogo = config('app')->deleteLogo;
         $this->pathUploadEvent = config('app')->uploadEvent;
         $this->pathViewEvent = config('app')->viewEvent;
@@ -397,7 +395,7 @@ class Utilities extends BaseController
     {
         $data = $this->defaultLoadSideBar();
         $data['postData'] = base_url()."admin/utilities/logo/postLogo";
-        $data['viewPathLogo'] = $this->pathViewLogo;
+        $data['viewPathLogo'] = $data['pathViewLogo'];
         $data['id'] = null;
         $data['filename'] = "";
         $data['title'] = "";
@@ -410,6 +408,7 @@ class Utilities extends BaseController
             $data['id'] = $getLogo[0]['id'];
             $data['filename'] = $getLogo[0]['filename'];
             $data['title'] = $getLogo[0]['title'];
+            $data['sort_name'] = $getLogo[0]['sort_name'];
             $data['created_by'] = $getLogo[0]['created_by'];
             $data['created_date'] = $getLogo[0]['created_date'];
             $data['updated_by'] = $getLogo[0]['updated_by'];

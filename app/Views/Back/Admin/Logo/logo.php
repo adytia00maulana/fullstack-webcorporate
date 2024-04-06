@@ -28,6 +28,12 @@
                         </div>
                     </div>
                     <div class="form-group row align-items-center">
+                        <label for="sort_name" class="form-control-label col-sm-3 text-md-right">Sort Name Site Title</label>
+                        <div class="col-sm-6 col-md-9">
+                            <input type="text" name="sort_name" class="form-control" id="sort_name" value="<?= $sort_name ?? '' ?>">
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center">
                         <label for="filename" class="form-control-label col-sm-3 text-md-right">File Name Logo</label>
                         <div class="col-sm-6 col-md-9">
                             <input type="text" class="form-control" name="filename" id="filename" value="<?= $filename ?? '' ?>" readonly>

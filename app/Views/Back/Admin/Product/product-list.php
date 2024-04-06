@@ -18,7 +18,7 @@
                             <thead class="table-primary">
                             <tr>
                                 <th>#</th>
-                                <th>Source Product</th>
+                                <!-- <th>Source Product</th> -->
                                 <th>Product Code</th>
                                 <th>Product Name</th>
                                 <th>Created By</th>
@@ -34,7 +34,7 @@
                             <?php
                                 $id = $row['id'];
                                 $id_source_product = $row['id_source_product'];
-                                $source_product_name = $row['source_product_name'];
+                                // $source_product_name = $row['source_product_name'];
                                 $code = $row['code'];
                                 $name = $row['name'];
                                 $active = $row['active'];
@@ -45,7 +45,7 @@
                             ?>
                                 <tr>
                                     <td><?= $no ?></td>
-                                    <td><?= $source_product_name ?></td>
+                                    <!-- <td><?php // $source_product_name ?? '-' ?></td> -->
                                     <td><?= $code ?></td>
                                     <td><?= $name ?></td>
                                     <td><?= $created_date? date('D, d M Y H:i:s', strtotime($created_date)): '' ?></td>
@@ -117,20 +117,20 @@
                             <input type="text" class="form-control" placeholder="ID" id="id" name="id" value="0"/>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="id_source_product">Source Product</label>
                         <div class="input-group">
                             <select class="form-control" id="id_source_product" name="id_source_product">
                                 <option value="">Choose Data</option>
-                                <?php $iSourceData = 0; foreach ($getSourceProductList as $dataSourceProduct): $iSourceData++;
+                                <?php /* $iSourceData = 0; foreach ($getSourceProductList as $dataSourceProduct): $iSourceData++;
                                 $idSourceData = $dataSourceProduct['id'];
                                 $nameSourceData = $dataSourceProduct['name'];
                                 ?>
                                 <option value="<?= $idSourceData ?>"><?= $nameSourceData ?></option>
-                                <?php endforeach; ?>
+                                <?php endforeach; */?>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="code">Product Code</label>
                         <div class="input-group">
