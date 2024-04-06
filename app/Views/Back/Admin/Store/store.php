@@ -25,6 +25,9 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <tr <?= empty($getList) ? '': "hidden='hidden'" ?>>
+                        <td colspan="7" class="text-center">No data available in table</td>
+                    </tr>
                     <?php $no=0; foreach ($stores as $data_store) : $no++?>
                         <tr>
                             <td><?= $no ?></td>

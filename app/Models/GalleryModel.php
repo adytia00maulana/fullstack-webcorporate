@@ -19,6 +19,14 @@ class GalleryModel extends Model
         return $query->getResultArray();
     }
 
+    // Retrieve all by Id Product
+    public function MdlSelectByIdProduct($id): array
+    {
+        $sqlQuery = "SELECT * FROM ". $this->table ." WHERE id_product = ". $id ." ORDER BY position asc;";
+        $query = $this->db->query($sqlQuery);
+        return $query->getResultArray();
+    }
+
     // Retrieve By id
     public function MdlSelectById($id): array
     {

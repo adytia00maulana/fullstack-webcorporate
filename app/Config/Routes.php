@@ -43,7 +43,7 @@ $routes->group('admin', ['filter' => 'loginFilter'], static function ($subRoutes
         $UtilRoutes->get('form-detail-store/(:any)', 'Utilities::formDetailStore/$1');
         $UtilRoutes->post('update-store/(:any)', 'Utilities::UpdateStore/$1');
 
-        $UtilRoutes->get('gallery', 'Utilities::indexGallery');
+        $UtilRoutes->get('gallery/(:any)', 'Utilities::indexGallery/$1');
         $UtilRoutes->get('gallery/getGalleryById/(:any)', 'Utilities::getGallery/$1');
         $UtilRoutes->post('gallery/upload/(:any)', 'Utilities::uploadGallery/$1');
         $UtilRoutes->get('gallery/deleteById/(:any)/(:any)', 'Utilities::deleteGallery/$1/$2');

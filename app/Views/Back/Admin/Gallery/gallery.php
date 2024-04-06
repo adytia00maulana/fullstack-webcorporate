@@ -3,7 +3,12 @@
 <?= $this->section('content') ?>
 <section class="section">
     <div class="section-header">
-        <h1>Gallery</h1>
+        <h1>Gallery <?php
+            $finddingValue = array_filter($getListProduct, function ($obj) use ($id_product) {
+                return $obj['id'] == $id_product;
+            });
+            echo ($finddingValue[key($finddingValue)]['name']);
+            ?></h1>
     </div>
 
     <div class="section-body">
@@ -15,6 +20,7 @@
                 <div class="section-title">ADD Data Gallery</div>
                 <?php if(isset($upload)) echo form_open_multipart($upload."0"); ?>
                 <?= csrf_field(); ?>
+                <input type="hidden" name="id_product" id="id_product" value="<?= $id_product ?? '' ?>">
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="customFile" name="fileUpload[]" multiple accept="image/*" onchange="changeFileGallery(event.target.files, '0')">
                     <label class="custom-file-label" for="customFile" id="labelFile">Choose file .PNG, .JPG or .JPEG</label>

@@ -40,7 +40,7 @@ class Admin extends BaseController
         $data['url_detail_product_list'] = base_url() . 'admin/listDetailProduct/';
         $data['url_source_product_list'] = base_url() . 'admin/listSourceProduct/';
         $data['getListProduct'] = $this->ProductModel->MdlProductSelect();
-        $data['url_gallery'] = base_url() . 'admin/utilities/gallery';
+        $data['url_gallery'] = base_url() . 'admin/utilities/gallery/';
         $data['url_event'] = base_url() . 'admin/utilities/event';
         $data['url_store'] = base_url() . 'admin/utilities/store';
         $data['url_logo'] = base_url() . 'admin/utilities/logo';

@@ -387,16 +387,25 @@ class Utilities extends BaseController
         return $this->formDetail($id);
     }
 
-    public function indexGallery()
+    public function indexGallery($id)
     {
         $data = $this->defaultLoadSideBar();
-        $data['getList'] = $this->GalleryModel->MdlSelect();
-        $data['upload'] = base_url() . 'admin/utilities/gallery/upload/';
-        $data['getById'] = base_url() . 'admin/utilities/gallery/getGalleryById/';
-        $data['idUpdated'] = 0;
-        $data['deleteById'] = base_url() . 'admin/utilities/gallery/deleteById/';
-        $data['updatePosition'] = base_url() . 'admin/utilities/gallery/updatePosition';
-        $data['viewPathGallery'] = $this->pathViewGallery;
+        $msgInfo = $this->GlobalValidation->validation();
+        if($id){
+            $data['id_product'] = $id;
+            $data['getList'] = $this->GalleryModel->MdlSelectByIdProduct($id);
+            $data['getListProduct'] = $this->ProductModel->MdlProductSelect();
+            $data['upload'] = base_url() . 'admin/utilities/gallery/upload/';
+            $data['getById'] = base_url() . 'admin/utilities/gallery/getGalleryById/';
+            $data['idUpdated'] = 0;
+            $data['deleteById'] = base_url() . 'admin/utilities/gallery/deleteById/';
+            $data['updatePosition'] = base_url() . 'admin/utilities/gallery/updatePosition';
+            $data['viewPathGallery'] = $this->pathViewGallery;
+        }else{
+            $msgInfo['result'] = "Data Not Found";
+            session()->setFlashdata($msgInfo);
+            return redirect()->to(base_url().'admin');
+        }
         return view('Back/Admin/Gallery/gallery', $data);
     }
 
@@ -412,6 +421,7 @@ class Utilities extends BaseController
         $idUniqFile = 0;
         $getFile = service('request')->getFiles();
         $totalFile = count($getFile['fileUpload']);
+        $idProduct = $this->request->getVar('id_product');
         foreach ($getFile['fileUpload'] as $validSize) {
             $totalSize += (int) $validSize->getSizeByUnit('mb');
         }
@@ -436,9 +446,10 @@ class Utilities extends BaseController
                     $newPath = $path.'/' . $newName;
 
                     if($id == 0){
-                        $idUniqFile = 'gallery_'.$totalFile.$key.'_';
+                        $idUniqFile = 'gallery_'.$totalFile.$key.'_'.$idProduct.'_';
                         $value = array(
                             'id' => null,
+                            'id_product' => $idProduct,
                             'filename' => $idUniqFile.$newName,
                             'filepath' => $newPath,
                             'position' => $checkData,
@@ -449,9 +460,10 @@ class Utilities extends BaseController
                         );
                         $res = $this->GalleryModel->MdlInsert($value);
                     }else{
-                        $idUniqFile = 'gallery_'.$id.'_';
+                        $idUniqFile = 'gallery_'.$id.'_'.$idProduct.'_';
                         $value = array(
                             'id' => $id,
+                            'id_product' => $idProduct,
                             'filename' => $idUniqFile.$newName,
                             'filepath' => $newPath,
                             'position' => $checkData,
@@ -477,7 +489,7 @@ class Utilities extends BaseController
             session()->setFlashdata('flashData', $storeValidate);
         }
 
-        return redirect()->route('admin/utilities/gallery');
+        return redirect()->route('admin/utilities/gallery/'.$idProduct);
     }
 
      public function deleteGallery($id, $fileName) {
