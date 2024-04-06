@@ -146,9 +146,10 @@
                     <div class="form-group">
                         <label for="filename">File Name</label>
                         <div class="row align-items-center">
-                            <div class="col-sm-12 col-md-12">
+                            <div class="col-sm-6 col-md-9" id="idFileNameProduct">
                                 <input type="text" class="form-control" name="filename" id="filename" value="<?= $filename ?? '' ?>" readonly>
                             </div>
+                            <button type="button" class="btn btn-secondary" id="viewButtonProduct" onclick="viewImgProduct()">View</button>
                             <div class="col-sm-12 col-md-12">
                                 <div class="custom-file">
                                     <input type="file" name="fileUpload" class="custom-file-input" id="fileUpload" onchange="changeFileProduct(event.target.files)">

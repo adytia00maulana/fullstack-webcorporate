@@ -3,6 +3,8 @@
         let url = '<?php if(isset($getDataById)) echo $getDataById ?>';
 
         if(id == null){
+            $('#idFileNameProduct').addClass('col-sm-12 col-md-12');
+            $('#viewButtonProduct').hide();
             $('#id').val(null);
             $('#id_source_product').val("");
             $('#code').val("");
@@ -25,6 +27,8 @@
                     dataType: 'json',
                 }).done((success)=>{
                     const data = success[0];
+                    $('#idFileNameProduct').addClass('col-sm-6 col-md-9');
+                    $('#viewButtonProduct').show();
                     let convertActive = data.active === '1';
                     if(data.filename) $('#labelFileProduct').html('Choose File for Edit');
                     $('#id').val(data.id);
@@ -68,5 +72,17 @@
     }
     function changeFileProduct(value){
         $('#labelFileProduct').html("Selected "+value[0].name);
+    }
+    function viewImgProduct() {
+        const fileName = $('#filename').val();
+        const path = '<?php
+            $pathProduct = '';
+            if(isset($viewPathProduct)) $pathProduct = $viewPathProduct;
+            echo base_url(). $pathProduct;
+            ?>'
+        let url = path+fileName;
+        img = '<img src="'+url+'" class="d-block w-100" alt="...">';
+        popup = window.open('');
+        popup.document.write(img);
     }
 </script>

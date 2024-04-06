@@ -102,7 +102,7 @@
         const fileName = $('#filename').val();
         const path = '<?php
             $pathProduct = '';
-            if(isset($viewPathProduct)) $pathProduct = $viewPathProduct;
+            if(isset($viewPathDetailProduct)) $pathProduct = $viewPathDetailProduct;
             echo base_url(). $pathProduct;
             ?>'
         let url = path+fileName;

@@ -13,7 +13,7 @@ use LogoModel;
 
 class Admin extends BaseController
 {
-    private $MstUserModel, $MstRoleModel, $ProductModel, $pathUploadProduct, $pathViewProduct, $pathDeleteProduct, $LogoModel, $pathViewLogo;
+    private $MstUserModel, $MstRoleModel, $ProductModel, $pathUploadProduct, $pathViewProduct, $pathDeleteProduct, $LogoModel, $pathViewLogo, $pathUploadDetailProduct, $pathViewDetailProduct, $pathDeleteDetailProduct;
     public GlobalValidation $GlobalValidation;
     public function __construct()
     {
@@ -23,6 +23,9 @@ class Admin extends BaseController
         $this->pathUploadProduct = config('app')-> uploadProduct;
         $this->pathViewProduct = config('app')-> viewProduct;
         $this->pathDeleteProduct = config('app')-> deleteProduct;
+        $this->pathUploadDetailProduct = config('app')-> uploadDetailProduct;
+        $this->pathViewDetailProduct = config('app')-> viewDetailProduct;
+        $this->pathDeleteDetailProduct = config('app')-> deleteDetailProduct;
         $this->pathViewLogo = config('app')-> viewLogo;
         $this->GlobalValidation = new GlobalValidation();
         $this->LogoModel = model(LogoModel::class);
@@ -104,6 +107,7 @@ class Admin extends BaseController
         $data['deleteDataById'] = base_url()."admin/deleteDataProduct/";
         $data['getList'] = $queryList;
         $data['getSourceProductList'] = $this->ProductModel->MdlSourceProductSelect();
+        $data['viewPathProduct'] = $this->pathViewProduct;
 
         return view('Back/Admin/Product/product-list', $data);
     }
@@ -150,13 +154,13 @@ class Admin extends BaseController
 
         if($id == NULL){
             $data['id'] = 0;
-            $idUniqFile = $idUniqFile.$totalFile.'_';
-            $data['filename'] = $idUniqFile.$newName;
+            $idUniqFile = $idUniqFile.($totalFile + 1).'_';
+            if($getFile->getSize() > 0) $data['filename'] = $idUniqFile.$newName;
             $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
             $res = $this->ProductModel->MdlProductInsert($data);
         }else{
             $idUniqFile = $idUniqFile.$data['id'].'_';
-            $data['filename'] = $idUniqFile.$newName;
+            if($getFile->getSize() > 0) $data['filename'] = $idUniqFile.$newName;
             $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
             $res = $this->ProductModel->MdlProductUpdatedById($id, $data);
         }
@@ -256,7 +260,7 @@ class Admin extends BaseController
         $data['postData'] = base_url()."admin/postDataDetailProduct";
         $data['getDataById'] = base_url()."admin/getDataDetailProduct/";
         $data['deleteDataById'] = base_url()."admin/deleteDataDetailProduct/";
-        $data['viewPathProduct'] = $this->pathViewProduct;
+        $data['viewPathDetailProduct'] = $this->pathViewDetailProduct;
 
         return view('Back/Admin/Product/detail-product-list', $data);
     }
@@ -292,7 +296,7 @@ class Admin extends BaseController
                 session()->setFlashdata($msgInfo);
                 return redirect()->to(base_url().$urlPrevious);
             }
-            $path = realpath($this->pathUploadProduct);
+            $path = realpath($this->pathUploadDetailProduct);
             $newName = $getFile->getName();
             if($getFile->getClientExtension() === "JPG") $newName = strtolower($getFile->getName());
             $data['filepath'] = $path .'/' . $newName;
@@ -310,7 +314,7 @@ class Admin extends BaseController
                 $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
                 $res = $this->ProductModel->MdlDetailProductUpdatedById($id, $data);
                 if($res) {
-                    if ($oldFile) unlink($this->pathDeleteProduct . $oldFile);
+                    if ($oldFile) unlink($this->pathDeleteDetailProduct . $oldFile);
                 }
             }
             if ($res) {
@@ -342,7 +346,7 @@ class Admin extends BaseController
     public function deleteDetailProduct($id) {
         $urlPrevious = $this->getUrlPrevious();
         $queryGetById = $this->ProductModel->MdlDetailProductSelectById($id);
-        if(count($queryGetById) > 0) unlink($this->pathDeleteProduct . $queryGetById[0]->filename);
+        if(count($queryGetById) > 0) unlink($this->pathDeleteDetailProduct . $queryGetById[0]->filename);
         $this->ProductModel->MdlDetailProductDeleteById($id);
         $redirect = redirect()->to(base_url().$urlPrevious);
         return $redirect;

@@ -22,7 +22,7 @@
             ?>
             <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="<?= $no*100?>">
                 <div class="course-item">
-                    <img src="<?= base_url().$viewPathProduct.$filename ?>" class="img-fluid" alt="...">
+                    <img src="<?= base_url().$viewPathDetailProduct.$filename ?>" class="img-fluid" alt="...">
                     <div class="course-content">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <p class="category"><?= $name_product ?></p>

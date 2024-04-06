@@ -8,7 +8,7 @@
         <div class="row">
           <!-- <div class="col-lg-8"> -->
           <div class="col-lg-12">
-            <img src="<?= base_url().$viewPathProduct.$getDetailProduct->filename ?>" class="img-fluid" alt="">
+            <img src="<?= base_url().$viewPathDetailProduct.$getDetailProduct->filename ?>" class="img-fluid" alt="">
             <h3><?= $getDetailProduct->name ?></h3>
             <p>
               <?= $getDetailProduct->description ?>
