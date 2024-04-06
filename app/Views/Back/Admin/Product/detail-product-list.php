@@ -21,7 +21,7 @@
                                 <th>Source Product</th>
                                 <th>Code Product</th>
                                 <th>Detail Product Name</th>
-                                <th>Description</th>
+                                <!-- <th>Description</th> -->
                                 <th>Created By</th>
                                 <th>Created At</th>
                                 <th>Updated By</th>
@@ -57,10 +57,10 @@
                             ?>
                                 <tr>
                                     <td><?= $no ?></td>
-                                    <td><?= $name_source_product ?></td>
+                                    <td><?= $name_source_product ?? '-' ?></td>
                                     <td><?= $code ?></td>
                                     <td><?= $name ?></td>
-                                    <td><?= $description ?></td>
+                                    <!-- <td><?php // $description ?></td> -->
                                     <td><?= $created_by ?></td>
                                     <td><?= $created_date? date('D, d M Y H:i:s', strtotime($created_date)): '' ?></td>
                                     <td><?= $updated_by? $updated_by : 'No Updated' ?></td>

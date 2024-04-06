@@ -302,13 +302,13 @@ class Admin extends BaseController
             $data['filepath'] = $path .'/' . $newName;
 
             if($id == NULL){
-                $idUniqFile = 'product_'.$totalFile.'_';
+                $idUniqFile = 'detail_product_'.$totalFile.'_';
                 $data['id'] = 0;
                 $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
                 $data['filename'] = $idUniqFile.$newName;
                 $res = $this->ProductModel->MdlDetailProductInsert($data);
             }else{
-                $idUniqFile = 'product_'.$totalFile.$id.'_';
+                $idUniqFile = 'detail_product_'.$totalFile.$id.'_';
                 $oldFile = $data['filename'];
                 $data['filename'] = $idUniqFile.$newName;
                 $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
