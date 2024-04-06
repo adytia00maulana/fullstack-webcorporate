@@ -22,6 +22,9 @@ class Utilities extends BaseController
     public $pathUploadEvent;
     public $pathViewEvent;
     public $pathDeleteEvent;
+    public $pathUploadDetailEvent;
+    public $pathViewDetailEvent;
+    public $pathDeleteDetailEvent;
     public $pathUploadBrandAmbassador;
     public $pathViewBrandAmbassador;
     public $pathDeleteBrandAmbassador;
@@ -47,6 +50,9 @@ class Utilities extends BaseController
         $this->pathUploadEvent = config('app')->uploadEvent;
         $this->pathViewEvent = config('app')->viewEvent;
         $this->pathDeleteEvent = config('app')->deleteEvent;
+        $this->pathUploadDetailEvent = config('app')->uploadDetailEvent;
+        $this->pathViewDetailEvent = config('app')->viewDetailEvent;
+        $this->pathDeleteDetailEvent = config('app')->deleteDetailEvent;
         $this->pathUploadBrandAmbassador = config('app')->uploadBrandAmbassador;
         $this->pathViewBrandAmbassador = config('app')->viewBrandAmbassador;
         $this->pathDeleteBrandAmbassador = config('app')->deleteBrandAmbassador;
@@ -301,9 +307,16 @@ class Utilities extends BaseController
     public function formDetail($id) {
         $data = $this->defaultLoadSideBar();
         $data['viewPathEvent'] = $this->pathViewEvent;
+
+        $data['upload'] = base_url() . 'admin/utilities/event/upload/';
+        $data['idUpdated'] = 0;
+        $data['deleteById'] = base_url() . 'admin/utilities/event/deleteById/';
+        $data['updatePosition'] = base_url() . 'admin/utilities/event/updatePosition';
+        $data['viewPathDetailEvent'] = $this->pathViewDetailEvent;
         $msgInfo = $this->GlobalValidation->validation();
         if ($id) {
             $dataEvents = $this->InfoModel->getById($id);
+            $data['getList'] = $this->InfoModel->getDetailInfoById($id);
             if($dataEvents){
                 $data['id'] = $dataEvents['id'];
                 $data['event_name'] = $dataEvents['event_name'];
@@ -386,6 +399,112 @@ class Utilities extends BaseController
 
         return $this->formDetail($id);
     }
+
+    public function uploadEvent($id) {
+        $msgInfo = $this->GlobalValidation->validation();
+        $totalSize = 0;
+        $idUniqFile = 0;
+        $getFile = service('request')->getFiles();
+        $totalFile = count($getFile['fileUpload']);
+        $idEvent = $this->request->getVar('id_event');
+        foreach ($getFile['fileUpload'] as $validSize) {
+            $totalSize += (int) $validSize->getSizeByUnit('mb');
+        }
+        if($totalSize > 8) {
+            session()->setFlashdata($msgInfo);
+            return redirect()->route('form-detail-event/'.$idEvent);
+        }
+        if(isset($id)){
+            $storeValidate = array();
+            $path = $this->pathUploadDetailEvent;
+            foreach ($getFile['fileUpload'] as $key=>$img) {
+                if ($img->isValid() && ! $img->hasMoved()) {
+                    $validate = $img->getClientMimeType() === "image/png"|$img->getClientMimeType() === "image/jpg"|$img->getClientMimeType() === "image/jpeg";
+                    if (!$validate) {
+                        $msgInfo['result'] = "File upload does not match the format";
+                        session()->setFlashdata($msgInfo);
+                        return redirect()->route('form-detail-event/'.$idEvent);
+                    }
+                    $checkData = count($this->InfoModel->getAllDataDetailEvent());
+                    $newName = $img->getName();
+                    if($img->getClientExtension() === "JPG") $newName = strtolower($img->getName());
+                    $newPath = $path.'/' . $newName;
+
+                    if($id == 0){
+                        $idUniqFile = 'detail_event_'.$totalFile.$key.'_'.$idEvent.'_';
+                        $value = array(
+                            'id' => null,
+                            'id_event' => $idEvent,
+                            'filename' => $idUniqFile.$newName,
+                            'position' => $checkData,
+                            'created_by' => isset($_SESSION['username'])? session()->get('username'): "SYSTEM",
+                            'created_date' => '',
+                            'updated_by' => '',
+                            'updated_date' => ''
+                        );
+                        $res = $this->InfoModel->MdlInsertDetailEvent($value);
+                    }else{
+                        $idUniqFile = 'gallery_'.$id.'_'.$idEvent.'_';
+                        $value = array(
+                            'id' => $id,
+                            'id_event' => $idEvent,
+                            'filename' => $idUniqFile.$newName,
+                            'filepath' => $newPath,
+                            'position' => $checkData,
+                            'created_date' => '',
+                            'updated_by' => isset($_SESSION['username'])? session()->get('username'): "SYSTEM",
+                            'updated_date' => ''
+                        );
+                        $res = $this->InfoModel->MdlUpdatedByIdDetailEvent($id, $value);
+                        if ($res) unlink($this->pathDeleteDetailEvent.$_POST['filename']);
+                    }
+                    if ($res) {
+                        $success = $this->GlobalValidation->success();
+                        $success['result'] = 'Upload '. $newName .' Success';
+                        $storeValidate[] = $success;
+                        $img->move($path, $idUniqFile.$newName);
+                    } else {
+                        $fail = $this->GlobalValidation->validation();
+                        $fail['result'] = 'Upload '. $newName .' Failed';
+                        $storeValidate[] = $fail;
+                    }
+                }
+            }
+            session()->setFlashdata('flashData', $storeValidate);
+        }
+
+        return redirect()->route('admin/utilities/gallery/'.$idEvent);
+    }
+
+    public function deleteEvent($id, $fileName) {
+        $path = $this->pathDeleteGallery.$fileName;
+        unlink($path);
+        $this->GalleryModel->MdlDeleteById($id);
+        $redirect = redirect()->to(base_url().'admin/utilities/gallery');
+        return $redirect;
+    }
+
+    public function updatePositionEvent() {
+        $data = $_POST;
+        $start = $data['index_start'];
+        $end = $data['index_end'];
+        $selectStart = $this->GalleryModel->MdlGetByPosition($start);
+        $selectEnd = $this->GalleryModel->MdlGetByPosition($end);
+        $idStart = $selectStart[0]['id'];
+        $idEnd = $selectEnd[0]['id'];
+        $selectStart[0]['position'] = $end;
+        $selectStart[0]['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
+        $selectEnd[0]['position'] = $start;
+        $selectEnd[0]['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
+
+        if(count($selectStart)>0) $this->GalleryModel->MdlUpdatedById($idStart, $selectStart[0]);
+        if(count($selectStart)>0) $this->GalleryModel->MdlUpdatedById($idEnd, $selectEnd[0]);
+        $msgInfo = $this->GlobalValidation->success();
+        $msgInfo['result'] = "Successfully moved the data";
+        session()->setFlashdata($msgInfo);
+        return json_encode(base_url().'admin/utilities/gallery');
+    }
+
 
     public function indexGallery($id)
     {

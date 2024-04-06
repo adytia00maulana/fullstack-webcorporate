@@ -208,6 +208,11 @@ class App extends BaseConfig
     public string $viewEvent         = 'assets/admin/img/event/';
     public string $deleteEvent       = ROOTPATH."public/assets/admin/img/event/";
 
+    // Event
+    public string $uploadDetailEvent       = ROOTPATH."public/assets/admin/img/detail_event";
+    public string $viewDetailEvent         = 'assets/admin/img/detail_event/';
+    public string $deleteDetailEvent       = ROOTPATH."public/assets/admin/img/detail_event/";
+
     // Brand Ambassador
     public string $uploadBrandAmbassador       = ROOTPATH."public/assets/admin/img/ba";
     public string $viewBrandAmbassador         = 'assets/admin/img/ba/';
@@ -226,6 +231,7 @@ class App extends BaseConfig
     public string $detail_product   = 'detail_product';
     public string $gallery          = 'gallery';
     public string $info             = 'info';
+    public string $detail_info      = 'detail_info';
     public string $store            = 'store';
     public string $ref_store        = 'ref_store';
     public string $logo             = 'logo';
