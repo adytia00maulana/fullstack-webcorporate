@@ -213,6 +213,11 @@ class App extends BaseConfig
     public string $viewBrandAmbassador         = 'assets/admin/img/ba/';
     public string $deleteBrandAmbassador       = ROOTPATH."public/assets/admin/img/ba/";
 
+    // Store
+    public string $uploadStore       = ROOTPATH."public/assets/admin/img/store";
+    public string $viewStore         = 'assets/admin/img/store/';
+    public string $deleteStore       = ROOTPATH."public/assets/admin/img/store/";
+
     // Table Database Name
     public string $mst_role         = 'mst_role';
     public string $mst_users        = 'mst_users';
@@ -222,6 +227,7 @@ class App extends BaseConfig
     public string $gallery          = 'gallery';
     public string $info             = 'info';
     public string $store            = 'store';
+    public string $ref_store        = 'ref_store';
     public string $logo             = 'logo';
     public string $visi_misi        = 'visi_misi';
     public string $ba               = 'brand_ambassador';

@@ -8,7 +8,7 @@
     <div class="section-body">
         <div class="card">
             <div class="card-body">
-                <a class="btn btn-primary text-white my-2" href="<?= base_url('admin/utilities/form-event') ?>">Add Event</a>
+                <a class="btn btn-primary text-white my-2 float-right" href="<?= base_url('admin/utilities/form-event') ?>">Add Event</a>
                 <div class="table-responsive">
                     <table class="table table-striped table-md">
                         <thead class="table-primary">

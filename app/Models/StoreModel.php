@@ -8,17 +8,37 @@ class StoreModel extends Model
     {
         $this->db = \Config\Database::connect();
         $this->table = config('app')->store;
+        $this->refTable = config('app')->ref_store;
     }
 
     public function getAllData(): array {
         $sqlQuery = "select * from ".$this->table;
         $query = $this->db->query($sqlQuery);
         return $query->getResultArray();
-    }   
+    }
+
+    public function getRefStore(): array {
+        $sqlQuery = "select * from ".$this->refTable;
+        $query = $this->db->query($sqlQuery);
+        return $query->getResultArray();
+    }
 
     public function getById($id) {
-        $sqlQuery = $this->db->table($this->table)->where('id', $id);
-        return $sqlQuery->get()->getRow();
+        // $sqlQuery = $this->db->table($this->table)->where('id', $id);
+        $sqlQuery = "select
+            s.id,
+            s.id_ref_store,
+            rs.name as ref_store_name,
+            s.store_name,
+            s.store_link,
+            s.store_image,
+            s.created,
+            s.updated
+            from ".$this->table." s
+            left join ".$this->refTable." rs 
+            on s.id = rs.id where s.id =".$id;
+        // return $sqlQuery->get()->getRow();
+        return $this->db->query($sqlQuery)->getResultArray();
     }
 
     public function InsertData($data) {

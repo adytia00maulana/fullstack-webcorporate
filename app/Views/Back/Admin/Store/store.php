@@ -10,12 +10,7 @@
             <h4>Stores</h4>
         </div>
         <div class="card-body">
-            <?php if(!empty(session()->getFlashdata('message'))) : ?>
-                <div class="alert alert-success">
-                    <?php echo session()->getFlashdata('message');?>
-                </div>
-            <?php endif ?>
-            <a class="btn btn-primary text-white my-2" href="<?= base_url('admin/utilities/form-store') ?>">Add Store</a>
+            <a class="btn btn-primary text-white my-2 float-right" href="<?= base_url('admin/utilities/form-store') ?>">Add Store</a>
             <div class="table-responsive">
                 <table class="table table-striped table-md">
                     <thead class="table-primary">
@@ -30,12 +25,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($stores as $data_store) : ?>
+                    <?php $no=0; foreach ($stores as $data_store) : $no++?>
                         <tr>
-                            <td></td>
+                            <td><?= $no ?></td>
                             <td><?= $data_store['store_name']; ?></td>
                             <td><?= $data_store['store_link'] ?></td>
-                            <td>-</td>
+                            <td><?= $data_store['store_image'] ?? '-' ?></td>
                             <td><?= date('Y-m-d', strtotime($data_store['created'])) ?></td>
                             <td><?= date('Y-m-d', strtotime($data_store['updated'])) ?></td>
                             <td>

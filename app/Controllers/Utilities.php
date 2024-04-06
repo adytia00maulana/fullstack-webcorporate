@@ -25,6 +25,9 @@ class Utilities extends BaseController
     public $pathUploadBrandAmbassador;
     public $pathViewBrandAmbassador;
     public $pathDeleteBrandAmbassador;
+    public $pathUploadStore;
+    public $pathViewStore;
+    public $pathDeleteStore;
     public $LogoModel;
     public $VisiMisiModel;
     public $brandAmbassadorModel;
@@ -47,6 +50,9 @@ class Utilities extends BaseController
         $this->pathUploadBrandAmbassador = config('app')->uploadBrandAmbassador;
         $this->pathViewBrandAmbassador = config('app')->viewBrandAmbassador;
         $this->pathDeleteBrandAmbassador = config('app')->deleteBrandAmbassador;
+        $this->pathUploadStore = config('app')->uploadStore;
+        $this->pathViewStore = config('app')->viewStore;
+        $this->pathDeleteStore = config('app')->deleteStore;
         $this->LogoModel = model(LogoModel::class);
         $this->VisiMisiModel = model(VisiMisiModel::class);
         $this->brandAmbassadorModel = model(BrandAmbassadorModel::class);
@@ -68,26 +74,71 @@ class Utilities extends BaseController
     public function indexStore() {
         $data = $this->defaultLoadSideBar();
         $data['stores'] = $this->StoreModel->getAllData();
+        $data['ref_stores'] = $this->StoreModel->getRefStore();
         return view('Back/Admin/Store/store' , $data);
     }
 
 
     public function formStore() {
         $data = $this->defaultLoadSideBar();
-        $data['stores'] = $this->StoreModel->getAllData();
+        $data['ref_stores'] = $this->StoreModel->getRefStore();
         return view('Back/Admin/Store/form', $data);
     }
 
     public function PostStore() {
+        $msgInfo = $this->GlobalValidation->validation();
+        $path = realpath($this->pathUploadEvent);
         $data = $_POST;
-        if ($data) {
-            $this->StoreModel->InsertData($data);
-            session()->setFlashdata('message', 'Create Store Success');
-            return redirect()->route('admin/utilities/store');
-        } else {
-            alert('oops, error!');
-            return view('Back/Admin/Store/form');
+        unset($data['csrf_test_name']);
+        $getFile = service('request')->getFile('fileUpload');
+        if($getFile){
+            $checkData = $this->StoreModel->getAllData();
+            $totalFile = count($checkData);
+            $getFileSize = (int) $getFile->getSizeByUnit('mb');
+            if($getFileSize > 3) {
+                $msgInfo['result'] = "Max Upload File 3 Megabyte";
+                session()->setFlashdata($msgInfo);
+                return redirect()->to(base_url('admin/utilities/form-store'));
+            }
+            if ($getFile->isValid() && ! $getFile->hasMoved()) {
+                $validate = $getFile->getClientMimeType() === "image/png" | $getFile->getClientMimeType() === "image/jpg" | $getFile->getClientMimeType() === "image/jpeg";
+                if (!$validate) {
+                    $msgInfo['result'] = "File upload does not match the format";
+                    session()->setFlashdata($msgInfo);
+                    return redirect()->to(base_url('admin/utilities/form-store'));
+                }
+
+                $newName = $getFile->getName();
+                if($getFile->getClientExtension() === "JPG") $newName = strtolower($getFile->getName());
+
+                if ($data) {
+                    $idUniqFile = 'store_'.$totalFile.'_';
+                    $data['store_image'] = $idUniqFile.$newName;
+                    $res = $this->StoreModel->InsertData($data);
+                    if($res) {
+                        $getFile->move($path, $idUniqFile.$newName);
+                        $msgInfo = $this->GlobalValidation->success();
+                    }else{
+                        $msgInfo['result'] = "Failed to save data";
+                    }
+                    session()->setFlashdata($msgInfo);
+                } else {
+                    $msgInfo['result'] = "Please Insert Value";
+                    session()->setFlashdata($msgInfo);
+                    return redirect()->to(base_url('admin/utilities/form-store'));
+                }
+            }else{
+                $msgInfo['result'] = "Please Selected File";
+                session()->setFlashdata($msgInfo);
+                return redirect()->to(base_url('admin/utilities/form-store'));
+            }
+        }else{
+            $msgInfo['result'] = "Please Selected File";
+            session()->setFlashdata($msgInfo);
+            return redirect()->to(base_url('admin/utilities/form-store'));
         }
+
+        return redirect()->route('admin/utilities/store');
     }
     
 
@@ -159,24 +210,92 @@ class Utilities extends BaseController
     }
 
     public function formDetailStore($id) {
+        $data = $this->defaultLoadSideBar();
+        $data['ref_stores'] = $this->StoreModel->getRefStore();
+        $data['viewPathStore'] = $this->pathViewStore;
+        $msgInfo = $this->GlobalValidation->validation();
         if ($id) {
-            $data = $this->defaultLoadSideBar();
-            $data['stores'] = $this->StoreModel->getById($id);
-            return view('Back/Admin/Store/form-detail', $data);
-        }        
+            $dataStore = $this->StoreModel->getById($id);
+            if(!empty($dataStore)){
+                $data['id'] = $dataStore[0]['id'];
+                $data['id_ref_store'] = $dataStore[0]['id_ref_store'];
+                $data['ref_store_name'] = $dataStore[0]['ref_store_name'];
+                $data['store_name'] = $dataStore[0]['store_name'];
+                $data['store_link'] = $dataStore[0]['store_link'];
+                $data['store_image'] = $dataStore[0]['store_image'];
+                $data['created'] = $dataStore[0]['created'];
+                $data['updated'] = $dataStore[0]['updated'];
+            }else{
+                $msgInfo['result'] = "Data not Found";
+                session()->setFlashdata($msgInfo);
+                return redirect()->route('admin/utilities/store');
+            }
+        }else{
+            $msgInfo['result'] = "Data not Found";
+            session()->setFlashdata($msgInfo);
+            return redirect()->route('admin/utilities/store');
+        }
+        return view('Back/Admin/Store/form-detail', $data);
     }
 
     public function UpdateStore($id) {
+        $msgInfo = $this->GlobalValidation->validation();
+        $path = realpath($this->pathUploadStore);
         $data = $_POST;
-        if ($data) {
-            $this->StoreModel->UpdateData($data, $id);
-            session()->setFlashdata('message', 'Update Event Success');
-            return redirect()->route('admin/utilities/store');
-        } else {    
-            alert('oops, error!');
-            return view('Back/Admin/Store/form');
+        unset($data['csrf_test_name']);
+        $getFile = service('request')->getFile('fileUpload');
+        if($getFile){
+            $getFileSize = (int) $getFile->getSizeByUnit('mb');
+            if($getFileSize > 3) {
+                $msgInfo['result'] = "Max Upload File 3 Megabyte";
+                session()->setFlashdata($msgInfo);
+                return redirect()->to(base_url().'admin/utilities/form-detail-store/'.$id);
+            }
+            if ($getFile->isValid() && ! $getFile->hasMoved()) {
+                $validate = $getFile->getClientMimeType() === "image/png" | $getFile->getClientMimeType() === "image/jpg" | $getFile->getClientMimeType() === "image/jpeg";
+                if (!$validate) {
+                    $msgInfo['result'] = "File upload does not match the format";
+                    session()->setFlashdata($msgInfo);
+                    return redirect()->to(base_url().'admin/utilities/form-detail-store/'.$id);
+                }
+
+                $newName = $getFile->getName();
+                if($getFile->getClientExtension() === "JPG") $newName = strtolower($getFile->getName());
+
+                if ($data) {
+                    $idUniqFile = 'event_'.$id.'_';
+                    $oldFile = $data['store_image'];
+                    $data['store_image'] = $idUniqFile.$newName;
+                    $res = $this->StoreModel->UpdateData($data, $id);
+                    if($res) {
+                        if($oldFile) unlink($this->pathDeleteStore . $oldFile);
+                        $getFile->move($path, $idUniqFile.$newName);
+                        $msgInfo = $this->GlobalValidation->success();
+                    }else{
+                        $msgInfo['result'] = "Failed to save data";
+                    }
+                    session()->setFlashdata($msgInfo);
+                } else {
+                    $msgInfo['result'] = "Please Insert Value";
+                    session()->setFlashdata($msgInfo);
+                    return redirect()->to(base_url().'admin/utilities/form-detail-store/'.$id);
+                }
+            }else{
+                $res = $this->StoreModel->UpdateData($data, $id);
+                if($res) {
+                    $msgInfo = $this->GlobalValidation->success();
+                }else{
+                    $msgInfo['result'] = "Failed to save data";
+                }
+                session()->setFlashdata($msgInfo);
+            }
+        }else{
+            $msgInfo['result'] = "Please Selected File";
+            session()->setFlashdata($msgInfo);
+            return redirect()->to(base_url().'admin/utilities/form-detail-store/'.$id);
         }
 
+        return $this->formDetailStore($id);
     }
 
     public function formDetail($id) {
