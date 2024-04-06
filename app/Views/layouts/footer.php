@@ -56,7 +56,7 @@
 
 <!-- <div class="container copyright text-center mt-4"> -->
 <div class="container text-center mt-4">
-    <p>© <span>Copyright <?= Date('Y') ?> </span> <strong class="px-1">PT. Multi Bestri Indonesia</strong> <span>All Rights Reserved</span></p>
+    <p>© <span>Copyright <?= Date('Y') ?> </span> <strong class="px-1"><?= $site_name ?? 'Admin Template' ?></strong> <span>All Rights Reserved</span></p>
     <div class="credits">
         Designed by <a href="<?= base_url() ?>">IGS</a>
     </div>

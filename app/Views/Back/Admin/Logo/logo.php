@@ -30,7 +30,7 @@
                     <div class="form-group row align-items-center">
                         <label for="sort_name" class="form-control-label col-sm-3 text-md-right">Sort Name Site Title</label>
                         <div class="col-sm-6 col-md-9">
-                            <input type="text" name="sort_name" class="form-control" id="sort_name" value="<?= $sort_name ?? '' ?>">
+                            <input type="text" name="sort_name" class="form-control" id="sort_name" maxlength="3" value="<?= $sort_name ?? '' ?>">
                         </div>
                     </div>
                     <div class="form-group row align-items-center">
@@ -72,7 +72,8 @@
                             </div>
                             <div class="form-text text-muted">The image must have a maximum size of 3MB</div>
                         </div>
-                    </div><div class="form-group row align-items-center">
+                    </div>
+                    <div class="form-group row align-items-center">
                         <label class="form-control-label col-sm-3 text-md-right">Image Logo</label>
                         <div class="col-sm-6 col-md-auto bg-secondary p-2">
                             <img

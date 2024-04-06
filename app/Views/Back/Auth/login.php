@@ -41,13 +41,13 @@
 
                 <div class="text-center mt-4 mb-3">
                     <div class="text-success text-muted">
-                        <a style="text-decoration: none;" href="<?= base_url('home') ?>"><?= $site_name ?? 'Admin Template' ?></a>
+                        <a style="text-decoration: none;" href="<?= base_url('/') ?>"><?= $site_name ?? 'Admin Template' ?></a>
                     </div>
                 </div>
                 <div class="row sm-gutters"></div>
             </div>
             <div class="simple-footer font-weight-bold">
-                Copyright &copy; IGS 2023
+                Copyright &copy; IGS <?= Date('Y') ?>
             </div>
         </div>
     </div>

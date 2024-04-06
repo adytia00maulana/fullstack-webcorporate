@@ -108,7 +108,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <?php echo form_open($postData);?>
+                <?php echo form_open_multipart($postData);?>
                 <?= csrf_field(); ?>
                 <div class="modal-body">
                     <div class="form-group" hidden="hidden">
@@ -117,7 +117,7 @@
                             <input type="text" class="form-control" placeholder="ID" id="id" name="id" value="0"/>
                         </div>
                     </div>
-                    <!-- <div class="form-group">
+                    <div class="form-group" hidden="hidden">
                         <label for="id_source_product">Source Product</label>
                         <div class="input-group">
                             <select class="form-control" id="id_source_product" name="id_source_product">
@@ -130,7 +130,7 @@
                                 <?php endforeach; */?>
                             </select>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="form-group">
                         <label for="code">Product Code</label>
                         <div class="input-group">
@@ -141,6 +141,21 @@
                         <label for="name">Product Name</label>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Product Name" id="name" name="name"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="filename">File Name</label>
+                        <div class="row align-items-center">
+                            <div class="col-sm-12 col-md-12">
+                                <input type="text" class="form-control" name="filename" id="filename" value="<?= $filename ?? '' ?>" readonly>
+                            </div>
+                            <div class="col-sm-12 col-md-12">
+                                <div class="custom-file">
+                                    <input type="file" name="fileUpload" class="custom-file-input" id="fileUpload" onchange="changeFileProduct(event.target.files)">
+                                    <label class="custom-file-label" id="labelFileProduct">Choose File</label>
+                                </div>
+                                <div class="form-text text-muted">The image must have a maximum size of 3MB</div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group mb-0">

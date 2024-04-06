@@ -7,6 +7,7 @@
             $('#id_source_product').val("");
             $('#code').val("");
             $('#name').val("");
+            $('#filename').val("");
             $('#active').prop("checked", false);
             $('#created_by').val("");
             $('#created_date').val("");
@@ -17,29 +18,30 @@
             $("#id").val(id);
             const urlWithId = url+id;
 
-            if(url == null) return;
-
-            $.ajax({
-                url: urlWithId,
-                type: 'get',
-                dataType: 'json',
-            }).done((success)=>{
-                var data = success[0];
-                let convertActive = data.active == 1? true: false;
-
-                $('#id').val(data.id);
-                $('#id_source_product').val(data.id_source_product);
-                $('#code').val(data.code);
-                $('#name').val(data.name);
-                $('#active').prop("checked", convertActive);
-                $('#created_by').val(data.created_by);
-                $('#created_date').val(data.created_date);
-                $('#updated_by').val(data.updated_by);
-                $('#updated_date').val(data.updated_date);
-                $("#productModal").modal('show');
-            }).fail((error)=>{
-                console.error(error);
-            })
+            if(url) {
+                $.ajax({
+                    url: urlWithId,
+                    type: 'get',
+                    dataType: 'json',
+                }).done((success)=>{
+                    const data = success[0];
+                    let convertActive = data.active === '1';
+                    if(data.filename) $('#labelFileProduct').html('Choose File for Edit');
+                    $('#id').val(data.id);
+                    $('#id_source_product').val(data.id_source_product);
+                    $('#code').val(data.code);
+                    $('#name').val(data.name);
+                    $('#filename').val(data.filename);
+                    $('#active').prop("checked", convertActive);
+                    $('#created_by').val(data.created_by);
+                    $('#created_date').val(data.created_date);
+                    $('#updated_by').val(data.updated_by);
+                    $('#updated_date').val(data.updated_date);
+                    $("#productModal").modal('show');
+                }).fail((error)=>{
+                    console.error(error);
+                })
+            }
         }
     }
     function deleteProduct(id) {
@@ -63,5 +65,8 @@
                     swal('Your Data is safe!');
                 }
             });
+    }
+    function changeFileProduct(value){
+        $('#labelFileProduct').html("Selected "+value[0].name);
     }
 </script>

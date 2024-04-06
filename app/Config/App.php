@@ -188,6 +188,11 @@ class App extends BaseConfig
     public string $viewProduct      = 'assets/admin/img/products/';
     public string $deleteProduct    = ROOTPATH . "public/assets/admin/img/products/";
 
+    // Detail Product
+    public string $uploadDetailProduct    = ROOTPATH."public/assets/admin/img/detail_products";
+    public string $viewDetailProduct      = 'assets/admin/img/detail_products/';
+    public string $deleteDetailProduct    = ROOTPATH . "public/assets/admin/img/detail_products/";
+
     // Gallery
     public string $uploadGallery    = ROOTPATH."public/assets/admin/img/gallery";
     public string $viewGallery      = 'assets/admin/img/gallery/';

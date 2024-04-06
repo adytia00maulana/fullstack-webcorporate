@@ -38,6 +38,7 @@ class ProductModel extends Model
                 sc.name as source_product_name,
                 p.code,
                 p.name,
+                p.filename,
                 p.active,
                 p.created_by,
                 p.created_date,

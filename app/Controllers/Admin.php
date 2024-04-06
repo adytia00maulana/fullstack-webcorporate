@@ -116,20 +116,56 @@ class Admin extends BaseController
 
     public function postProduct(): RedirectResponse
     {
+        $path = realpath($this->pathUploadProduct);
         $data = $_POST;
         unset($data['csrf_test_name']);
         if(!isset($data['active'])) $data['active'] = "0";
         $id = $data['id'];
+        $newName = "";
+        $idUniqFile = 'product_';
+        $oldFile = $data['filename'];
+        $checkData = $this->ProductModel->MdlProductSelect();
+        $totalFile = !empty($checkData)? count($checkData) : 0;
+        $getFile = service('request')->getFile('fileUpload');
+
+        $getFileSize = (int) $getFile->getSizeByUnit('mb');
+        if($getFileSize > 3) {
+            $msgInfo['result'] = "Max Upload File 3 Megabyte";
+            session()->setFlashdata($msgInfo);
+            return redirect()->route('admin/utilities/logo');
+        }
+
+        if($getFile->getSize() > 0){
+            if ($getFile->isValid() && ! $getFile->hasMoved()) {
+                $validate = $getFile->getClientMimeType() === "image/png" | $getFile->getClientMimeType() === "image/jpg" | $getFile->getClientMimeType() === "image/jpeg";
+                if (!$validate) {
+                    $msgInfo['result'] = "File upload does not match the format";
+                    session()->setFlashdata($msgInfo);
+                    return redirect()->route('admin/utilities/logo');
+                }
+                $newName = $getFile->getName();
+                if($getFile->getClientExtension() === "JPG") $newName = strtolower($getFile->getName());
+            }
+        }
 
         if($id == NULL){
             $data['id'] = 0;
+            $idUniqFile = $idUniqFile.$totalFile.'_';
+            $data['filename'] = $idUniqFile.$newName;
             $data['created_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
             $res = $this->ProductModel->MdlProductInsert($data);
         }else{
+            $idUniqFile = $idUniqFile.$data['id'].'_';
+            $data['filename'] = $idUniqFile.$newName;
             $data['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
             $res = $this->ProductModel->MdlProductUpdatedById($id, $data);
         }
+
         if ($res) {
+            if($getFile->getSize() > 0){
+                if($oldFile) unlink($this->pathDeleteProduct . $oldFile);
+                $getFile->move($path, $idUniqFile.$newName);
+            }
             $msgInfo = $this->GlobalValidation->success();
         } else {
             $msgInfo = $this->GlobalValidation->validation();
