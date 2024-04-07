@@ -37,8 +37,8 @@ $routes->group('admin', ['filter' => 'loginFilter'], static function ($subRoutes
         $UtilRoutes->get('form-detail-event/(:any)', 'Utilities::formDetail/$1');
         $UtilRoutes->post('update-event/(:any)', 'Utilities::UpdateEvent/$1');
         $UtilRoutes->post('event/upload/(:any)', 'Utilities::uploadEvent/$1');
-        $UtilRoutes->get('event/deleteById/(:any)/(:any)', 'Utilities::deleteEvent/$1/$2');
-        $UtilRoutes->post('event/updatePosition', 'Utilities::updatePositionEvent');
+        $UtilRoutes->get('event/deleteById/(:any)/(:any)/(:any)', 'Utilities::deleteEvent/$1/$2/$3');
+        $UtilRoutes->post('event/updatePosition/(:any)', 'Utilities::updatePositionEvent/$1');
         
         $UtilRoutes->get('store', 'Utilities::indexStore');
         $UtilRoutes->post('create-store', 'Utilities::PostStore');

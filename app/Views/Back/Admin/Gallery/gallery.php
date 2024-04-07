@@ -21,6 +21,7 @@
                 <?php if(isset($upload)) echo form_open_multipart($upload."0"); ?>
                 <?= csrf_field(); ?>
                 <input type="hidden" name="id_product" id="id_product" value="<?= $id_product ?? '' ?>">
+                <input type="hidden" name="position" value="<?= $position ?? '' ?>">
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="customFile" name="fileUpload[]" multiple accept="image/*" onchange="changeFileGallery(event.target.files, '0')">
                     <label class="custom-file-label" for="customFile" id="labelFile">Choose file .PNG, .JPG or .JPEG</label>
@@ -69,6 +70,8 @@
                                         <input type="file" class="custom-file-input" name="fileUpload[]" onchange="changeFileGallery(event.target.files, <?= $id ?>)">
                                         <label class="custom-file-label" id="updatedFileUpload<?= $id ?>">Edit</label>
                                         <input type="hidden" name="filename" value="<?= $filename ?>">
+                                        <input type="hidden" name="id_product" id="id_product" value="<?= $id_product ?? '' ?>">
+                                        <input type="hidden" name="position" value="<?= $position ?>">
                                     </div>
                                     <button type="submit" class="btn btn-info" id="updatedFile<?= $id ?>" style="display: none" onclick="showLoader()">Upload</button>
                                     <?php echo form_close(); ?>

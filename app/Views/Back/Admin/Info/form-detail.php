@@ -51,7 +51,8 @@
                 <div class="section-title">ADD Data Event</div>
                 <?php if(isset($uploadEvent)) echo form_open_multipart($uploadEvent."0"); ?>
                 <?= csrf_field(); ?>
-                <input type="hidden" name="id" id="id" value="<?= $id ?? '' ?>">
+                <input type="hidden" name="id_event" id="id_event" value="<?= $id ?? '' ?>">
+                <input type="hidden" name="position" id="position" value="0">
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="customFile" name="fileUpload[]" multiple accept="image/*" onchange="changeFileDetailEvent(event.target.files, '0')">
                     <label class="custom-file-label" for="customFile" id="labelFile">Choose file .PNG, .JPG or .JPEG</label>
@@ -96,6 +97,7 @@
                                     <?php if(isset($upload)) echo form_open_multipart($upload.$id); ?>
                                     <?= csrf_field(); ?>
                                     <input type="hidden" name="id_event" id="id_event" value="<?= $id ?? '' ?>">
+                                    <input type="hidden" name="position" id="position" value="<?= $position ?? 0 ?>">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" name="fileUpload[]" onchange="changeFileDetailEvent(event.target.files, <?= $id ?>)">
                                         <label class="custom-file-label" id="updatedFileUpload<?= $id ?>">Edit</label>

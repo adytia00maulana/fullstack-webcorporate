@@ -73,9 +73,9 @@ class InfoModel extends Model
     }
 
     // Get Data By Position
-    public function MdlGetByPositionDetailEvent($position)
+    public function MdlGetByPositionDetailEvent($id_event, $position)
     {
-        $sqlQuery = "SELECT * FROM ".$this->tableDetailInfo." WHERE position=".$position;
+        $sqlQuery = "SELECT * FROM ".$this->tableDetailInfo." WHERE id_event=".$id_event." and position=".$position;
         $query = $this->db->query($sqlQuery);
         return $query->getResultArray();
     }

@@ -39,7 +39,6 @@
     $("#table-event tbody").sortable({
         start: function (event, ui) {
             startEvent = ui.item.index();
-            // sortingEvent(ui.item.index(), null);
         },
         update: function(event, ui) {
             endEvent = ui.item.index();
@@ -70,8 +69,9 @@
     }
 
     function deleteDetailEvent(id, filePath) {
+        const idEvent = '<?= $id ?? 0 ?>';
         const url = "<?php if(isset($deleteById)) echo $deleteById ?>";
-        let urlGet = url+Number(id)+'/'+filePath
+        let urlGet = url+Number(id)+'/'+idEvent+'/'+filePath
         swal({
             title: 'Are you sure?',
             text: 'Once deleted, you will not be able to recover this data!',
@@ -94,7 +94,8 @@
 </script>
 <script>
     function sortingEvent(){
-        let url = '<?= $updatePosition ?? '' ?>';
+        const idEvent = '<?= $id ?? 0 ?>';
+        let url = '<?= $updatePosition ?? '' ?>' + idEvent;
         $.ajax({
             type: "POST",
             url: url,
