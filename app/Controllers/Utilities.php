@@ -495,8 +495,8 @@ class Utilities extends BaseController
     
     public function updatePositionEvent($id) {
         $msgInfo = $this->GlobalValidation->success();
+        $getPrevious = $this->AdminController->getUrlPrevious();
         if($id){
-            $getPrevious = $this->AdminController->getUrlPrevious();
             $data = $_POST;
             $start = $data['index_start'];
             $end = $data['index_end'];
@@ -532,8 +532,8 @@ class Utilities extends BaseController
             $data['upload'] = base_url() . 'admin/utilities/gallery/upload/';
             $data['getById'] = base_url() . 'admin/utilities/gallery/getGalleryById/';
             $data['idUpdated'] = 0;
-            $data['deleteById'] = base_url() . 'admin/utilities/gallery/deleteById/';
-            $data['updatePosition'] = base_url() . 'admin/utilities/gallery/updatePosition';
+            $data['deleteByIdProduct'] = base_url() . 'admin/utilities/gallery/deleteById/';
+            $data['updatePosition'] = base_url() . 'admin/utilities/gallery/updatePosition/';
             $data['viewPathGallery'] = $this->pathViewGallery;
         }else{
             $msgInfo['result'] = "Data Not Found";
@@ -628,32 +628,47 @@ class Utilities extends BaseController
         return redirect()->to(base_url().$getPrevious);
     }
 
-     public function deleteGallery($id, $fileName) {
-         $path = $this->pathDeleteGallery.$fileName;
-         unlink($path);
-         $this->GalleryModel->MdlDeleteById($id);
-         $redirect = redirect()->to(base_url().'admin/utilities/gallery');
-         return $redirect;
+     public function deleteGallery($id, $id_product, $fileName) {
+        dd('masuk');
+        $path = $this->pathDeleteGallery.$fileName;
+        unlink($path);
+        $this->GalleryModel->MdlDeleteById($id);
+        $getListByProduct = $this->GalleryModel->MdlSelectByIdProduct($id_product);
+        foreach ($getListByProduct as $key=>$value) {
+            $updatePosition = $value;
+            $updatePosition['position'] =  $key;
+            $this->GalleryModel->MdlUpdatedById($value['id'], $updatePosition);
+        }
+        $redirect = redirect()->to(base_url().'admin/utilities/gallery/'.$id_product);
+        $msgInfo = $this->GlobalValidation->success();
+        $msgInfo['result'] = "Successfully delete data";
+        session()->setFlashdata($msgInfo);
+        return $redirect;
      }
 
-     public function updatePositionGallery() {
-        $getPrevious = $this->AdminController->getUrlPrevious();
-        $data = $_POST;
-        $start = $data['index_start'];
-        $end = $data['index_end'];
-        $selectStart = $this->GalleryModel->MdlGetByPosition($start);
-        $selectEnd = $this->GalleryModel->MdlGetByPosition($end);
-        $idStart = $selectStart[0]['id'];
-        $idEnd = $selectEnd[0]['id'];
-        $selectStart[0]['position'] = $end;
-        $selectStart[0]['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
-        $selectEnd[0]['position'] = $start;
-        $selectEnd[0]['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
-
-        if(count($selectStart)>0) $this->GalleryModel->MdlUpdatedById($idStart, $selectStart[0]);
-        if(count($selectStart)>0) $this->GalleryModel->MdlUpdatedById($idEnd, $selectEnd[0]);
+     public function updatePositionGallery($id_product) {
         $msgInfo = $this->GlobalValidation->success();
-        $msgInfo['result'] = "Successfully moved the data";
+        $getPrevious = $this->AdminController->getUrlPrevious();
+        if($id_product){
+            $data = $_POST;
+            $start = $data['index_start'];
+            $end = $data['index_end'];
+            $selectStart = $this->GalleryModel->MdlGetByPosition($id_product, $start);
+            $selectEnd = $this->GalleryModel->MdlGetByPosition($id_product, $end);
+            $idStart = $selectStart[0]['id'];
+            $idEnd = $selectEnd[0]['id'];
+            $selectStart[0]['position'] = $end;
+            $selectStart[0]['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
+            $selectEnd[0]['position'] = $start;
+            $selectEnd[0]['updated_by'] = isset($_SESSION['username'])? session()->get('username'): "SYSTEM";
+    
+            if(count($selectStart)>0) $this->GalleryModel->MdlUpdatedById($idStart, $selectStart[0]);
+            if(count($selectStart)>0) $this->GalleryModel->MdlUpdatedById($idEnd, $selectEnd[0]);
+            $msgInfo['result'] = "Successfully moved the data";
+        }else{
+            $msgInfo = $this->GlobalValidation->validation();
+            $msgInfo['result'] = "Failed to move data";
+        }
         session()->setFlashdata($msgInfo);
         return json_encode(base_url().$getPrevious);
      }

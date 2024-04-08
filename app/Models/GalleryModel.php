@@ -65,9 +65,9 @@ class GalleryModel extends Model
     }
 
     // Get Data By Position
-    public function MdlGetByPosition($position)
+    public function MdlGetByPosition($id_product, $position)
     {
-        $sqlQuery = "SELECT * FROM ".$this->table." WHERE position=".$position;
+        $sqlQuery = "SELECT * FROM ".$this->table." WHERE id_product=".$id_product." and position=".$position;
         $query = $this->db->query($sqlQuery);
         return $query->getResultArray();
     }

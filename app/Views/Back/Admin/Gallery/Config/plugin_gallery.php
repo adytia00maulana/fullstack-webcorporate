@@ -37,8 +37,9 @@
     }
 
     function deleteGallery(id, filePath) {
-        const url = "<?php if(isset($deleteById)) echo $deleteById ?>";
-        let urlGet = url+Number(id)+'/'+filePath
+        const idProduct = '<?= $id_product ?? 0 ?>';
+        const url = "<?= $deleteById ?? '' ?>";
+        let urlGet = url+Number(id)+'/'+idProduct+'/'+filePath;
         swal({
             title: 'Are you sure?',
             text: 'Once deleted, you will not be able to recover this data!',
@@ -73,7 +74,8 @@
 </script>
 <script>
     function sortingGallery(){
-        let url = '<?= $updatePosition ?? '' ?>';
+        const idProduct = '<?= $id_product ?? 0 ?>';
+        let url = '<?= $updatePosition ?? '' ?>'+idProduct;
         $.ajax({
             type: "POST",
             url: url,
