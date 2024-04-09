@@ -12,7 +12,7 @@
         <div class="card-body">
             <a class="btn btn-primary text-white my-2 float-right" href="<?= base_url('admin/utilities/form-store') ?>">Add Store</a>
             <div class="table-responsive">
-                <table class="table table-striped table-md">
+                <table class="table table-striped table-md" id="table-store">
                     <thead class="table-primary">
                     <tr>
                         <th>#</th>
@@ -25,9 +25,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr <?= empty($getList) ? '': "hidden='hidden'" ?>>
-                        <td colspan="7" class="text-center">No data available in table</td>
-                    </tr>
                     <?php $no=0; foreach ($stores as $data_store) : $no++?>
                         <tr>
                             <td><?= $no ?></td>

@@ -36,8 +36,8 @@
                             <label for="store_image">Store Thumbnail</label>
                             <input type="hidden" class="form-control" name="store_image" id="store_image">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="fileUpload" id="customFile">
-                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                <input type="file" class="custom-file-input" name="fileUpload" id="customFile" onchange="changeFileStore()">
+                                <label class="custom-file-label" for="customFile" id="labelFileStore">Choose file</label>
                             </div>
                         </div>
                     </div>
