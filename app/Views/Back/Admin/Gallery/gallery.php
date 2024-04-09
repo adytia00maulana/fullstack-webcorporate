@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <section class="section">
     <div class="section-header">
-        <h1>Gallery<?= $name_product ?? '' ?></h1>
+        <h1>Gallery <?= $name_product ?? '' ?></h1>
     </div>
 
     <div class="section-body">

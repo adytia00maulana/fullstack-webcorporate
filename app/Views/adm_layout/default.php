@@ -208,5 +208,6 @@
         <?= $this->include('Back/Admin/Visi_misi/Config/plugin_visi_misi'); ?>
         <?= $this->include('Back/Admin/Info/Config/plugin_info'); ?>
         <?= $this->include('Back/Admin/Brand_ambassador/Config/plugin_brand_ambassador'); ?>
+        <?= $this->include('Back/Admin/Store/Config/plugin_store'); ?>
     </body>
 </html>
