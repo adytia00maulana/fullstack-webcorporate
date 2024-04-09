@@ -130,8 +130,7 @@
         <script src="<?php echo base_url(); ?>assets/admin/modules/jquery-ui/jquery-ui.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/modules/izitoast/js/iziToast.min.js"></script>
 
-        <!-- Page Specific JS File
-        <script src="<?php // echo base_url(); ?>assets/admin/js/page/index-0.js"></script>-->
+        <!-- Page Specific JS File -->
         <script src="<?php echo base_url(); ?>assets/admin/js/page/modules-sweetalert.js"></script>
 
         <!-- Template JS File -->
@@ -209,5 +208,6 @@
         <?= $this->include('Back/Admin/Info/Config/plugin_info'); ?>
         <?= $this->include('Back/Admin/Brand_ambassador/Config/plugin_brand_ambassador'); ?>
         <?= $this->include('Back/Admin/Store/Config/plugin_store'); ?>
+        <?= $this->include('Views/adm_layout/Config/plugin_dashboard'); ?>
     </body>
 </html>
