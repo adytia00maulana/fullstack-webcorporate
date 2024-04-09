@@ -1,4 +1,5 @@
 <script>
+    $("#table-list-event").dataTable({});
     function changeFileEvent(){
         $('#labelFileUploadEvent').html("File Selected. Save Data for Upload");
     }
