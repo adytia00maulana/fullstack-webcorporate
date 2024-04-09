@@ -3,12 +3,7 @@
 <?= $this->section('content') ?>
 <section class="section">
     <div class="section-header">
-        <h1>Gallery <?php
-            $finddingValue = array_filter($getListProduct, function ($obj) use ($id_product) {
-                return $obj['id'] == $id_product;
-            });
-            echo ($finddingValue[key($finddingValue)]['name']);
-            ?></h1>
+        <h1>Gallery<?= $name_product ?? '' ?></h1>
     </div>
 
     <div class="section-body">

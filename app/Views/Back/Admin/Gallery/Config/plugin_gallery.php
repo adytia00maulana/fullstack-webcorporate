@@ -40,6 +40,7 @@
         const idProduct = '<?= $id_product ?? 0 ?>';
         const url = "<?= $deleteById ?? '' ?>";
         let urlGet = url+Number(id)+'/'+idProduct+'/'+filePath;
+        
         swal({
             title: 'Are you sure?',
             text: 'Once deleted, you will not be able to recover this data!',

@@ -532,9 +532,15 @@ class Utilities extends BaseController
             $data['upload'] = base_url() . 'admin/utilities/gallery/upload/';
             $data['getById'] = base_url() . 'admin/utilities/gallery/getGalleryById/';
             $data['idUpdated'] = 0;
-            $data['deleteByIdProduct'] = base_url() . 'admin/utilities/gallery/deleteById/';
+            $data['deleteById'] = base_url() . 'admin/utilities/deleteGalleryById/';
             $data['updatePosition'] = base_url() . 'admin/utilities/gallery/updatePosition/';
             $data['viewPathGallery'] = $this->pathViewGallery;
+            
+            $finddingValue = array_filter($data['getListProduct'], function ($obj) use ($id) {
+                return $obj['id'] == $id;
+            });
+            $getKey = key($finddingValue);
+            $data['name_product'] = $finddingValue[$getKey]['name'];
         }else{
             $msgInfo['result'] = "Data Not Found";
             session()->setFlashdata($msgInfo);
@@ -629,7 +635,6 @@ class Utilities extends BaseController
     }
 
      public function deleteGallery($id, $id_product, $fileName) {
-        dd('masuk');
         $path = $this->pathDeleteGallery.$fileName;
         unlink($path);
         $this->GalleryModel->MdlDeleteById($id);
