@@ -35,7 +35,7 @@
                             <td><?= date('Y-m-d', strtotime($data_store['updated'])) ?></td>
                             <td>
                                 <a class="btn btn-secondary" href="<?= base_url('admin/utilities/form-detail-store/'.$data_store['id']) ?>">Detail</a>
-                                <a class="btn btn-warning text-white">Delete</a>
+                                <a class="btn btn-warning text-white" onclick="deleteStoreById(<?= $data_store['id'] ?>)">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

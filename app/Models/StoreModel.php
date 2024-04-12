@@ -50,4 +50,11 @@ class StoreModel extends Model
         return $result;
     }
 
+    // Delete Data
+    public function MdlDeleteById($id): void
+    {
+        $sqlQuery = "DELETE FROM ".$this->table." where id =".$id;
+        $this->db->query($sqlQuery);
+    }
+
 }

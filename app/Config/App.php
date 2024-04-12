@@ -237,6 +237,6 @@ class App extends BaseConfig
     public string $logo             = 'logo';
     public string $visi_misi        = 'visi_misi';
     public string $ba               = 'brand_ambassador';
-
+    public string $tbl_activities   = 'activities';
     public string $tbl_users        = 'users';
 }

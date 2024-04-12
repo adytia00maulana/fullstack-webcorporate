@@ -81,9 +81,20 @@ class Utilities extends BaseController
         $data = $this->defaultLoadSideBar();
         $data['stores'] = $this->StoreModel->getAllData();
         $data['ref_stores'] = $this->StoreModel->getRefStore();
+        $data['deleteById'] = base_url() . 'admin/utilities/deleteStoreById/';
         return view('Back/Admin/Store/store' , $data);
     }
 
+
+    public function deleteStore($id) {
+        $getPrevious = $this->AdminController->getUrlPrevious();
+        $this->StoreModel->MdlDeleteById($id);
+        $redirect = redirect()->to(base_url().$getPrevious);
+        $msgInfo = $this->GlobalValidation->success();
+        $msgInfo['result'] = "Successfully delete data";
+        session()->setFlashdata($msgInfo);
+        return $redirect;
+    }
 
     public function formStore() {
         $data = $this->defaultLoadSideBar();
