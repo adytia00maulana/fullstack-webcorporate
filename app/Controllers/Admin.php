@@ -11,13 +11,19 @@ use MstUserModel;
 use ProductModel;
 use LogoModel;
 use ActivitiesModel;
+use GalleryModel;
+use InfoModel;
+use StoreModel;
 
 class Admin extends BaseController
 {
-    private $MstUserModel, $MstRoleModel, $ProductModel, $pathUploadProduct, $pathViewProduct, $pathDeleteProduct, $LogoModel, $pathViewLogo, $pathUploadDetailProduct, $pathViewDetailProduct, $pathDeleteDetailProduct, $ActivitiesModel;
+    private $MstUserModel, $MstRoleModel, $GalleryModel, $ProductModel, $InfoModel, $StoreModel, $pathUploadProduct, $pathViewProduct, $pathDeleteProduct, $LogoModel, $pathViewLogo, $pathUploadDetailProduct, $pathViewDetailProduct, $pathDeleteDetailProduct, $ActivitiesModel;
     public GlobalValidation $GlobalValidation;
     public function __construct()
     {
+        $this->GalleryModel = model(GalleryModel::class);
+        $this->InfoModel = model(InfoModel::class);
+        $this->StoreModel = model(StoreModel::class);
         $this->MstUserModel = model(MstUserModel::class);
         $this->MstRoleModel = model(MstRoleModel::class);
         $this->ProductModel = model(ProductModel::class);
@@ -65,14 +71,10 @@ class Admin extends BaseController
     {
         $data = $this->defaultLoadSideBar();
         $data['title'] = 'Dashboard';
-        $queryUsers = $this->MstUserModel->MdlSelect();
-        $queryUsersActive = $this->MstUserModel->MdlSelectByActive();
-        $querySourceProduct = $this->ProductModel->MdlSourceProductSelect();
-        $queryDetailProduct = $this->ProductModel->MdlDetailProductSelect();
-        $data['totalUsers'] = count($queryUsers);
-        $data['totalUsersActive'] = count($queryUsersActive);
-        $data['totalSourceProduct'] = count($querySourceProduct);
-        $data['totalDetailProduct'] = count($queryDetailProduct);
+        $data['totalDetailProduct'] = count($this->ProductModel->MdlDetailProductSelect());
+        $data['totalGallery'] = count($this->GalleryModel->MdlSelect());
+        $data['totalEvent'] = count($this->InfoModel->getAllData());
+        $data['totalStore'] = count($this->StoreModel->getAllData());
         $data['getListActivities'] = $this->ActivitiesModel->MdlSelectNewActivity('administrator');
         $data['countVisitorUser'] = count($this->ActivitiesModel->MdlSelectNewActivity('user'));
         $data['countVisitorUserJanuary'] = count($this->ActivitiesModel->MdlSelectVisitorUser('user', Date('Y'), '01'));

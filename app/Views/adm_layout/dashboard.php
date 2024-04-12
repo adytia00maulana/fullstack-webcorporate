@@ -52,7 +52,7 @@
                         <h4>Total Product</h4>
                     </div>
                     <div class="card-body">
-                        <?php if(isset($totalDetailProduct)) echo $totalDetailProduct;?>
+                        <?= $totalDetailProduct ?? 0;?>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                         <h4>Total Gallery</h4>
                     </div>
                     <div class="card-body">
-                        <?php if(isset($totalDetailProduct)) echo $totalDetailProduct;?>
+                        <?= $totalGallery ?? 0;?>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                         <h4>Total Event</h4>
                     </div>
                     <div class="card-body">
-                        <?php if(isset($totalDetailProduct)) echo $totalDetailProduct;?>
+                        <?= $totalEvent ?? 0;?>
                     </div>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                         <h4>Total Store</h4>
                     </div>
                     <div class="card-body">
-                        <?php if(isset($totalDetailProduct)) echo $totalDetailProduct;?>
+                        <?= $totalStore ?? 0;?>
                     </div>
                 </div>
             </div>
