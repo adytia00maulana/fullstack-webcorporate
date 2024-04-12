@@ -185,25 +185,34 @@
                         $now = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
                         $timeStamp = $now->format("Y-m-d H:i:s");
                         $start_datetime = new DateTime($timeStamp); 
-                        $diff = $start_datetime->diff(new DateTime($created_date)); 
+                        $diff = $start_datetime->diff(new DateTime($created_date));
+                        $total_minutes = ($diff->days * 24 * 60); 
+                        $total_minutes += ($diff->h * 60); 
+                        $total_minutes += $diff->i;
                     ?>
-                    <div class="float-right<?= $diff->i == 0?' text-primary':'' ?>">
+                    <div class="float-right<?= $total_minutes == 0?' text-primary':'' ?>">
                         <?php
-                            if($diff->i == 0) {
-                                echo 'NOW';
-                            }else{
-                                if(($diff->days) >= 7 ) {
-                                    echo $diff->m.' Months ago';
+                            $showTime = 'NOW';
+                            if($total_minutes > 0) {
+                                if($diff->y > 0){
+                                    $showTime = $diff->y.' Years ago';
                                 }else{
-                                    $total_minutes = ($diff->days * 24 * 60); 
-                                    $total_minutes += ($diff->h * 60); 
-                                    $total_minutes += $diff->i; 
-                                    
-                                    if($total_minutes < 60) echo $total_minutes. ' Minutes ago';
-                                    if($total_minutes >= 60 && $total_minutes < 1440) echo $total_minutes. ' Hours ago';
-                                    if($total_minutes > 1440) echo $diff->days.' Days ago';
+                                    if($diff->m > 0){
+                                        $showTime = $diff->m.' Months ago'; 
+                                    }else{
+                                        if($diff->d > 0){
+                                            $showTime = $diff->days.' Days ago';
+                                        }else{
+                                            if($diff->h > 0){
+                                                $showTime = $diff->h.' Hours ago';
+                                            }else{
+                                                $showTime = $total_minutes.' Minutes ago';
+                                            }
+                                        }
+                                    }
                                 }
                             }
+                            echo $showTime;
                         ?>
                     </div>
                     <div class="media-title"><?= $created_by ?></div>

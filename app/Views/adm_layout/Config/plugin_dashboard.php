@@ -1,14 +1,27 @@
 <script>
   if(document.getElementById("myChart")){
     var statistics_chart = document.getElementById("myChart").getContext('2d');
-  
+
     var myChart = new Chart(statistics_chart, {
       type: 'line',
       data: {
-        labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
         datasets: [{
           label: 'Statistics',
-          data: [640, 387, 530, 302, 430, 270, 488],
+          data: [
+            <?= $countVisitorUserJanuary ?? 0 ?>,
+            <?= $countVisitorUserFebruary ?? 0 ?>,
+            <?= $countVisitorUserMarch ?? 0 ?>,
+            <?= $countVisitorUserApril ?? 0 ?>,
+            <?= $countVisitorUserMay ?? 0 ?>,
+            <?= $countVisitorUserJune ?? 0 ?>,
+            <?= $countVisitorUserJuly ?? 0 ?>,
+            <?= $countVisitorUserAugust ?? 0 ?>,
+            <?= $countVisitorUserSeptember ?? 0 ?>,
+            <?= $countVisitorUserOctober ?? 0 ?>,
+            <?= $countVisitorUserNovember ?? 0 ?>,
+            <?= $countVisitorUserDecember ?? 0 ?>
+          ],
           borderWidth: 5,
           borderColor: '#6777ef',
           backgroundColor: 'transparent',
@@ -28,7 +41,7 @@
               drawBorder: false,
             },
             ticks: {
-              stepSize: 150
+              stepSize: <?= $countVisitorUser ?? 0 ?>
             }
           }],
           xAxes: [{

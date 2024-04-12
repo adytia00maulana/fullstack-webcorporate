@@ -75,13 +75,13 @@ $routes->group('admin', ['filter' => 'loginFilter'], static function ($subRoutes
 });
 
 // routing front / company profile
-$routes->get('/', 'Home::index');
-$routes->get('/vm', 'Home::visiMisi');
-$routes->get('/about', 'Home::about');
-$routes->get('/gallery', 'Home::gallery');
-$routes->get('/product/(:any)', 'Home::product/$1');
-$routes->get('/detailProduct/(:any)', 'Home::detailProduct/$1');
-$routes->get('/info', 'Home::info');
-$routes->get('/brand', 'Home::brand');
-$routes->get('/faq', 'Home::faq');
+$routes->get('/', 'Home::index', ['filter' => 'webFilter']);
+$routes->get('/vm', 'Home::visiMisi', ['filter' => 'webFilter']);
+$routes->get('/about', 'Home::about', ['filter' => 'webFilter']);
+$routes->get('/gallery', 'Home::gallery', ['filter' => 'webFilter']);
+$routes->get('/product/(:any)', 'Home::product/$1', ['filter' => 'webFilter']);
+$routes->get('/detailProduct/(:any)', 'Home::detailProduct/$1', ['filter' => 'webFilter']);
+$routes->get('/info', 'Home::info', ['filter' => 'webFilter']);
+$routes->get('/brand', 'Home::brand', ['filter' => 'webFilter']);
+$routes->get('/faq', 'Home::faq', ['filter' => 'webFilter']);
 

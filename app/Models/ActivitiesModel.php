@@ -19,9 +19,17 @@ class ActivitiesModel extends Model
     }
 
     // Retrieve New Activity
-    public function MdlSelectNewActivity(): array
+    public function MdlSelectNewActivity($type): array
     {
-        $sqlQuery = "select * from ".$this->table." order by id DESC LIMIT 0,5";
+        $sqlQuery = "select * from ".$this->table." where type='".$type."' order by id DESC LIMIT 0,5";
+        $query = $this->db->query($sqlQuery);
+        return $query->getResultArray();
+    }
+
+    // Retrieve New Activity
+    public function MdlSelectVisitorUser($type, $year, $month): array
+    {
+        $sqlQuery = "select * from ".$this->table." where type='".$type."' and created_date like '".$year."-".$month."%%'";
         $query = $this->db->query($sqlQuery);
         return $query->getResultArray();
     }

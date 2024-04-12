@@ -73,7 +73,20 @@ class Admin extends BaseController
         $data['totalUsersActive'] = count($queryUsersActive);
         $data['totalSourceProduct'] = count($querySourceProduct);
         $data['totalDetailProduct'] = count($queryDetailProduct);
-        $data['getListActivities'] = $this->ActivitiesModel->MdlSelectNewActivity();
+        $data['getListActivities'] = $this->ActivitiesModel->MdlSelectNewActivity('administrator');
+        $data['countVisitorUser'] = count($this->ActivitiesModel->MdlSelectNewActivity('user'));
+        $data['countVisitorUserJanuary'] = count($this->ActivitiesModel->MdlSelectVisitorUser('user', Date('Y'), '01'));
+        $data['countVisitorUserFebruary'] = count($this->ActivitiesModel->MdlSelectVisitorUser('user', Date('Y'), '02'));
+        $data['countVisitorUserMarch'] = count($this->ActivitiesModel->MdlSelectVisitorUser('user', Date('Y'), '03'));
+        $data['countVisitorUserApril'] = count($this->ActivitiesModel->MdlSelectVisitorUser('user', Date('Y'), '04'));
+        $data['countVisitorUserMay'] = count($this->ActivitiesModel->MdlSelectVisitorUser('user', Date('Y'), '05'));
+        $data['countVisitorUserJune'] = count($this->ActivitiesModel->MdlSelectVisitorUser('user', Date('Y'), '06'));
+        $data['countVisitorUserJuly'] = count($this->ActivitiesModel->MdlSelectVisitorUser('user', Date('Y'), '07'));
+        $data['countVisitorUserAugust'] = count($this->ActivitiesModel->MdlSelectVisitorUser('user', Date('Y'), '08'));
+        $data['countVisitorUserSeptember'] = count($this->ActivitiesModel->MdlSelectVisitorUser('user', Date('Y'), '09'));
+        $data['countVisitorUserOctober'] = count($this->ActivitiesModel->MdlSelectVisitorUser('user', Date('Y'), '10'));
+        $data['countVisitorUserNovember'] = count($this->ActivitiesModel->MdlSelectVisitorUser('user', Date('Y'), '11'));
+        $data['countVisitorUserDecember'] = count($this->ActivitiesModel->MdlSelectVisitorUser('user', Date('Y'), '12'));
         
         return view('adm_layout/dashboard', $data);
     }
