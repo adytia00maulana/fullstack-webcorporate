@@ -15,7 +15,7 @@ class WebFilter implements FilterInterface
     }
     public function before(RequestInterface $req, $arguments = null)
     {
-        $this->saveAdminActivities($req);
+        // $this->saveAdminActivities($req);
     }
 
     public function after(RequestInterface $req, ResponseInterface $res, $arguments = null)
