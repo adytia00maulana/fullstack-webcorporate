@@ -122,7 +122,8 @@
     <div class="col-lg-8 col-md-12 col-12 col-sm-12">
         <div class="card">
         <div class="card-header">
-            <h4>Statistics User Activities</h4>
+            <!-- <h4>Statistics User Activities</h4> -->
+            <h4>Visitor Statistics</h4>
             <div class="card-header-action">
             <!-- <div class="btn-group">
                 <a href="#" class="btn btn-primary">Week</a>
@@ -132,7 +133,7 @@
         </div>
         <div class="card-body">
             <canvas id="myChart" height="182"></canvas>
-            <div class="statistic-details mt-sm-4">
+            <!-- <div class="statistic-details mt-sm-4">
             <div class="statistic-details-item">
                 <span class="text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 7%</span>
                 <div class="detail-value">$243</div>
@@ -153,7 +154,7 @@
                 <div class="detail-value">$92,142</div>
                 <div class="detail-name">This Year's Sales</div>
             </div>
-            </div>
+            </div> -->
         </div>
         </div>
     </div>
@@ -164,46 +165,52 @@
         </div>
         <div class="card-body">             
             <ul class="list-unstyled list-unstyled-border">
+                <?php
+                    $indexDash = 0;
+                    foreach($getListActivities as $valueAct): $indexDash++;
+                ?>
+                <?php
+                    $id = $valueAct['id'];
+                    $type = $valueAct['type'];
+                    $route_name = $valueAct['route_name'];
+                    $route_params = $valueAct['route_params'];
+                    $description = $valueAct['description'];
+                    $created_by = $valueAct['created_by'];
+                    $created_date = $valueAct['created_date'];
+                ?>
                 <li class="media">
                     <img class="mr-3 rounded-circle" width="50" src="<?php echo base_url(); ?>assets/admin/img/avatar/avatar-1.png" alt="avatar">
                     <div class="media-body">
-                    <div class="float-right text-primary">Now</div>
-                    <div class="media-title">Administrator</div>
-                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
+                    <?php
+                        $now = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
+                        $timeStamp = $now->format("Y-m-d H:i:s");
+                        $start_datetime = new DateTime($timeStamp); 
+                        $diff = $start_datetime->diff(new DateTime($created_date)); 
+                    ?>
+                    <div class="float-right<?= $diff->i == 0?' text-primary':'' ?>">
+                        <?php
+                            if($diff->i == 0) {
+                                echo 'NOW';
+                            }else{
+                                if(($diff->days) >= 7 ) {
+                                    echo $diff->m.' Months ago';
+                                }else{
+                                    $total_minutes = ($diff->days * 24 * 60); 
+                                    $total_minutes += ($diff->h * 60); 
+                                    $total_minutes += $diff->i; 
+                                    
+                                    if($total_minutes < 60) echo $total_minutes. ' Minutes ago';
+                                    if($total_minutes >= 60 && $total_minutes < 1440) echo $total_minutes. ' Hours ago';
+                                    if($total_minutes > 1440) echo $diff->days.' Days ago';
+                                }
+                            }
+                        ?>
+                    </div>
+                    <div class="media-title"><?= $created_by ?></div>
+                    <span class="text-small text-muted"><?= $description ?></span>
                     </div>
                 </li>
-                <li class="media">
-                    <img class="mr-3 rounded-circle" width="50" src="<?php echo base_url(); ?>assets/admin/img/avatar/avatar-1.png" alt="avatar">
-                    <div class="media-body">
-                    <div class="float-right">12m</div>
-                    <div class="media-title">Administrator</div>
-                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                    </div>
-                </li>
-                <li class="media">
-                    <img class="mr-3 rounded-circle" width="50" src="<?php echo base_url(); ?>assets/admin/img/avatar/avatar-1.png" alt="avatar">
-                    <div class="media-body">
-                    <div class="float-right">17m</div>
-                    <div class="media-title">Administrator</div>
-                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                    </div>
-                </li>
-                <li class="media">
-                    <img class="mr-3 rounded-circle" width="50" src="<?php echo base_url(); ?>assets/admin/img/avatar/avatar-1.png" alt="avatar">
-                    <div class="media-body">
-                    <div class="float-right">21m</div>
-                    <div class="media-title">Administrator</div>
-                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                    </div>
-                </li>
-                <li class="media">
-                    <img class="mr-3 rounded-circle" width="50" src="<?php echo base_url(); ?>assets/admin/img/avatar/avatar-1.png" alt="avatar">
-                    <div class="media-body">
-                    <div class="float-right">21m</div>
-                    <div class="media-title">Administrator</div>
-                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                    </div>
-                </li>
+                <?php endforeach; ?>
             </ul>
             <!-- <div class="text-center pt-1 pb-1">
             <a href="#" class="btn btn-primary btn-lg btn-round">

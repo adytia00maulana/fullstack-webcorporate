@@ -45,16 +45,20 @@ $routes->group('admin', ['filter' => 'loginFilter'], static function ($subRoutes
         $UtilRoutes->get('form-store', 'Utilities::FormStore');
         $UtilRoutes->get('form-detail-store/(:any)', 'Utilities::formDetailStore/$1');
         $UtilRoutes->post('update-store/(:any)', 'Utilities::UpdateStore/$1');
+        $UtilRoutes->get('deleteStoreById/(:any)', 'Utilities::deleteStore/$1');
 
         $UtilRoutes->get('gallery/(:any)', 'Utilities::indexGallery/$1');
         $UtilRoutes->get('gallery/getGalleryById/(:any)', 'Utilities::getGallery/$1');
         $UtilRoutes->post('gallery/upload/(:any)', 'Utilities::uploadGallery/$1');
         $UtilRoutes->get('deleteGalleryById/(:any)/(:any)/(:any)', 'Utilities::deleteGallery/$1/$2/$3');
         $UtilRoutes->post('gallery/updatePosition/(:any)', 'Utilities::updatePositionGallery/$1');
+
         $UtilRoutes->get('logo', 'Utilities::indexLogo');
         $UtilRoutes->post('logo/postLogo', 'Utilities::postLogo');
+
         $UtilRoutes->get('vm', 'Utilities::indexVm');
         $UtilRoutes->post('vm/postVm', 'Utilities::postVm');
+
         $UtilRoutes->get('ba', 'Utilities::indexBrandAmbassador');
         $UtilRoutes->post('ba/upload/(:any)', 'Utilities::uploadBrandAmbassador/$1');
         $UtilRoutes->get('ba/deleteById/(:any)/(:any)', 'Utilities::deleteBrandAmbassador/$1/$2');

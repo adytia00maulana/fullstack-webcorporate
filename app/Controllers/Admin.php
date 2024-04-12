@@ -10,10 +10,11 @@ use MstRoleModel;
 use MstUserModel;
 use ProductModel;
 use LogoModel;
+use ActivitiesModel;
 
 class Admin extends BaseController
 {
-    private $MstUserModel, $MstRoleModel, $ProductModel, $pathUploadProduct, $pathViewProduct, $pathDeleteProduct, $LogoModel, $pathViewLogo, $pathUploadDetailProduct, $pathViewDetailProduct, $pathDeleteDetailProduct;
+    private $MstUserModel, $MstRoleModel, $ProductModel, $pathUploadProduct, $pathViewProduct, $pathDeleteProduct, $LogoModel, $pathViewLogo, $pathUploadDetailProduct, $pathViewDetailProduct, $pathDeleteDetailProduct, $ActivitiesModel;
     public GlobalValidation $GlobalValidation;
     public function __construct()
     {
@@ -29,6 +30,7 @@ class Admin extends BaseController
         $this->pathViewLogo = config('app')-> viewLogo;
         $this->GlobalValidation = new GlobalValidation();
         $this->LogoModel = model(LogoModel::class);
+        $this->ActivitiesModel = model(ActivitiesModel::class);
     }
 
     public function defaultLoadSideBar(): array
@@ -71,7 +73,8 @@ class Admin extends BaseController
         $data['totalUsersActive'] = count($queryUsersActive);
         $data['totalSourceProduct'] = count($querySourceProduct);
         $data['totalDetailProduct'] = count($queryDetailProduct);
-
+        $data['getListActivities'] = $this->ActivitiesModel->MdlSelectNewActivity();
+        
         return view('adm_layout/dashboard', $data);
     }
 
