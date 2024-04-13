@@ -1,53 +1,80 @@
 <?= $this->extend('layouts/default') ?>
  
 <?= $this->section('content') ?>
-  <!-- ======= Portfolio Details Section ======= -->
-  <section id="portfolio-details" class="portfolio-details">
-      <div class="container">
+<p></p>
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+  <div class="container">
 
-      <div class="row gy-4">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li>Product Details</li>
+    </ol>
+    <h2><?= $getDetailProduct->name ?></h2>
 
-          <div class="col-lg-8">
-          <div class="portfolio-details-slider swiper">
-              <div class="swiper-wrapper align-items-center">
+  </div>
+</section><!-- End Breadcrumbs -->
 
-              <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-details-1.jpg" alt="">
-              </div>
+<!-- ======= Portfolio Details Section ======= -->
+<section id="portfolio-details" class="portfolio-details">
+  <div class="container">
 
-              <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-details-2.jpg" alt="">
-              </div>
+    <div class="row gy-4">
 
-              <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-details-3.jpg" alt="">
-              </div>
+      <div class="col-lg-8">
+        <div class="portfolio-details-slider swiper">
+          <div class="swiper-wrapper align-items-center">
 
-              </div>
-              <div class="swiper-pagination"></div>
+            <div class="swiper-slide">
+              <img src="<?= base_url().$viewPathDetailProduct.$getDetailProduct->filename ?>" alt="">
+            </div>
+
+            <!-- <div class="swiper-slide">
+              <img src="<?php // echo base_url().$viewPathDetailProduct.$getDetailProduct->filename ?>" alt="">
+            </div>
+
+            <div class="swiper-slide">
+              <img src="<?php // echo base_url().$viewPathDetailProduct.$getDetailProduct->filename ?>" alt="">
+            </div> -->
+
           </div>
-          </div>
-
-          <div class="col-lg-4">
-          <div class="portfolio-info">
-              <h3>Project information</h3>
-              <ul>
-              <li><strong>Category</strong>: Web design</li>
-              <li><strong>Client</strong>: ASU Company</li>
-              <li><strong>Project date</strong>: 01 March, 2020</li>
-              <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
-              </ul>
-          </div>
-          <div class="portfolio-description">
-              <h2>This is an example of portfolio detail</h2>
-              <p>
-              Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-              </p>
-          </div>
-          </div>
-
+          <div class="swiper-pagination"></div>
+        </div>
       </div>
 
+      <div class="col-lg-4">
+        <div class="portfolio-info">
+          <h3>Project information</h3>
+          <ul>
+            <li>
+                <strong>Packaging</strong>:
+                <br/><?= $getDetailProduct->packaging ?>
+            </li>
+            <li>
+                <strong>Composition</strong>:
+                <br/><?= $getDetailProduct->composition ?>
+            </li>
+            <li>
+                <strong>Usage Method</strong>:
+                <br/><?= $getDetailProduct->usage_method ?>
+            </li>
+            <li>
+                <strong>Benefits</strong>:
+                <br/><?= $getDetailProduct->benefits ?>
+             </li>
+          </ul>
+        </div>
+        <div class="portfolio-description">
+          <h2>Detail <?= $getDetailProduct->name ?></h2>
+          <p>
+            <?= $getDetailProduct->description ?>
+          </p>
+        </div>
       </div>
-  </section><!-- End Portfolio Details Section -->
+
+    </div>
+
+  </div>
+</section><!-- End Portfolio Details Section -->
+
 <?= $this->endSection() ?>

@@ -1198,7 +1198,7 @@ section {
   left: 0;
   width: 0%;
   height: 5px;
-  background-color: #1bb1dc;
+  background-color: #198754;
   transition: 0.5s;
 }
 
@@ -1269,12 +1269,12 @@ section {
   letter-spacing: 1px;
   border-radius: 3px;
   display: inline-block;
-  background: #1bb1dc;
+  background: #198754;
   color: #fff;
 }
 
 #pricing .card .btn:hover {
-  background: #0a98c0;
+  background: #0e5031;
 }
 
 /* Frequently Asked Questions Section

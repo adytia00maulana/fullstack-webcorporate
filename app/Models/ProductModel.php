@@ -258,6 +258,7 @@ class ProductModel extends Model
                 dp.id,
                 dp.id_product,
                 p.name as name_product,
+                p.filename as filename_product,
                 dp.id_source_product,
                 sp.name as name_source_product,
                 dp.code,

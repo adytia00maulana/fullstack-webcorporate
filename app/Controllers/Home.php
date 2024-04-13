@@ -16,6 +16,7 @@ class Home extends BaseController
     private $StoreModel;
     public $GalleryModel;
     public $pathViewProduct;
+    public $pathViewDetailProduct;
     public $pathViewGallery;
     public $pathViewLogo;
     public $pathViewEvent;
@@ -29,6 +30,7 @@ class Home extends BaseController
         $this->StoreModel = model(StoreModel::class);
         $this->GalleryModel = model(GalleryModel::class);
         $this->pathViewProduct = config('app')-> viewProduct;
+        $this->pathViewDetailProduct = config('app')-> viewDetailProduct;
         $this->pathViewGallery = config('app')-> viewGallery;
         $this->pathViewLogo = config('app')->viewLogo;
         $this->pathViewEvent = config('app')->viewEvent;
@@ -40,6 +42,7 @@ class Home extends BaseController
     {
         $data['divVideo'] = 'hidden';
         $data['viewPathProduct'] = $this->pathViewProduct;
+        $data['viewPathDetailProduct'] = $this->pathViewDetailProduct;
         $data['viewPathGallery'] = $this->pathViewGallery;
         $data['viewPathLogo'] = $this->pathViewLogo;
         $data['viewPathEvent'] = $this->pathViewEvent;
@@ -79,7 +82,7 @@ class Home extends BaseController
         $data['title'] = 'Product';
         $data['url_detail_product'] = base_url() . 'detailProduct/';
         $data['getListDetailProduct'] = $this->ProductModel->MdlDetailProductSelectByIdProduct($id);
-        
+        // dd($data);
         return view('Front/product', $data);
     }
 

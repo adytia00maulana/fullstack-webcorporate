@@ -1,52 +1,47 @@
 <?= $this->extend('layouts/default') ?>
  
 <?= $this->section('content') ?>
-<section id="courses-list" class="section courses-list">
-    <div class="container">
-        <div class="row">
-            <?php
-                $no = 0;
-                foreach($getListDetailProduct as $dataDetailProd): $no++;
-            ?>
-            <?php
-                $id = $dataDetailProd['id'];
-                $id_product = $dataDetailProd['id_product'];
-                $name_product = $dataDetailProd['name_product'];
-                $id_source_product = $dataDetailProd['id_source_product'];
-                $name_source_product = $dataDetailProd['name_source_product'];
-                $code = $dataDetailProd['code'];
-                $name = $dataDetailProd['name'];
-                $filename = $dataDetailProd['filename'];
-                $filepath = $dataDetailProd['filepath'];
-                $description = $dataDetailProd['description'];
-            ?>
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="<?= $no*100?>">
-                <div class="course-item">
-                    <img src="<?= base_url().$viewPathDetailProduct.$filename ?>" class="img-fluid" alt="...">
-                    <div class="course-content">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <p class="category"><?= $name_product ?></p>
-                            <!-- <p class="price">$169</p> -->
-                        </div>
+<p></p>
+<!-- ======= Pricing Section ======= -->
+<section id="pricing" class="pricing section-bg wow fadeInUp">
 
-                        <h3><a href="<?= $url_detail_product.$id ?>"><?= $name ?></a></h3>
-                        <p class="description" data-toggle="tooltip" data-placement="right" title="<?= (chunk_split($description, 100, "\r\n")); ?>"><?= chunk_split($description, 100, "\r\n") ?? '-'; ?></p>
-                        <!-- <div class="trainer d-flex justify-content-between align-items-center">
-                            <div class="trainer-profile d-flex align-items-center">
-                            <img src="<?=base_url(); ?>assets/front_end/assets/img/trainers/trainer-1-2.jpg" class="img-fluid" alt="">
-                            <a href="" class="trainer-link">Antonio</a>
-                            </div>
-                            <div class="trainer-rank d-flex align-items-center">
-                            <i class="bi bi-person user-icon"></i>&nbsp;50
-                            &nbsp;&nbsp;
-                            <i class="bi bi-heart heart-icon"></i>&nbsp;65
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
+  <div class="container" data-aos="fade-up">
+
+    <header class="section-header">
+        <h3><?= empty($getListDetailProduct)? 'Product' : $getListDetailProduct[0]['name_product'] ?></h3>
+        <?php if(empty($getListDetailProduct)) { ?>
+            <p></p>
+        <?php } else { ?>
+            <p>
+                <?php if($getListDetailProduct[0]['filename_product'] != NULL) { ?>
+                    <img src="<?= base_url().$viewPathProduct.$getListDetailProduct[0]['filename_product']?>" class="img-fluid w-75 h-75" alt="">
+                <?php } ?>
+            </p>
+        <?php } ?>
+    </header>
+
+    <div class="row flex-items-xs-middle flex-items-xs-center">
+        <?php
+            $no = 0;
+            foreach($getListDetailProduct as $dataDetailProd): $no++;
+        ?>
+        <div class="col-xs-12 col-lg-4 p-2" data-aos="fade-up" data-aos-delay="<?= $no*100 ?>">
+            <div class="card">
+            <div class="card-header">
+                <img src="<?= base_url().$viewPathDetailProduct.$dataDetailProd['filename'] ?>" class="img-fluid w-50 h-50 rounded" alt="">
             </div>
-            <?php endforeach; ?>
+            <div class="card-block">
+                <h4 class="card-title"><?= $dataDetailProd['name']; ?></h4>
+                <ul class="list-group">
+                    <li class="list-group-item"><?= $dataDetailProd['description']; ?></li>
+                </ul>
+                <a href="<?= $url_detail_product.$dataDetailProd['id'] ??'' ?>" class="btn">Choose Product</a>
+            </div>
+            </div>
         </div>
+        <?php endforeach; ?>
     </div>
-</section>
+  </div>
+
+</section><!-- End Pricing Section -->
 <?= $this->endSection() ?>

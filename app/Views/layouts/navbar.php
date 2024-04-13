@@ -1,7 +1,7 @@
 <ul>
     <li><a class="nav-link scrollto<?= $activeUrl.'/' == (string) current_url()? ' '.'active': '' ?>" href="/">Home</a></li>
     <li><a class="nav-link scrollto<?= $activeUrl.'/about' == (string) current_url()? ' '.'active': '' ?>" href="<?= base_url(); ?>about">About Us</a></li>
-    <li class="dropdown"><a href="#"><span>Products</span> <i class="bi bi-chevron-down"></i></a>
+    <li class="dropdown"><a class="nav-link scrollto<?= (strpos((string) current_url(), $activeUrl.'/product') !== false) ? ' active' : '' ?>" href="#"><span>Products</span> <i class="bi bi-chevron-down"></i></a>
         <ul>
             <?php $i=0; foreach($getListProduct as $row): $i++;
                 $id = $row['id'];

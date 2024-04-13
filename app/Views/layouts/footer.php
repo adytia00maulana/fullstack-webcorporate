@@ -24,10 +24,10 @@
                         <div class="footer-links">
                             <h4>Useful Links</h4>
                             <ul>
-                                <li><a href="#">Home Page</a></li>
-                                <li><a href="#about">About us</a></li>
+                                <li><a href="/">Home Page</a></li>
+                                <li><a href="<?= base_url(); ?>about">About us</a></li>
                                 <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">FAQ</a></li>
+                                <li><a href="<?= base_url(); ?>faq">FAQ</a></li>
                             </ul>
                         </div>
 
