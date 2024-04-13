@@ -6,47 +6,49 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use GalleryModel;
 use ProductModel;
+use LogoModel;
+use StoreModel;
 
 class Home extends BaseController
 {
+    private $LogoModel;
     private $ProductModel;
+    private $StoreModel;
     public $GalleryModel;
     public $pathViewProduct;
     public $pathViewGallery;
     public $pathViewLogo;
     public $pathViewEvent;
     public $pathViewBrandAmbassador;
+    public $pathViewStore;
     public GlobalValidation $GlobalValidation;
     public function __construct()
     {
+        $this->LogoModel = model(LogoModel::class);
         $this->ProductModel = model(ProductModel::class);
+        $this->StoreModel = model(StoreModel::class);
         $this->GalleryModel = model(GalleryModel::class);
         $this->pathViewProduct = config('app')-> viewProduct;
         $this->pathViewGallery = config('app')-> viewGallery;
         $this->pathViewLogo = config('app')->viewLogo;
         $this->pathViewEvent = config('app')->viewEvent;
         $this->pathViewBrandAmbassador = config('app')->viewBrandAmbassador;
+        $this->pathViewStore = config('app')->viewStore;
         $this->GlobalValidation = new GlobalValidation();
     }
     public function defaultLoad(): array
     {
+        $data['divVideo'] = 'hidden';
         $data['viewPathProduct'] = $this->pathViewProduct;
         $data['viewPathGallery'] = $this->pathViewGallery;
         $data['viewPathLogo'] = $this->pathViewLogo;
         $data['viewPathEvent'] = $this->pathViewEvent;
         $data['viewPathBrandAmbassador'] = $this->pathViewBrandAmbassador;
+        $data['viewStore'] = $this->pathViewStore;
         $data['activeUrl'] = site_url();
+        $data['getLogo'] = $this->LogoModel->MdlSelect();
         $data['getListProduct'] = $this->ProductModel->MdlProductSelectByActive();
-        $data['getListStores'] = [
-            array(
-                'id' => 1,
-                'name' => 'Toko Offline'
-            ),
-            array(
-                'id' => 2,
-                'name' => 'Toko Online'
-            )
-        ];
+        $data['getListStores'] = $this->StoreModel->getRefStore();
         $data['getListInfo'] = [
             array(
                 'id' => 1,
@@ -59,14 +61,16 @@ class Home extends BaseController
                 'code' => 'info'
             )
         ];
-
+        
         return $data;
     }
 
     public function index(): string {
         $data = $this->defaultLoad();
         $data['title'] = 'Home';
-
+        $data['divVideo'] = 'show';
+        $data['getAllStores'] = $this->StoreModel->getAllData();
+        // dd($data);
         return view('Front/home', $data);
     }
 
