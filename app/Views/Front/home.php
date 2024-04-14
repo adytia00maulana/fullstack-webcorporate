@@ -63,7 +63,7 @@
                         $store_image = $dataStores['store_image'];
                         $store_name = $dataStores['store_name'];
                     ?>
-                    <div class="swiper-slide"><img src="<?= base_url().$viewStore.$store_image ?>" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="<?= base_url().$viewPathStore.$store_image ?>" class="img-fluid" alt=""></div>
                     <?php endforeach; ?>
                 </div>
                 <div class="swiper-pagination"></div>
