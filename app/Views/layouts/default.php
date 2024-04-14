@@ -11,7 +11,7 @@
 
     <!-- Favicons -->
     <link href="<?php echo base_url(); ?>assets/img/favicon512.png" rel="icon">
-    <!-- <link href="<?php echo base_url(); ?>assets/front_end/assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
+    <!-- <link href="<?php // echo base_url(); ?>assets/front_end/assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet">
@@ -35,7 +35,7 @@
 
             <!-- <h1 class="logo me-auto"><a href="index.html">Rapid</a></h1> -->
             <!-- Uncomment below if you prefer to use an image logo -->
-            <a href="index.html" class="logo me-auto"><img src="<?= !empty($getLogo)? base_url().$viewPathLogo.$getLogo[0]['filename']  : '#' ?>" alt="" class="img-fluid"></a>
+            <a href="/" class="logo me-auto"><img src="<?= !empty($getLogo)? base_url().$viewPathLogo.$getLogo[0]['filename']  : '#' ?>" alt="" class="img-fluid"></a>
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <?= $this->include('layouts/navbar') ?>

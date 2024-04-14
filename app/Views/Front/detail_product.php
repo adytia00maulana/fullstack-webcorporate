@@ -25,8 +25,8 @@
         <div class="portfolio-details-slider swiper">
           <div class="swiper-wrapper align-items-center">
 
-            <div class="swiper-slide">
-              <img src="<?= base_url().$viewPathDetailProduct.$getDetailProduct->filename ?>" alt="">
+            <div class="swiper-slide row text-center p-2">
+              <img src="<?= base_url().$viewPathDetailProduct.$getDetailProduct->filename ?>" class="img-fluid w-100 h-100" alt="Responsive image">
             </div>
 
             <!-- <div class="swiper-slide">
