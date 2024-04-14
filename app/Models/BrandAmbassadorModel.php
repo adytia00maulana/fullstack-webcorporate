@@ -13,7 +13,7 @@ class BrandAmbassadorModel extends Model
     // Retrieve all
     public function MdlSelect(): array
     {
-        $sqlQuery = "select * from ".$this->table;
+        $sqlQuery = "select * from ".$this->table." ORDER BY position asc";
         $query = $this->db->query($sqlQuery);
         return $query->getResultArray();
     }

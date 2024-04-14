@@ -18,8 +18,9 @@
             <?php $i=0; foreach($getListInfo as $row): $i++;
                 $id = $row['id'];
                 $name = $row['name'];
-                ?>
-                <li><a href="<?= base_url(). 'product'.$id; ?>"><?= $name ?></a></li>
+                $link = $row['link'];
+            ?>
+                <li><a href="<?= base_url(). $link; ?>"><?= $name ?></a></li>
             <?php endforeach; ?>
         </ul>
     </li>

@@ -8,6 +8,7 @@ use GalleryModel;
 use ProductModel;
 use LogoModel;
 use StoreModel;
+use BrandAmbassadorModel;
 
 class Home extends BaseController
 {
@@ -15,6 +16,7 @@ class Home extends BaseController
     private $ProductModel;
     private $StoreModel;
     public $GalleryModel;
+    public $BrandAmbassadorModel;
     public $pathViewProduct;
     public $pathViewDetailProduct;
     public $pathViewGallery;
@@ -29,6 +31,7 @@ class Home extends BaseController
         $this->ProductModel = model(ProductModel::class);
         $this->StoreModel = model(StoreModel::class);
         $this->GalleryModel = model(GalleryModel::class);
+        $this->BrandAmbassadorModel = model(BrandAmbassadorModel::class);
         $this->pathViewProduct = config('app')-> viewProduct;
         $this->pathViewDetailProduct = config('app')-> viewDetailProduct;
         $this->pathViewGallery = config('app')-> viewGallery;
@@ -56,12 +59,12 @@ class Home extends BaseController
             array(
                 'id' => 1,
                 'name' => 'Brand Ambassador',
-                'code' => 'brand'
+                'link' => 'brand',
             ),
             array(
                 'id' => 2,
                 'name' => 'Event',
-                'code' => 'info'
+                'link' => 'info'
             )
         ];
         
@@ -122,8 +125,9 @@ class Home extends BaseController
 
     public function brand(): string {
         $data = $this->defaultLoad();
+        $data['getListBa'] = $this->BrandAmbassadorModel->MdlSelect();
         $data['title'] = 'Brand Ambasador';
-
+        
         return view('Front/brand', $data);
     }
 
