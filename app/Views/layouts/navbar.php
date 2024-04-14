@@ -24,7 +24,7 @@
             <?php endforeach; ?>
         </ul>
     </li>
-    <li class="dropdown"><a href="#"><span>Gallery</span> <i class="bi bi-chevron-down"></i></a>
+    <li class="dropdown"><a class="nav-link scrollto<?= (strpos((string) current_url(), $activeUrl.'/gallery') !== false) ? ' active' : '' ?>" href="#"><span>Gallery</span> <i class="bi bi-chevron-down"></i></a>
         <ul>
             <?php $i=0; foreach($getListProduct as $row): $i++;
                 $id = $row['id'];
@@ -36,7 +36,7 @@
             <?php endforeach; ?>
         </ul>
     </li>
-    <li class="dropdown"><a href="#"><span>Stores</span> <i class="bi bi-chevron-down"></i></a>
+    <li class="dropdown"><a class="nav-link scrollto<?= (strpos((string) current_url(), $activeUrl.'/store') !== false) ? ' active' : '' ?>" href="#"><span>Stores</span> <i class="bi bi-chevron-down"></i></a>
         <ul>
             <?php $i=0; foreach($getListStores as $row): $i++;
                 $id = $row['id'];
