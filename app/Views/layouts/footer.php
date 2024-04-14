@@ -56,7 +56,7 @@
                 <div class="form">
                     <h4>Send us a message</h4>
                     <p>Halo, Selamat Datang Di Korea Best Shop Untuk keterangan lebih lanjut silahkan hubungi admin</p>
-                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                    <form action="<?= base_url() ?>sendToWa" method="post" role="form">
                         <div class="form-group">
                             <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
                         </div>
@@ -69,12 +69,12 @@
                         <div class="form-group mt-3">
                             <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
                         </div>
-                        <div class="my-3">
+                        <!-- <div class="my-3">
                             <div class="loading">Loading</div>
                             <div class="error-message"></div>
                             <div class="sent-message">Your message has been sent. Thank you!</div>
-                        </div>
-                        <div class="text-center"><button type="submit" title="Send Message">Send Message</button></div>
+                        </div> -->
+                        <div class="text-center mt-3"><button type="submit" title="Send Message" class="btn btn-success">Send Message</button></div>
                     </form>
                 </div>
             </div>

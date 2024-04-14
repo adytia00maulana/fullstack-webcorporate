@@ -46,7 +46,7 @@
             <?php endforeach; ?>
         </ul>
     </li>
-    <li><a class="nav-link scrollto<?= $activeUrl.'/contact' == (string) current_url()? ' '.'active': '' ?>" href="<?= base_url(); ?>footer">Contact Us</a></li>
+    <li><a class="nav-link scrollto<?= $activeUrl.'/about' == (string) current_url()? ' '.'active': '' ?>" href="<?= base_url(); ?>about">Contact Us</a></li>
     <li><a class="nav-link scrollto<?= $activeUrl.'/faq' == (string) current_url()? ' '.'active': '' ?>" href="<?= base_url(); ?>faq">FAQ</a></li>
 </ul>
 <i class="bi bi-list mobile-nav-toggle"></i>

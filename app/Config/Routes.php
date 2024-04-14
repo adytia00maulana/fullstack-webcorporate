@@ -86,4 +86,5 @@ $routes->get('/detailsInfo/(:any)', 'Home::detailsInfo/$1', ['filter' => 'webFil
 $routes->get('/brand', 'Home::brand', ['filter' => 'webFilter']);
 $routes->get('/faq', 'Home::faq', ['filter' => 'webFilter']);
 $routes->get('/store/(:any)', 'Home::store/$1', ['filter' => 'webFilter']);
+$routes->post('/sendToWa', 'Home::sendToWa', ['filter' => 'webFilter']);
 

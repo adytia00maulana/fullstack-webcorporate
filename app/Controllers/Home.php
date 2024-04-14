@@ -173,4 +173,11 @@ class Home extends BaseController
         
         return view('Front/store', $data);
     }
+
+    public function sendToWa() {
+        $data = array();
+        $data['text'] = 'Halo Korea Best Shop, Saya '. $_POST['name'] .', Email Saya '. $_POST['email'] .'. '. $_POST['subject'] .' . '. $_POST['message'] .' dan tertarik untuk membeli produk Korea Best Shop, mohon informasi lebih lanjut.';
+        
+        return redirect()->to("https://api.whatsapp.com/send?phone=6282116167126&".http_build_query($data));
+    }
 }
