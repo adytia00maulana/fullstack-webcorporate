@@ -112,8 +112,10 @@ class Home extends BaseController
 
     public function visiMisi(): string {
         $data = $this->defaultLoad();
+        $data['getVisiMisi'] = $this->VisiMisiModel->MdlSelect();
         $data['title'] = 'Visi Misi';
-
+        if(!empty($data['getVisiMisi'])) $data['getVisiMisi'] = $data['getVisiMisi'][0];
+        
         return view('Front/vm', $data);
     }
     

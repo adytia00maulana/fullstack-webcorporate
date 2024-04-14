@@ -25,7 +25,7 @@
             $no = 0;
             foreach($getListDetailProduct as $dataDetailProd): $no++;
         ?>
-        <div class="col-xs-12 col-lg-4 p-2" data-aos="fade-up" data-aos-delay="<?= $no*100 ?>">
+        <div class="col-xs-12 col-lg-4 p-2" data-aos="fade-up" data-aos-delay="<?= $no*50 ?>">
             <div class="card h-100">
                 <div class="card-header">
                     <img src="<?= base_url().$viewPathDetailProduct.$dataDetailProd['filename'] ?>" class="img-fluid h-100" style="max-height: 150px;" alt="Responsive image">

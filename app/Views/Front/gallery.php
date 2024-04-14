@@ -9,7 +9,7 @@
         <header class="section-header">
             <h3 class="section-title"><?= isset($product_name)? 'Gallery '.$product_name:'Our Gallery' ?></h3>
         </header>
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
             <?php
                 $no = 0;
                 foreach($getGallery as $dataGallery): $no++;
