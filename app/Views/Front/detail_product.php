@@ -70,8 +70,8 @@
             <?= $getDetailProduct->description ?>
           </p>
         </div>
+        <a href="https://linktr.ee/kbshopofficial" class="btn btn-success">Get Now on Official Online Store</a>
       </div>
-
     </div>
 
   </div>

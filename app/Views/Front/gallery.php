@@ -7,7 +7,7 @@
 <section id="portfolio" class="portfolio section-bg">
     <div class="container" data-aos="fade-up">
         <header class="section-header">
-            <h3 class="section-title"><?= "Gallery ".$product_name ?? 'Our Gallery' ?></h3>
+            <h3 class="section-title"><?= isset($product_name)? 'Gallery '.$product_name:'Our Gallery' ?></h3>
         </header>
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
             <?php
