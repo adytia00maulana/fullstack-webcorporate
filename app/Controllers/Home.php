@@ -59,7 +59,7 @@ class Home extends BaseController
         $data['viewPathEvent'] = $this->pathViewEvent;
         $data['viewPathDetailEvent'] = $this->pathViewDetailEvent;
         $data['viewPathBrandAmbassador'] = $this->pathViewBrandAmbassador;
-        $data['viewStore'] = $this->pathViewStore;
+        $data['viewPathStore'] = $this->pathViewStore;
         $data['activeUrl'] = site_url();
         $data['getLogo'] = $this->LogoModel->MdlSelect();
         $data['getListProduct'] = $this->ProductModel->MdlProductSelectByActive();
@@ -163,5 +163,14 @@ class Home extends BaseController
         $data['title'] = 'Home';
 
         return view('Front/faq', $data);
+    }
+
+    public function store($id): string {
+        $data = $this->defaultLoad();
+        $data['getDataListStore'] = $this->StoreModel->getStoreByIdRef($id);
+        if(!empty($data['getDataListStore'])) $data['ref_store_name'] = $data['getDataListStore'][0]['ref_store_name'];
+        $data['title'] = 'Store';
+        
+        return view('Front/store', $data);
     }
 }

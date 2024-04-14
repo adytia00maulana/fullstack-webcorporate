@@ -13,7 +13,7 @@
             <?php endforeach; ?>
         </ul>
     </li>
-    <li class="dropdown"><a href="#"><span>News</span> <i class="bi bi-chevron-down"></i></a>
+    <li class="dropdown"><a class="nav-link scrollto<?= $activeUrl.'/brand' == (string) current_url() || $activeUrl.'/info' == (string) current_url() ? ' active' : '' ?>" href="#"><span>News</span> <i class="bi bi-chevron-down"></i></a>
         <ul>
             <?php $i=0; foreach($getListInfo as $row): $i++;
                 $id = $row['id'];
@@ -42,7 +42,7 @@
                 $id = $row['id'];
                 $name = $row['name'];
                 ?>
-                <li><a href="<?= base_url(). 'product'.$id; ?>"><?= $name ?></a></li>
+                <li><a href="<?= base_url(). 'store/'.$id; ?>"><?= $name ?></a></li>
             <?php endforeach; ?>
         </ul>
     </li>

@@ -41,6 +41,23 @@ class StoreModel extends Model
         return $this->db->query($sqlQuery)->getResultArray();
     }
 
+    public function getStoreByIdRef($id_ref_store) {
+        $sqlQuery = "select 
+            s.id,
+            s.id_ref_store,
+            rs.name as ref_store_name,
+            s.store_name,
+            s.store_link,
+            s.store_image,
+            s.created,
+            s.updated
+        from ".$this->table." s 
+        left join ".$this->refTable." rs 
+        on s.id_ref_store = rs.id 
+        where s.id_ref_store = ".$id_ref_store.";";
+        return $this->db->query($sqlQuery)->getResultArray();
+    }
+
     public function InsertData($data) {
         return $result = $this->db->table($this->table)->insert($data);
     }
