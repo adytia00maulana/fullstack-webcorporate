@@ -1,38 +1,34 @@
 <?= $this->extend('layouts/default') ?>
  
 <?= $this->section('content') ?>
-<!-- Events Section -->
-<section id="events" class="events section">
-
+<br>
+<br>
+<!-- ======= Services Section ======= -->
+<section id="services" class="services section-bg">
     <div class="container" data-aos="fade-up">
 
-        <div class="row">
-            <div class="col-md-6 d-flex align-items-stretch">
-                <div class="card">
-                    <div class="card-img">
-                        <img src="<?php echo base_url(); ?>assets/front_end/assets/img/events-item-1.jpg" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="">Introduction to webdesign</a></h5>
-                        <p class="fst-italic text-center">Sunday, September 26th at 7:00 pm</p>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 d-flex align-items-stretch">
-                <div class="card">
-                    <div class="card-img">
-                        <img src="<?php echo base_url(); ?>assets/front_end/assets/img/events-item-2.jpg" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="">Marketing Strategies</a></h5>
-                        <p class="fst-italic text-center">Sunday, November 15th at 7:00 pm</p>
-                        <p class="card-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo</p>
-                    </div>
-                </div>
+        <header class="section-header">
+            <h3>Our Event</h3>
+            <p></p>
+        </header>
 
+        <div class="row g-5">
+            <?php
+                $no = 0;
+                foreach($getListEvent as $dataEvent): $no++;
+            ?>
+            <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="<?= $no*50 ?>">
+                <div class="box">
+                    <!-- <div class="icon"> -->
+                    <div class="p-2">
+                        <img src="<?= base_url().$viewPathEvent.$dataEvent['filename'] ?>" class="img-fluid rounded mx-auto d-block" style="max-height: 165px; min-height: 165px;" alt="">
+                    </div>
+                    <h4 class="title"><a href="<?= $urlDetailEvent.$dataEvent['id']; ?>"><?= $dataEvent['event_name'] ?></a></h4>
+                    <p class="description"><?= $dataEvent['description'] ?></p>
+                </div>
             </div>
+            <?php endforeach; ?>
         </div>
     </div>
-</section><!-- /Events Section -->
+</section><!-- End Services Section -->
 <?= $this->endSection() ?>

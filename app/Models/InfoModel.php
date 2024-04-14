@@ -25,7 +25,22 @@ class InfoModel extends Model
 
     public function getDetailInfoById($id): array
     {
-        $sqlQuery = "SELECT * FROM ". $this->tableDetailInfo ." WHERE id_event = ". $id ." ORDER BY position asc;";
+        // $sqlQuery = "SELECT * FROM ". $this->tableDetailInfo ." WHERE id_event = ". $id ." ORDER BY position asc;";
+        $sqlQuery = 
+        "SELECT 
+            de.id,
+            de.id_event,
+            e.event_name,
+            de.filename,
+            de.position,
+            de.created_by,
+            de.created_date,
+            de.updated_by,
+            de.updated_date
+        FROM ". $this->tableDetailInfo ." de
+        left join ". $this->table ." e on de.id_event = e.id
+        WHERE id_event = ". $id ." ORDER BY position asc;
+        ";
         $query = $this->db->query($sqlQuery);
         return $query->getResultArray();
     }

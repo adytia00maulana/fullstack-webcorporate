@@ -9,6 +9,8 @@ use ProductModel;
 use LogoModel;
 use StoreModel;
 use BrandAmbassadorModel;
+use VisiMisiModel;
+use InfoModel;
 
 class Home extends BaseController
 {
@@ -17,11 +19,14 @@ class Home extends BaseController
     private $StoreModel;
     public $GalleryModel;
     public $BrandAmbassadorModel;
+    public $VisiMisiModel;
+    public $InfoModel;
     public $pathViewProduct;
     public $pathViewDetailProduct;
     public $pathViewGallery;
     public $pathViewLogo;
     public $pathViewEvent;
+    public $pathViewDetailEvent;
     public $pathViewBrandAmbassador;
     public $pathViewStore;
     public GlobalValidation $GlobalValidation;
@@ -32,11 +37,14 @@ class Home extends BaseController
         $this->StoreModel = model(StoreModel::class);
         $this->GalleryModel = model(GalleryModel::class);
         $this->BrandAmbassadorModel = model(BrandAmbassadorModel::class);
+        $this->VisiMisiModel = model(VisiMisiModel::class);
+        $this->InfoModel = model(InfoModel::class);
         $this->pathViewProduct = config('app')-> viewProduct;
         $this->pathViewDetailProduct = config('app')-> viewDetailProduct;
         $this->pathViewGallery = config('app')-> viewGallery;
         $this->pathViewLogo = config('app')->viewLogo;
         $this->pathViewEvent = config('app')->viewEvent;
+        $this->pathViewDetailEvent = config('app')->viewDetailEvent;
         $this->pathViewBrandAmbassador = config('app')->viewBrandAmbassador;
         $this->pathViewStore = config('app')->viewStore;
         $this->GlobalValidation = new GlobalValidation();
@@ -49,6 +57,7 @@ class Home extends BaseController
         $data['viewPathGallery'] = $this->pathViewGallery;
         $data['viewPathLogo'] = $this->pathViewLogo;
         $data['viewPathEvent'] = $this->pathViewEvent;
+        $data['viewPathDetailEvent'] = $this->pathViewDetailEvent;
         $data['viewPathBrandAmbassador'] = $this->pathViewBrandAmbassador;
         $data['viewStore'] = $this->pathViewStore;
         $data['activeUrl'] = site_url();
@@ -130,12 +139,23 @@ class Home extends BaseController
         
         return view('Front/brand', $data);
     }
-
+    
     public function info(): string {
         $data = $this->defaultLoad();
-        $data['title'] = 'Info';
+        $data['getListEvent'] = $this->InfoModel->getAllData();
+        $data['urlDetailEvent'] = base_url().'detailsInfo/';
+        $data['title'] = 'Event';
 
         return view('Front/info', $data);
+    }
+    
+    public function detailsInfo($id_event): string {
+        $data = $this->defaultLoad();
+        $data['getListDetailsEvent'] = $this->InfoModel->getDetailInfoById($id_event);
+        if(!empty($data['getListDetailsEvent'])) $data['event_name'] = $data['getListDetailsEvent'][0]['event_name'];
+        $data['title'] = 'Details Event';
+        
+        return view('Front/detailsInfo', $data);
     }
 
     public function faq(): string {

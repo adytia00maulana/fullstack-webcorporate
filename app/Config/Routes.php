@@ -82,6 +82,7 @@ $routes->get('/gallery/(:any)', 'Home::gallery/$1', ['filter' => 'webFilter']);
 $routes->get('/product/(:any)', 'Home::product/$1', ['filter' => 'webFilter']);
 $routes->get('/detailProduct/(:any)', 'Home::detailProduct/$1', ['filter' => 'webFilter']);
 $routes->get('/info', 'Home::info', ['filter' => 'webFilter']);
+$routes->get('/detailsInfo/(:any)', 'Home::detailsInfo/$1', ['filter' => 'webFilter']);
 $routes->get('/brand', 'Home::brand', ['filter' => 'webFilter']);
 $routes->get('/faq', 'Home::faq', ['filter' => 'webFilter']);
 
