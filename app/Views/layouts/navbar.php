@@ -30,7 +30,7 @@
                 $name = $row['name'];
             ?>
             <li>
-                <a href="<?= base_url(). 'product/'.$id; ?>"><?= $name ?></a>
+                <a href="<?= base_url(). 'gallery/'.$id; ?>"><?= $name ?></a>
             </li>
             <?php endforeach; ?>
         </ul>

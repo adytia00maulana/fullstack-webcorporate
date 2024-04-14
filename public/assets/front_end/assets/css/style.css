@@ -854,7 +854,8 @@ section {
 }
 
 #portfolio .portfolio-item .portfolio-wrap .portfolio-info h4 a:hover {
-  color: #1bb1dc;
+  /*color: #1bb1dc;*/ /* Setting Portfolio */
+  color: #20a165; /* Setting Portfolio */
 }
 
 #portfolio .portfolio-item .portfolio-wrap .portfolio-info p {

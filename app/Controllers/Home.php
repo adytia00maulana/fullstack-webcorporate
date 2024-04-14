@@ -73,7 +73,7 @@ class Home extends BaseController
         $data['title'] = 'Home';
         $data['divVideo'] = 'show';
         $data['getAllStores'] = $this->StoreModel->getAllData();
-        // dd($data);
+        
         return view('Front/home', $data);
     }
 
@@ -82,7 +82,7 @@ class Home extends BaseController
         $data['title'] = 'Product';
         $data['url_detail_product'] = base_url() . 'detailProduct/';
         $data['getListDetailProduct'] = $this->ProductModel->MdlDetailProductSelectByIdProduct($id);
-        // dd($data);
+        
         return view('Front/product', $data);
     }
 
@@ -112,11 +112,11 @@ class Home extends BaseController
         return view('Front/about', $data);
     }
     
-    public function gallery(): string {
+    public function gallery($id_product): string {
         $data = $this->defaultLoad();
         $data['title'] = 'Gallery';
-        $data['getGallery'] = $this->GalleryModel->MdlSelect();
-
+        $data['getGallery'] = $this->GalleryModel->MdlSelectByIdProduct($id_product);
+        if(!empty($data['getGallery'])) $data['product_name'] = $data['getGallery'][0]['product_name'];
         return view('Front/gallery', $data);
     }
 

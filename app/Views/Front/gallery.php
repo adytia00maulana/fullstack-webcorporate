@@ -1,11 +1,15 @@
 <?= $this->extend('layouts/default') ?>
  
 <?= $this->section('content') ?>
-    <section id="trainers-index" class="section trainers-index">
-
-      <div class="container">
-
-        <div class="row">
+<br>
+<br>
+<!-- ======= Portfolio Section ======= -->
+<section id="portfolio" class="portfolio section-bg">
+    <div class="container" data-aos="fade-up">
+        <header class="section-header">
+            <h3 class="section-title"><?= "Gallery ".$product_name ?? 'Our Gallery' ?></h3>
+        </header>
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
             <?php
                 $no = 0;
                 foreach($getGallery as $dataGallery): $no++;
@@ -14,29 +18,16 @@
                 $id = $dataGallery['id'];
                 $filename = $dataGallery['filename'];
             ?>
-            <div class="col-lg-4 col-md-6 d-flex p-1" data-aos="fade-up" data-aos-delay="100">
-                <!-- <div class="member"> -->
-                <img src="<?= base_url().$viewPathGallery.$filename ?>" class="img-fluid" alt="">
-                    <!-- <div class="member-content">
-                        <h4>Walter White</h4>
-                        <span>Web Development</span>
-                        <p>
-                        Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis quaerat qui aut aut aut
-                        </p>
-                        <div class="social">
-                        <a href=""><i class="bi bi-twitter"></i></a>
-                        <a href=""><i class="bi bi-facebook"></i></a>
-                        <a href=""><i class="bi bi-instagram"></i></a>
-                        <a href=""><i class="bi bi-linkedin"></i></a>
-                        </div>
-                    </div> -->
-                <!-- </div> -->
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web" data-wow-delay="<?= 0..$no?>s">
+                <div class="portfolio-wrap">
+                    <img src="<?= base_url().$viewPathGallery.$filename ?>" class="img-fluid" alt="">
+                    <div class="portfolio-info">
+                        <h4><a href="<?= base_url().$viewPathGallery.$filename ?>" class="portfolio-lightbox" data-gallery="portfolioGallery" title="<?= explode("_", $filename)[3] ?>"><?= explode("_", $filename)[3] ?></a></h4>
+                    </div>
+                </div>
             </div>
             <?php endforeach; ?>
-
         </div>
-
-      </div>
-
-    </section>
+    </div>
+</section><!-- End Portfolio Section -->
 <?= $this->endSection() ?>

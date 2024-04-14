@@ -8,6 +8,7 @@ class GalleryModel extends Model
     {
         $this->db = \Config\Database::connect();
         $this->table = config('app')->gallery;
+        $this->tableProduct = config('app')->product;
     }
 
     // Retrieve all
@@ -22,7 +23,21 @@ class GalleryModel extends Model
     // Retrieve all by Id Product
     public function MdlSelectByIdProduct($id): array
     {
-        $sqlQuery = "SELECT * FROM ". $this->table ." WHERE id_product = ". $id ." ORDER BY position asc;";
+        // $sqlQuery = "SELECT * FROM ". $this->table ." WHERE id_product = ". $id ." ORDER BY position asc;";
+        $sqlQuery = "SELECT 
+            g.id,
+            g.id_product,
+            p.name as product_name,
+            g.filename,
+            g.filepath,
+            g.position,
+            g.created_by,
+            g.created_date,
+            g.updated_by,
+            g.updated_date
+            FROM ". $this->table ." g
+            left join ". $this->tableProduct ." p on g.id_product = p.id
+            WHERE id_product = ". $id ." ORDER BY position asc";
         $query = $this->db->query($sqlQuery);
         return $query->getResultArray();
     }
