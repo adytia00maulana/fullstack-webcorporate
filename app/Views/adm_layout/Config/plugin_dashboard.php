@@ -41,7 +41,7 @@
               drawBorder: false,
             },
             ticks: {
-              stepSize: <?= $countVisitorUser ?? 0 ?>
+              stepSize: 200
             }
           }],
           xAxes: [{

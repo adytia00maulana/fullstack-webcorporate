@@ -4,8 +4,4 @@
     } else {
         document.getElementById('hero').style.display = 'none';
     }
-
-    function sendToWa(){
-        alert('Masuk')
-    }
 </script>

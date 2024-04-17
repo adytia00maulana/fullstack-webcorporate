@@ -23,7 +23,7 @@
                     <div class="p-2">
                         <img src="<?= base_url().$viewPathStore.$dataStore['store_image'] ?>" class="img-fluid rounded mx-auto d-block" style="max-height: 100px;" alt="">
                     </div>
-                    <h4 class="title"><a href="<?= isset($dataStore['store_link'])||$dataStore['store_link'] =='/'? '#':$dataStore['store_link']; ?>"><?= $dataStore['store_name'] ?></a></h4>
+                    <h4 class="title"><a href="<?= !isset($dataStore['store_link'])||$dataStore['store_link'] =='/'? '#':$dataStore['store_link']; ?>"><?= $dataStore['store_name'] ?></a></h4>
                 </div>
             </div>
             <?php endforeach; ?>
